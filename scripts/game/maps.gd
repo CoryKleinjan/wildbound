@@ -5,6 +5,7 @@ class_name Maps
 # . grass   , tall grass   = path   F flowers   ~ water   # tree   v ledge (jump down)
 # r/p/b roof (house/lodge/mart)   w wall   h/l/m door (house/lodge/mart)   S sign
 # k/n roof (gym/league)   j/u door (gym/league)   indoor: _ floor  | wall  o statue  e exit mat
+# c counter (talk across it)  t table  K bookshelf  B bed  P potted plant  q mart shelf  M storage machine
 
 const WALKABLE := {
 	".": true, ",": true, "=": true, "F": true, "h": true, "l": true, "m": true,
@@ -39,6 +40,8 @@ static func validate_maps() -> Array[String]:
 			var ch := tile_at(m, int(p[0]), int(p[1]))
 			if not "hlm".contains(ch):
 				errs.append("%s door %s is %s" % [m.id, k, ch])
+			if not m.get("warps", {}).has(k):
+				errs.append("%s door %s has no room behind it" % [m.id, k])
 		for k: String in m.get("signs", {}).keys():
 			var p := k.split(",")
 			var ch := tile_at(m, int(p[0]), int(p[1]))

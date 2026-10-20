@@ -72,6 +72,11 @@ func load_map(id: String, x: int, y: int, dir: String) -> void:
 		follower = null
 	npcs = []
 	for n in map.get("npcs", []):
+		# showIf / hideIf: story flags that make an NPC appear or leave.
+		if n.has("showIf") and not gs.flags.get(n.showIf, false):
+			continue
+		if n.has("hideIf") and gs.flags.get(n.hideIf, false):
+			continue
 		var a := Actor.new(n.x, n.y, n.dir, n.palette)
 		a.npc = n
 		npcs.append(a)
@@ -81,12 +86,14 @@ func load_map(id: String, x: int, y: int, dir: String) -> void:
 		var a := Actor.new(t.x, t.y, t.dir, t.palette)
 		a.trainer = t
 		npcs.append(a)
-	_banner = {"text": map.name, "t": 2.2}
+	_banner = {"text": map.name, "t": 0.0 if map.get("interior", false) else 2.2}
 	_map_fresh = true
 	Audio.play_music(map_track(map))
 
-## Music for a map: gym, league, town or route.
+## Music for a map: gym, league, town or route (rooms inside buildings name theirs).
 static func map_track(m: Dictionary) -> String:
+	if m.has("music"):
+		return m.music
 	var id: String = m.id
 	if id.begins_with("gym"):
 		return "gym"
@@ -310,9 +317,6 @@ func _on_step() -> void:
 			gs.y = warp.y
 			gs.dir = warp.dir)
 		return
-	if "hlm".contains(t):
-		_enter_door(p.x, p.y)
-		return
 	if _check_trainers():
 		return
 	if t == "," and map.has("encounters"):
@@ -320,40 +324,38 @@ func _on_step() -> void:
 		if Rng.global_rng.int_below(2880) < rate * 16:
 			_start_wild()
 
-# ---------- doors ----------
-func _enter_door(x: int, y: int) -> void:
-	var door: Variant = map.get("doors", {}).get("%d,%d" % [x, y])
-	var do_exit := func() -> void:
-		player.y = y + 1
-		player.dir = "down"
-		gs.y = y + 1
-		if follower != null:
-			follower.x = x
-			follower.y = y + 2 if y + 2 < _map_h() and _walkable(x, y + 2) else y + 1
-			follower.dir = "down"
-	if door == null:
-		do_exit.call()
-		return
-	Audio.sfx("door")
-	if door.kind == "house":
-		Game.transition(func() -> void:
-			for m in GameState.all_party_mons(gs):
-				Creatures.heal_fully(m)
-			do_exit.call()
-			Game.say(door.get("text", []) + ["Your creatures look well rested!"]))
-	elif door.kind == "lodge":
-		Game.transition(func() -> void:
-			do_exit.call()
-			Game.say(["Welcome to the Rest Lodge!"], _lodge_menu))
-	else:
-		Game.transition(func() -> void:
-			do_exit.call()
-			Game.say(["Welcome to the Trail Mart! What do you need?"], func() -> void:
-				Menus.open_shop(0, func() -> void: Game.say(["Please come again!"]))))
+# ---------- buildings ----------
+## What looking at a piece of furniture says (A while facing it).
+const FURNITURE_TEXT := {
+	"K": ["It's crammed with books about creatures."],
+	"B": ["A soft, cozy bed. It looks freshly made."],
+	"P": ["A potted plant. Someone waters it every day."],
+	"q": ["The shelves are stocked with Potions and Capture Orbs.", "Pay at the counter."],
+}
 
-func _lodge_menu() -> void:
+## Runs a building NPC's job after (or instead of) their lines: the Rest Lodge nurse, the Mart clerk,
+## or a resident who lets your creatures rest.
+func _npc_action(action: String, text: Array) -> void:
+	match action:
+		"lodge":
+			Game.say(["Welcome to the Rest Lodge!"], _lodge_menu)
+		"mart":
+			Game.say(["Welcome to the Trail Mart! What do you need?"], func() -> void:
+				Menus.open_shop(0, func() -> void: Game.say(["Please come again!"])))
+		"heal":
+			Game.say(text, func() -> void:
+				for m in GameState.all_party_mons(gs):
+					Creatures.heal_fully(m)
+				if not GameState.all_party_mons(gs).is_empty():
+					Audio.sfx("heal")
+					Game.say(["You took a short rest. Your creatures look well rested!"]))
+		_:
+			Game.say(text)
+
+func _lodge_menu(heal := true) -> void:
 	var players: int = gs.players.size()
-	var items: Array = ["HEAL"]
+	var items: Array = ["HEAL"] if heal else []
+	var first := 1 if heal else 0
 	items.append_array(["STORAGE P1", "STORAGE P2"] if players > 1 else ["STORAGE"])
 	items.append("LEAVE")
 	var ref: Array = []
@@ -362,18 +364,18 @@ func _lodge_menu() -> void:
 		"on_cancel": func() -> void: Game.pop(ref[0]),
 		"on_select": func(i: int) -> void:
 			Game.pop(ref[0])
-			if i == 0:
+			if heal and i == 0:
 				for m in GameState.all_party_mons(gs):
 					Creatures.heal_fully(m)
 				gs.respawn = {"map": map.id, "x": player.x, "y": player.y}
 				Audio.sfx("heal")
 				Game.say(["Let me take your creatures for a moment...", "... ... ...", "They're fully healed! We hope to see you again!"], _lodge_menu)
-			elif i <= players:
-				var pl := i - 1
+			elif i - first < players:
+				var pl := i - first
 				var sref: Array = []
 				var s = StorageScreen.new(pl, func() -> void:
 					Game.pop(sref[0])
-					_lodge_menu())
+					_lodge_menu(heal))
 				sref.append(s)
 				Game.push(s),
 	})
@@ -387,6 +389,9 @@ func _interact() -> void:
 	var tx := p.x + d.x
 	var ty := p.y + d.y
 	var n := _npc_at(tx, ty)
+	# Shopkeepers and nurses are talked to across their counter.
+	if n == null and Maps.tile_at(map, tx, ty) == "c":
+		n = _npc_at(tx + d.x, ty + d.y)
 	if n != null:
 		n.dir = OPP[p.dir]
 		if n.npc != null:
@@ -395,7 +400,7 @@ func _interact() -> void:
 				if gs.flags.get(v.if, false):
 					text = v.text
 					break
-			Game.say(text)
+			_npc_action(n.npc.get("action", ""), text)
 			return
 		if n.trainer != null:
 			if gs.flags.get(n.trainer.id, false):
@@ -406,6 +411,12 @@ func _interact() -> void:
 	var sign: Variant = map.get("signs", {}).get("%d,%d" % [tx, ty])
 	if sign != null:
 		Game.say(sign)
+		return
+	var tile := Maps.tile_at(map, tx, ty)
+	if tile == "M":
+		Game.say(["It's a storage machine for creatures."], func() -> void: _lodge_menu(false))
+	elif FURNITURE_TEXT.has(tile) and map.get("interior", false):
+		Game.say(FURNITURE_TEXT[tile])
 
 func _open_start_menu(pl: int) -> void:
 	var ref: Array = []
@@ -604,6 +615,12 @@ func draw() -> void:
 	var p := actor_pixel(player)
 	var cam_x: int = roundi(p.x + 8 - Gfx.W / 2.0)
 	var cam_y: int = roundi(p.y + 8 - Gfx.H / 2.0)
+	# Rooms that fit on screen stay still and centered, like the handheld games.
+	if map.get("interior", false):
+		if _map_w() * 16 <= Gfx.W:
+			cam_x = roundi((_map_w() * 16 - Gfx.W) / 2.0)
+		if _map_h() * 16 <= Gfx.H:
+			cam_y = roundi((_map_h() * 16 - Gfx.H) / 2.0)
 	var x0: int = floori(cam_x / 16.0) - 1
 	var y0: int = floori(cam_y / 16.0) - 1
 	var anim: int = floori(_frame * 2)

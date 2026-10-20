@@ -12,7 +12,7 @@ static func player_names(gs: Dictionary) -> String:
 ## Called whenever the overworld loads a map.
 static func on_map_loaded(ow: OverworldScene) -> void:
 	var gs: Dictionary = Game.gs
-	if ow.map.id == "fernhollow" and not gs.flags.get("intro_mom", false):
+	if ow.map.id == "fernhollow_home" and not gs.flags.get("intro_mom", false):
 		gs.flags.intro_mom = true
 		Game.say([
 			"MOM: %s! Your first morning in Fernhollow!" % player_names(gs),

@@ -41,7 +41,17 @@ func _init() -> void:
 	_fix_ints(GYMS)
 	_fix_ints(ROUTE_LEVELS)
 	_fix_ints(TYPE_CHART)
+	_apply_interiors(_fix_ints(_load("interiors")))
 	_apply_story(_fix_ints(_load("story")))
+
+## Merges data/interiors.json (the rooms behind town doors, built by tools/build_interiors.py) into MAPS
+## and turns each door into a warp to its room.
+func _apply_interiors(interiors: Dictionary) -> void:
+	MAPS.merge(interiors.maps)
+	for map_id in interiors.warps:
+		var warps: Dictionary = MAPS[map_id].get("warps", {})
+		warps.merge(interiors.warps[map_id])
+		MAPS[map_id].warps = warps
 
 ## Merges data/story.json (story NPCs, Hollow Order trainers, rival lines) into MAPS.
 func _apply_story(story: Dictionary) -> void:
