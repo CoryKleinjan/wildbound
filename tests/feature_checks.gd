@@ -368,7 +368,7 @@ func _rest_of_emerald_tests() -> void:
 	Field.itemfinder(ow)
 	var lines := _drain()
 	check("itemfinder points at an item", " ".join(lines).contains("response"), str(lines))
-	_place(ow, 12, 17, "down")
+	_place(ow, 12, 14, "down")
 	Field.itemfinder(ow)
 	_drain()
 	check("itemfinder digs it up", gs.bag.get("nugget", 0) == 1)

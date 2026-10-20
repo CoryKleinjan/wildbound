@@ -743,6 +743,11 @@ func draw() -> void:
 			else:
 				tex = TownStyle.apply(Tiles.tile_texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), Maps.tile_at(map, tx, ty + 1), theme), ch, style)
 			Gfx.image(tex, tx * 16 - cam_x, ty * 16 - cam_y)
+	# Cave mouths the painting leaves out (data/features.json "mouths", on outdoor maps) get a rocky entrance drawn over them.
+	if painted != null:
+		for k in map.get("mouths", []):
+			var xy: PackedStringArray = k.split(",")
+			Gfx.image(FieldTiles.cave_entrance(), int(xy[0]) * 16 - 8 - cam_x, int(xy[1]) * 16 - 16 - cam_y)
 	# Generated trees: one 32x32 sprite per '#' tile, row by row so lower trees overlap the ones behind.
 	if gen_trees and not cave:
 		for ty in range(y0, y0 + Gfx.H / 16 + 4):

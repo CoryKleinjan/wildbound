@@ -176,3 +176,42 @@ static func decoration(id: String, color: String) -> Texture2D:
 		p.call(2, 4, 12, 10, Color(color).darkened(0.35))
 		p.call(3, 3, 10, 10, color)
 		p.call(4, 4, 4, 2, Color(color).lightened(0.4)))
+
+## A rocky cave entrance, 32x32, drawn over a painted map where the painting has no cave mouth. Its bottom edge
+## sits on the mouth tile and it overhangs half a tile each side and one tile above.
+static func cave_entrance() -> Texture2D:
+	var key := "fx_cave_entrance"
+	if Tiles._cache.has(key):
+		return Tiles._cache[key]
+	var img := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	var rows := func(top: int, hw: Callable, color: String) -> void:
+		for y in range(top, 32):
+			var w: int = hw.call(y)
+			if w > 0:
+				img.fill_rect(Rect2i(16 - w, y, w * 2, 1), Color(color))
+	# The mound: outline, body, a lit top and a shaded foot.
+	var dome := func(inset: int) -> Callable:
+		return func(y: int) -> int:
+			# A wide dome: an ellipse 16 across and 15 high on top, straight sides below it.
+			var d := clampf((16.0 - float(y)) / 15.0, 0.0, 1.0)
+			return maxi(0, int(round(16.0 * sqrt(1.0 - d * d))) - inset)
+	rows.call(1, dome.call(0), "#3a2c20")
+	rows.call(2, dome.call(1), "#8a7a64")
+	for y in range(3, 12):
+		var w: int = dome.call(4).call(y)
+		if w > 0:
+			img.fill_rect(Rect2i(16 - w, y, w + w / 2, 1), Color("#a8987e"))
+	img.fill_rect(Rect2i(2, 28, 28, 3), Color("#6a5a48"))
+	for c in [[5, 16, 4, 2], [23, 13, 3, 2], [9, 7, 3, 1], [20, 22, 4, 1], [4, 23, 3, 1]]:
+		img.fill_rect(Rect2i(c[0], c[1], c[2], c[3]), Color("#6a5a48"))
+	# The opening: a dark arch over the mouth tile.
+	var arch := func(inset: int, top: int) -> Callable:
+		return func(y: int) -> int:
+			var d := float(y - top)
+			return 0 if d < 0 else maxi(0, int(round(sqrt(maxf(0.0, 36.0 - maxf(0.0, 6.0 - d) * maxf(0.0, 6.0 - d))))) - inset)
+	rows.call(13, arch.call(-1, 13), "#3a2c20")
+	rows.call(14, arch.call(0, 14), "#181010")
+	img.fill_rect(Rect2i(11, 30, 10, 2), Color("#302018"))
+	var tex := ImageTexture.create_from_image(img)
+	Tiles._cache[key] = tex
+	return tex

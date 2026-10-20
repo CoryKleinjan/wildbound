@@ -6119,9 +6119,9 @@
    "#########....,,,,,..####",
    "#########..#......######",
    "#########..##.....######",
-   "##...####..#.,,,,..#####",
-   "##....T##..#.,,,,,.#####",
-   "##...##......,,,,..#####",
+   "#########..#.,,,,..#####",
+   "#########..#.,,,,,.#####",
+   "#######......,,,,..#####",
    "#######............#####",
    "######,,,,,.......######",
    "######,,,,,..#....######",
@@ -6142,7 +6142,7 @@
    "#.,,,,,,,........,,,,,.#",
    "#.,,,,,,,........,,,,,.#",
    "#..,,,,,##..###........#",
-   "##.....###S.#####......#",
+   "##.....###S.#####...F..#",
    "##########==############",
    "##########==############"
   ],
@@ -6159,21 +6159,17 @@
   "trainers": [
    {
     "id": "mossgrove_t0",
-    "name": "Bug Catcher Vash",
+    "name": "Bug Catcher Cass",
     "palette": "boy",
-    "x": 14,
-    "y": 39,
-    "dir": "left",
+    "x": 10,
+    "y": 23,
+    "dir": "up",
     "sight": 4,
     "pay": 16,
     "party": [
      [
-      "jellip",
-      9
-     ],
-     [
-      "jellip",
-      8
+      "leaplet",
+      10
      ]
     ],
     "double": false,
@@ -6183,17 +6179,17 @@
    },
    {
     "id": "mossgrove_t1",
-    "name": "Aroma Lady Zed",
+    "name": "Aroma Lady Nico",
     "palette": "beauty",
-    "x": 5,
-    "y": 11,
-    "dir": "down",
-    "sight": 3,
+    "x": 10,
+    "y": 16,
+    "dir": "up",
+    "sight": 4,
     "pay": 16,
     "party": [
      [
-      "fenspawn",
-      10
+      "dewsprig",
+      7
      ]
     ],
     "double": false,
@@ -6203,20 +6199,20 @@
    },
    {
     "id": "mossgrove_t2",
-    "name": "Twins Odile & Rhea",
+    "name": "Twins Edda & Dov",
     "palette": "girl",
-    "x": 13,
-    "y": 22,
+    "x": 6,
+    "y": 12,
     "dir": "up",
-    "sight": 4,
+    "sight": 2,
     "pay": 16,
     "party": [
      [
-      "crawlet",
+      "dewsprig",
       9
      ],
      [
-      "acornip",
+      "sapfawn",
       9
      ]
     ],
@@ -6227,17 +6223,17 @@
    },
    {
     "id": "mossgrove_t3",
-    "name": "Picnicker Brisa",
+    "name": "Picnicker Toby",
     "palette": "girl",
-    "x": 15,
-    "y": 15,
+    "x": 14,
+    "y": 19,
     "dir": "up",
     "sight": 4,
     "pay": 16,
     "party": [
      [
-      "crawlet",
-      5
+      "leaplet",
+      8
      ]
     ],
     "double": false,
@@ -6257,21 +6253,21 @@
     "id": "mossgrove_i1",
     "x": 5,
     "y": 7,
-    "item": "repel",
+    "item": "potion",
     "count": 1,
     "hidden": false
    },
    {
     "id": "mossgrove_i2",
-    "x": 3,
-    "y": 19,
-    "item": "parlyzHeal",
+    "x": 19,
+    "y": 15,
+    "item": "antidote",
     "count": 1,
     "hidden": false
    },
    {
     "id": "mossgrove_i3",
-    "x": 2,
+    "x": 22,
     "y": 41,
     "item": "miracleSeed",
     "count": 1,
@@ -6287,8 +6283,8 @@
    },
    {
     "id": "mossgrove_i5",
-    "x": 13,
-    "y": 4,
+    "x": 11,
+    "y": 26,
     "item": "stardust",
     "count": 1,
     "hidden": true
@@ -6303,7 +6299,13 @@
   "encounterRate": 25,
   "encounters": [
    {
-    "species": "acornip",
+    "species": "mossling",
+    "min": 5,
+    "max": 9,
+    "weight": 20
+   },
+   {
+    "species": "ozlug",
     "min": 5,
     "max": 9,
     "weight": 20
@@ -6312,10 +6314,22 @@
     "species": "ironmite",
     "min": 5,
     "max": 9,
-    "weight": 20
+    "weight": 10
    },
    {
-    "species": "mossling",
+    "species": "dewsprig",
+    "min": 5,
+    "max": 9,
+    "weight": 10
+   },
+   {
+    "species": "acornip",
+    "min": 5,
+    "max": 9,
+    "weight": 10
+   },
+   {
+    "species": "sapfawn",
     "min": 5,
     "max": 9,
     "weight": 10
@@ -6324,46 +6338,28 @@
     "species": "leaplet",
     "min": 5,
     "max": 9,
-    "weight": 10
-   },
-   {
-    "species": "wrigglet",
-    "min": 5,
-    "max": 9,
-    "weight": 10
-   },
-   {
-    "species": "crawlet",
-    "min": 5,
-    "max": 9,
-    "weight": 10
-   },
-   {
-    "species": "jellip",
-    "min": 5,
-    "max": 9,
-    "weight": 5
-   },
-   {
-    "species": "fenspawn",
-    "min": 5,
-    "max": 9,
     "weight": 5
    },
    {
     "species": "seepling",
     "min": 5,
     "max": 9,
-    "weight": 4
+    "weight": 5
    },
    {
-    "species": "gorsling",
+    "species": "wrigglet",
     "min": 5,
     "max": 9,
     "weight": 4
    },
    {
-    "species": "buzzlet",
+    "species": "ohmite",
+    "min": 5,
+    "max": 9,
+    "weight": 4
+   },
+   {
+    "species": "hushgrub",
     "min": 5,
     "max": 9,
     "weight": 1
@@ -6703,7 +6699,7 @@
       14
      ],
      [
-      "eddykin",
+      "antlit",
       14
      ]
     ],
@@ -6723,7 +6719,7 @@
     "pay": 21,
     "party": [
      [
-      "glowgnat",
+      "eddykin",
       12
      ]
     ],
@@ -6747,7 +6743,7 @@
       12
      ],
      [
-      "nipshell",
+      "raylet",
       13
      ]
     ],
@@ -6805,16 +6801,10 @@
     "weight": 20
    },
    {
-    "species": "ozlug",
-    "min": 12,
-    "max": 15,
-    "weight": 20
-   },
-   {
     "species": "nipshell",
     "min": 12,
     "max": 15,
-    "weight": 10
+    "weight": 20
    },
    {
     "species": "raylet",
@@ -6835,13 +6825,13 @@
     "weight": 10
    },
    {
-    "species": "ohmite",
+    "species": "eddykin",
     "min": 12,
     "max": 15,
-    "weight": 5
+    "weight": 10
    },
    {
-    "species": "eddykin",
+    "species": "fenspawn",
     "min": 12,
     "max": 15,
     "weight": 5
@@ -6850,7 +6840,7 @@
     "species": "antlit",
     "min": 12,
     "max": 15,
-    "weight": 4
+    "weight": 5
    },
    {
     "species": "brookit",
@@ -6860,6 +6850,12 @@
    },
    {
     "species": "mirrakoi",
+    "min": 12,
+    "max": 15,
+    "weight": 4
+   },
+   {
+    "species": "rimewing",
     "min": 12,
     "max": 15,
     "weight": 1
@@ -6965,12 +6961,12 @@
     "pay": 24,
     "party": [
      [
-      "acornip",
+      "buzzlet",
       15
      ],
      [
-      "dynamoth",
-      18
+      "omenkin",
+      15
      ]
     ],
     "double": false,
@@ -6993,7 +6989,7 @@
       18
      ],
      [
-      "stingrub",
+      "acornip",
       16
      ]
     ],
@@ -7013,11 +7009,11 @@
     "pay": 24,
     "party": [
      [
-      "dynamoth",
+      "omenkin",
       18
      ],
      [
-      "stingrub",
+      "acornip",
       18
      ]
     ],
@@ -7041,11 +7037,11 @@
       15
      ],
      [
-      "omenkin",
+      "rimeshade",
       15
      ],
      [
-      "acornip",
+      "buzzlet",
       19
      ]
     ],
@@ -7103,13 +7099,25 @@
     "weight": 20
    },
    {
-    "species": "acornip",
+    "species": "buzzlet",
     "min": 15,
     "max": 18,
     "weight": 20
    },
    {
+    "species": "acornip",
+    "min": 15,
+    "max": 18,
+    "weight": 10
+   },
+   {
     "species": "stingrub",
+    "min": 15,
+    "max": 18,
+    "weight": 10
+   },
+   {
+    "species": "gorsling",
     "min": 15,
     "max": 18,
     "weight": 10
@@ -7124,16 +7132,10 @@
     "species": "barkhide",
     "min": 18,
     "max": 18,
-    "weight": 10
+    "weight": 5
    },
    {
     "species": "omenkin",
-    "min": 15,
-    "max": 18,
-    "weight": 10
-   },
-   {
-    "species": "hushgrub",
     "min": 15,
     "max": 18,
     "weight": 5
@@ -7142,7 +7144,7 @@
     "species": "dynamoth",
     "min": 18,
     "max": 18,
-    "weight": 5
+    "weight": 4
    },
    {
     "species": "encasa",
@@ -7152,12 +7154,6 @@
    },
    {
     "species": "grimlet",
-    "min": 15,
-    "max": 18,
-    "weight": 4
-   },
-   {
-    "species": "duskwisp",
     "min": 15,
     "max": 18,
     "weight": 1
@@ -7988,11 +7984,11 @@
     "pay": 30,
     "party": [
      [
-      "umbrat",
+      "sapfawn",
       25
      ],
      [
-      "umbrat",
+      "sapfawn",
       23
      ]
     ],
@@ -8012,7 +8008,7 @@
     "pay": 30,
     "party": [
      [
-      "dewsprig",
+      "omenkin",
       23
      ],
      [
@@ -8040,7 +8036,7 @@
       26
      ],
      [
-      "sapfawn",
+      "blightcap",
       26
      ]
     ],
@@ -8060,11 +8056,11 @@
     "pay": 30,
     "party": [
      [
-      "dewsprig",
+      "omenkin",
       25
      ],
      [
-      "sapfawn",
+      "blightcap",
       27
      ]
     ],
@@ -8128,18 +8124,6 @@
     "weight": 20
    },
    {
-    "species": "sapfawn",
-    "min": 23,
-    "max": 26,
-    "weight": 10
-   },
-   {
-    "species": "dewsprig",
-    "min": 23,
-    "max": 26,
-    "weight": 10
-   },
-   {
     "species": "blightcap",
     "min": 23,
     "max": 26,
@@ -8155,13 +8139,31 @@
     "species": "grimlet",
     "min": 23,
     "max": 26,
-    "weight": 5
+    "weight": 10
+   },
+   {
+    "species": "duskwisp",
+    "min": 23,
+    "max": 26,
+    "weight": 10
    },
    {
     "species": "umbrat",
     "min": 23,
     "max": 26,
     "weight": 5
+   },
+   {
+    "species": "sapfawn",
+    "min": 23,
+    "max": 26,
+    "weight": 5
+   },
+   {
+    "species": "dewsprig",
+    "min": 23,
+    "max": 26,
+    "weight": 4
    },
    {
     "species": "pallwick",
@@ -8171,12 +8173,6 @@
    },
    {
     "species": "acornip",
-    "min": 23,
-    "max": 26,
-    "weight": 4
-   },
-   {
-    "species": "rimeshade",
     "min": 23,
     "max": 26,
     "weight": 1
@@ -8234,8 +8230,8 @@
     "pay": 32,
     "party": [
      [
-      "dreadspore",
-      28
+      "lullamoth",
+      27
      ]
     ],
     "double": false,
@@ -8254,11 +8250,11 @@
     "pay": 32,
     "party": [
      [
-      "musklet",
-      26
+      "brightwing",
+      28
      ],
      [
-      "lullamoth",
+      "encasa",
       26
      ]
     ],
@@ -8278,11 +8274,11 @@
     "pay": 32,
     "party": [
      [
-      "brightwing",
+      "hopvault",
       29
      ],
      [
-      "dreadspore",
+      "lullamoth",
       29
      ]
     ],
@@ -8306,7 +8302,7 @@
       26
      ],
      [
-      "encasa",
+      "musklet",
       28
      ]
     ],
@@ -8330,7 +8326,7 @@
       27
      ],
      [
-      "rimewing",
+      "jellip",
       30
      ]
     ],
@@ -8382,7 +8378,7 @@
   "encounterRate": 22,
   "encounters": [
    {
-    "species": "rimewing",
+    "species": "jellip",
     "min": 26,
     "max": 29,
     "weight": 20
@@ -8392,12 +8388,6 @@
     "min": 26,
     "max": 29,
     "weight": 20
-   },
-   {
-    "species": "jellip",
-    "min": 26,
-    "max": 29,
-    "weight": 10
    },
    {
     "species": "dreadspore",
@@ -8421,7 +8411,7 @@
     "species": "musklet",
     "min": 26,
     "max": 29,
-    "weight": 5
+    "weight": 10
    },
    {
     "species": "brightwing",
@@ -8433,7 +8423,7 @@
     "species": "hopvault",
     "min": 26,
     "max": 29,
-    "weight": 4
+    "weight": 5
    },
    {
     "species": "pulsecarab",
@@ -8443,6 +8433,12 @@
    },
    {
     "species": "venomwing",
+    "min": 26,
+    "max": 29,
+    "weight": 4
+   },
+   {
+    "species": "hushgrub",
     "min": 26,
     "max": 29,
     "weight": 1
@@ -9048,9 +9044,9 @@
    "####################################",
    "####################################",
    "#......#############################",
-   "#..,,,..####...#########.,,,,#######",
-   "#.,,,,,..#T....########..,,,,,######",
-   "#.,,,,,...##...###..,,,,,,,,,,######",
+   "#..,,,..################.,,,,#######",
+   "#.,,,,,..##############..,,,,,######",
+   "#.,,,,,...########..,,,,,,,,,,######",
    "#.,,,,,...#######..,,,,,,,....######",
    "#..,,,,...#######..,,,,,,.....######",
    "#........,,.#####.............######",
@@ -9061,11 +9057,11 @@
    "###########...,,,F..#..#####..######",
    "###########..,,,,,.....#####..######",
    "###########..,,,,,.....###.....#####",
-   "############.,,,,,.######...,,,.####",
-   "#########################F.,,,,,.S==",
-   "#########################..,,,,,..==",
-   "##########################.,,,,#####",
-   "####################################",
+   "############.,,,,,.###T##...,,,.####",
+   "######################.##F.,,,,,.S==",
+   "#####################...#..,,,,,..==",
+   "#####################...##.,,,,#####",
+   "#####################...############",
    "####################################",
    "####################################",
    "####################################"
@@ -9081,15 +9077,15 @@
     "id": "elderglen_t0",
     "name": "Bug Catcher Milo",
     "palette": "boy",
-    "x": 9,
+    "x": 24,
     "y": 16,
     "dir": "up",
-    "sight": 3,
+    "sight": 4,
     "pay": 36,
     "party": [
      [
-      "venomwing",
-      30
+      "willowhart",
+      34
      ],
      [
       "elderoak",
@@ -9105,14 +9101,14 @@
     "id": "elderglen_t1",
     "name": "Aroma Lady Arlo",
     "palette": "beauty",
-    "x": 12,
-    "y": 19,
+    "x": 8,
+    "y": 20,
     "dir": "up",
-    "sight": 2,
+    "sight": 4,
     "pay": 36,
     "party": [
      [
-      "willowhart",
+      "fernhart",
       35
      ],
      [
@@ -9133,7 +9129,7 @@
     "id": "elderglen_t2",
     "name": "Twins Finn & Zora",
     "palette": "girl",
-    "x": 26,
+    "x": 29,
     "y": 27,
     "dir": "up",
     "sight": 4,
@@ -9144,7 +9140,7 @@
       34
      ],
      [
-      "mantrill",
+      "crawlet",
       34
      ]
     ],
@@ -9157,18 +9153,18 @@
     "id": "elderglen_t3",
     "name": "Picnicker Pia",
     "palette": "girl",
-    "x": 16,
-    "y": 24,
+    "x": 21,
+    "y": 22,
     "dir": "up",
     "sight": 4,
     "pay": 36,
     "party": [
      [
-      "mantrill",
+      "crawlet",
       30
      ],
      [
-      "willowhart",
+      "fernhart",
       35
      ]
     ],
@@ -9187,39 +9183,39 @@
   "items": [
    {
     "id": "elderglen_i1",
-    "x": 13,
-    "y": 12,
+    "x": 22,
+    "y": 27,
     "item": "repeatOrb",
     "count": 1,
     "hidden": false
    },
    {
     "id": "elderglen_i2",
-    "x": 24,
-    "y": 11,
+    "x": 8,
+    "y": 12,
     "item": "maxEther",
     "count": 1,
     "hidden": false
    },
    {
     "id": "elderglen_i3",
-    "x": 1,
-    "y": 16,
+    "x": 19,
+    "y": 21,
     "item": "leafStone",
     "count": 1,
     "hidden": false
    },
    {
     "id": "elderglen_i4",
-    "x": 6,
-    "y": 19,
+    "x": 24,
+    "y": 11,
     "item": "spellTag",
     "count": 1,
     "hidden": false
    },
    {
     "id": "elderglen_i5",
-    "x": 25,
+    "x": 12,
     "y": 24,
     "item": "rareCandy",
     "count": 1,
@@ -9259,6 +9255,12 @@
     "weight": 10
    },
    {
+    "species": "crawlet",
+    "min": 30,
+    "max": 32,
+    "weight": 10
+   },
+   {
     "species": "mantrill",
     "min": 30,
     "max": 34,
@@ -9268,7 +9270,7 @@
     "species": "fernhart",
     "min": 30,
     "max": 34,
-    "weight": 10
+    "weight": 5
    },
    {
     "species": "willowhart",
@@ -9280,7 +9282,7 @@
     "species": "venomwing",
     "min": 30,
     "max": 34,
-    "weight": 5
+    "weight": 4
    },
    {
     "species": "dreadspore",
@@ -9290,12 +9292,6 @@
    },
    {
     "species": "blightcap",
-    "min": 30,
-    "max": 34,
-    "weight": 4
-   },
-   {
-    "species": "mystrakoi",
     "min": 30,
     "max": 34,
     "weight": 1
@@ -9349,7 +9345,7 @@
     "pay": 37,
     "party": [
      [
-      "glacifin",
+      "fenspawn",
       33
      ],
      [
@@ -9373,11 +9369,11 @@
     "pay": 37,
     "party": [
      [
-      "glacifin",
+      "fenspawn",
       34
      ],
      [
-      "glacifin",
+      "fenspawn",
       33
      ]
     ],
@@ -9397,7 +9393,7 @@
     "pay": 37,
     "party": [
      [
-      "rocklobber",
+      "raylet",
       35
      ],
      [
@@ -9425,7 +9421,7 @@
     "pay": 37,
     "party": [
      [
-      "glacifin",
+      "fenspawn",
       36
      ],
      [
@@ -9530,6 +9526,12 @@
     "weight": 10
    },
    {
+    "species": "mystrakoi",
+    "min": 32,
+    "max": 35,
+    "weight": 10
+   },
+   {
     "species": "raylet",
     "min": 32,
     "max": 35,
@@ -9539,7 +9541,7 @@
     "species": "rocklobber",
     "min": 32,
     "max": 35,
-    "weight": 10
+    "weight": 5
    },
    {
     "species": "fenspawn",
@@ -9551,16 +9553,10 @@
     "species": "glacifin",
     "min": 32,
     "max": 35,
-    "weight": 5
-   },
-   {
-    "species": "glimmerfin",
-    "min": 32,
-    "max": 35,
     "weight": 4
    },
    {
-    "species": "brightwing",
+    "species": "glimmerfin",
     "min": 32,
     "max": 35,
     "weight": 4
@@ -9977,11 +9973,11 @@
     "pay": 40,
     "party": [
      [
-      "floodfang",
+      "jabcrab",
       37
      ],
      [
-      "gorsling",
+      "floodfang",
       40
      ]
     ],
@@ -10001,11 +9997,11 @@
     "pay": 40,
     "party": [
      [
-      "floodfang",
+      "jabcrab",
       36
      ],
      [
-      "jabcrab",
+      "lobsmash",
       36
      ]
     ],
@@ -10025,11 +10021,11 @@
     "pay": 40,
     "party": [
      [
-      "seepling",
+      "gorsling",
       39
      ],
      [
-      "floodfang",
+      "jabcrab",
       39
      ]
     ],
@@ -10049,11 +10045,11 @@
     "pay": 40,
     "party": [
      [
-      "seepling",
+      "gorsling",
       36
      ],
      [
-      "seepling",
+      "gorsling",
       40
      ]
     ],
@@ -10123,6 +10119,12 @@
     "weight": 10
    },
    {
+    "species": "jellip",
+    "min": 36,
+    "max": 39,
+    "weight": 10
+   },
+   {
     "species": "lobsmash",
     "min": 36,
     "max": 39,
@@ -10138,7 +10140,7 @@
     "species": "floodfang",
     "min": 36,
     "max": 39,
-    "weight": 10
+    "weight": 5
    },
    {
     "species": "gorsling",
@@ -10150,7 +10152,7 @@
     "species": "seepling",
     "min": 36,
     "max": 39,
-    "weight": 5
+    "weight": 4
    },
    {
     "species": "hoarwhal",
@@ -10160,12 +10162,6 @@
    },
    {
     "species": "glacifin",
-    "min": 36,
-    "max": 39,
-    "weight": 4
-   },
-   {
-    "species": "elderoak",
     "min": 36,
     "max": 39,
     "weight": 1
@@ -10865,7 +10861,7 @@
       46
      ],
      [
-      "driftail",
+      "cascadon",
       43
      ]
     ],
@@ -10885,11 +10881,11 @@
     "pay": 45,
     "party": [
      [
-      "bogmonarch",
+      "lobsmash",
       46
      ],
      [
-      "rimewing",
+      "mirrakoi",
       43
      ]
     ],
@@ -10909,15 +10905,15 @@
     "pay": 45,
     "party": [
      [
-      "driftail",
+      "cascadon",
       45
      ],
      [
-      "lobsmash",
+      "driftail",
       46
      ],
      [
-      "driftail",
+      "cascadon",
       46
      ]
     ],
@@ -10941,11 +10937,11 @@
       42
      ],
      [
-      "bogmonarch",
+      "lobsmash",
       43
      ],
      [
-      "cascadon",
+      "rimeshade",
       43
      ]
     ],
@@ -11005,6 +11001,12 @@
     "weight": 20
    },
    {
+    "species": "rimeshade",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
     "species": "cascadon",
     "min": 42,
     "max": 45,
@@ -11026,7 +11028,7 @@
     "species": "bogmonarch",
     "min": 42,
     "max": 45,
-    "weight": 10
+    "weight": 5
    },
    {
     "species": "mirrakoi",
@@ -11038,16 +11040,10 @@
     "species": "rimewing",
     "min": 42,
     "max": 45,
-    "weight": 5
-   },
-   {
-    "species": "glacifin",
-    "min": 42,
-    "max": 45,
     "weight": 4
    },
    {
-    "species": "rimeshade",
+    "species": "glacifin",
     "min": 42,
     "max": 45,
     "weight": 4
@@ -12002,7 +11998,7 @@
     "pay": 50,
     "party": [
      [
-      "cascadon",
+      "mystrakoi",
       52
      ]
     ],
@@ -12128,10 +12124,16 @@
     "weight": 10
    },
    {
-    "species": "mystrakoi",
+    "species": "rimeshade",
     "min": 48,
     "max": 52,
     "weight": 10
+   },
+   {
+    "species": "mystrakoi",
+    "min": 48,
+    "max": 52,
+    "weight": 5
    },
    {
     "species": "cascadon",
@@ -12141,12 +12143,6 @@
    },
    {
     "species": "lobsmash",
-    "min": 48,
-    "max": 52,
-    "weight": 5
-   },
-   {
-    "species": "rimeshade",
     "min": 48,
     "max": 52,
     "weight": 4
