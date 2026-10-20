@@ -98,11 +98,15 @@ class MailScene extends Scene:
 			Audio.sfx("cancel")
 			_on_close.call()
 	func draw() -> void:
-		var d: Array = DESIGNS.get(_mail.item, ["#c0c0c0", "#f8f8f8"])
-		Gfx.rect(0, 0, Gfx.W, Gfx.H, d[0])
-		for i in 12:
-			Gfx.ellipse(fposmod(i * 47.0, Gfx.W), fposmod(i * 31.0, Gfx.H), 6, 6, Gfx.shade(d[0], 1.15))
-		Gfx.rect(20, 20, Gfx.W - 40, Gfx.H - 40, d[1])
+		var paper := ArtAssets.texture("screens/mail_" + str(_mail.item))
+		if paper != null:
+			Gfx.image(paper, 0, 0)
+		else:
+			var d: Array = DESIGNS.get(_mail.item, ["#c0c0c0", "#f8f8f8"])
+			Gfx.rect(0, 0, Gfx.W, Gfx.H, d[0])
+			for i in 12:
+				Gfx.ellipse(fposmod(i * 47.0, Gfx.W), fposmod(i * 31.0, Gfx.H), 6, 6, Gfx.shade(d[0], 1.15))
+			Gfx.rect(20, 20, Gfx.W - 40, Gfx.H - 40, d[1])
 		Gfx.text(DB.item(_mail.item).name if DB.ITEMS.has(_mail.item) else "Mail", 28, 26, {"size": 5, "color": "#808080"})
 		var lines := Gfx.wrap(str(_mail.text) if str(_mail.text) != "" else "(blank)", Gfx.W - 64, 7)
 		for i in lines.size():

@@ -17,7 +17,10 @@ BASE = (
 	"big square pixels. Only the backdrop: no windows, boxes, buttons, text, letters, numbers, creatures or characters. "
 )
 HEADER = "Leave a plain darker header band across the top eighth of the screen. "
-FULL = {"ending", "evolution", "halloffame", "gamecorner"}  # full scenes: no header band
+FULL = {"ending", "evolution", "halloffame", "gamecorner", "mail_orangeMail", "mail_harborMail", "mail_glitterMail", "mail_mechMail",
+	"mail_woodMail", "mail_waveMail"}
+LETTER = ("Mail stationery: a letter sheet filling the screen, with a decorated border about one sixth of the screen wide all around "
+	"and a plain light writing area in the middle (no lines of text). The border: ")  # full scenes: no header band
 SCREENS = {
 	"party": "The party menu backdrop: a calm blue background with a subtle diagonal pattern of soft lighter-blue stripes and "
 		"small rounded tile shapes, like the Emerald party screen.",
@@ -37,6 +40,12 @@ SCREENS = {
 	"ending": "An ending credits backdrop: a peaceful night sky full of stars over a grassy hill and a distant town with warm "
 		"lights; the top center has open sky.",
 	"evolution": "The evolution screen backdrop: a dark blue background with soft glowing rings and sparkles radiating from the center.",
+	"mail_orangeMail": LETTER + "warm orange with a pattern of small round orange fruits and leaves.",
+	"mail_harborMail": LETTER + "deep blue with little anchors, ships' wheels and waves, a harbor theme.",
+	"mail_glitterMail": LETTER + "lavender with sparkles and tiny stars, glittering.",
+	"mail_mechMail": LETTER + "steel grey with bolts, gears and metal plates, a mechanical theme.",
+	"mail_woodMail": LETTER + "brown wood grain planks with small leaves, a forest cabin theme.",
+	"mail_waveMail": LETTER + "sea blue with rolling white-capped waves and bubbles.",
 	"starter": "A professor's lab backdrop: wooden floor, bookshelves and a lab desk at the back, warm light, like Professor Birch's lab.",
 }
 

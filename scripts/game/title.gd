@@ -72,7 +72,13 @@ func draw() -> void:
 	Gfx.image(CreatureArt.creature_sprite("cindercub"), 20, 64 + bob, {"scale": s})
 	Gfx.image(CreatureArt.creature_sprite("sproutle"), 92, 68 - bob, {"scale": s})
 	Gfx.image(CreatureArt.creature_sprite("ripplet"), 164, 64 + bob, {"scale": s})
-	Gfx.text("WILDBOUND", Gfx.W / 2.0, 18, {"size": 16, "align": "center", "color": "#f8f8f8", "shadow": "#384878"})
-	Gfx.text("a co-op creature adventure", Gfx.W / 2.0, 42, {"size": 6, "align": "center", "color": "#283860", "shadow": null})
+	var logo := ArtAssets.texture("ui/logo")
+	if logo != null:
+		var k := 150.0 / logo.get_width()
+		Gfx.image(logo, Gfx.W / 2.0 - 75, 3, {"scale": k})
+		Gfx.text("a co-op creature adventure", Gfx.W / 2.0, 3 + logo.get_height() * k + 1, {"size": 6, "align": "center", "color": "#283860", "shadow": null})
+	else:
+		Gfx.text("WILDBOUND", Gfx.W / 2.0, 18, {"size": 16, "align": "center", "color": "#f8f8f8", "shadow": "#384878"})
+		Gfx.text("a co-op creature adventure", Gfx.W / 2.0, 42, {"size": 6, "align": "center", "color": "#283860", "shadow": null})
 	if not _menu_open and floori(_t * 2) % 2 == 0:
 		Gfx.text("PRESS A / ENTER", Gfx.W / 2.0, 140, {"size": 7, "align": "center", "color": "#f8f8f8", "shadow": "#305020"})
