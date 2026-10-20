@@ -1178,6 +1178,280 @@ for k, p in OUT['mapPatches'].items():
                               for x, ch in enumerate(r)) for y, r in enumerate(p['tiles'])]
 WALKABLE = set('.,=Fhlm:ju_eagdysX')
 
+# ---------- the rest of Emerald: Itemfinder, Game Corner, Lottery, Trick House, Mirage Island, Berry Master,
+# Battle Frontier, mail, the region map ----------
+def building_i(town, id, name, npcs, rows=ROOM, **extra):
+    door = add_building(town, id, roof='i')
+    return interior(id, name, rows, town, door, npcs, **extra)
+
+
+for it in FD.extra_items():
+    OUT['items'][it['id']] = it
+ALL_ITEMS.update(OUT['items'])
+OUT['shops']['mart']['1'] += ['orangeMail', 'harborMail']
+OUT['shops']['mart']['3'] += ['glitterMail', 'mechMail']
+OUT['shops']['mart']['4'] += ['woodMail', 'waveMail']
+
+# Itemfinder (Stonecrest) and Coin Case (Cinder City).
+add_npc('stonecrest', 'boy', ["Some items are buried where you can't see them. This Itemfinder beeps when one is near!"],
+        service='gift', gift='itemfinder', flag='gift_itemfinder',
+        after=['Use the Itemfinder from your BAG. It points toward hidden items nearby.'])
+
+# Game Corner (Cinder City): slot machines (Y), coins and prizes.
+GAME_CORNER = ['|||||||||||||||',
+               '|_____________|',
+               '|_Y_Y_Y_Y_Y_Y_|',
+               '|_____________|',
+               '|_____________|',
+               '|_Y_Y_Y_Y_Y_Y_|',
+               '|_____________|',
+               '|_____________|',
+               '|cccc_____cccc|',
+               '|_____________|',
+               '|_____________|',
+               '|||||||e|||||||']
+building_i('cindercity', 'gamecorner', 'Game Corner', [
+    npc(2, 7, 'clerk', ['Welcome to the Game Corner! Coins are 50 for $1,000.'], service='coins'),
+    npc(12, 7, 'clerk', ['Exchange your coins for prizes!'], service='prizes'),
+    npc(7, 9, 'gentleman', ['You need a Coin Case to play. Here, have mine!'], service='gift', gift='coinCase',
+        flag='gift_coinCase', after=['Face a slot machine and press A to play. Three 7s pay 300 coins!']),
+    npc(4, 4, 'girl', ['Press A three times to stop the reels. Line up three of a kind on the middle row!']),
+], rows=GAME_CORNER, music='town')
+OUT['prizes'] = {
+    'items': [['tm%02d' % (FD.TMS.index('thunderbolt') + 1), 4000], ['tm%02d' % (FD.TMS.index('iceBeam') + 1), 4000],
+              ['tm%02d' % (FD.TMS.index('flamethrower') + 1), 4000], ['tm%02d' % (FD.TMS.index('psychic') + 1), 3500],
+              ['tm%02d' % (FD.TMS.index('shadowBall') + 1), 3500], ['brightPowder', 1500], ['scopeLens', 1500],
+              ['quickClaw', 1000], ['kingsRock', 1000], ['rareCandy', 800], ['ppUp', 1200]],
+    'creatures': [],
+}
+# Three prize creatures nobody can catch in the wild.
+wild_species = set()
+for mm in list(MAPS.values()) + list(OUT['maps'].values()) + list(OUT['mapPatches'].values()):
+    for key in ('encounters', 'waterEncounters'):
+        for e in mm.get(key, []) or []:
+            wild_species.add(e['species'])
+    for rod in (mm.get('fishing') or {}).values():
+        for e in rod:
+            wild_species.add(e['species'])
+STARTERS = set(MISC.get('starters', []))
+unwild = sorted([k for k in SPECIES if k not in wild_species and k not in LEGENDARIES and base_form(k) not in STARTERS],
+                key=lambda k: (bst(SPECIES[k]), k))
+prize_mons = unwild[len(unwild) // 3: len(unwild) // 3 + 3] if len(unwild) >= 6 else unwild[:3]
+OUT['prizes']['creatures'] = [[sp, 25 + 5 * i, 2000 + 2500 * i] for i, sp in enumerate(prize_mons)]
+mirage_mon = unwild[len(unwild) // 3 + 4]
+
+# Lottery corner (Lumenvale Dept. Store).
+OUT['maps']['deptstore']['npcs'].append(
+    npc(11, 8, 'girl', ["This is the Lottery Corner! We draw a number every day. If it matches the ID No. of one of "
+                        "your creatures, you win a prize!"], service='lottery'))
+
+# Berry Master's house (Route 8): two berries a day; his wife hands out a rare one once a day.
+building_i('route8', 'berrymaster', "Berry Master's House", [
+    npc(7, 4, 'old', ["I'm the Berry Master! I grow berries for anyone who loves them. Take these!"],
+        service='berryMaster', flag='berrymaster_daily'),
+    npc(4, 6, 'beauty', ["My husband's berries are the best. Have one of my favorites, too."],
+        service='berryWife', flag='berrywife_daily'),
+], theme='#e8d8b8')
+
+# Mirage Island: shows up on Route 13 on some days (see Field.mirage_visible).
+MIRAGE = ['~aaaaa~',
+          'aa,,,aa',
+          'a,,,,,a',
+          'aa,,,aa',
+          '~aaaaa~']
+OUT['maps']['route13']['mirage'] = {'x': 22, 'y': 2, 'tiles': MIRAGE}
+OUT['maps']['route13']['berries'] = {'25,4': 'liechiBerry'}
+OUT['maps']['route13']['encounters'] = [{'species': mirage_mon, 'min': 30, 'max': 35, 'weight': 100}]
+add_npc('saltmarsh', 'old', ['I look out to sea every morning, hoping to see Mirage Island...'], service='mirageWatch')
+
+# Trick House (Route 7): find the Trick Master, then solve his puzzle rooms.
+TRICK_HOUSE = ['|||||||||||||||',
+               '|_KK_______KK_|',
+               '|_____________|',
+               '|_t_________t_|',
+               '|_____________|',
+               '|______o______|',
+               '|_____________|',
+               '|_t_________t_|',
+               '|_____________|',
+               '|_KK_______KK_|',
+               '|_____________|',
+               '|||||||e|||||||']
+building_i('route7', 'trickhouse', 'Trick House', [], rows=TRICK_HOUSE, trickHouse=True, theme='#d8c8e0')
+OUT['maps']['trickhouse']['hideSpots'] = ['2,1', '3,1', '11,1', '12,1', '2,3', '12,3', '7,5', '2,7', '12,7', '2,9', '3,9', '11,9', '12,9']
+# Puzzle rooms: a maze from the door (bottom) to the stairs (X, top). The way through is blocked by trees to Cut
+# (room 1), rocks to smash (room 2) and boulders to push aside with Strength (room 3).
+def trick_maze(level, seed):
+    r = random.Random(seed)
+    W, H = 15, 13
+    g = [['|'] * W for _ in range(H)]
+    cells = [(x, y) for y in range(1, H - 1, 2) for x in range(1, W - 1, 2)]
+    start = (7, 11)
+    seen = {start}
+    stack = [start]
+    g[start[1]][start[0]] = '_'
+    while stack:
+        x, y = stack[-1]
+        nb = [(x + dx, y + dy, dx, dy) for dx, dy in [(0, -2), (0, 2), (-2, 0), (2, 0)]
+              if 1 <= x + dx < W - 1 and 1 <= y + dy < H - 1 and (x + dx, y + dy) not in seen]
+        if not nb:
+            stack.pop()
+            continue
+        nx, ny, dx, dy = r.choice(nb)
+        g[y + dy // 2][x + dx // 2] = '_'
+        g[ny][nx] = '_'
+        seen.add((nx, ny))
+        stack.append((nx, ny))
+    g[H - 1][7] = 'e'
+    # The stairs: the top-row cell farthest along the maze from the door.
+    def bfs(src):
+        dist, prev, q = {src: 0}, {}, deque([src])
+        while q:
+            x, y = q.popleft()
+            for dx, dy in DX:
+                n = (x + dx, y + dy)
+                if g[n[1]][n[0]] == '_' and n not in dist:
+                    dist[n] = dist[(x, y)] + 1
+                    prev[n] = (x, y)
+                    q.append(n)
+        return dist, prev
+    dist, prev = bfs(start)
+    goal = max([c for c in cells if c[1] == 1], key=lambda c: dist[c])
+    g[1][goal[0]] = 'X'
+    path = [goal]
+    while path[-1] != start:
+        path.append(prev[path[-1]])
+    path.reverse()
+    on_path = set(path)
+    if level < 3:
+        spots = [p for p in path[3:-2] if p[0] % 2 == 0 or p[1] % 2 == 0]
+        r.shuffle(spots)
+        picks = spots[:3]
+        for i, (x, y) in enumerate(picks):
+            g[y][x] = 'T' if level == 1 or i == 2 else 'R'
+        return [''.join(row) for row in g] if len(picks) == 3 else None
+    # Strength: a boulder on a junction of the path, pushed straight on into a dead-end branch.
+    placed = 0
+    for i in range(2, len(path) - 2):
+        (px, py), (jx, jy) = path[i - 1], path[i]
+        bx, by = 2 * jx - px, 2 * jy - py
+        if g[by][bx] == '_' and (bx, by) not in on_path and g[2 * by - jy][2 * bx - jx] == '_' and placed < 2:
+            g[jy][jx] = 'O'
+            on_path.add((bx, by))
+            placed += 1
+    if placed < 2:
+        return None
+    spots = [p for p in path[3:-2] if g[p[1]][p[0]] == '_' and (p[0] % 2 == 0 or p[1] % 2 == 0)]
+    if not spots:
+        return None
+    x, y = r.choice(spots)
+    g[y][x] = 'R'
+    return [''.join(row) for row in g]
+
+
+PUZZLES = []
+for lv in (1, 2, 3):
+    sd = lv * 100
+    rows = None
+    while rows is None:
+        sd += 1
+        rows = trick_maze(lv, sd)
+    PUZZLES.append(rows)
+TRICK_PRIZES = [['rareCandy', 'nugget'], ['ppUp', 'starPiece'], ['leftovers', 'masterOrb']]
+for i, rows in enumerate(PUZZLES):
+    assert all(len(r) == 15 for r in rows), (i, [len(r) for r in rows])
+    pid = 'trickpuzzle%d' % (i + 1)
+    sx = rows[1].index('X')
+    OUT['maps'][pid] = {
+        'id': pid, 'name': 'Trick House Puzzle %d' % (i + 1), 'tiles': rows, 'indoor': True, 'theme': '#c8b8d8',
+        'connections': {}, 'npcs': [], 'music': 'trickhouse',
+        'warps': {'7,12': {'map': 'trickhouse', 'x': 7, 'y': 10, 'dir': 'up'},
+                  '%d,1' % sx: {'map': 'trickreward', 'x': 7, 'y': 6, 'dir': 'up', 'script': 'trickDone', 'level': i + 1}},
+        'trickLevel': i + 1,
+    }
+    # The way through needs the field moves (and Strength for the third room).
+    g = [list(r) for r in rows]
+    open_set = set('_eXTRO')
+    seen, q = {(7, 12)}, deque([(7, 12)])
+    while q:
+        x, y = q.popleft()
+        for dx, dy in DX:
+            nx, ny = x + dx, y + dy
+            if 0 <= ny < len(g) and 0 <= nx < 15 and (nx, ny) not in seen and g[ny][nx] in open_set:
+                seen.add((nx, ny))
+                q.append((nx, ny))
+    assert (sx, 1) in seen, 'puzzle %d has no way through' % (i + 1)
+OUT['maps']['trickreward'] = {
+    'id': 'trickreward', 'name': 'Trick House', 'indoor': True, 'theme': '#d8c8e0', 'connections': {}, 'music': 'trickhouse',
+    'tiles': ['|||||||||||||||', '|_____________|', '|_t_________t_|', '|_____________|', '|_____________|',
+              '|_____________|', '|_____________|', '|||||||e|||||||'],
+    'warps': {'7,7': dict(next(iter(OUT['maps']['trickhouse']['warps'].values())))},
+    'npcs': [npc(7, 3, 'psychic', ['You solved my puzzle!'], service='trickPrize')],
+}
+OUT['trick'] = {'badges': [1, 3, 4], 'prizes': TRICK_PRIZES}
+
+# ---------- Battle Frontier (ferry from Saltmarsh after becoming Champion) ----------
+FRONTIER = [list('~' * 40) for _ in range(28)]
+
+
+def fr(x0, y0, rows):
+    for dy, r in enumerate(rows):
+        for dx, ch in enumerate(r):
+            FRONTIER[y0 + dy][x0 + dx] = ch
+
+
+fr(1, 1, ['#' * 38] + ['#' + '.' * 36 + '#'] * 21 + ['#' + 'a' * 36 + '#'] * 2)
+for x in range(2, 38):
+    FRONTIER[11][x] = '='
+    FRONTIER[19][x] = '='
+for y in range(5, 25):
+    FRONTIER[y][19] = '='
+    FRONTIER[y][20] = '='
+for y in range(23, 27):
+    for x in range(18, 22):
+        FRONTIER[y][x] = 'a'
+FRONTIER[25][16] = FRONTIER[25][17] = 'a'
+FACILITIES = [
+    ('factory', 'Battle Factory', 4, 7, 'Rent creatures, then win seven battles in a row. You may swap a rental after each win.'),
+    ('arena', 'Battle Arena', 11, 7, 'Three-turn matches judged on Mind, Skill and Body. No switching!'),
+    ('dome', 'Battle Dome', 26, 7, 'A four-round tournament. See your rival\'s team, then pick two of your three.'),
+    ('palace', 'Battle Palace', 33, 7, 'Your creatures fight on their own, as their nature tells them.'),
+    ('pike', 'Battle Pike', 4, 15, 'Choose one of three doors in each of 14 rooms. Anything could be behind them...'),
+    ('pyramid', 'Battle Pyramid', 33, 15, 'Climb seven dark floors full of wild creatures and trainers. Bring only what you find!'),
+    ('exchange', 'Exchange Service Corner', 18, 1, 'Exchange your Battle Points for prizes!'),
+]
+for fid, name, x, y, desc in FACILITIES:
+    fr(x, y, ['iiii', 'iiii', 'wwdw'])
+FRONTIER = [''.join(r) for r in FRONTIER]
+fwarps = {}
+for fid, name, x, y, desc in FACILITIES:
+    rid = 'frontier_' + fid
+    fwarps['%d,%d' % (x + 2, y + 2)] = {'map': rid, 'x': 7, 'y': 10, 'dir': 'up'}
+    if fid == 'exchange':
+        npcs = [npc(7, 4, 'clerk', [desc], service='shop', shop='bp'),
+                npc(3, 6, 'ace', ['Each facility pays Battle Points for every set of seven wins.'])]
+    else:
+        npcs = [npc(7, 4, 'nurse', ['Welcome to the %s!' % name, desc], service='frontier', facility=fid),
+                npc(11, 7, 'gentleman', ['Every facility uses level-50 creatures. Legendaries can\'t enter.'])]
+    interior(rid, name, ROOM, 'battlefrontier', (x + 2, y + 2), npcs, theme='#d0d8e8', music='town')
+OUT['flyPoints']['battlefrontier'] = {'x': 19, 'y': 21, 'name': 'Battle Frontier'}
+OUT['maps']['battlefrontier'] = {
+    'id': 'battlefrontier', 'name': 'Battle Frontier', 'tiles': FRONTIER, 'theme': '#d8d0c0', 'connections': {},
+    'warps': fwarps, 'town': False, 'music': 'town',
+    'npcs': [npc(17, 25, 'swimmer', ['The ferry leaves for Saltmarsh whenever you\'re ready.'], service='ferry', to='saltmarsh'),
+             npc(22, 12, 'ace', ['Welcome to the Battle Frontier! Seven facilities, one goal: become the strongest.']),
+             npc(8, 20, 'girl', ['Win seven battles in a row anywhere here and you earn Battle Points.'])],
+}
+add_npc('saltmarsh', 'swimmer', ['This ferry runs to the Battle Frontier. Only Champions may board.'], service='ferry',
+        to='battlefrontier')
+# The Pyramid's floors are built in the game; these are the wild creatures inside.
+OUT['frontier'] = {
+    'pyramidWild': sorted(k for k in SPECIES if k not in LEGENDARIES and 380 <= bst(SPECIES[k]) <= 520)[:40],
+    'arrive': {'battlefrontier': [19, 24], 'saltmarsh': None},
+}
+
+
+
 
 # ---------- validation ----------
 def all_maps():
@@ -1229,6 +1503,56 @@ for mid in FD.TMS + FD.HMS:
 if errors:
     print('\n'.join(errors))
     sys.exit(1)
+
+# ---------- region map: where every outdoor map sits, in tiles ----------
+def region_layout():
+    am = all_maps()
+    pos = {'fernhollow': (0, 0)}
+    order = ['fernhollow']
+    while order:
+        a = order.pop(0)
+        ax, ay = pos[a]
+        A = am[a]
+        aw, ah = len(A['tiles'][0]), len(A['tiles'])
+        for d, c in A.get('connections', {}).items():
+            b = c['map']
+            B = am[b]
+            bw, bh = len(B['tiles'][0]), len(B['tiles'])
+            o = c['offset']
+            p = {'up': (ax - o, ay - bh), 'down': (ax - o, ay + ah), 'left': (ax - bw, ay - o), 'right': (ax + aw, ay - o)}[d]
+            if b not in pos:
+                pos[b] = p
+                order.append(b)
+    minx = min(p[0] for p in pos.values())
+    miny = min(p[1] for p in pos.values())
+    out = {}
+    for k, (x, y) in pos.items():
+        m = am[k]
+        out[k] = {'x': x - minx, 'y': y - miny, 'w': len(m['tiles'][0]), 'h': len(m['tiles']),
+                  'town': bool(m.get('town') or k == 'fernhollow'), 'name': m['name']}
+    # The Battle Frontier is out at sea, east of Route 13.
+    r13 = out['route13']
+    out['battlefrontier'] = {'x': r13['x'] + r13['w'] + 6, 'y': r13['y'] + 2, 'w': 40, 'h': 28, 'town': True,
+                             'name': 'Battle Frontier', 'island': True}
+    # Indoor maps and caves point at the outdoor map whose door leads to them.
+    parent = {}
+    changed = True
+    while changed:
+        changed = False
+        for k, m in am.items():
+            for wp in m.get('warps', {}).values():
+                dst = wp['map']
+                if dst in out or dst in parent:
+                    continue
+                src = k if k in out else parent.get(k)
+                if src:
+                    parent[dst] = src
+                    changed = True
+    return out, parent
+
+
+OUT['regionMap'], OUT['mapParent'] = region_layout()
+
 
 with open(os.path.join(ROOT, 'data', 'features.json'), 'w') as f:
     json.dump(OUT, f, indent=1)
