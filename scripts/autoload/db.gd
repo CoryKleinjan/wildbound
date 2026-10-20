@@ -43,6 +43,19 @@ func _init() -> void:
 	_fix_ints(TYPE_CHART)
 	_apply_interiors(_fix_ints(_load("interiors")))
 	_apply_story(_fix_ints(_load("story")))
+	_apply_styles(_load("town_styles"))
+
+## Attaches each town's look (data/town_styles.json, see TownStyle) to the town and the rooms inside it.
+func _apply_styles(styles: Dictionary) -> void:
+	for m in MAPS.values():
+		var sid: String = m.get("townId", m.id)
+		if not styles.has(sid):
+			continue
+		var style: Dictionary = styles[sid].duplicate()
+		style.id = sid
+		m.style = style
+		if m.get("interior", false) and style.has("floor"):
+			m.theme = style.floor
 
 ## Merges data/interiors.json (the rooms behind town doors, built by tools/build_interiors.py) into MAPS
 ## and turns each door into a warp to its room.

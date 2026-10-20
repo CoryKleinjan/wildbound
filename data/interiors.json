@@ -3,6 +3,7 @@
   "fernhollow_home": {
    "id": "fernhollow_home",
    "name": "Your House",
+   "townId": "fernhollow",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -44,6 +45,7 @@
   "fernhollow_lodge": {
    "id": "fernhollow_lodge",
    "name": "Fernhollow Rest Lodge",
+   "townId": "fernhollow",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -92,6 +94,7 @@
   "fernhollow_mart": {
    "id": "fernhollow_mart",
    "name": "Fernhollow Trail Mart",
+   "townId": "fernhollow",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -139,6 +142,7 @@
   "fernhollow_lab": {
    "id": "fernhollow_lab",
    "name": "Prof. Alder's House",
+   "townId": "fernhollow",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -192,6 +196,7 @@
   "stonecrest_lodge": {
    "id": "stonecrest_lodge",
    "name": "Stonecrest Rest Lodge",
+   "townId": "stonecrest",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -240,6 +245,7 @@
   "stonecrest_mart": {
    "id": "stonecrest_mart",
    "name": "Stonecrest Trail Mart",
+   "townId": "stonecrest",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -287,6 +293,7 @@
   "stonecrest_house1": {
    "id": "stonecrest_house1",
    "name": "Stonecrest House",
+   "townId": "stonecrest",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -337,6 +344,7 @@
   "duskmere_lodge": {
    "id": "duskmere_lodge",
    "name": "Duskmere Rest Lodge",
+   "townId": "duskmere",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -384,6 +392,7 @@
   "duskmere_house1": {
    "id": "duskmere_house1",
    "name": "Duskmere House",
+   "townId": "duskmere",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -434,6 +443,7 @@
   "duskmere_mart": {
    "id": "duskmere_mart",
    "name": "Duskmere Trail Mart",
+   "townId": "duskmere",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -481,6 +491,7 @@
   "voltara_house1": {
    "id": "voltara_house1",
    "name": "Voltara House",
+   "townId": "voltara",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -530,6 +541,7 @@
   "voltara_lodge": {
    "id": "voltara_lodge",
    "name": "Voltara Rest Lodge",
+   "townId": "voltara",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -577,6 +589,7 @@
   "voltara_mart": {
    "id": "voltara_mart",
    "name": "Voltara Trail Mart",
+   "townId": "voltara",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -621,31 +634,33 @@
     }
    ]
   },
-  "cindercity_mart": {
-   "id": "cindercity_mart",
-   "name": "Cinder City Trail Mart",
+  "cindercity_store2f": {
+   "id": "cindercity_store2f",
+   "name": "Cinder City Dept. Store 2F",
+   "townId": "cindercity",
    "connections": {},
    "tiles": [
-    "|||||||||||",
-    "|||||||||||",
-    "|_c_______|",
-    "|_c__qq_qq|",
-    "|_c_______|",
-    "|____qq_qq|",
-    "|_________|",
-    "|P_______P|",
-    "|||||e|||||"
+    "|||||||||||||||",
+    "|||||||||||||||",
+    "|_c________V_X|",
+    "|_c___________|",
+    "|_c___________|",
+    "|___________c_|",
+    "|_qq_qq_____c_|",
+    "|___________c_|",
+    "|P___________P|",
+    "|||||||||||||||"
    ],
-   "theme": "#d0dce8",
+   "theme": "#e8e0d0",
    "indoor": true,
    "interior": true,
    "music": "town",
    "warps": {
-    "5,8": {
-     "map": "cindercity",
-     "x": 6,
-     "y": 6,
-     "dir": "down"
+    "13,2": {
+     "map": "cindercity_store1f",
+     "x": 12,
+     "y": 2,
+     "dir": "left"
     }
    },
    "npcs": [
@@ -655,15 +670,120 @@
      "dir": "right",
      "palette": "clerk",
      "text": [],
-     "action": "mart"
+     "action": "mart",
+     "greeting": "Status cures! We even stock Ice Heal.",
+     "stock": [
+      "antidote",
+      "parlyzHeal",
+      "awakening",
+      "burnHeal",
+      "iceHeal",
+      "fullHeal"
+     ]
     },
     {
-     "x": 6,
+     "x": 13,
      "y": 6,
+     "dir": "left",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart",
+     "greeting": "Capture Orbs of every grade, for every budget!",
+     "stock": [
+      "orb",
+      "greatOrb",
+      "ultraOrb"
+     ]
+    },
+    {
+     "x": 7,
+     "y": 8,
      "dir": "up",
-     "palette": "mom",
+     "palette": "hiker",
      "text": [
-      "Capture Orbs are cheap. Buy a stack before heading into the grass!"
+      "The drink machine's Lemonade restores more HP than a Super Potion... almost."
+     ]
+    }
+   ]
+  },
+  "cindercity_store1f": {
+   "id": "cindercity_store1f",
+   "name": "Cinder City Dept. Store 1F",
+   "townId": "cindercity",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||||",
+    "|||||||||||||||",
+    "|_c________K_X|",
+    "|_c___ccc_____|",
+    "|_c___________|",
+    "|_____________|",
+    "|_qq_qq_qq_qq_|",
+    "|_____________|",
+    "|P___________P|",
+    "|||||||e|||||||"
+   ],
+   "theme": "#e8e0d0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "7,9": {
+     "map": "cindercity",
+     "x": 19,
+     "y": 7,
+     "dir": "down"
+    },
+    "13,2": {
+     "map": "cindercity_store2f",
+     "x": 12,
+     "y": 2,
+     "dir": "left"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 2,
+     "dir": "down",
+     "palette": "beauty",
+     "text": [
+      "Welcome to the Cinder Department Store!",
+      "1F: medicine counter. 2F: status cures, Capture Orbs and a drink machine. The stairs are in the back."
+     ]
+    },
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart",
+     "greeting": "Medicine counter! Potions of every strength.",
+     "stock": [
+      "potion",
+      "superPotion",
+      "hyperPotion",
+      "maxPotion",
+      "revive"
+     ]
+    },
+    {
+     "x": 5,
+     "y": 7,
+     "dir": "up",
+     "palette": "gentleman",
+     "text": [
+      "Max Potions! You cannot find those in a little Trail Mart."
+     ]
+    },
+    {
+     "x": 10,
+     "y": 5,
+     "dir": "left",
+     "palette": "girl",
+     "text": [
+      "I came all the way from Fernhollow just to shop here!"
      ]
     }
    ]
@@ -671,6 +791,7 @@
   "cindercity_lodge": {
    "id": "cindercity_lodge",
    "name": "Cinder City Rest Lodge",
+   "townId": "cindercity",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -690,7 +811,7 @@
    "warps": {
     "6,8": {
      "map": "cindercity",
-     "x": 21,
+     "x": 31,
      "y": 6,
      "dir": "down"
     }
@@ -718,6 +839,7 @@
   "cindercity_house1": {
    "id": "cindercity_house1",
    "name": "Cinder City House",
+   "townId": "cindercity",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -737,8 +859,8 @@
    "warps": {
     "5,8": {
      "map": "cindercity",
-     "x": 21,
-     "y": 16,
+     "x": 4,
+     "y": 5,
      "dir": "down"
     }
    },
@@ -749,7 +871,8 @@
      "dir": "left",
      "palette": "mom",
      "text": [
-      "Make yourself at home! Your creatures look tired. Rest a while."
+      "The city never sleeps! The lamps stay lit all night.",
+      "Rest here a while. It's quieter than the avenue."
      ],
      "action": "heal"
     },
@@ -765,9 +888,163 @@
     }
    ]
   },
+  "cindercity_house2": {
+   "id": "cindercity_house2",
+   "name": "Cinder City House",
+   "townId": "cindercity",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "cindercity",
+     "x": 17,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "old",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "girl",
+     "text": [
+      "I want to be a trainer when I grow up!",
+      "Do creatures get stronger if you talk to them? I talk to mine every day."
+     ]
+    }
+   ]
+  },
+  "cindercity_house3": {
+   "id": "cindercity_house3",
+   "name": "Cinder City House",
+   "townId": "cindercity",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "cindercity",
+     "x": 31,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "gentleman",
+     "text": [
+      "My dad works at the department store. He says the 2F counter gets new orbs every season."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "psychic",
+     "text": [
+      "A creature that knows four moves is ready for anything.",
+      "But pick them carefully. Each one only has so much PP!"
+     ]
+    }
+   ]
+  },
+  "cindercity_house4": {
+   "id": "cindercity_house4",
+   "name": "Cinder City House",
+   "townId": "cindercity",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "cindercity",
+     "x": 22,
+     "y": 27,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "beauty",
+     "text": [
+      "We moved here from Fernhollow. So many people! So many shops!"
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "swimmer",
+     "text": [
+      "Did you know a creature holding a grudge fights harder?",
+      "...Just kidding. I made that up."
+     ]
+    }
+   ]
+  },
   "harrowfield_house1": {
    "id": "harrowfield_house1",
    "name": "Harrowfield House",
+   "townId": "harrowfield",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -797,7 +1074,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "old",
+     "palette": "hiker",
      "text": [
       "Make yourself at home! Your creatures look tired. Rest a while."
      ],
@@ -807,10 +1084,10 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "girl",
+     "palette": "battlegirl",
      "text": [
-      "I want to be a trainer when I grow up!",
-      "Do creatures get stronger if you talk to them? I talk to mine every day."
+      "Some creatures only evolve once they reach a certain level.",
+      "Don't press B during evolution unless you mean it!"
      ]
     }
    ]
@@ -818,6 +1095,7 @@
   "harrowfield_house2": {
    "id": "harrowfield_house2",
    "name": "Harrowfield House",
+   "townId": "harrowfield",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -847,7 +1125,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "gentleman",
+     "palette": "mom",
      "text": [
       "I trade stories with travelers. You've got a good one going!"
      ],
@@ -857,10 +1135,9 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "psychic",
+     "palette": "boy",
      "text": [
-      "A creature that knows four moves is ready for anything.",
-      "But pick them carefully. Each one only has so much PP!"
+      "My big sister has all eight badges. She says the League is no joke."
      ]
     }
    ]
@@ -868,6 +1145,7 @@
   "harrowfield_lodge": {
    "id": "harrowfield_lodge",
    "name": "Harrowfield Rest Lodge",
+   "townId": "harrowfield",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -916,6 +1194,7 @@
   "harrowfield_mart": {
    "id": "harrowfield_mart",
    "name": "Harrowfield Trail Mart",
+   "townId": "harrowfield",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -953,9 +1232,9 @@
      "x": 6,
      "y": 6,
      "dir": "up",
-     "palette": "old",
+     "palette": "mom",
      "text": [
-      "Antidotes save a lot of trouble on long routes."
+      "Capture Orbs are cheap. Buy a stack before heading into the grass!"
      ]
     }
    ]
@@ -963,6 +1242,7 @@
   "bramblegate_house1": {
    "id": "bramblegate_house1",
    "name": "Bramblegate House",
+   "townId": "bramblegate",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -992,7 +1272,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "beauty",
+     "palette": "old",
      "text": [
       "I trade stories with travelers. You've got a good one going!"
      ],
@@ -1002,10 +1282,10 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "swimmer",
+     "palette": "girl",
      "text": [
-      "Did you know a creature holding a grudge fights harder?",
-      "...Just kidding. I made that up."
+      "Paralysis lowers Speed to a quarter. Burns halve physical attacks.",
+      "Status moves win more battles than you would think."
      ]
     }
    ]
@@ -1013,6 +1293,7 @@
   "bramblegate_lodge": {
    "id": "bramblegate_lodge",
    "name": "Bramblegate Rest Lodge",
+   "townId": "bramblegate",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -1061,6 +1342,7 @@
   "bramblegate_mart": {
    "id": "bramblegate_mart",
    "name": "Bramblegate Trail Mart",
+   "townId": "bramblegate",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1098,9 +1380,9 @@
      "x": 6,
      "y": 6,
      "dir": "up",
-     "palette": "gentleman",
+     "palette": "old",
      "text": [
-      "I always buy a few Potions before a gym battle."
+      "Antidotes save a lot of trouble on long routes."
      ]
     }
    ]
@@ -1108,6 +1390,7 @@
   "skyreach_mart": {
    "id": "skyreach_mart",
    "name": "Skyreach Trail Mart",
+   "townId": "skyreach",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1145,9 +1428,9 @@
      "x": 6,
      "y": 6,
      "dir": "up",
-     "palette": "beauty",
+     "palette": "gentleman",
      "text": [
-      "The clerk said new stock comes in once you earn more badges. Or was that a rumor?"
+      "I always buy a few Potions before a gym battle."
      ]
     }
    ]
@@ -1155,6 +1438,7 @@
   "skyreach_lodge": {
    "id": "skyreach_lodge",
    "name": "Skyreach Rest Lodge",
+   "townId": "skyreach",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -1202,6 +1486,7 @@
   "skyreach_house1": {
    "id": "skyreach_house1",
    "name": "Skyreach House",
+   "townId": "skyreach",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1231,7 +1516,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "hiker",
+     "palette": "gentleman",
      "text": [
       "Make yourself at home! Your creatures look tired. Rest a while."
      ],
@@ -1241,10 +1526,10 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "battlegirl",
+     "palette": "psychic",
      "text": [
-      "Some creatures only evolve once they reach a certain level.",
-      "Don't press B during evolution unless you mean it!"
+      "I want to be a trainer when I grow up!",
+      "Do creatures get stronger if you talk to them? I talk to mine every day."
      ]
     }
    ]
@@ -1252,6 +1537,7 @@
   "saltmarsh_lodge": {
    "id": "saltmarsh_lodge",
    "name": "Saltmarsh Rest Lodge",
+   "townId": "saltmarsh",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -1299,6 +1585,7 @@
   "saltmarsh_house1": {
    "id": "saltmarsh_house1",
    "name": "Saltmarsh House",
+   "townId": "saltmarsh",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1328,7 +1615,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "mom",
+     "palette": "beauty",
      "text": [
       "My grandpa says creatures caught at a low level grow up loyal."
      ],
@@ -1338,9 +1625,10 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "boy",
+     "palette": "swimmer",
      "text": [
-      "My big sister has all eight badges. She says the League is no joke."
+      "A creature that knows four moves is ready for anything.",
+      "But pick them carefully. Each one only has so much PP!"
      ]
     }
    ]
@@ -1348,6 +1636,7 @@
   "saltmarsh_house2": {
    "id": "saltmarsh_house2",
    "name": "Saltmarsh House",
+   "townId": "saltmarsh",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1377,7 +1666,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "old",
+     "palette": "hiker",
      "text": [
       "Make yourself at home! Your creatures look tired. Rest a while."
      ],
@@ -1387,10 +1676,10 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "girl",
+     "palette": "battlegirl",
      "text": [
-      "Paralysis lowers Speed to a quarter. Burns halve physical attacks.",
-      "Status moves win more battles than you would think."
+      "Did you know a creature holding a grudge fights harder?",
+      "...Just kidding. I made that up."
      ]
     }
    ]
@@ -1398,6 +1687,7 @@
   "saltmarsh_mart": {
    "id": "saltmarsh_mart",
    "name": "Saltmarsh Trail Mart",
+   "townId": "saltmarsh",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1435,9 +1725,9 @@
      "x": 6,
      "y": 6,
      "dir": "up",
-     "palette": "hiker",
+     "palette": "beauty",
      "text": [
-      "Capture Orbs are cheap. Buy a stack before heading into the grass!"
+      "The clerk said new stock comes in once you earn more badges. Or was that a rumor?"
      ]
     }
    ]
@@ -1445,6 +1735,7 @@
   "lumenvale_house1": {
    "id": "lumenvale_house1",
    "name": "Lumenvale House",
+   "townId": "lumenvale",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1474,7 +1765,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "gentleman",
+     "palette": "mom",
      "text": [
       "Make yourself at home! Your creatures look tired. Rest a while."
      ],
@@ -1484,10 +1775,10 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "psychic",
+     "palette": "boy",
      "text": [
-      "I want to be a trainer when I grow up!",
-      "Do creatures get stronger if you talk to them? I talk to mine every day."
+      "Some creatures only evolve once they reach a certain level.",
+      "Don't press B during evolution unless you mean it!"
      ]
     }
    ]
@@ -1495,6 +1786,7 @@
   "lumenvale_mart": {
    "id": "lumenvale_mart",
    "name": "Lumenvale Trail Mart",
+   "townId": "lumenvale",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1532,9 +1824,9 @@
      "x": 6,
      "y": 6,
      "dir": "up",
-     "palette": "mom",
+     "palette": "hiker",
      "text": [
-      "Antidotes save a lot of trouble on long routes."
+      "Capture Orbs are cheap. Buy a stack before heading into the grass!"
      ]
     }
    ]
@@ -1542,6 +1834,7 @@
   "lumenvale_lodge": {
    "id": "lumenvale_lodge",
    "name": "Lumenvale Rest Lodge",
+   "townId": "lumenvale",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -1589,6 +1882,7 @@
   "coralhaven_mart": {
    "id": "coralhaven_mart",
    "name": "Coralhaven Trail Mart",
+   "townId": "coralhaven",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1626,9 +1920,9 @@
      "x": 6,
      "y": 6,
      "dir": "up",
-     "palette": "old",
+     "palette": "mom",
      "text": [
-      "I always buy a few Potions before a gym battle."
+      "Antidotes save a lot of trouble on long routes."
      ]
     }
    ]
@@ -1636,6 +1930,7 @@
   "coralhaven_house1": {
    "id": "coralhaven_house1",
    "name": "Coralhaven House",
+   "townId": "coralhaven",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1665,7 +1960,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "beauty",
+     "palette": "old",
      "text": [
       "Make yourself at home! Your creatures look tired. Rest a while."
      ],
@@ -1675,10 +1970,9 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "swimmer",
+     "palette": "girl",
      "text": [
-      "A creature that knows four moves is ready for anything.",
-      "But pick them carefully. Each one only has so much PP!"
+      "My big sister has all eight badges. She says the League is no joke."
      ]
     }
    ]
@@ -1686,6 +1980,7 @@
   "coralhaven_lodge": {
    "id": "coralhaven_lodge",
    "name": "Coralhaven Rest Lodge",
+   "townId": "coralhaven",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -1734,6 +2029,7 @@
   "summitcrown_house1": {
    "id": "summitcrown_house1",
    "name": "Summit Crown House",
+   "townId": "summitcrown",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1763,7 +2059,7 @@
      "x": 6,
      "y": 5,
      "dir": "left",
-     "palette": "hiker",
+     "palette": "gentleman",
      "text": [
       "Sleep is the best medicine. For people and creatures alike!"
      ],
@@ -1773,10 +2069,10 @@
      "x": 2,
      "y": 6,
      "dir": "right",
-     "palette": "battlegirl",
+     "palette": "psychic",
      "text": [
-      "Did you know a creature holding a grudge fights harder?",
-      "...Just kidding. I made that up."
+      "Paralysis lowers Speed to a quarter. Burns halve physical attacks.",
+      "Status moves win more battles than you would think."
      ]
     }
    ]
@@ -1784,6 +2080,7 @@
   "summitcrown_lodge": {
    "id": "summitcrown_lodge",
    "name": "Summit Crown Rest Lodge",
+   "townId": "summitcrown",
    "connections": {},
    "tiles": [
     "|||||||||||||",
@@ -1832,6 +2129,7 @@
   "summitcrown_mart": {
    "id": "summitcrown_mart",
    "name": "Summit Crown Trail Mart",
+   "townId": "summitcrown",
    "connections": {},
    "tiles": [
     "|||||||||||",
@@ -1869,9 +2167,9 @@
      "x": 6,
      "y": 6,
      "dir": "up",
-     "palette": "gentleman",
+     "palette": "old",
      "text": [
-      "The clerk said new stock comes in once you earn more badges. Or was that a rumor?"
+      "I always buy a few Potions before a gym battle."
      ]
     }
    ]
@@ -1965,20 +2263,38 @@
    }
   },
   "cindercity": {
-   "6,5": {
-    "map": "cindercity_mart",
-    "x": 5,
-    "y": 7,
+   "19,6": {
+    "map": "cindercity_store1f",
+    "x": 7,
+    "y": 8,
     "dir": "up"
    },
-   "21,5": {
+   "31,5": {
     "map": "cindercity_lodge",
     "x": 6,
     "y": 7,
     "dir": "up"
    },
-   "21,15": {
+   "4,4": {
     "map": "cindercity_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "17,15": {
+    "map": "cindercity_house2",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "31,15": {
+    "map": "cindercity_house3",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "22,26": {
+    "map": "cindercity_house4",
     "x": 5,
     "y": 7,
     "dir": "up"

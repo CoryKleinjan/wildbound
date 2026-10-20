@@ -275,4 +275,31 @@ static func tile_texture(ch: String, x: int, y: int, frame: int, above: String =
 				p.call(4, 10, 3, 2, "#e05050")
 				p.call(9, 10, 3, 2, "#50c050")
 				p.call(2, 15, 12, 1, Color(0, 0, 0, 0.3)))
+		"X":
+			return _make("stairs%s" % theme, func(p: Callable):
+				p.call(0, 0, 16, 16, "#605868")
+				for i in 4:
+					p.call(1, 1 + i * 4, 14, 3, Gfx.shade(Color(theme), -0.05 * (3 - i)))
+					p.call(1, 3 + i * 4, 14, 1, "#807888")
+				p.call(0, 0, 1, 16, "#403848")
+				p.call(15, 0, 1, 16, "#403848"))
+		"V":
+			return _make("vending%s" % theme, func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(2, 0, 12, 15, "#c83838")
+				p.call(3, 1, 10, 7, "#f8f8f0")
+				for i in 3:
+					p.call(4 + i * 3, 2, 2, 5, ["#58a8e0", "#f0d050", "#f08040"][i])
+				p.call(4, 10, 8, 2, "#402020")
+				p.call(11, 9, 1, 1, "#f8e070")
+				p.call(2, 15, 12, 1, Color(0, 0, 0, 0.3)))
+		"L":
+			return _make("lamp", func(p: Callable):
+				_grass(p, 2)
+				p.call(4, 14, 8, 2, Color(0, 0, 0, 0.2))
+				p.call(5, 13, 6, 2, "#383840")
+				p.call(7, 3, 2, 11, "#484850")
+				p.call(5, 0, 6, 4, "#383840")
+				p.call(6, 1, 4, 2, "#f8e890")
+				p.call(4, 4, 8, 1, Color(1.0, 0.95, 0.6, 0.35)))
 	return _make("void", func(p: Callable): p.call(0, 0, 16, 16, "#000000"))

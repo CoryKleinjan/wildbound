@@ -49,7 +49,35 @@ MART = [
     '|||||e|||||',
 ]
 
-THEMES = {'house': '#e0c8a0', 'lodge': '#f0d8d8', 'mart': '#d0dce8'}
+# Department store (the big city only): two floors joined by stairs (X) at the same spot.
+STORE_1F = [
+    '|||||||||||||||',
+    '|||||||||||||||',
+    '|_c________K_X|',
+    '|_c___ccc_____|',
+    '|_c___________|',
+    '|_____________|',
+    '|_qq_qq_qq_qq_|',
+    '|_____________|',
+    '|P___________P|',
+    '|||||||e|||||||',
+]
+STORE_2F = [
+    '|||||||||||||||',
+    '|||||||||||||||',
+    '|_c________V_X|',
+    '|_c___________|',
+    '|_c___________|',
+    '|___________c_|',
+    '|_qq_qq_____c_|',
+    '|___________c_|',
+    '|P___________P|',
+    '|||||||||||||||',
+]
+STAIRS = (13, 2)
+STAIRS_LANDING = (12, 2, 'left')
+
+THEMES = {'house': '#e0c8a0', 'lodge': '#f0d8d8', 'mart': '#d0dce8', 'store': '#e8e0d0'}
 
 # Who stands where in each room (x, y, facing). The resident of a house is the door's own text.
 HOUSE_RESIDENT = (6, 5, 'left')
@@ -104,6 +132,34 @@ def npc(pos, palette, text, **extra):
     return out
 
 
+def store(town_id, town, door):
+    """The two department store floors. Returns (1F, 2F)."""
+    one = room(f'{town_id}_store1f', f"{town['name']} Dept. Store 1F", 'store', STORE_1F, town_id, door)
+    two = room(f'{town_id}_store2f', f"{town['name']} Dept. Store 2F", 'store', STORE_2F, town_id, door)
+    sx, sy = STAIRS
+    lx, ly, ld = STAIRS_LANDING
+    one['warps'][f'{sx},{sy}'] = {'map': two['id'], 'x': lx, 'y': ly, 'dir': ld}
+    two['warps'][f'{sx},{sy}'] = {'map': one['id'], 'x': lx, 'y': ly, 'dir': ld}
+    one['npcs'] = [
+        npc((7, 2, 'down'), 'beauty', [
+            'Welcome to the Cinder Department Store!',
+            '1F: medicine counter. 2F: status cures, Capture Orbs and a drink machine. The stairs are in the back.',
+        ]),
+        npc((1, 3, 'right'), 'clerk', [], action='mart', greeting='Medicine counter! Potions of every strength.',
+            stock=['potion', 'superPotion', 'hyperPotion', 'maxPotion', 'revive']),
+        npc((5, 7, 'up'), 'gentleman', ['Max Potions! You cannot find those in a little Trail Mart.']),
+        npc((10, 5, 'left'), 'girl', ['I came all the way from Fernhollow just to shop here!']),
+    ]
+    two['npcs'] = [
+        npc((1, 3, 'right'), 'clerk', [], action='mart', greeting='Status cures! We even stock Ice Heal.',
+            stock=['antidote', 'parlyzHeal', 'awakening', 'burnHeal', 'iceHeal', 'fullHeal']),
+        npc((13, 6, 'left'), 'clerk', [], action='mart', greeting='Capture Orbs of every grade, for every budget!',
+            stock=['orb', 'greatOrb', 'ultraOrb']),
+        npc((7, 8, 'up'), 'hiker', ["The drink machine's Lemonade restores more HP than a Super Potion... almost."]),
+    ]
+    return one, two
+
+
 def exit_mat(rows):
     y = len(rows) - 1
     return rows[y].index('e'), y
@@ -111,24 +167,28 @@ def exit_mat(rows):
 
 def room(map_id, name, kind, rows, town_id, door):
     dx, dy = map(int, door.split(','))
-    ex, ey = exit_mat(rows)
+    out_warps = {}
+    if 'e' in rows[-1]:
+        ex, ey = exit_mat(rows)
+        out_warps[f'{ex},{ey}'] = {'map': town_id, 'x': dx, 'y': dy + 1, 'dir': 'down'}
     return {
         'id': map_id,
         'name': name,
+        'townId': town_id,
         'connections': {},
         'tiles': rows_ok(rows),
         'theme': THEMES[kind],
         'indoor': True,
         'interior': True,
         'music': 'town',
-        'warps': {f'{ex},{ey}': {'map': town_id, 'x': dx, 'y': dy + 1, 'dir': 'down'}},
+        'warps': out_warps,
         'npcs': [],
     }
 
 
 rooms = {}
 warps = {}
-counters = {'house': 0, 'lodge': 0, 'mart': 0}
+counters = {'house': 0, 'lodge': 0, 'mart': 0, 'store': 0}
 for town_id, town in MAPS.items():
     houses = 0
     for door, d in town.get('doors', {}).items():
@@ -154,6 +214,10 @@ for town_id, town in MAPS.items():
             r['npcs'].append(resident)
             if special.get('guest', True) is not None and map_id != 'fernhollow_lab':
                 r['npcs'].append(npc(HOUSE_GUEST, GUEST_PALETTES[n % len(GUEST_PALETTES)], HOUSE_GUEST_LINES[n % len(HOUSE_GUEST_LINES)]))
+        elif kind == 'store':
+            r, upstairs = store(town_id, town, door)
+            map_id = r['id']
+            rooms[upstairs['id']] = upstairs
         elif kind == 'lodge':
             map_id = f'{town_id}_lodge'
             r = room(map_id, f"{town['name']} Rest Lodge", kind, LODGE, town_id, door)

@@ -6,10 +6,11 @@ class_name Maps
 # r/p/b roof (house/lodge/mart)   w wall   h/l/m door (house/lodge/mart)   S sign
 # k/n roof (gym/league)   j/u door (gym/league)   indoor: _ floor  | wall  o statue  e exit mat
 # c counter (talk across it)  t table  K bookshelf  B bed  P potted plant  q mart shelf  M storage machine
+# X stairs  V drink machine   L street lamp
 
 const WALKABLE := {
 	".": true, ",": true, "=": true, "F": true, "h": true, "l": true, "m": true,
-	":": true, "j": true, "u": true, "_": true, "e": true,
+	":": true, "j": true, "u": true, "_": true, "e": true, "X": true,
 }
 
 static func tile_at(m: Dictionary, x: int, y: int) -> String:
