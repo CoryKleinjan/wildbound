@@ -207,6 +207,18 @@ func _initialize() -> void:
 		for e in leader.party:
 			mons.append("%s %d" % [e[0], e[1]])
 		print("  %s (%s): %s" % [g.leader, g.type, ", ".join(mons)])
+	# Every trainer and NPC faces a real direction, and every walking sheet has had each frame's facing checked
+	# (tools/artgen/walkers.py records the sheet's md5 once its rows face down, up and left).
+	for m: Dictionary in maps.values():
+		for who in m.get("trainers", []) + m.get("npcs", []):
+			if not ["down", "up", "left", "right"].has(who.get("dir", "down")):
+				errs.append("%s: %s faces %s" % [m.id, who.get("id", who.get("name", "?")), who.dir])
+	var facing: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/trainers/walk_facing.json"))
+	for f in DirAccess.get_files_at("res://assets/trainers"):
+		if f.ends_with("_walk.png") and not f.contains("_bike") and not f.contains("_surf"):
+			var md5 := FileAccess.get_md5("res://assets/trainers/" + f)
+			if facing.get(f.get_basename(), "") != md5:
+				errs.append("%s: facing not checked (run tools/artgen/walkers.py audit)" % f)
 	if errs.size():
 		print("\n".join(errs))
 		quit(1)

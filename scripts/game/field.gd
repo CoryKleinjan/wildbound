@@ -993,19 +993,40 @@ static func draw_overlay(o: OverworldScene, cam_x: int, cam_y: int) -> void:
 	match o.map.get("weather", ""):
 		"rain":
 			Gfx.rect(0, 0, Gfx.W, Gfx.H, Color(0.2, 0.25, 0.45, 0.18))
+			var rain := ArtAssets.texture("fx/wx_rain")
 			for i in 50:
-				Gfx.rect(fmod(i * 37 + tm * 90 - cam_x * 0.0, Gfx.W), fmod(i * 23 + tm * 320, Gfx.H), 1, 6, Color(0.7, 0.8, 1.0, 0.7))
+				var rx := fmod(i * 37 + tm * 90, Gfx.W)
+				var ry := fmod(i * 23 + tm * 320, Gfx.H)
+				if rain != null:
+					if i % 2 == 0:
+						Gfx.image(rain, rx, ry, {"scale": 0.5, "modulate": Color(1, 1, 1, 0.8)})
+				else:
+					Gfx.rect(rx, ry, 1, 6, Color(0.7, 0.8, 1.0, 0.7))
 		"sand":
 			Gfx.rect(0, 0, Gfx.W, Gfx.H, Color(0.85, 0.7, 0.35, 0.25))
+			var sand := ArtAssets.texture("fx/wx_sand")
 			for i in 40:
-				Gfx.rect(fmod(i * 41 + tm * 220, Gfx.W), fmod(i * 29 + tm * 30, Gfx.H), 2, 1, Color(0.95, 0.85, 0.55, 0.8))
+				if sand != null:
+					if i % 2 == 0:
+						Gfx.image(sand, fmod(i * 41 + tm * 220, Gfx.W + 20) - 20, fmod(i * 29 + tm * 30, Gfx.H), {"scale": 0.6})
+				else:
+					Gfx.rect(fmod(i * 41 + tm * 220, Gfx.W), fmod(i * 29 + tm * 30, Gfx.H), 2, 1, Color(0.95, 0.85, 0.55, 0.8))
 		"ash":
+			var ash := ArtAssets.texture("fx/wx_ash")
 			for i in 40:
-				Gfx.rect(fmod(i * 41 + sin(tm + i) * 6, Gfx.W), fmod(i * 29 + tm * 25, Gfx.H), 2, 2, Color(0.55, 0.55, 0.55, 0.8))
+				if ash != null:
+					if i % 2 == 0:
+						Gfx.image(ash, fmod(i * 41 + sin(tm + i) * 6, Gfx.W), fmod(i * 29 + tm * 25, Gfx.H + 20) - 20, {"scale": 0.5})
+				else:
+					Gfx.rect(fmod(i * 41 + sin(tm + i) * 6, Gfx.W), fmod(i * 29 + tm * 25, Gfx.H), 2, 2, Color(0.55, 0.55, 0.55, 0.8))
 		"fog":
 			Gfx.rect(0, 0, Gfx.W, Gfx.H, Color(0.9, 0.9, 0.95, 0.35))
+			var fog := ArtAssets.texture("fx/wx_fog")
 			for i in 4:
-				Gfx.rect(fmod(i * 90 + tm * 8, Gfx.W + 120) - 120, 20 + i * 36, 120, 18, Color(1, 1, 1, 0.18))
+				if fog != null:
+					Gfx.image(fog, fmod(i * 90 + tm * 8, Gfx.W + 120) - 120, 14 + i * 36, {"scale": 5.0, "modulate": Color(1, 1, 1, 0.3)})
+				else:
+					Gfx.rect(fmod(i * 90 + tm * 8, Gfx.W + 120) - 120, 20 + i * 36, 120, 18, Color(1, 1, 1, 0.18))
 	if o.map.get("underwater", false):
 		Gfx.rect(0, 0, Gfx.W, Gfx.H, Color(0.1, 0.25, 0.6, 0.35))
 	if o.map.get("dark", false):

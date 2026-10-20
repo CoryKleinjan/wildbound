@@ -785,14 +785,23 @@ func draw() -> void:
 			look = _ride_look(look)
 			if look.ends_with("_surf"):
 				step = floori(Game.time * 3) % 3  # the surf ride paddles even when still
+		var wake := ArtAssets.texture("fx/fx_wake")
+		if look.ends_with("_surf") and wake != null:
+			Gfx.image(wake, sx + 8 - wake.get_width() / 2.0, sy + 10, {"modulate": Color(1, 1, 1, 0.5 + 0.3 * sin(Game.time * 4))})
 		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy), look)
+		var rustle := ArtAssets.texture("fx/fx_rustle")
+		if walking and rustle != null and Maps.tile_at(map, a.x, a.y) == "," and a.move.t / a.move.dur > 0.5:
+			Gfx.image(rustle, a.x * 16 - cam_x + 1, a.y * 16 - cam_y + 2, {"scale": 0.65})
 		# Tall grass covers the feet.
 		if a.move == null and Maps.tile_at(map, a.x, a.y) == "," and painted != null:
 			Gfx.ci.draw_texture_rect_region(painted, Rect2(ap.x - cam_x, ap.y - cam_y + 9, 16, 7), Rect2(a.x * 16, a.y * 16 + 9, 16, 7))
 		elif a.move == null and Maps.tile_at(map, a.x, a.y) == ",":
 			var gt: Texture2D = TownStyle.apply(Tiles.tile_texture(",", a.x, a.y, anim), ",", style)
 			Gfx.ci.draw_texture_rect_region(gt, Rect2(ap.x - cam_x, ap.y - cam_y + 9, 16, 7), Rect2(0, 9, 16, 7))
-		if _exclaim != null and _exclaim.a == a:
+		if _exclaim != null and _exclaim.a == a and ArtAssets.texture("fx/emote_exclaim") != null:
+			var ex := ArtAssets.texture("fx/emote_exclaim")
+			Gfx.image(ex, sx + 8 - ex.get_width() * 0.35, sy - 18, {"scale": 0.7})
+		elif _exclaim != null and _exclaim.a == a:
 			Gfx.rect(sx + 4, sy - 14, 9, 11, "#303030")
 			Gfx.rect(sx + 5, sy - 13, 7, 9, "#f8f8f8")
 			Gfx.rect(sx + 8, sy - 12, 2, 5, "#e03030")

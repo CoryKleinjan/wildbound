@@ -243,11 +243,19 @@ class ContestScene extends Scene:
 			Gfx.image(spr, 8, y + 1, {"scale": 22.0 / spr.get_width()})
 			Gfx.text(row.name, 34, y + 4, {"size": 6, "color": "#c03050" if row.is_player else "#303030"})
 			Gfx.text(row.trainer, 34, y + 14, {"size": 5, "color": "#606870"})
+			var heart := ArtAssets.texture("fx/contest_heart")
+			var star := ArtAssets.texture("fx/contest_star")
 			for h in _hearts(row.primary):
-				Gfx.rect(110 + h * 6, y + 5, 4, 4, "#e05080")
+				if heart != null:
+					Gfx.image(heart, 109 + h * 6, y + 4, {"scale": 6.0 / heart.get_width()})
+				else:
+					Gfx.rect(110 + h * 6, y + 5, 4, 4, "#e05080")
 			var ap: int = mini(int(row.appeal), 30)
 			for h in ap:
-				Gfx.rect(110 + (h % 15) * 6, y + 13 + (h / 15) * 5, 4, 3, "#f0a020")
+				if star != null:
+					Gfx.image(star, 110 + (h % 15) * 6, y + 12 + (h / 15) * 5, {"scale": 5.0 / star.get_width()})
+				else:
+					Gfx.rect(110 + (h % 15) * 6, y + 13 + (h / 15) * 5, 4, 3, "#f0a020")
 		Gfx.panel(0, 126, Gfx.W, 34)
 		var lines := Gfx.wrap(_msg, 220, 5)
 		for i in mini(3, lines.size()):
