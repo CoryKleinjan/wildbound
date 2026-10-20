@@ -656,8 +656,9 @@ static func controls_text(coop: bool) -> Array:
 	if not coop:
 		return ["CONTROLS: Arrows or WASD to move. Z, Enter, Space or F = A (confirm).", "X, Shift or G = B (back; hold to run). Esc, C or R = Menu. Gamepads work too."]
 	return [
-		"PLAYER 1: WASD to move, F = A, G = B (hold to run), R = Menu.",
-		"PLAYER 2: Arrow keys, Enter = A, Right Shift = B, Backspace = Menu.",
+		"CO-OP over your network: each player uses their own computer. Arrows or WASD move, Z or Enter = A, X or Shift = B, Esc = Menu.",
+		"On one keyboard instead: PLAYER 1 uses WASD to move, F = A, G = B (hold to run), R = Menu.",
+		"PLAYER 2 uses the arrow keys, Enter = A, Right Shift = B, Backspace = Menu.",
 		"P1 leads in the overworld. In battle each player picks moves for their own creature.",
 	]
 
