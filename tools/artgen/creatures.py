@@ -49,7 +49,7 @@ def front_prompt(s: dict) -> str:
 		f"Main color {sp['main']}, accent color {sp['accent']}, belly/highlight color {sp['belly']}. "
 		f"Notable features: {feats}. Concept (for inspiration only, do not write it): {s['dexText']} "
 		f"Front-facing three-quarter view facing left, full body visible, centered, filling most of the frame. "
-		f"{STYLE} "
+		f"{STYLE} Give it a distinctive, unique silhouette that does not resemble any existing monster from other games. "
 		"Plain solid flat magenta (#FF00FF) background, no shadow, no ground, no border. Absolutely no text, letters, captions or labels anywhere. Only the one creature."
 	)
 

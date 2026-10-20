@@ -658,6 +658,7 @@ func draw() -> void:
 	var theme: String = map.get("theme", "#d8d0c0")
 	var indoor: bool = map.get("indoor", false)
 	var style: Dictionary = map.get("style", {})
+	var gen_trees := Tiles.tree_sprite(0, 0) != null and not style.has("treeShape")
 	var h := _map_h()
 	var w := _map_w()
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#000000")
@@ -666,8 +667,26 @@ func draw() -> void:
 			if indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w):
 				continue
 			var ch := Maps.tile_at(map, tx, ty)
-			var tex: Texture2D = TownStyle.apply(Tiles.tile_texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), Maps.tile_at(map, tx, ty + 1), theme), ch, style)
+			# Generated trees are drawn as sprites below, so their tile is just (town-styled) grass.
+			var tch := "." if ch == "#" and gen_trees else ch
+			var tex: Texture2D = TownStyle.apply(Tiles.map_tile(map, tx, ty, anim, theme), tch, style)
 			Gfx.image(tex, tx * 16 - cam_x, ty * 16 - cam_y)
+	# Generated trees: one 32x32 sprite per '#' tile, row by row so lower trees overlap the ones behind.
+	if gen_trees:
+		for ty in range(y0, y0 + Gfx.H / 16 + 4):
+			for tx in range(x0 - 1, x0 + Gfx.W / 16 + 4):
+				if Maps.tile_at(map, tx, ty) == "#" and not (indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w)):
+					Gfx.image(TownStyle.apply(Tiles.tree_sprite(tx, ty), "#", style), tx * 16 - cam_x - 8, ty * 16 - cam_y - 16)
+	# Generated whole-building sprites (when present) over their footprint, doors on top.
+	for b in Tiles.buildings(map):
+		var btex := ArtAssets.texture("buildings/" + b.kind)
+		var r: Rect2i = b.rect
+		if btex == null or r.position.x * 16 - cam_x > Gfx.W or r.end.x * 16 - cam_x < 0 or r.position.y * 16 - cam_y > Gfx.H or r.end.y * 16 - cam_y < 0:
+			continue
+		btex = TownStyle.apply(btex, b.roof, style)
+		Gfx.ci.draw_texture_rect(btex, Rect2(r.position.x * 16 - cam_x, r.position.y * 16 - cam_y, r.size.x * 16, r.size.y * 16), false)
+		for d in b.doors:
+			Gfx.image(TownStyle.apply(Tiles.tile_texture(d[2], d[0], d[1], anim), d[2], style), d[0] * 16 - cam_x, d[1] * 16 - cam_y)
 	var actors: Array[Actor] = []
 	actors.append_array(npcs)
 	actors.append(player)

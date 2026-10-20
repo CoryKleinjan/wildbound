@@ -106,7 +106,7 @@ def raw(kind: str, name: str):
 def process() -> None:
 	out = ROOT / "assets" / "tiles"
 	out.mkdir(parents=True, exist_ok=True)
-	for sheet, cells in SHEETS.items():
+	for sheet, cells in ():  # map tiles now come from emerald.py
 		if raw("tiles", sheet).exists():
 			labels = sheet_labels(sheet)
 			ims = grid_cells(raw("tiles", sheet), 4, 4, 0.06)
@@ -126,7 +126,7 @@ def process() -> None:
 
 def jobs() -> list[tuple[str, str, str, str]]:
 	"""(kind, name, prompt, aspect) for every image."""
-	j = [("tiles", n, sheet_prompt(c), "1:1") for n, c in SHEETS.items()]
+	j = []  # map tiles: see emerald.py
 	j += [("backdrops", n, f"{p} {BG_STYLE}", "21:9") for n, p in BACKDROPS.items()]
 	j.append(("title", "title", TITLE, "3:2"))
 	return j

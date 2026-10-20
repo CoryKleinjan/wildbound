@@ -7,7 +7,7 @@ import numpy as np
 from PIL import Image
 
 
-def key_background(rgb: np.ndarray, tol: float = 90.0) -> np.ndarray:
+def key_background(rgb: np.ndarray, tol: float = 90.0, fringe: bool = True) -> np.ndarray:
 	"""Alpha mask (bool, True = keep). Background = pixels close to the border's dominant color,
 	flood-filled from the edges so same-colored pixels inside the subject survive."""
 	h, w, _ = rgb.shape
@@ -17,7 +17,7 @@ def key_background(rgb: np.ndarray, tol: float = 90.0) -> np.ndarray:
 	near = np.sqrt(((rgb.astype(np.float32) - bg) ** 2).sum(axis=2)) < tol
 	# magenta-ish fringe (antialiased edge between subject and #FF00FF)
 	r, g, b = rgb[..., 0].astype(int), rgb[..., 1].astype(int), rgb[..., 2].astype(int)
-	if bg[0] > 200 and bg[2] > 200 and bg[1] < 80:
+	if fringe and bg[0] > 200 and bg[2] > 200 and bg[1] < 80:
 		near |= (r - g > 90) & (b - g > 90)
 	seen = np.zeros((h, w), bool)
 	q = deque()
@@ -72,16 +72,18 @@ def outline(img: Image.Image) -> Image.Image:
 	return Image.fromarray(arr.astype(np.uint8), "RGBA")
 
 
-def to_sprite(src: Path, size: int, fit: int, colors: int = 16, bottom: bool = True, do_outline: bool = True) -> Image.Image:
+def to_sprite(src: Path, size: int, fit: int, colors: int = 16, bottom: bool = True, do_outline: bool = True, key_tol: float = 55.0) -> Image.Image:
 	"""size x size RGBA sprite, subject scaled to fit `fit` px, centered horizontally and
 	(if bottom) standing on the bottom edge like the GBA battle sprites."""
 	im = Image.open(src).convert("RGB")
 	rgb = np.array(im)
-	mask = key_background(rgb)
+	mask = key_background(rgb, tol=key_tol, fringe=key_tol >= 90)
 	try:
 		mask = _largest_blobs(mask)
 	except ImportError:
 		pass
+	if key_tol < 90:
+		mask = erode(mask, 3)  # tight key: shave the antialiased background fringe instead
 	ys, xs = np.nonzero(mask)
 	if len(xs) == 0:
 		raise ValueError(f"empty subject in {src}")
@@ -171,3 +173,19 @@ def grid_cells(src: Path, cols: int, rows: int, inset: float = 0.03) -> list[Ima
 			dx, dy = (x1 - x0) * inset, (y1 - y0) * inset
 			cells.append(im.crop((round(x0 + dx), round(y0 + dy), round(x1 - dx), round(y1 - dy))))
 	return cells
+
+
+def trim_light_border(im: Image.Image, thresh: int = 225) -> Image.Image:
+	"""Crops away near-white or light gutter lines along the edges of a sheet cell."""
+	a = np.array(im.convert("RGB")).astype(int)
+	light = (a.min(axis=2) > thresh)
+	t, b, l, r = 0, a.shape[0], 0, a.shape[1]
+	while t < b - 1 and light[t, l:r].mean() > 0.3:
+		t += 1
+	while b > t + 1 and light[b - 1, l:r].mean() > 0.3:
+		b -= 1
+	while l < r - 1 and light[t:b, l].mean() > 0.3:
+		l += 1
+	while r > l + 1 and light[t:b, r - 1].mean() > 0.3:
+		r -= 1
+	return im.crop((l, t, r, b))

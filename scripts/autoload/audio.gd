@@ -1,5 +1,6 @@
 extends Node
-## Audio autoload: procedurally synthesized chiptune sound effects plus streamed background music.
+## Audio autoload: sound effects (rendered samples in assets/sfx, with procedurally synthesized chiptune
+## fallbacks) plus streamed background music.
 ##
 ##   Audio.sfx("confirm")              play a sound effect (names in SFX_NAMES; unknown names are ignored)
 ##   Audio.play_music("route")         loop res://assets/music/route.ogg (.mp3/.wav), crossfading; no-op if the
@@ -122,7 +123,9 @@ func sfx(sfx_name: String) -> void:
 		Net.relay_sfx(sfx_name)
 	if _pool.is_empty() or not sfx_name in SFX_NAMES:
 		return
-	var s: AudioStreamWAV = streams.get(sfx_name)
+	var s: AudioStream = sample(sfx_name)
+	if s == null:
+		s = streams.get(sfx_name)
 	if s == null:
 		s = make_stream(build(sfx_name))
 		streams[sfx_name] = s
@@ -165,8 +168,20 @@ func stop_sfx() -> void:
 		p.stop()
 
 func sfx_length(sfx_name: String) -> float:
-	var s: AudioStreamWAV = streams.get(sfx_name)
+	var s: AudioStream = sample(sfx_name)
+	if s == null:
+		s = streams.get(sfx_name)
 	return s.get_length() if s else 0.0
+
+var _samples := {}
+
+## Rendered sound effect res://assets/sfx/<name>.wav (made by tools/sfx/make_sfx.py), or null to use the
+## procedural version.
+func sample(sfx_name: String) -> AudioStream:
+	if not _samples.has(sfx_name):
+		var path := "res://assets/sfx/%s.wav" % sfx_name
+		_samples[sfx_name] = load(path) if ResourceLoader.exists(path) else null
+	return _samples[sfx_name]
 
 func current_track() -> String:
 	return _current

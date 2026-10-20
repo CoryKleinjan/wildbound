@@ -343,42 +343,35 @@ static func tile_texture(ch: String, x: int, y: int, frame: int, above: String =
 static func _generated(ch: String, x: int, y: int, frame: int, above: String, below: String, theme: String, v: int) -> Texture2D:
 	match ch:
 		".":
-			return _gen("grass", "grass")
+			return _gen("grass", "grass") if v != 3 else _gen("grass2", "grass2")
 		",":
 			return _gen("tallgrass", "tallgrass")
 		"=":
 			return _gen("path", "path")
 		"F":
-			var n := "flowers" if v % 2 == 0 else "flowers2"
-			return _gen(n + str(frame % 2), n, Callable(), "", 0)
+			return _gen("flowers" if v % 2 == 0 else "flowers2", "flowers" if v % 2 == 0 else "flowers2")
 		"~":
-			var n := "water" if above == "~" else "shore"
-			return _gen("%s%d" % [n, frame % 2], n, Callable(), "", 3 if frame % 2 else 0)
+			return _gen("water%d" % (frame % 2), "water2", Callable(), "", 2 if frame % 2 else 0)
 		"#":
-			var n := "tree" if (x + y) % 2 == 0 else "tree2"
-			return _gen(n, n)
+			# Trees are drawn as overlapping 32x32 sprites by the overworld (tree_sprite); grass underneath.
+			return _gen("grass2", "grass2") if tree_sprite(x, y) != null else null
 		"v":
 			return _gen("ledge", "ledge")
 		"S":
 			return _gen("sign", "sign")
 		"r", "p", "b", "k", "n":
-			var top := above != ch
-			var bottom := below != ch
-			var hi: String = {"r": "#e87060", "p": "#f898b0", "b": "#78a0e8", "k": "#e8c050", "n": "#e8d070"}[ch]
-			return _gen("roof%s%d%d" % [ch, 1 if top else 0, 1 if bottom else 0], "roof_" + ch, func(p: Callable):
-				if top:
-					p.call(0, 0, 16, 1, hi)
-				if bottom:
-					p.call(0, 14, 16, 2, "#504048"))
+			# Roofs are part of the whole-building sprites (see buildings()); grass shows under their edges.
+			if ArtAssets.image("buildings/" + BUILDING_KIND[ch]) != null:
+				return _gen("grass", "grass")
+			return null
 		"w":
-			return _gen("wall%d" % (x % 2), "window" if x % 2 else "wall2")
+			return _gen("grass", "grass") if ArtAssets.image("buildings/house") != null else null
 		"_":
 			return _gen("floor%s%d" % [theme, (x + y) % 2], "floor", func(p: Callable):
 				if (x + y) % 2:
 					p.call(0, 0, 16, 16, Color(0, 0, 0, 0.04)), theme)
 		"|":
-			var n := "iwall" if below == "|" else "iwall_base"
-			return _gen(n, n)
+			return _gen("iwall", "iwall")
 		"o":
 			return _gen("statue" + theme, "statue", Callable(), theme)
 		"e":
@@ -386,3 +379,95 @@ static func _generated(ch: String, x: int, y: int, frame: int, above: String, be
 		"h", "l", "m", "j", "u":
 			return _gen("door" + ch, "door_" + ch)
 	return null
+
+const BUILDING_KIND := {"r": "house", "p": "lodge", "b": "mart", "k": "gym", "n": "league"}
+const _PATHISH := {"=": true, "h": true, "l": true, "m": true, "j": true, "u": true, ":": true}
+const _WATERISH := {"~": true}
+
+## Generated 32x32 tree for the '#' tile at (x, y), or null. The overworld draws it with its trunk on the
+## tile and its canopy spilling over the tiles above and beside it, so rows of trees join into forest walls.
+static func tree_sprite(x: int, y: int) -> Texture2D:
+	return ArtAssets.texture("tiles/tree32_%d" % (posmod(x * 7 + y * 3, 4)))
+
+## Map-aware tile: like tile_texture, but path and water tiles get soft edges toward their neighbours.
+static func map_tile(m: Dictionary, x: int, y: int, frame: int, theme: String) -> Texture2D:
+	var ch := Maps.tile_at(m, x, y)
+	var up := Maps.tile_at(m, x, y - 1)
+	var down := Maps.tile_at(m, x, y + 1)
+	if ch == "=" or ch == "~":
+		var set := _PATHISH if ch == "=" else _WATERISH
+		var sides := 0
+		var n4 := [up, Maps.tile_at(m, x + 1, y), down, Maps.tile_at(m, x - 1, y)]
+		for i in 4:
+			if not set.has(n4[i]) and n4[i] != "#" or (ch == "~" and n4[i] == "#"):
+				sides |= 1 << i
+		var t := _edged(ch, sides, frame)
+		if t != null:
+			return t
+	return tile_texture(ch, x, y, frame, up, down, theme)
+
+## Path/water tile with grass (or shore) edges on the given sides (bit 0 up, 1 right, 2 down, 3 left).
+static func _edged(ch: String, sides: int, frame: int) -> Texture2D:
+	var water := ch == "~"
+	var f := frame % 2 if water else 0
+	var key := "png|edge%s%d_%d" % [ch, sides, f]
+	if _cache.has(key):
+		return _cache[key]
+	var base := ArtAssets.image("tiles/water2" if water else "tiles/path")
+	var edge := ArtAssets.image("tiles/shore" if water else "tiles/path_top")
+	if base == null or edge == null:
+		return null
+	var img := base.duplicate() as Image
+	if water and f:
+		var copy := img.duplicate() as Image
+		for yy in 16:
+			for xx in 16:
+				img.set_pixel(xx, yy, copy.get_pixel((xx + 2) % 16, yy))
+	# Edge pixels: the parts of the top-edge tile that are not path/water colored.
+	for side in 4:
+		if not sides & (1 << side):
+			continue
+		var e := edge.duplicate() as Image
+		for i in side:
+			e.rotate_90(CLOCKWISE)
+		for yy in 16:
+			for xx in 16:
+				var c := e.get_pixel(xx, yy)
+				var is_edge := (c.b < c.r) if water else (c.g > c.r + 0.04)
+				if is_edge:
+					img.set_pixel(xx, yy, c)
+	var tex := ImageTexture.create_from_image(img)
+	_cache[key] = tex
+	return tex
+
+static var _buildings: Dictionary = {}
+
+## Whole-building sprites for a map: [{kind, rect (tiles), doors: [[x, y, ch]]}] (cached per map id).
+## A building is a block of roof tiles plus the wall row(s) under it.
+static func buildings(m: Dictionary) -> Array:
+	if _buildings.has(m.id):
+		return _buildings[m.id]
+	var out: Array = []
+	var tiles: Array = m.tiles
+	for y in tiles.size():
+		var row: String = tiles[y]
+		for x in row.length():
+			var ch := row[x]
+			if not BUILDING_KIND.has(ch) or Maps.tile_at(m, x - 1, y) == ch or Maps.tile_at(m, x, y - 1) == ch:
+				continue
+			var w := 0
+			while Maps.tile_at(m, x + w, y) == ch:
+				w += 1
+			var h := 0
+			while Maps.tile_at(m, x, y + h) == ch:
+				h += 1
+			var doors: Array = []
+			while "whlmju".contains(Maps.tile_at(m, x, y + h)):
+				for i in w:
+					var d := Maps.tile_at(m, x + i, y + h)
+					if d != "w":
+						doors.append([x + i, y + h, d])
+				h += 1
+			out.append({"kind": BUILDING_KIND[ch], "roof": ch, "rect": Rect2i(x, y, w, h), "doors": doors})
+	_buildings[m.id] = out
+	return out
