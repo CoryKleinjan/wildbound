@@ -32,7 +32,7 @@ static func partner_ready(ow: OverworldScene) -> bool:
 
 static func _has_usable(party: Array) -> bool:
 	for m in party:
-		if m.hp > 0:
+		if Battle.can_battle(m):
 			return true
 	return false
 

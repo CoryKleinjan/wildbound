@@ -118,7 +118,11 @@ func _damage_test() -> void:
 
 # Fuzz: random battles must always terminate without throwing.
 func _fuzz_test() -> void:
-	var ids: Array = root.get_node("DB").SPECIES.keys()
+	var db = root.get_node("DB")
+	var ids: Array = db.SPECIES.keys()
+	var all_moves: Array = db.MOVES.keys().filter(func(k: String) -> bool: return k != "struggle")
+	var held: Array = db.ITEMS.keys().filter(func(k: String) -> bool:
+		return db.ITEMS[k].effect.kind in ["held", "berry"])
 	var rng = RngS.new(1234)
 	var done := 0
 	var total_turns := 0
@@ -128,7 +132,14 @@ func _fuzz_test() -> void:
 		var mk := func(cnt: int, owner: int) -> Array:
 			var out: Array = []
 			for i in cnt:
-				out.push_back(Cr.create_creature(rng.pick(ids), 5 + rng.int_below(40), {"rng": rng, "owner": owner}))
+				var c: Dictionary = Cr.create_creature(rng.pick(ids), 5 + rng.int_below(40), {"rng": rng, "owner": owner})
+				# The second half uses random moves from the whole list and random held items.
+				if n >= 200:
+					c.moves = []
+					for j in 4:
+						c.moves.push_back(Cr.move_slot(rng.pick(all_moves)))
+					c.item = rng.pick(held) if rng.int_below(4) != 0 else null
+				out.push_back(c)
 			return out
 		var side0: Array
 		if double:
@@ -143,7 +154,7 @@ func _fuzz_test() -> void:
 			side1 = [{"name": "wild", "party": mk.call(2 if double else 1, 9), "controller": "wild", "slots": [0, 1] if double else [0]}]
 		else:
 			side1 = [{"name": "Rival", "party": mk.call(3, 9), "controller": "ai", "slots": [0, 1] if double else [0]}]
-		var b = BattleS.new({"kind": "wild" if wild else "trainer", "double": double, "sides": [side0, side1], "rng": RngS.new(n)})
+		var b = BattleS.new({"kind": ("safari" if n % 7 == 0 and not double else "wild") if wild else "trainer", "double": double, "sides": [side0, side1], "rng": RngS.new(n)})
 		b.start()
 		var turns := 0
 		while b.phase != "over" and turns < 500:
@@ -159,12 +170,14 @@ func _fuzz_test() -> void:
 				var roll = rng.int_below(10)
 				if roll == 0 and not bench.is_empty():
 					chosen[key] = {"kind": "switch", "partyIdx": rng.pick(bench)}
+				elif roll == 2 and b.kind == "safari":
+					chosen[key] = {"kind": rng.pick(["bait", "rock"])}
 				elif roll == 1 and wild:
 					chosen[key] = {"kind": "item", "itemId": "orb", "target": {"side": 1, "slot": rng.int_below(2 if double else 1)}}
 				else:
 					var usable: Array = []
 					for i in mon.moves.size():
-						if mon.moves[i].pp > 0:
+						if b.move_selectable(b.at(r.ref), i) == "":
 							usable.push_back(i)
 					chosen[key] = {"kind": "move", "moveIdx": rng.pick(usable) if not usable.is_empty() else -1, "target": {"side": 1, "slot": rng.int_below(2 if double else 1)}}
 			b.submit(chosen)
