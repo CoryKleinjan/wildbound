@@ -227,8 +227,12 @@ class ContestScene extends Scene:
 			if not (_m.ribbons as Array).has(ribbon):
 				_m.ribbons.append(ribbon)
 			gs.contest[_cat] = maxi(int(gs.contest.get(_cat, 0)), _rank + 1)
+			if _rank == RANKS.size() - 1:
+				Museum.paint(gs, _cat, _m)
 			Audio.sfx("badge")
 			_msg = "%s won the contest! It received the %s Ribbon!" % [_rows[0].name, ribbon]
+			if _rank == RANKS.size() - 1:
+				_msg += " Its portrait will hang in the Lumenvale Art Museum!"
 		else:
 			_msg = "%s placed %s. Keep raising its condition with Treat Blocks!" % [_rows[0].name, ["", "1st", "2nd", "3rd", "4th"][place]]
 

@@ -66,6 +66,14 @@ static func _extra() -> Dictionary:
 		"calls": [],
 		"lastDay": 0,
 		"trades": 0,
+		"ash": 0,
+		"flute": "",
+		"trendy": "GREAT BATTLE",
+		"fossil": null,
+		"tents": {},
+		"paintings": {},
+		"mixed": [],
+		"tvSeen": 0,
 	}
 
 ## Gives a player their first creature (from PROF. ALDER's bag).
@@ -193,6 +201,11 @@ static func guest_state(save: Variant, name: String, host_gs: Dictionary) -> Dic
 			for k in pc:
 				if k is String and DB.ITEMS.has(k) and pc[k] is int and pc[k] > 0:
 					gs.pcItems[k] = mini(pc[k], 999)
+		var mixed: Variant = s.get("mixed")
+		if mixed is Array:
+			gs.mixed = mixed.filter(func(r: Variant) -> bool: return RecordMix.valid(r)).slice(0, RecordMix.KEEP)
+		if s.get("trendy") is String and s.trendy != "":
+			gs.trendy = (s.trendy as String).substr(0, 24)
 	# Fresh ids, so they can't clash with the host's creatures.
 	for m in gs.players[0].party + gs.box:
 		Creatures.migrate(m)

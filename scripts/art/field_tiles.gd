@@ -3,9 +3,9 @@ class_name FieldTiles
 ## soft soil, caves, sand, the new buildings and Secret Base trees. Drawn into Tiles' texture cache.
 ##   T cut tree   R cracked rock   O boulder   W waterfall   D deep (dive) water   s soft soil
 ##   g cave floor   x cave wall   y cave mouth or ladder   a sand   i roof   d door   z secret-base tree   Q base PC
-##   Y slot machine (Game Corner)
+##   Y slot machine (Game Corner)   N TV   G painting on an easel (art museum)   Z Braille wall
 
-const CHARS := "TROWDsgxyaidzQY"
+const CHARS := "TROWDsgxyaidzQYNGZ"
 
 static func handles(ch: String) -> bool:
 	return ch.length() == 1 and CHARS.contains(ch)
@@ -118,6 +118,30 @@ static func texture(ch: String, x: int, y: int, frame: int, above: String, theme
 				p.call(4, 11, 8, 2, "#f8d040")
 				p.call(13, 3, 2, 1, "#c0c0c0")
 				p.call(14, 2, 1, 4, "#c0c0c0"))
+		"N":
+			return Tiles._make("fx_tv%d%s" % [frame % 2, theme], func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(3, 12, 10, 4, "#7a5a32")
+				p.call(1, 2, 14, 11, "#383840")
+				p.call(2, 3, 12, 8, "#78b8e8" if frame % 2 else "#88c8f0")
+				p.call(3, 4, 4, 2, "#d8f0ff")
+				p.call(12, 11, 1, 1, "#f04040"))
+		"G":
+			return Tiles._make("fx_easel" + theme, func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(3, 12, 1, 4, "#7a5a32")
+				p.call(12, 12, 1, 4, "#7a5a32")
+				p.call(1, 1, 14, 12, "#c09838")
+				p.call(2, 2, 12, 10, "#f0e8d0")
+				p.call(4, 5, 8, 5, "#a8b8c8")
+				p.call(6, 4, 4, 3, "#c8d0d8"))
+		"Z":
+			return Tiles._make("fx_braille%d" % ((x * 3 + y) % 3), func(p: Callable):
+				p.call(0, 0, 16, 16, "#5a4632")
+				p.call(1, 2, 14, 12, "#6e5840")
+				for i in 6:
+					if (x * 5 + y * 3 + i * 7) % 3 != 0:
+						p.call(3 + (i % 2) * 3 + (i / 2 % 2) * 6, 4 + (i / 2) * 3, 2, 2, "#d8c8a0"))
 	return Tiles.tile_texture(ch, x, y, frame, above, "", theme)
 
 ## A Capture Orb lying on the ground (an item to pick up).
