@@ -1071,7 +1071,7 @@ for mid, m in MAPS.items():
 # ---------- fishing and surfing tables ----------
 def water_table(level, n=4):
     lo = [k for k in water_sp if (SPECIES[k].get('area') or 99) <= max(1, level // 4 + 1) or base_form(k) == k]
-    pool = sorted(set(lo), key=lambda k: bst(SPECIES[k]))
+    pool = sorted(set(lo), key=lambda k: (bst(SPECIES[k]), k))
     if level < 20:
         pool = pool[:n + 2]
     else:
@@ -1092,6 +1092,8 @@ for mid in list(MAPS) + list(OUT['maps']):
     if mid == 'fernhollow':
         r = 1
     lv = ROUTE_LEVELS[min(r, 12)][1] if r else 30
+    if 'levels' in m:  # routes from tools/build_routes.py carry their own
+        lv = m['levels'][1]
     if mid in ('route13', 'safarizone', 'seacavern'):
         lv = 36 if mid != 'safarizone' else 28
     old = water_table(5)
@@ -1103,8 +1105,9 @@ for mid in list(MAPS) + list(OUT['maps']):
         'good': [{'species': s, 'min': max(10, lv - 15), 'max': max(15, lv - 8), 'weight': w} for s, w in zip(good[:3], [60, 20, 20])],
         'super': [{'species': s, 'min': max(20, lv - 5), 'max': max(25, lv + 5), 'weight': w} for s, w in zip(sup[:4], [40, 40, 15, 5])],
     }
-    p['waterEncounters'] = [{'species': s, 'min': max(5, lv - 8), 'max': max(8, lv), 'weight': w}
-                            for s, w in zip(water_table(lv + 1, 3), [60, 30, 10])]
+    if 'waterEncounters' not in m:  # routes from tools/build_routes.py bring their own
+        p['waterEncounters'] = [{'species': s, 'min': max(5, lv - 8), 'max': max(8, lv), 'weight': w}
+                                for s, w in zip(water_table(lv + 1, 3), [60, 30, 10])]
 
 # ---------- weather ----------
 for mid, w in {'route5': 'sand', 'route6': 'ash', 'route9': 'rain', 'route10': 'rain', 'route12': 'fog',
@@ -1886,6 +1889,8 @@ def region_layout():
         m = am[k]
         out[k] = {'x': x - minx, 'y': y - miny, 'w': len(m['tiles'][0]), 'h': len(m['tiles']),
                   'town': bool(m.get('town') or k == 'fernhollow'), 'name': m['name']}
+        if m.get('sea') or k == 'route13':
+            out[k]['sea'] = True
     # The Battle Frontier is out at sea, east of Route 13.
     r13 = out['route13']
     out['battlefrontier'] = {'x': r13['x'] + r13['w'] + 6, 'y': r13['y'] + 2, 'w': 40, 'h': 28, 'town': True,

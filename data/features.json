@@ -27361,13 +27361,13 @@
     ],
     "good": [
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 21,
       "max": 28,
       "weight": 60
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 21,
       "max": 28,
       "weight": 20
@@ -27381,13 +27381,13 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "brookit",
       "min": 31,
       "max": 41,
       "weight": 40
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 41,
       "weight": 40
@@ -27420,7 +27420,7 @@
      "weight": 30
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 28,
      "max": 36,
      "weight": 10
@@ -27543,13 +27543,13 @@
     ],
     "good": [
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 15,
       "max": 22,
       "weight": 60
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 15,
       "max": 22,
       "weight": 20
@@ -27563,13 +27563,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 25,
       "max": 35,
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 25,
       "max": 35,
       "weight": 40
@@ -27581,7 +27581,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 25,
       "max": 35,
       "weight": 5
@@ -27596,13 +27596,13 @@
      "weight": 60
     },
     {
-     "species": "brookit",
+     "species": "mirrakoi",
      "min": 22,
      "max": 30,
      "weight": 30
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 22,
      "max": 30,
      "weight": 10
@@ -27667,13 +27667,13 @@
     ],
     "good": [
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 21,
       "max": 28,
       "weight": 60
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 21,
       "max": 28,
       "weight": 20
@@ -27687,13 +27687,13 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "brookit",
       "min": 31,
       "max": 41,
       "weight": 40
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 41,
       "weight": 40
@@ -27726,7 +27726,7 @@
      "weight": 30
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 28,
      "max": 36,
      "weight": 10
@@ -28168,13 +28168,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 23,
       "max": 33,
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 23,
       "max": 33,
       "weight": 40
@@ -28186,7 +28186,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 23,
       "max": 33,
       "weight": 5
@@ -28195,7 +28195,7 @@
    },
    "waterEncounters": [
     {
-     "species": "mirrakoi",
+     "species": "twirlfin",
      "min": 20,
      "max": 28,
      "weight": 60
@@ -30069,13 +30069,13 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 26,
       "max": 36,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 26,
       "max": 36,
       "weight": 15
@@ -30096,7 +30096,7 @@
      "weight": 60
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 23,
      "max": 31,
      "weight": 30
@@ -30444,13 +30444,13 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 26,
       "max": 36,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 26,
       "max": 36,
       "weight": 15
@@ -30471,7 +30471,7 @@
      "weight": 60
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 23,
      "max": 31,
      "weight": 30
@@ -30668,13 +30668,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -30686,7 +30686,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -30856,13 +30856,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 26,
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 20,
       "max": 26,
       "weight": 40
@@ -30874,7 +30874,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 20,
       "max": 26,
       "weight": 5
@@ -30883,13 +30883,13 @@
    },
    "waterEncounters": [
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 13,
      "max": 21,
      "weight": 60
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 13,
      "max": 21,
      "weight": 30
@@ -31184,13 +31184,13 @@
     ],
     "good": [
      {
-      "species": "twirlfin",
+      "species": "brookit",
       "min": 31,
       "max": 38,
       "weight": 60
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 38,
       "weight": 20
@@ -31204,7 +31204,7 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 41,
       "max": 51,
       "weight": 40
@@ -31216,13 +31216,13 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 41,
       "max": 51,
       "weight": 15
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 41,
       "max": 51,
       "weight": 5
@@ -31475,13 +31475,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -31493,7 +31493,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -32230,7 +32230,7 @@
     ],
     "super": [
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 29,
       "max": 39,
       "weight": 40
@@ -32248,7 +32248,7 @@
       "weight": 15
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 29,
       "max": 39,
       "weight": 5
@@ -32263,7 +32263,7 @@
      "weight": 60
     },
     {
-     "species": "mirrakoi",
+     "species": "twirlfin",
      "min": 26,
      "max": 34,
      "weight": 30
@@ -32413,7 +32413,7 @@
     ],
     "good": [
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 23,
       "max": 30,
       "weight": 60
@@ -32451,7 +32451,7 @@
       "weight": 15
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 33,
       "max": 43,
       "weight": 5
@@ -32472,7 +32472,7 @@
      "weight": 30
     },
     {
-     "species": "brookit",
+     "species": "mirrakoi",
      "min": 30,
      "max": 38,
      "weight": 10
@@ -32587,7 +32587,7 @@
       "weight": 60
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 27,
       "max": 34,
       "weight": 20
@@ -32607,13 +32607,13 @@
       "weight": 40
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 37,
       "max": 47,
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 37,
       "max": 47,
       "weight": 15
@@ -32634,13 +32634,13 @@
      "weight": 60
     },
     {
-     "species": "twirlfin",
+     "species": "brookit",
      "min": 34,
      "max": 42,
      "weight": 30
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 34,
      "max": 42,
      "weight": 10
@@ -33027,13 +33027,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -33045,7 +33045,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -33206,13 +33206,13 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 26,
       "max": 36,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 26,
       "max": 36,
       "weight": 15
@@ -33233,7 +33233,7 @@
      "weight": 60
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 23,
      "max": 31,
      "weight": 30
@@ -33536,13 +33536,13 @@
     ],
     "good": [
      {
-      "species": "twirlfin",
+      "species": "brookit",
       "min": 31,
       "max": 38,
       "weight": 60
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 38,
       "weight": 20
@@ -33556,7 +33556,7 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 41,
       "max": 51,
       "weight": 40
@@ -33568,13 +33568,13 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 41,
       "max": 51,
       "weight": 15
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 41,
       "max": 51,
       "weight": 5
@@ -33670,13 +33670,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -33688,7 +33688,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -33715,6 +33715,774 @@
      "weight": 10
     }
    ]
+  },
+  "route27": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "jabcrab",
+      "min": 10,
+      "max": 15,
+      "weight": 60
+     },
+     {
+      "species": "nipshell",
+      "min": 10,
+      "max": 15,
+      "weight": 20
+     },
+     {
+      "species": "raylet",
+      "min": 10,
+      "max": 15,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "twirlfin",
+      "min": 20,
+      "max": 25,
+      "weight": 40
+     },
+     {
+      "species": "tuskling",
+      "min": 20,
+      "max": 25,
+      "weight": 40
+     },
+     {
+      "species": "ripplet",
+      "min": 20,
+      "max": 25,
+      "weight": 15
+     },
+     {
+      "species": "mirrakoi",
+      "min": 20,
+      "max": 25,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route20": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "fenspawn",
+      "min": 17,
+      "max": 24,
+      "weight": 60
+     },
+     {
+      "species": "tuskling",
+      "min": 17,
+      "max": 24,
+      "weight": 20
+     },
+     {
+      "species": "arclure",
+      "min": 17,
+      "max": 24,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "icefin",
+      "min": 27,
+      "max": 37,
+      "weight": 40
+     },
+     {
+      "species": "tuskling",
+      "min": 27,
+      "max": 37,
+      "weight": 40
+     },
+     {
+      "species": "jabcrab",
+      "min": 27,
+      "max": 37,
+      "weight": 15
+     },
+     {
+      "species": "glimmerfin",
+      "min": 27,
+      "max": 37,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route21": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "fenspawn",
+      "min": 20,
+      "max": 27,
+      "weight": 60
+     },
+     {
+      "species": "icefin",
+      "min": 20,
+      "max": 27,
+      "weight": 20
+     },
+     {
+      "species": "brookit",
+      "min": 20,
+      "max": 27,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "jabcrab",
+      "min": 30,
+      "max": 40,
+      "weight": 40
+     },
+     {
+      "species": "twirlfin",
+      "min": 30,
+      "max": 40,
+      "weight": 40
+     },
+     {
+      "species": "icefin",
+      "min": 30,
+      "max": 40,
+      "weight": 15
+     },
+     {
+      "species": "tuskling",
+      "min": 30,
+      "max": 40,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route22": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "fenspawn",
+      "min": 23,
+      "max": 30,
+      "weight": 60
+     },
+     {
+      "species": "ripplet",
+      "min": 23,
+      "max": 30,
+      "weight": 20
+     },
+     {
+      "species": "jabcrab",
+      "min": 23,
+      "max": 30,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "ripplet",
+      "min": 33,
+      "max": 43,
+      "weight": 40
+     },
+     {
+      "species": "icefin",
+      "min": 33,
+      "max": 43,
+      "weight": 40
+     },
+     {
+      "species": "glimmerfin",
+      "min": 33,
+      "max": 43,
+      "weight": 15
+     },
+     {
+      "species": "fenspawn",
+      "min": 33,
+      "max": 43,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route31": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "twirlfin",
+      "min": 24,
+      "max": 31,
+      "weight": 60
+     },
+     {
+      "species": "arclure",
+      "min": 24,
+      "max": 31,
+      "weight": 20
+     },
+     {
+      "species": "ripplet",
+      "min": 24,
+      "max": 31,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "glimmerfin",
+      "min": 34,
+      "max": 44,
+      "weight": 40
+     },
+     {
+      "species": "ripplet",
+      "min": 34,
+      "max": 44,
+      "weight": 40
+     },
+     {
+      "species": "mirrakoi",
+      "min": 34,
+      "max": 44,
+      "weight": 15
+     },
+     {
+      "species": "arclure",
+      "min": 34,
+      "max": 44,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route23": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "icefin",
+      "min": 26,
+      "max": 33,
+      "weight": 60
+     },
+     {
+      "species": "mirrakoi",
+      "min": 26,
+      "max": 33,
+      "weight": 20
+     },
+     {
+      "species": "fenspawn",
+      "min": 26,
+      "max": 33,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "jabcrab",
+      "min": 36,
+      "max": 46,
+      "weight": 40
+     },
+     {
+      "species": "arclure",
+      "min": 36,
+      "max": 46,
+      "weight": 40
+     },
+     {
+      "species": "glimmerfin",
+      "min": 36,
+      "max": 46,
+      "weight": 15
+     },
+     {
+      "species": "mirrakoi",
+      "min": 36,
+      "max": 46,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route26": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "jabcrab",
+      "min": 30,
+      "max": 37,
+      "weight": 60
+     },
+     {
+      "species": "twirlfin",
+      "min": 30,
+      "max": 37,
+      "weight": 20
+     },
+     {
+      "species": "icefin",
+      "min": 30,
+      "max": 37,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "brookit",
+      "min": 40,
+      "max": 50,
+      "weight": 40
+     },
+     {
+      "species": "twirlfin",
+      "min": 40,
+      "max": 50,
+      "weight": 40
+     },
+     {
+      "species": "fenspawn",
+      "min": 40,
+      "max": 50,
+      "weight": 15
+     },
+     {
+      "species": "arclure",
+      "min": 40,
+      "max": 50,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route24": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "jabcrab",
+      "min": 30,
+      "max": 37,
+      "weight": 60
+     },
+     {
+      "species": "twirlfin",
+      "min": 30,
+      "max": 37,
+      "weight": 20
+     },
+     {
+      "species": "icefin",
+      "min": 30,
+      "max": 37,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "brookit",
+      "min": 40,
+      "max": 50,
+      "weight": 40
+     },
+     {
+      "species": "twirlfin",
+      "min": 40,
+      "max": 50,
+      "weight": 40
+     },
+     {
+      "species": "fenspawn",
+      "min": 40,
+      "max": 50,
+      "weight": 15
+     },
+     {
+      "species": "arclure",
+      "min": 40,
+      "max": 50,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route25": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "brookit",
+      "min": 31,
+      "max": 38,
+      "weight": 60
+     },
+     {
+      "species": "twirlfin",
+      "min": 31,
+      "max": 38,
+      "weight": 20
+     },
+     {
+      "species": "arclure",
+      "min": 31,
+      "max": 38,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "twirlfin",
+      "min": 41,
+      "max": 51,
+      "weight": 40
+     },
+     {
+      "species": "ripplet",
+      "min": 41,
+      "max": 51,
+      "weight": 40
+     },
+     {
+      "species": "mirrakoi",
+      "min": 41,
+      "max": 51,
+      "weight": 15
+     },
+     {
+      "species": "fenspawn",
+      "min": 41,
+      "max": 51,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route32": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "icefin",
+      "min": 32,
+      "max": 39,
+      "weight": 60
+     },
+     {
+      "species": "glimmerfin",
+      "min": 32,
+      "max": 39,
+      "weight": 20
+     },
+     {
+      "species": "tuskling",
+      "min": 32,
+      "max": 39,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "jabcrab",
+      "min": 42,
+      "max": 52,
+      "weight": 40
+     },
+     {
+      "species": "arclure",
+      "min": 42,
+      "max": 52,
+      "weight": 40
+     },
+     {
+      "species": "glimmerfin",
+      "min": 42,
+      "max": 52,
+      "weight": 15
+     },
+     {
+      "species": "mirrakoi",
+      "min": 42,
+      "max": 52,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route33": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "glimmerfin",
+      "min": 34,
+      "max": 41,
+      "weight": 60
+     },
+     {
+      "species": "ripplet",
+      "min": 34,
+      "max": 41,
+      "weight": 20
+     },
+     {
+      "species": "mirrakoi",
+      "min": 34,
+      "max": 41,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "arclure",
+      "min": 44,
+      "max": 54,
+      "weight": 40
+     },
+     {
+      "species": "twirlfin",
+      "min": 44,
+      "max": 54,
+      "weight": 40
+     },
+     {
+      "species": "glimmerfin",
+      "min": 44,
+      "max": 54,
+      "weight": 15
+     },
+     {
+      "species": "ripplet",
+      "min": 44,
+      "max": 54,
+      "weight": 5
+     }
+    ]
+   }
+  },
+  "route34": {
+   "fishing": {
+    "old": [
+     {
+      "species": "polarpup",
+      "min": 5,
+      "max": 10,
+      "weight": 70
+     },
+     {
+      "species": "ozlug",
+      "min": 5,
+      "max": 10,
+      "weight": 30
+     }
+    ],
+    "good": [
+     {
+      "species": "ripplet",
+      "min": 37,
+      "max": 44,
+      "weight": 60
+     },
+     {
+      "species": "twirlfin",
+      "min": 37,
+      "max": 44,
+      "weight": 20
+     },
+     {
+      "species": "mirrakoi",
+      "min": 37,
+      "max": 44,
+      "weight": 20
+     }
+    ],
+    "super": [
+     {
+      "species": "brookit",
+      "min": 47,
+      "max": 57,
+      "weight": 40
+     },
+     {
+      "species": "fenspawn",
+      "min": 47,
+      "max": 57,
+      "weight": 40
+     },
+     {
+      "species": "arclure",
+      "min": 47,
+      "max": 57,
+      "weight": 15
+     },
+     {
+      "species": "glimmerfin",
+      "min": 47,
+      "max": 57,
+      "weight": 5
+     }
+    ]
+   }
   },
   "lumenvale_house1": {
    "npcs": [
@@ -35416,7 +36184,28 @@
    "route9",
    "route10",
    "route11",
-   "route12"
+   "route12",
+   "route14",
+   "route15",
+   "route16",
+   "route17",
+   "route18",
+   "route19",
+   "route20",
+   "route21",
+   "route22",
+   "route23",
+   "route24",
+   "route25",
+   "route26",
+   "route27",
+   "route28",
+   "route29",
+   "route30",
+   "route31",
+   "route32",
+   "route33",
+   "route34"
   ],
   "quizPrizes": [
    "ppUp",
@@ -35468,32 +36257,48 @@
  },
  "regionMap": {
   "fernhollow": {
-   "x": 2,
-   "y": 264,
+   "x": 0,
+   "y": 463,
    "w": 24,
    "h": 18,
    "town": true,
    "name": "Fernhollow"
   },
   "route1": {
-   "x": 2,
-   "y": 230,
+   "x": 0,
+   "y": 429,
    "w": 24,
    "h": 34,
    "town": false,
    "name": "Route 1"
   },
+  "route14": {
+   "x": 0,
+   "y": 389,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 14"
+  },
   "route2": {
-   "x": 2,
-   "y": 200,
+   "x": 0,
+   "y": 359,
    "w": 24,
    "h": 30,
    "town": false,
    "name": "Mistwood Path"
   },
+  "mossgrove": {
+   "x": 0,
+   "y": 315,
+   "w": 24,
+   "h": 44,
+   "town": false,
+   "name": "Mossgrove Woods"
+  },
   "stonecrest": {
    "x": 0,
-   "y": 178,
+   "y": 293,
    "w": 26,
    "h": 22,
    "town": true,
@@ -35501,175 +36306,352 @@
   },
   "route3": {
    "x": 26,
-   "y": 179,
+   "y": 294,
    "w": 40,
    "h": 20,
    "town": false,
    "name": "Route 3"
   },
-  "duskmere": {
+  "route15": {
    "x": 66,
-   "y": 178,
+   "y": 294,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 15"
+  },
+  "duskmere": {
+   "x": 106,
+   "y": 294,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Duskmere"
   },
+  "route27": {
+   "x": 76,
+   "y": 314,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 27"
+  },
   "route4": {
-   "x": 68,
-   "y": 138,
+   "x": 108,
+   "y": 254,
    "w": 22,
    "h": 40,
    "town": false,
    "name": "Route 4"
   },
+  "route16": {
+   "x": 108,
+   "y": 214,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 16"
+  },
   "voltara": {
-   "x": 66,
-   "y": 116,
+   "x": 108,
+   "y": 192,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Voltara"
   },
   "route5": {
-   "x": 92,
-   "y": 117,
+   "x": 134,
+   "y": 193,
    "w": 40,
    "h": 20,
    "town": false,
    "name": "Route 5"
   },
+  "route17": {
+   "x": 174,
+   "y": 193,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 17"
+  },
   "cindercity": {
-   "x": 132,
-   "y": 116,
+   "x": 214,
+   "y": 193,
    "w": 36,
    "h": 30,
    "town": true,
    "name": "Cinder City"
   },
+  "route28": {
+   "x": 185,
+   "y": 153,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 28"
+  },
   "route6": {
-   "x": 134,
-   "y": 146,
+   "x": 216,
+   "y": 223,
    "w": 22,
    "h": 40,
    "town": false,
    "name": "Route 6"
   },
+  "route18": {
+   "x": 216,
+   "y": 263,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 18"
+  },
   "harrowfield": {
-   "x": 132,
-   "y": 186,
+   "x": 216,
+   "y": 303,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Harrowfield"
   },
+  "route29": {
+   "x": 176,
+   "y": 264,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 29"
+  },
   "route7": {
-   "x": 158,
-   "y": 187,
+   "x": 242,
+   "y": 304,
    "w": 40,
    "h": 20,
    "town": false,
    "name": "Route 7"
   },
+  "route19": {
+   "x": 282,
+   "y": 304,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 19"
+  },
   "bramblegate": {
-   "x": 198,
-   "y": 186,
+   "x": 322,
+   "y": 304,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Bramblegate"
   },
+  "route30": {
+   "x": 289,
+   "y": 324,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 30"
+  },
   "route8": {
-   "x": 200,
-   "y": 146,
+   "x": 324,
+   "y": 264,
    "w": 22,
    "h": 40,
    "town": false,
    "name": "Route 8"
   },
+  "route20": {
+   "x": 324,
+   "y": 224,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 20"
+  },
   "skyreach": {
-   "x": 198,
-   "y": 124,
+   "x": 324,
+   "y": 202,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Skyreach"
   },
+  "elderglen": {
+   "x": 288,
+   "y": 224,
+   "w": 36,
+   "h": 32,
+   "town": false,
+   "name": "Elderglen Forest"
+  },
   "route9": {
-   "x": 224,
-   "y": 125,
+   "x": 350,
+   "y": 203,
    "w": 40,
    "h": 20,
    "town": false,
    "name": "Route 9"
   },
+  "route21": {
+   "x": 390,
+   "y": 203,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 21",
+   "sea": true
+  },
   "saltmarsh": {
-   "x": 264,
-   "y": 124,
+   "x": 430,
+   "y": 203,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Saltmarsh"
   },
   "route10": {
-   "x": 266,
-   "y": 84,
+   "x": 432,
+   "y": 163,
    "w": 22,
    "h": 40,
    "town": false,
    "name": "Route 10"
   },
   "route13": {
-   "x": 290,
-   "y": 124,
+   "x": 456,
+   "y": 203,
    "w": 40,
    "h": 20,
    "town": false,
-   "name": "Route 13"
+   "name": "Route 13",
+   "sea": true
+  },
+  "route22": {
+   "x": 432,
+   "y": 123,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 22"
   },
   "lumenvale": {
-   "x": 264,
-   "y": 62,
+   "x": 432,
+   "y": 101,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Lumenvale"
   },
+  "route31": {
+   "x": 392,
+   "y": 128,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 31"
+  },
   "route11": {
-   "x": 290,
-   "y": 63,
+   "x": 458,
+   "y": 102,
    "w": 40,
    "h": 20,
    "town": false,
    "name": "Route 11"
   },
+  "route23": {
+   "x": 498,
+   "y": 102,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 23",
+   "sea": true
+  },
   "coralhaven": {
-   "x": 330,
-   "y": 62,
+   "x": 538,
+   "y": 102,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Coralhaven"
   },
+  "route26": {
+   "x": 538,
+   "y": 62,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 26",
+   "sea": true
+  },
   "route12": {
-   "x": 332,
+   "x": 538,
    "y": 22,
    "w": 22,
    "h": 40,
    "town": false,
    "name": "Victory Road"
   },
+  "route24": {
+   "x": 560,
+   "y": 78,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 24",
+   "sea": true
+  },
   "summitcrown": {
-   "x": 330,
+   "x": 536,
    "y": 0,
    "w": 26,
    "h": 22,
    "town": true,
    "name": "Summit Crown"
   },
+  "route25": {
+   "x": 600,
+   "y": 78,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 25",
+   "sea": true
+  },
+  "route32": {
+   "x": 600,
+   "y": 98,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 32",
+   "sea": true
+  },
+  "route33": {
+   "x": 600,
+   "y": 138,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 33",
+   "sea": true
+  },
+  "route34": {
+   "x": 622,
+   "y": 150,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 34",
+   "sea": true
+  },
   "battlefrontier": {
-   "x": 336,
-   "y": 126,
+   "x": 502,
+   "y": 205,
    "w": 40,
    "h": 28,
    "town": true,

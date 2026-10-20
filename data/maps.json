@@ -138,7 +138,7 @@
     "offset": 0
    },
    "up": {
-    "map": "route2",
+    "map": "route14",
     "offset": 0
    }
   },
@@ -327,12 +327,12 @@
   ],
   "connections": {
    "down": {
-    "map": "route1",
+    "map": "route14",
     "offset": 0
    },
    "up": {
-    "map": "stonecrest",
-    "offset": 2
+    "map": "mossgrove",
+    "offset": 0
    }
   },
   "encounterRate": 22,
@@ -582,8 +582,8 @@
   ],
   "connections": {
    "down": {
-    "map": "route2",
-    "offset": -2
+    "map": "mossgrove",
+    "offset": 0
    },
    "right": {
     "map": "route3",
@@ -691,8 +691,8 @@
   ],
   "connections": {
    "left": {
-    "map": "route3",
-    "offset": -1
+    "map": "route15",
+    "offset": 0
    },
    "up": {
     "map": "route4",
@@ -800,8 +800,8 @@
   ],
   "connections": {
    "down": {
-    "map": "route4",
-    "offset": -2
+    "map": "route16",
+    "offset": 0
    },
    "right": {
     "map": "route5",
@@ -917,8 +917,8 @@
   ],
   "connections": {
    "left": {
-    "map": "route5",
-    "offset": -1
+    "map": "route17",
+    "offset": 0
    },
    "down": {
     "map": "route6",
@@ -1069,8 +1069,8 @@
   ],
   "connections": {
    "up": {
-    "map": "route6",
-    "offset": -2
+    "map": "route18",
+    "offset": 0
    },
    "right": {
     "map": "route7",
@@ -1165,8 +1165,8 @@
   ],
   "connections": {
    "left": {
-    "map": "route7",
-    "offset": -1
+    "map": "route19",
+    "offset": 0
    },
    "up": {
     "map": "route8",
@@ -1274,8 +1274,8 @@
   ],
   "connections": {
    "down": {
-    "map": "route8",
-    "offset": -2
+    "map": "route20",
+    "offset": 0
    },
    "right": {
     "map": "route9",
@@ -1383,8 +1383,8 @@
   ],
   "connections": {
    "left": {
-    "map": "route9",
-    "offset": -1
+    "map": "route21",
+    "offset": 0
    },
    "up": {
     "map": "route10",
@@ -1479,8 +1479,8 @@
   ],
   "connections": {
    "down": {
-    "map": "route10",
-    "offset": -2
+    "map": "route22",
+    "offset": 0
    },
    "right": {
     "map": "route11",
@@ -1588,12 +1588,12 @@
   ],
   "connections": {
    "left": {
-    "map": "route11",
-    "offset": -1
+    "map": "route23",
+    "offset": 0
    },
    "up": {
-    "map": "route12",
-    "offset": -2
+    "map": "route26",
+    "offset": 0
    }
   },
   "doors": {
@@ -1798,8 +1798,8 @@
     "offset": 1
    },
    "right": {
-    "map": "duskmere",
-    "offset": 1
+    "map": "route15",
+    "offset": 0
    }
   },
   "trainers": [
@@ -2010,8 +2010,8 @@
     "offset": 2
    },
    "up": {
-    "map": "voltara",
-    "offset": 2
+    "map": "route16",
+    "offset": 0
    }
   },
   "trainers": [
@@ -2262,8 +2262,8 @@
     "offset": 1
    },
    "right": {
-    "map": "cindercity",
-    "offset": 1
+    "map": "route17",
+    "offset": 0
    }
   },
   "trainers": [
@@ -2492,8 +2492,8 @@
     "offset": 2
    },
    "down": {
-    "map": "harrowfield",
-    "offset": 2
+    "map": "route18",
+    "offset": 0
    }
   },
   "trainers": [
@@ -2714,8 +2714,8 @@
     "offset": 1
    },
    "right": {
-    "map": "bramblegate",
-    "offset": 1
+    "map": "route19",
+    "offset": 0
    }
   },
   "trainers": [
@@ -3054,8 +3054,8 @@
     "offset": 2
    },
    "up": {
-    "map": "skyreach",
-    "offset": 2
+    "map": "route20",
+    "offset": 0
    }
   },
   "trainers": [
@@ -3378,8 +3378,8 @@
     "offset": 1
    },
    "right": {
-    "map": "saltmarsh",
-    "offset": 1
+    "map": "route21",
+    "offset": 0
    }
   },
   "trainers": [
@@ -3700,8 +3700,8 @@
     "offset": 2
    },
    "up": {
-    "map": "lumenvale",
-    "offset": 2
+    "map": "route22",
+    "offset": 0
    }
   },
   "trainers": [
@@ -4000,8 +4000,8 @@
     "offset": 1
    },
    "right": {
-    "map": "coralhaven",
-    "offset": 1
+    "map": "route23",
+    "offset": 0
    }
   },
   "trainers": [
@@ -4360,8 +4360,8 @@
   ],
   "connections": {
    "down": {
-    "map": "coralhaven",
-    "offset": 2
+    "map": "route26",
+    "offset": 0
    },
    "up": {
     "map": "summitcrown",
@@ -5860,5 +5860,6324 @@
     "champion": true
    }
   ]
+ },
+ "route14": {
+  "id": "route14",
+  "name": "Route 14",
+  "tiles": [
+   "##########==##########",
+   "#F..F..,,,==,...F....#",
+   "#..#######==,,,.####.#",
+   "#..#######=======#####",
+   "#F.######,=======#####",
+   "#....,,,,,,,,,,==....#",
+   "#.....,,,,,,,,,==....#",
+   "#......,,,,,,,.==....#",
+   "#......,,,,,...==#...#",
+   "#......,,,,,..#==##..#",
+   "#.......,,,...#==##..#",
+   "#.###....F...F#==##..#",
+   "#,###,........#==#.F.#",
+   "#,###,........#==....#",
+   "#,,,,,........#==....#",
+   "#.,,,....###.F#==....#",
+   "####...######.#==....#",
+   "####..#######..==....#",
+   "####..#######..==....#",
+   "####..#######..==....#",
+   "####..#######,,==....#",
+   "#.....#########==....#",
+   "#......########==....#",
+   "#.......#######==....#",
+   "#.....,,#######==....#",
+   "#....,,,#######==....#",
+   "#...,,,,#####,,==....#",
+   "#..,,,,,.###,,,==....#",
+   "#..,,,,,.#=======....#",
+   "#..,,,,,.#=======,,,,#",
+   "#..,,,,,,#==#,,.,,,,,#",
+   "#..,,,,,,,==,,,,,,,,,#",
+   "#...,,,.,,==###,,,,,,#",
+   "#.......,#==####,,,,,#",
+   "#.......,,==####,,,,,#",
+   "#,,,,,,.,,==,,..,,,,,#",
+   "#,,,,,,,.S==.........#",
+   "#,,,,,,,..==.........#",
+   "#.........==.........#",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "route1",
+    "offset": 0
+   },
+   "up": {
+    "map": "route2",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route14_t0",
+    "name": "Youngster Zed",
+    "palette": "boy",
+    "x": 19,
+    "y": 19,
+    "dir": "left",
+    "sight": 4,
+    "pay": 14,
+    "party": [
+     [
+      "chirpling",
+      4
+     ],
+     [
+      "nimbolt",
+      5
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like you want a battle!",
+    "defeat": "Hmph. You got lucky.",
+    "after": "There are more trainers up the road."
+   },
+   {
+    "id": "route14_t1",
+    "name": "Lass Hale",
+    "palette": "girl",
+    "x": 19,
+    "y": 14,
+    "dir": "left",
+    "sight": 4,
+    "pay": 14,
+    "party": [
+     [
+      "aerolith",
+      3
+     ]
+    ],
+    "double": false,
+    "intro": "This road is my training ground!",
+    "defeat": "Well, I tried.",
+    "after": "Tall grass hides the most creatures."
+   },
+   {
+    "id": "route14_t2",
+    "name": "Hiker Bram",
+    "palette": "hiker",
+    "x": 13,
+    "y": 18,
+    "dir": "right",
+    "sight": 4,
+    "pay": 14,
+    "party": [
+     [
+      "rambrawl",
+      7
+     ]
+    ],
+    "double": false,
+    "intro": "I won't let you pass that easily!",
+    "defeat": "Fine, go ahead.",
+    "after": "A ledge is a one-way shortcut. Jump down, but never up."
+   }
+  ],
+  "signs": {
+   "9,36": [
+    "ROUTE 14",
+    "Route 1 <-> Mistwood Path"
+   ]
+  },
+  "items": [
+   {
+    "id": "route14_i1",
+    "x": 20,
+    "y": 2,
+    "item": "repel",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route14_i2",
+    "x": 18,
+    "y": 8,
+    "item": "antidote",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route14_i3",
+    "x": 12,
+    "y": 15,
+    "item": "stardust",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 14,
+  "levels": [
+   3,
+   6
+  ],
+  "backdrop": "field",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "nimbolt",
+    "min": 3,
+    "max": 6,
+    "weight": 20
+   },
+   {
+    "species": "hexapede",
+    "min": 3,
+    "max": 6,
+    "weight": 20
+   },
+   {
+    "species": "glowgnat",
+    "min": 3,
+    "max": 6,
+    "weight": 10
+   },
+   {
+    "species": "aerolith",
+    "min": 3,
+    "max": 6,
+    "weight": 10
+   },
+   {
+    "species": "rimewing",
+    "min": 3,
+    "max": 6,
+    "weight": 10
+   },
+   {
+    "species": "rambrawl",
+    "min": 3,
+    "max": 6,
+    "weight": 10
+   },
+   {
+    "species": "chirpling",
+    "min": 3,
+    "max": 6,
+    "weight": 5
+   },
+   {
+    "species": "rivetant",
+    "min": 3,
+    "max": 6,
+    "weight": 5
+   },
+   {
+    "species": "pyrefinch",
+    "min": 3,
+    "max": 6,
+    "weight": 4
+   },
+   {
+    "species": "finchet",
+    "min": 3,
+    "max": 6,
+    "weight": 4
+   },
+   {
+    "species": "larkling",
+    "min": 3,
+    "max": 6,
+    "weight": 1
+   }
+  ],
+  "between": [
+   "route1",
+   "up",
+   "route2",
+   0
+  ]
+ },
+ "mossgrove": {
+  "id": "mossgrove",
+  "name": "Mossgrove Woods",
+  "tiles": [
+   "############==##########",
+   "############==##########",
+   "############==##########",
+   "#########.....##########",
+   "#########.....##########",
+   "#########..#############",
+   "####...##..#############",
+   "####....T..#############",
+   "####...##..#############",
+   "#########..#############",
+   "#####......##......#####",
+   "####.........,,,,,..####",
+   "####,,,,,,,.,,,,,,,.####",
+   "####,,,,,,,.,,,,,,,.####",
+   "#####,,,,,,.,,,,,,,.####",
+   "#########....,,,,,..####",
+   "#########..#......######",
+   "#########..##.....######",
+   "##...####..#.,,,,..#####",
+   "##....T##..#.,,,,,.#####",
+   "##...##......,,,,..#####",
+   "#######............#####",
+   "######,,,,,.......######",
+   "######,,,,,..#....######",
+   "######.,,,,..##..#######",
+   "#######......##..#######",
+   "#######.....###..#######",
+   "###############..#######",
+   "###############..#######",
+   "###############..#######",
+   "###############..#######",
+   "###############..#######",
+   "###############..#######",
+   "###############..#######",
+   "###############..#######",
+   "##.....########..#######",
+   "#.......#######..#######",
+   "#.......#######..,,,,.##",
+   "#.,,,,,,,........,,,,,.#",
+   "#.,,,,,,,........,,,,,.#",
+   "#..,,,,,##..###........#",
+   "##.....###S.#####......#",
+   "##########==############",
+   "##########==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "route2",
+    "offset": 0
+   },
+   "up": {
+    "map": "stonecrest",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "mossgrove_t0",
+    "name": "Bug Catcher Vash",
+    "palette": "boy",
+    "x": 14,
+    "y": 39,
+    "dir": "left",
+    "sight": 4,
+    "pay": 16,
+    "party": [
+     [
+      "jellip",
+      9
+     ],
+     [
+      "jellip",
+      8
+     ]
+    ],
+    "double": false,
+    "intro": "The woods are full of bugs! Battle me!",
+    "defeat": "Squashed...",
+    "after": "Some trees can be cut down to reach hidden glades."
+   },
+   {
+    "id": "mossgrove_t1",
+    "name": "Aroma Lady Zed",
+    "palette": "beauty",
+    "x": 5,
+    "y": 11,
+    "dir": "down",
+    "sight": 3,
+    "pay": 16,
+    "party": [
+     [
+      "fenspawn",
+      10
+     ]
+    ],
+    "double": false,
+    "intro": "Shh... you scared off my creature! Now you battle me.",
+    "defeat": "I lost the trail too...",
+    "after": "Bug creatures love the shade here."
+   },
+   {
+    "id": "mossgrove_t2",
+    "name": "Twins Odile & Rhea",
+    "palette": "girl",
+    "x": 13,
+    "y": 22,
+    "dir": "up",
+    "sight": 4,
+    "pay": 16,
+    "party": [
+     [
+      "crawlet",
+      9
+     ],
+     [
+      "acornip",
+      9
+     ]
+    ],
+    "double": true,
+    "intro": "Lost in the trees? Me too! Let's battle!",
+    "defeat": "I'm still lost.",
+    "after": "Follow the path and you'll find the exit."
+   },
+   {
+    "id": "mossgrove_t3",
+    "name": "Picnicker Brisa",
+    "palette": "girl",
+    "x": 15,
+    "y": 15,
+    "dir": "up",
+    "sight": 4,
+    "pay": 16,
+    "party": [
+     [
+      "crawlet",
+      5
+     ]
+    ],
+    "double": false,
+    "intro": "The forest spirits sent you to me...",
+    "defeat": "The spirits are pleased.",
+    "after": "Ghosts drift between these old trunks."
+   }
+  ],
+  "signs": {
+   "10,41": [
+    "MOSSGROVE WOODS",
+    "Mistwood Path <-> Stonecrest"
+   ]
+  },
+  "items": [
+   {
+    "id": "mossgrove_i1",
+    "x": 5,
+    "y": 7,
+    "item": "repel",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "mossgrove_i2",
+    "x": 3,
+    "y": 19,
+    "item": "parlyzHeal",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "mossgrove_i3",
+    "x": 2,
+    "y": 41,
+    "item": "miracleSeed",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "mossgrove_i4",
+    "x": 6,
+    "y": 41,
+    "item": "silverPowder",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "mossgrove_i5",
+    "x": 13,
+    "y": 4,
+    "item": "stardust",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "levels": [
+   5,
+   9
+  ],
+  "backdrop": "forest",
+  "generatedBy": "build_routes",
+  "encounterRate": 25,
+  "encounters": [
+   {
+    "species": "acornip",
+    "min": 5,
+    "max": 9,
+    "weight": 20
+   },
+   {
+    "species": "ironmite",
+    "min": 5,
+    "max": 9,
+    "weight": 20
+   },
+   {
+    "species": "mossling",
+    "min": 5,
+    "max": 9,
+    "weight": 10
+   },
+   {
+    "species": "leaplet",
+    "min": 5,
+    "max": 9,
+    "weight": 10
+   },
+   {
+    "species": "wrigglet",
+    "min": 5,
+    "max": 9,
+    "weight": 10
+   },
+   {
+    "species": "crawlet",
+    "min": 5,
+    "max": 9,
+    "weight": 10
+   },
+   {
+    "species": "jellip",
+    "min": 5,
+    "max": 9,
+    "weight": 5
+   },
+   {
+    "species": "fenspawn",
+    "min": 5,
+    "max": 9,
+    "weight": 5
+   },
+   {
+    "species": "seepling",
+    "min": 5,
+    "max": 9,
+    "weight": 4
+   },
+   {
+    "species": "gorsling",
+    "min": 5,
+    "max": 9,
+    "weight": 4
+   },
+   {
+    "species": "buzzlet",
+    "min": 5,
+    "max": 9,
+    "weight": 1
+   }
+  ],
+  "between": [
+   "route2",
+   "up",
+   "stonecrest",
+   2
+  ]
+ },
+ "route15": {
+  "id": "route15",
+  "name": "Route 15",
+  "tiles": [
+   "########################################",
+   "#.....,,,,,.......,,,,,,,..............#",
+   "#.....,,,,,,.F....,,,,,,,...F..........#",
+   "#.....,,,,,,,...,,,,,,,,,..............#",
+   "#..===,,,,,,,.,,,###==#####........F...#",
+   "#..===,,,,,==.,,####==#####............#",
+   "#..===.,,,,==.,,####==####...F.........#",
+   "#..===..,,,==.,,####==,.###............#",
+   "#.S===...,,==.,#####==..###,,,.........#",
+   "======================,.###,,,,........#",
+   "========================================",
+   "#,,,==,....,,,,###,,====================",
+   "#,,,==,........######,,,#####,,,,,,,...#",
+   "#,,,==,........##############,,,,,,,,..#",
+   "#,,,==,.........#############,,,,,,,,..#",
+   "#,,,==..........#############,,,,,,,,..#",
+   "#...========================#,,,,,,#####",
+   "#...========================#.,,,,######",
+   "#.................########==...,,,,#####",
+   "##########################==############"
+  ],
+  "connections": {
+   "left": {
+    "map": "route3",
+    "offset": 0
+   },
+   "right": {
+    "map": "duskmere",
+    "offset": 0
+   },
+   "down": {
+    "map": "route27",
+    "offset": -10
+   }
+  },
+  "trainers": [
+   {
+    "id": "route15_t0",
+    "name": "Youngster Dena",
+    "palette": "boy",
+    "x": 36,
+    "y": 7,
+    "dir": "down",
+    "sight": 4,
+    "pay": 20,
+    "party": [
+     [
+      "kittuft",
+      14
+     ],
+     [
+      "hoglet",
+      12
+     ],
+     [
+      "delvole",
+      15
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like you want a battle!",
+    "defeat": "Hmph. You got lucky.",
+    "after": "There are more trainers up the road."
+   },
+   {
+    "id": "route15_t1",
+    "name": "Lass Alden",
+    "palette": "girl",
+    "x": 12,
+    "y": 15,
+    "dir": "down",
+    "sight": 3,
+    "pay": 20,
+    "party": [
+     [
+      "kittuft",
+      14
+     ],
+     [
+      "hoglet",
+      14
+     ]
+    ],
+    "double": false,
+    "intro": "This road is my training ground!",
+    "defeat": "Well, I tried.",
+    "after": "Tall grass hides the most creatures."
+   },
+   {
+    "id": "route15_t2",
+    "name": "Twins Soren & Finn",
+    "palette": "girl",
+    "x": 8,
+    "y": 18,
+    "dir": "up",
+    "sight": 4,
+    "pay": 20,
+    "party": [
+     [
+      "bruisant",
+      14
+     ],
+     [
+      "yawnbruin",
+      14
+     ]
+    ],
+    "double": true,
+    "intro": "I won't let you pass that easily!",
+    "defeat": "Fine, go ahead.",
+    "after": "A ledge is a one-way shortcut. Jump down, but never up."
+   },
+   {
+    "id": "route15_t3",
+    "name": "Bird Keeper Nico",
+    "palette": "bird",
+    "x": 13,
+    "y": 5,
+    "dir": "down",
+    "sight": 4,
+    "pay": 20,
+    "party": [
+     [
+      "hoglet",
+      14
+     ],
+     [
+      "kittuft",
+      12
+     ],
+     [
+      "kittuft",
+      15
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see how strong your team is!",
+    "defeat": "Strong indeed!",
+    "after": "Rest at a Lodge before you go much farther."
+   }
+  ],
+  "signs": {
+   "2,8": [
+    "ROUTE 15",
+    "Route 3 <-> Duskmere <-> Route 27"
+   ]
+  },
+  "items": [
+   {
+    "id": "route15_i1",
+    "x": 26,
+    "y": 6,
+    "item": "greatOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route15_i2",
+    "x": 38,
+    "y": 15,
+    "item": "escapeRope",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route15_i3",
+    "x": 28,
+    "y": 18,
+    "item": "heartScale",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 15,
+  "levels": [
+   11,
+   14
+  ],
+  "backdrop": "field",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "cuffling",
+    "min": 11,
+    "max": 14,
+    "weight": 20
+   },
+   {
+    "species": "kittuft",
+    "min": 11,
+    "max": 14,
+    "weight": 20
+   },
+   {
+    "species": "yawnbruin",
+    "min": 11,
+    "max": 14,
+    "weight": 10
+   },
+   {
+    "species": "tinmole",
+    "min": 11,
+    "max": 14,
+    "weight": 10
+   },
+   {
+    "species": "bruisant",
+    "min": 11,
+    "max": 14,
+    "weight": 10
+   },
+   {
+    "species": "plumlet",
+    "min": 11,
+    "max": 14,
+    "weight": 10
+   },
+   {
+    "species": "hoglet",
+    "min": 11,
+    "max": 14,
+    "weight": 5
+   },
+   {
+    "species": "delvole",
+    "min": 11,
+    "max": 14,
+    "weight": 5
+   },
+   {
+    "species": "loamole",
+    "min": 11,
+    "max": 14,
+    "weight": 4
+   },
+   {
+    "species": "tussler",
+    "min": 11,
+    "max": 14,
+    "weight": 4
+   },
+   {
+    "species": "monkit",
+    "min": 11,
+    "max": 14,
+    "weight": 1
+   }
+  ],
+  "between": [
+   "route3",
+   "right",
+   "duskmere",
+   1
+  ]
+ },
+ "route27": {
+  "id": "route27",
+  "name": "Route 27",
+  "tiles": [
+   "################==####",
+   "#..######.######==...#",
+   "#.#######.######==...#",
+   "#.######..#####S==...#",
+   "#,,,,,,,...#####==,,.#",
+   "#,,,,,,,,......,==,,.#",
+   "#,,####,,F.....,==,..#",
+   "#,#####...F.....==...#",
+   "#,#####~~~~~...#==...#",
+   "#,,###~~~~==~..#==...#",
+   "#,,###~~~~==~..#==...#",
+   "#..###~~~~==~...==...#",
+   "#..##=============...#",
+   "#...#=============...#",
+   "#............#====...#",
+   "#...vvvvv.....====...#",
+   "#..........##.====...#",
+   "#..........###====,,,#",
+   "#..........###====,,,#",
+   "#..........###====,,,#",
+   "#...#####...##====,,,#",
+   "#...######....====,,,#",
+   "#..#######....==######",
+   "#..#######vvvv==######",
+   "#..#######,,..==####.#",
+   "#..#######,,..==,,,,,#",
+   "#..,#####,,,..==,,,,,#",
+   "#..,,,,,,,,,..==,,,,,#",
+   "#...,,,,,,....==,,,,,#",
+   "#.F...........==,,,,,#",
+   "#..F.F........==...F.#",
+   "#.....,,,,,,,.==.....#",
+   "#,,,..,,,,,,,.==.....#",
+   "#,,,,,,,,,,,,,==.....#",
+   "#,,,,,,,,,,,,,==.....#",
+   "#,,,,,,,,,,,,,==###..#",
+   "#,,,,,,,,,,,,,==###..#",
+   "#,,,,,,,,,,,,,,.###..#",
+   "#,,,,,,,,,,,,...###..#",
+   "######################"
+  ],
+  "connections": {
+   "up": {
+    "map": "route15",
+    "offset": 10
+   }
+  },
+  "trainers": [
+   {
+    "id": "route27_t0",
+    "name": "Fisherman Yuki",
+    "palette": "old",
+    "x": 19,
+    "y": 21,
+    "dir": "left",
+    "sight": 4,
+    "pay": 21,
+    "party": [
+     [
+      "tuskling",
+      14
+     ],
+     [
+      "eddykin",
+      14
+     ]
+    ],
+    "double": false,
+    "intro": "Nothing's biting. Battle me instead!",
+    "defeat": "Reeled in...",
+    "after": "Fishing rods catch creatures that never leave the water."
+   },
+   {
+    "id": "route27_t1",
+    "name": "Swimmer Xeno",
+    "palette": "swimmer",
+    "x": 16,
+    "y": 25,
+    "dir": "left",
+    "sight": 4,
+    "pay": 21,
+    "party": [
+     [
+      "glowgnat",
+      12
+     ]
+    ],
+    "double": false,
+    "intro": "The water here is perfect for training!",
+    "defeat": "Splashed!",
+    "after": "Surf lets you cross the water."
+   },
+   {
+    "id": "route27_t2",
+    "name": "Lass Quill",
+    "palette": "girl",
+    "x": 10,
+    "y": 28,
+    "dir": "right",
+    "sight": 4,
+    "pay": 21,
+    "party": [
+     [
+      "tuskling",
+      12
+     ],
+     [
+      "nipshell",
+      13
+     ]
+    ],
+    "double": false,
+    "intro": "I can see the future... and it holds a battle!",
+    "defeat": "I did not see that coming.",
+    "after": "Calm water hides strong creatures."
+   }
+  ],
+  "signs": {
+   "15,3": [
+    "ROUTE 27",
+    "Route 15"
+   ]
+  },
+  "items": [
+   {
+    "id": "route27_i1",
+    "x": 2,
+    "y": 1,
+    "item": "xAttack",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route27_i2",
+    "x": 9,
+    "y": 1,
+    "item": "nestOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route27_i3",
+    "x": 20,
+    "y": 24,
+    "item": "heartScale",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 27,
+  "levels": [
+   12,
+   15
+  ],
+  "backdrop": "field",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "tuskling",
+    "min": 12,
+    "max": 15,
+    "weight": 20
+   },
+   {
+    "species": "ozlug",
+    "min": 12,
+    "max": 15,
+    "weight": 20
+   },
+   {
+    "species": "nipshell",
+    "min": 12,
+    "max": 15,
+    "weight": 10
+   },
+   {
+    "species": "raylet",
+    "min": 12,
+    "max": 15,
+    "weight": 10
+   },
+   {
+    "species": "glimmerfin",
+    "min": 12,
+    "max": 15,
+    "weight": 10
+   },
+   {
+    "species": "glowgnat",
+    "min": 12,
+    "max": 15,
+    "weight": 10
+   },
+   {
+    "species": "ohmite",
+    "min": 12,
+    "max": 15,
+    "weight": 5
+   },
+   {
+    "species": "eddykin",
+    "min": 12,
+    "max": 15,
+    "weight": 5
+   },
+   {
+    "species": "antlit",
+    "min": 12,
+    "max": 15,
+    "weight": 4
+   },
+   {
+    "species": "brookit",
+    "min": 12,
+    "max": 15,
+    "weight": 4
+   },
+   {
+    "species": "mirrakoi",
+    "min": 12,
+    "max": 15,
+    "weight": 1
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "ripplet",
+    "min": 9,
+    "max": 15,
+    "weight": 40
+   },
+   {
+    "species": "tuskling",
+    "min": 9,
+    "max": 15,
+    "weight": 25
+   },
+   {
+    "species": "glimmerfin",
+    "min": 9,
+    "max": 15,
+    "weight": 15
+   },
+   {
+    "species": "brookit",
+    "min": 9,
+    "max": 15,
+    "weight": 12
+   },
+   {
+    "species": "eddykin",
+    "min": 9,
+    "max": 15,
+    "weight": 8
+   }
+  ]
+ },
+ "route16": {
+  "id": "route16",
+  "name": "Route 16",
+  "tiles": [
+   "############==########",
+   "####.#####..==...##..#",
+   "##########..==#####.##",
+   "########,,,,==########",
+   "####,###,,,,==########",
+   "#####,#,,,,,==########",
+   "#.###,,,,,,,==########",
+   "#####,,,vvvv==######F#",
+   "#####,,,,,,,==,,####.#",
+   "#####,,,,,,,==,,,,#..#",
+   "#.######.#,,==#####..#",
+   "#######.#..,==####.#.#",
+   "##.##..##.,,==####.#.#",
+   "#..###.#.,,===....#..#",
+   "#########,#===..##...#",
+   "#.######.##==,.##..#.#",
+   "#.#########==,###....#",
+   "#,,####..##==####..#.#",
+   "#,,,,,.####==#######.#",
+   "#,,,,,#.,##==######.##",
+   "#######..,#==#########",
+   "#######..#.==#########",
+   "#.#########==#########",
+   "#.#.#######==#########",
+   "#.#.#######==#########",
+   "##..#######==#####,,##",
+   "##.########==#######.#",
+   "#..########==#########",
+   "#.##,######==#########",
+   "###,,,,,###==#########",
+   "##.,###,###==,########",
+   "###,###,,##==,########",
+   "#F.,###,,##==,,,####.#",
+   "#...,,,,,##==,,#,,,,.#",
+   "#..#####.##==,###,,,##",
+   "#F.#####.##==,###,,,.#",
+   "#..#.#.#.S===,###,,,.#",
+   "##.#..##.#===,###,,,.#",
+   "##.##.##..==..###,,,##",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "route4",
+    "offset": 0
+   },
+   "up": {
+    "map": "voltara",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route16_t0",
+    "name": "Bug Catcher Wren",
+    "palette": "boy",
+    "x": 11,
+    "y": 12,
+    "dir": "down",
+    "sight": 4,
+    "pay": 24,
+    "party": [
+     [
+      "acornip",
+      15
+     ],
+     [
+      "dynamoth",
+      18
+     ]
+    ],
+    "double": false,
+    "intro": "The woods are full of bugs! Battle me!",
+    "defeat": "Squashed...",
+    "after": "Some trees can be cut down to reach hidden glades."
+   },
+   {
+    "id": "route16_t1",
+    "name": "Aroma Lady Garrick",
+    "palette": "beauty",
+    "x": 8,
+    "y": 6,
+    "dir": "right",
+    "sight": 4,
+    "pay": 24,
+    "party": [
+     [
+      "pallwick",
+      18
+     ],
+     [
+      "stingrub",
+      16
+     ]
+    ],
+    "double": false,
+    "intro": "Shh... you scared off my creature! Now you battle me.",
+    "defeat": "I lost the trail too...",
+    "after": "Bug creatures love the shade here."
+   },
+   {
+    "id": "route16_t2",
+    "name": "Twins Uma & Maren",
+    "palette": "girl",
+    "x": 17,
+    "y": 9,
+    "dir": "left",
+    "sight": 4,
+    "pay": 24,
+    "party": [
+     [
+      "dynamoth",
+      18
+     ],
+     [
+      "stingrub",
+      18
+     ]
+    ],
+    "double": true,
+    "intro": "Lost in the trees? Me too! Let's battle!",
+    "defeat": "I'm still lost.",
+    "after": "Follow the path and you'll find the exit."
+   },
+   {
+    "id": "route16_t3",
+    "name": "Picnicker Yuki",
+    "palette": "girl",
+    "x": 14,
+    "y": 33,
+    "dir": "left",
+    "sight": 3,
+    "pay": 24,
+    "party": [
+     [
+      "pallwick",
+      15
+     ],
+     [
+      "omenkin",
+      15
+     ],
+     [
+      "acornip",
+      19
+     ]
+    ],
+    "double": false,
+    "intro": "The forest spirits sent you to me...",
+    "defeat": "The spirits are pleased.",
+    "after": "Ghosts drift between these old trunks."
+   }
+  ],
+  "signs": {
+   "9,36": [
+    "ROUTE 16",
+    "Route 4 <-> Voltara"
+   ]
+  },
+  "items": [
+   {
+    "id": "route16_i1",
+    "x": 17,
+    "y": 13,
+    "item": "awakening",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route16_i2",
+    "x": 2,
+    "y": 38,
+    "item": "ether",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route16_i3",
+    "x": 2,
+    "y": 30,
+    "item": "pearl",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 16,
+  "levels": [
+   15,
+   18
+  ],
+  "backdrop": "forest",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "pallwick",
+    "min": 15,
+    "max": 18,
+    "weight": 20
+   },
+   {
+    "species": "acornip",
+    "min": 15,
+    "max": 18,
+    "weight": 20
+   },
+   {
+    "species": "stingrub",
+    "min": 15,
+    "max": 18,
+    "weight": 10
+   },
+   {
+    "species": "rimeshade",
+    "min": 15,
+    "max": 18,
+    "weight": 10
+   },
+   {
+    "species": "barkhide",
+    "min": 18,
+    "max": 18,
+    "weight": 10
+   },
+   {
+    "species": "omenkin",
+    "min": 15,
+    "max": 18,
+    "weight": 10
+   },
+   {
+    "species": "hushgrub",
+    "min": 15,
+    "max": 18,
+    "weight": 5
+   },
+   {
+    "species": "dynamoth",
+    "min": 18,
+    "max": 18,
+    "weight": 5
+   },
+   {
+    "species": "encasa",
+    "min": 16,
+    "max": 18,
+    "weight": 4
+   },
+   {
+    "species": "grimlet",
+    "min": 15,
+    "max": 18,
+    "weight": 4
+   },
+   {
+    "species": "duskwisp",
+    "min": 15,
+    "max": 18,
+    "weight": 1
+   }
+  ],
+  "between": [
+   "route4",
+   "up",
+   "voltara",
+   2
+  ]
+ },
+ "route17": {
+  "id": "route17",
+  "name": "Route 17",
+  "tiles": [
+   "###########################==###########",
+   "#..###.,,,#####............==..####....#",
+   "#..###.,,,#####............==.#######..#",
+   "#..###F,,,,###.............==.#######..#",
+   "#..######,,,...aaaaaaa.....==.#######..#",
+   "#...####aaaaaaaaaaaaaaa,,,,==.#######..#",
+   "#.....#aaaaaaaaaaaaaaaa,,,,==#######...#",
+   "#.....#aaaaaaaaaaaaaaaa,,,,==#######...#",
+   "##S===================================.#",
+   "======================================.#",
+   "=====##.......,,,,,###,,,,,==.......====",
+   "###====================,,,,==.......====",
+   "#aa===========================.........#",
+   "#aa===========================,,,,,...F#",
+   "#aaaaaaaaa######,,,.....aaaaaa,,,,,....#",
+   "#aaaaaaaa,######,,,....aaaaaaaaa,,.....#",
+   "#aaaaaa,,,######,,.....aaaaaaaaaF.....F#",
+   "#aaaaaa,,,#####,,......aaaaaaaaa.......#",
+   "#aaaaa,,,,.####.....F...aaaaaa.........#",
+   "########################################"
+  ],
+  "connections": {
+   "left": {
+    "map": "route5",
+    "offset": 0
+   },
+   "right": {
+    "map": "cindercity",
+    "offset": 0
+   },
+   "up": {
+    "map": "route28",
+    "offset": -11
+   }
+  },
+  "trainers": [
+   {
+    "id": "route17_t0",
+    "name": "Youngster Cleo",
+    "palette": "boy",
+    "x": 15,
+    "y": 10,
+    "dir": "up",
+    "sight": 4,
+    "pay": 27,
+    "party": [
+     [
+      "sparquill",
+      22
+     ],
+     [
+      "nimbolt",
+      19
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like you want a battle!",
+    "defeat": "Hmph. You got lucky.",
+    "after": "There are more trainers up the road."
+   },
+   {
+    "id": "route17_t1",
+    "name": "Lass Wade",
+    "palette": "girl",
+    "x": 18,
+    "y": 17,
+    "dir": "up",
+    "sight": 4,
+    "pay": 27,
+    "party": [
+     [
+      "nimbolt",
+      19
+     ],
+     [
+      "sparquill",
+      19
+     ]
+    ],
+    "double": false,
+    "intro": "This road is my training ground!",
+    "defeat": "Well, I tried.",
+    "after": "Tall grass hides the most creatures."
+   },
+   {
+    "id": "route17_t2",
+    "name": "Twins Arlo & Tamsin",
+    "palette": "girl",
+    "x": 30,
+    "y": 12,
+    "dir": "up",
+    "sight": 4,
+    "pay": 27,
+    "party": [
+     [
+      "voltick",
+      22
+     ],
+     [
+      "kindlet",
+      22
+     ]
+    ],
+    "double": true,
+    "intro": "I won't let you pass that easily!",
+    "defeat": "Fine, go ahead.",
+    "after": "A ledge is a one-way shortcut. Jump down, but never up."
+   },
+   {
+    "id": "route17_t3",
+    "name": "Bird Keeper Rafe",
+    "palette": "bird",
+    "x": 24,
+    "y": 10,
+    "dir": "up",
+    "sight": 4,
+    "pay": 27,
+    "party": [
+     [
+      "fizzlit",
+      20
+     ],
+     [
+      "sparquill",
+      20
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see how strong your team is!",
+    "defeat": "Strong indeed!",
+    "after": "Rest at a Lodge before you go much farther."
+   }
+  ],
+  "signs": {
+   "2,8": [
+    "ROUTE 17",
+    "Route 5 <-> Cinder City <-> Route 28"
+   ]
+  },
+  "items": [
+   {
+    "id": "route17_i1",
+    "x": 10,
+    "y": 18,
+    "item": "netOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route17_i2",
+    "x": 30,
+    "y": 1,
+    "item": "revive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route17_i3",
+    "x": 35,
+    "y": 1,
+    "item": "pearl",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 17,
+  "levels": [
+   19,
+   22
+  ],
+  "backdrop": "mountain",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "fizzlit",
+    "min": 19,
+    "max": 22,
+    "weight": 20
+   },
+   {
+    "species": "kindlet",
+    "min": 19,
+    "max": 22,
+    "weight": 20
+   },
+   {
+    "species": "arclure",
+    "min": 19,
+    "max": 22,
+    "weight": 10
+   },
+   {
+    "species": "voltick",
+    "min": 19,
+    "max": 22,
+    "weight": 10
+   },
+   {
+    "species": "nimbolt",
+    "min": 19,
+    "max": 22,
+    "weight": 10
+   },
+   {
+    "species": "sparquill",
+    "min": 19,
+    "max": 22,
+    "weight": 10
+   },
+   {
+    "species": "lavalug",
+    "min": 19,
+    "max": 22,
+    "weight": 5
+   },
+   {
+    "species": "joltfang",
+    "min": 19,
+    "max": 22,
+    "weight": 5
+   },
+   {
+    "species": "joltpup",
+    "min": 19,
+    "max": 22,
+    "weight": 4
+   },
+   {
+    "species": "galvanfly",
+    "min": 22,
+    "max": 22,
+    "weight": 4
+   },
+   {
+    "species": "pebblin",
+    "min": 19,
+    "max": 22,
+    "weight": 1
+   }
+  ],
+  "between": [
+   "route5",
+   "right",
+   "cindercity",
+   1
+  ]
+ },
+ "route28": {
+  "id": "route28",
+  "name": "Route 28",
+  "tiles": [
+   "######################",
+   "#...,,#####.,,########",
+   "#..,,,#####F,,########",
+   "#..,,,######,,#==#####",
+   "#..,,,#######,,==###.#",
+   "#...,,#######,.==....#",
+   "#......######,.==....#",
+   "#.......,###,..==....#",
+   "#F.............==....#",
+   "#..............==....#",
+   "#.........#....==....#",
+   "#........###...==....#",
+   "#.......,###...==....#",
+   "#......,,###..,==,...#",
+   "#......,#####.,==,,.F#",
+   "#......#######,==,,..#",
+   "#......#######,==#####",
+   "#...F..#######.==#####",
+   "#......#######.==#####",
+   "#,,,,,,.#####..==#####",
+   "#,,,,,,,.......==#####",
+   "#,,,,,,,,......==....#",
+   "#,,,,,,,,,.....==....#",
+   "#,,,,,,,,,.....==....#",
+   "#,,,,,,,,,.....==....#",
+   "#,,,,,,,,......==F...#",
+   "#.......,,,....==,,,.#",
+   "#......,,,,,,,,==,,,,#",
+   "#.....============,,,#",
+   "#.....============,,,#",
+   "#....#============,,,#",
+   "#...##============,,,#",
+   "#...#####..###,===,,.#",
+   "#..############===...#",
+   "#########.#####===...#",
+   "###############===...#",
+   "###############===S..#",
+   "###############===...#",
+   "##########,###..==...#",
+   "################==####"
+  ],
+  "connections": {
+   "down": {
+    "map": "route17",
+    "offset": 11
+   }
+  },
+  "trainers": [
+   {
+    "id": "route28_t0",
+    "name": "Youngster Orrin",
+    "palette": "boy",
+    "x": 18,
+    "y": 29,
+    "dir": "left",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "fizzlit",
+      20
+     ],
+     [
+      "voltick",
+      23
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like you want a battle!",
+    "defeat": "Hmph. You got lucky.",
+    "after": "There are more trainers up the road."
+   },
+   {
+    "id": "route28_t1",
+    "name": "Lass Nico",
+    "palette": "girl",
+    "x": 11,
+    "y": 9,
+    "dir": "right",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "fizzlit",
+      20
+     ],
+     [
+      "dartwing",
+      21
+     ]
+    ],
+    "double": false,
+    "intro": "This road is my training ground!",
+    "defeat": "Well, I tried.",
+    "after": "Tall grass hides the most creatures."
+   },
+   {
+    "id": "route28_t2",
+    "name": "Twins Yuki & Kira",
+    "palette": "girl",
+    "x": 3,
+    "y": 29,
+    "dir": "right",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "fizzlit",
+      23
+     ],
+     [
+      "dartwing",
+      23
+     ]
+    ],
+    "double": true,
+    "intro": "I won't let you pass that easily!",
+    "defeat": "Fine, go ahead.",
+    "after": "A ledge is a one-way shortcut. Jump down, but never up."
+   },
+   {
+    "id": "route28_t3",
+    "name": "Bird Keeper Dash",
+    "palette": "bird",
+    "x": 13,
+    "y": 4,
+    "dir": "right",
+    "sight": 3,
+    "pay": 28,
+    "party": [
+     [
+      "fizzlit",
+      24
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see how strong your team is!",
+    "defeat": "Strong indeed!",
+    "after": "Rest at a Lodge before you go much farther."
+   }
+  ],
+  "signs": {
+   "18,36": [
+    "ROUTE 28",
+    "Route 17"
+   ]
+  },
+  "items": [
+   {
+    "id": "route28_i1",
+    "x": 20,
+    "y": 4,
+    "item": "revive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route28_i2",
+    "x": 14,
+    "y": 38,
+    "item": "ppUp",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route28_i3",
+    "x": 1,
+    "y": 1,
+    "item": "bigPearl",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 28,
+  "levels": [
+   20,
+   23
+  ],
+  "backdrop": "field",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "dartwing",
+    "min": 20,
+    "max": 23,
+    "weight": 20
+   },
+   {
+    "species": "fizzlit",
+    "min": 20,
+    "max": 23,
+    "weight": 20
+   },
+   {
+    "species": "voltick",
+    "min": 20,
+    "max": 23,
+    "weight": 10
+   },
+   {
+    "species": "nuggit",
+    "min": 20,
+    "max": 23,
+    "weight": 10
+   },
+   {
+    "species": "sparquill",
+    "min": 20,
+    "max": 23,
+    "weight": 10
+   },
+   {
+    "species": "rambrawl",
+    "min": 20,
+    "max": 23,
+    "weight": 10
+   },
+   {
+    "species": "nibbit",
+    "min": 20,
+    "max": 23,
+    "weight": 5
+   },
+   {
+    "species": "shalekid",
+    "min": 20,
+    "max": 23,
+    "weight": 5
+   },
+   {
+    "species": "kittuft",
+    "min": 20,
+    "max": 23,
+    "weight": 4
+   },
+   {
+    "species": "joltfang",
+    "min": 20,
+    "max": 23,
+    "weight": 4
+   },
+   {
+    "species": "ironmite",
+    "min": 20,
+    "max": 23,
+    "weight": 1
+   }
+  ]
+ },
+ "route18": {
+  "id": "route18",
+  "name": "Route 18",
+  "tiles": [
+   "##########==##########",
+   "#........,==,,.......#",
+   "#........,==,,..,,,,,#",
+   "#........S======,,,,,#",
+   "#........#======,,,,,#",
+   "#.....####===#==#....#",
+   "#.....####===#==#....#",
+   "#.....####===#==.....#",
+   "#.....#======#==.....#",
+   "#.....#======#==.,,,,#",
+   "#......F.##==#==,,,,,#",
+   "#........##==#==.,,,,#",
+   "#.......###==#==.....#",
+   "#.......###==#==.....#",
+   "#.......###==#==.....#",
+   "=====...###==#==.....#",
+   "=====...###==#==.....#",
+   "#..==...,##==,==,....#",
+   "#..==...##,=====###..#",
+   "#..==..###.=====####.#",
+   "#..==..###.===########",
+   "#..==F.###.===########",
+   "#..==..###.===########",
+   "#..==,,,,,.===,,######",
+   "#..===========,,,#####",
+   "#,,===========.,,,,,,#",
+   "#,,,#####,,.==,,,,,,,#",
+   "#,,#######,.==,,,,,,,#",
+   "#..#######,.==,,,....#",
+   "#..#######..==,,,,...#",
+   "#..F#####...==,,,,,..#",
+   "#...........==,,,,,..#",
+   "#...........==,,,,,..#",
+   "#...........==,,,,...#",
+   "#...........==.......#",
+   "#...........==.......#",
+   "#...........==.......#",
+   "#.........F.==.......#",
+   "#...........==.......#",
+   "############==########"
+  ],
+  "connections": {
+   "up": {
+    "map": "route6",
+    "offset": 0
+   },
+   "down": {
+    "map": "harrowfield",
+    "offset": 0
+   },
+   "left": {
+    "map": "route29",
+    "offset": -1
+   }
+  },
+  "trainers": [
+   {
+    "id": "route18_t0",
+    "name": "Youngster Nell",
+    "palette": "boy",
+    "x": 10,
+    "y": 20,
+    "dir": "down",
+    "sight": 4,
+    "pay": 29,
+    "party": [
+     [
+      "kragshell",
+      22
+     ],
+     [
+      "hearthawk",
+      24
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like you want a battle!",
+    "defeat": "Hmph. You got lucky.",
+    "after": "There are more trainers up the road."
+   },
+   {
+    "id": "route18_t1",
+    "name": "Lass Milo",
+    "palette": "girl",
+    "x": 17,
+    "y": 33,
+    "dir": "left",
+    "sight": 4,
+    "pay": 29,
+    "party": [
+     [
+      "nipshell",
+      22
+     ]
+    ],
+    "double": false,
+    "intro": "This road is my training ground!",
+    "defeat": "Well, I tried.",
+    "after": "Tall grass hides the most creatures."
+   },
+   {
+    "id": "route18_t2",
+    "name": "Twins Edda & Ines",
+    "palette": "girl",
+    "x": 14,
+    "y": 24,
+    "dir": "left",
+    "sight": 4,
+    "pay": 29,
+    "party": [
+     [
+      "cairnlet",
+      25
+     ],
+     [
+      "flintail",
+      25
+     ]
+    ],
+    "double": true,
+    "intro": "I won't let you pass that easily!",
+    "defeat": "Fine, go ahead.",
+    "after": "A ledge is a one-way shortcut. Jump down, but never up."
+   },
+   {
+    "id": "route18_t3",
+    "name": "Bird Keeper Jory",
+    "palette": "bird",
+    "x": 19,
+    "y": 15,
+    "dir": "left",
+    "sight": 4,
+    "pay": 29,
+    "party": [
+     [
+      "cairnlet",
+      24
+     ],
+     [
+      "nipshell",
+      26
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see how strong your team is!",
+    "defeat": "Strong indeed!",
+    "after": "Rest at a Lodge before you go much farther."
+   }
+  ],
+  "signs": {
+   "9,3": [
+    "ROUTE 18",
+    "Route 6 <-> Harrowfield <-> Route 29"
+   ]
+  },
+  "items": [
+   {
+    "id": "route18_i1",
+    "x": 20,
+    "y": 19,
+    "item": "timerOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route18_i2",
+    "x": 9,
+    "y": 30,
+    "item": "netOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route18_i3",
+    "x": 20,
+    "y": 1,
+    "item": "stardust",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 18,
+  "levels": [
+   22,
+   25
+  ],
+  "backdrop": "mountain",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "kragshell",
+    "min": 22,
+    "max": 25,
+    "weight": 20
+   },
+   {
+    "species": "hearthawk",
+    "min": 22,
+    "max": 25,
+    "weight": 20
+   },
+   {
+    "species": "flintail",
+    "min": 22,
+    "max": 25,
+    "weight": 10
+   },
+   {
+    "species": "cairnlet",
+    "min": 22,
+    "max": 25,
+    "weight": 10
+   },
+   {
+    "species": "xenolith",
+    "min": 22,
+    "max": 25,
+    "weight": 10
+   },
+   {
+    "species": "cobblet",
+    "min": 22,
+    "max": 25,
+    "weight": 10
+   },
+   {
+    "species": "lavalug",
+    "min": 22,
+    "max": 25,
+    "weight": 5
+   },
+   {
+    "species": "nipshell",
+    "min": 22,
+    "max": 25,
+    "weight": 5
+   },
+   {
+    "species": "aerolith",
+    "min": 22,
+    "max": 25,
+    "weight": 4
+   },
+   {
+    "species": "kindlet",
+    "min": 22,
+    "max": 25,
+    "weight": 4
+   },
+   {
+    "species": "bouldron",
+    "min": 25,
+    "max": 25,
+    "weight": 1
+   }
+  ],
+  "weather": "ash",
+  "between": [
+   "route6",
+   "down",
+   "harrowfield",
+   2
+  ]
+ },
+ "route29": {
+  "id": "route29",
+  "name": "Route 29",
+  "tiles": [
+   "########################################",
+   "###.##..##############...#.####..#######",
+   "#####.#################...#.F.#,,,F#####",
+   "######...##############..#..#.,,,,,#####",
+   "#########.###.#########,......,,,,,#####",
+   "#..########..#..#######,......,,,,,#####",
+   "#,########,.#.###,,,,,================##",
+   "#,#==#####...F....,,,,================.#",
+   "###==####,,,......,,,###....########==##",
+   "###==#,===============##..##########==##",
+   "###==##===============##.###########==##",
+   "#,#==##==#..######..==...###...#####==.#",
+   "#,,==##==#.....###..==...###..F#####==.#",
+   "#,,===================================.#",
+   "#,,=====================================",
+   "#.,,,,,......,#####,====================",
+   "#............,#####,,,########....,,S,,#",
+   "##..####.##..,#####,,,.#######.........#",
+   "###....#..#.#.,###,,,.#..#########.#...#",
+   "########################################"
+  ],
+  "connections": {
+   "right": {
+    "map": "route18",
+    "offset": 1
+   }
+  },
+  "trainers": [
+   {
+    "id": "route29_t0",
+    "name": "Bug Catcher Lio",
+    "palette": "boy",
+    "x": 32,
+    "y": 5,
+    "dir": "down",
+    "sight": 2,
+    "pay": 30,
+    "party": [
+     [
+      "umbrat",
+      25
+     ],
+     [
+      "umbrat",
+      23
+     ]
+    ],
+    "double": false,
+    "intro": "The woods are full of bugs! Battle me!",
+    "defeat": "Squashed...",
+    "after": "Some trees can be cut down to reach hidden glades."
+   },
+   {
+    "id": "route29_t1",
+    "name": "Aroma Lady Zed",
+    "palette": "beauty",
+    "x": 14,
+    "y": 8,
+    "dir": "down",
+    "sight": 2,
+    "pay": 30,
+    "party": [
+     [
+      "dewsprig",
+      23
+     ],
+     [
+      "shadepup",
+      27
+     ]
+    ],
+    "double": false,
+    "intro": "Shh... you scared off my creature! Now you battle me.",
+    "defeat": "I lost the trail too...",
+    "after": "Bug creatures love the shade here."
+   },
+   {
+    "id": "route29_t2",
+    "name": "Twins Zora & Elsa",
+    "palette": "girl",
+    "x": 29,
+    "y": 2,
+    "dir": "down",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "lurkit",
+      26
+     ],
+     [
+      "sapfawn",
+      26
+     ]
+    ],
+    "double": true,
+    "intro": "Lost in the trees? Me too! Let's battle!",
+    "defeat": "I'm still lost.",
+    "after": "Follow the path and you'll find the exit."
+   },
+   {
+    "id": "route29_t3",
+    "name": "Picnicker Ebon",
+    "palette": "girl",
+    "x": 12,
+    "y": 15,
+    "dir": "up",
+    "sight": 3,
+    "pay": 30,
+    "party": [
+     [
+      "dewsprig",
+      25
+     ],
+     [
+      "sapfawn",
+      27
+     ]
+    ],
+    "double": false,
+    "intro": "The forest spirits sent you to me...",
+    "defeat": "The spirits are pleased.",
+    "after": "Ghosts drift between these old trunks."
+   }
+  ],
+  "signs": {
+   "36,16": [
+    "ROUTE 29",
+    "Route 18"
+   ]
+  },
+  "items": [
+   {
+    "id": "route29_i1",
+    "x": 9,
+    "y": 18,
+    "item": "revive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route29_i2",
+    "x": 34,
+    "y": 18,
+    "item": "ppUp",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route29_i3",
+    "x": 22,
+    "y": 1,
+    "item": "starPiece",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 29,
+  "levels": [
+   23,
+   26
+  ],
+  "backdrop": "forest",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "lurkit",
+    "min": 23,
+    "max": 26,
+    "weight": 20
+   },
+   {
+    "species": "shadepup",
+    "min": 23,
+    "max": 26,
+    "weight": 20
+   },
+   {
+    "species": "sapfawn",
+    "min": 23,
+    "max": 26,
+    "weight": 10
+   },
+   {
+    "species": "dewsprig",
+    "min": 23,
+    "max": 26,
+    "weight": 10
+   },
+   {
+    "species": "blightcap",
+    "min": 23,
+    "max": 26,
+    "weight": 10
+   },
+   {
+    "species": "omenkin",
+    "min": 23,
+    "max": 26,
+    "weight": 10
+   },
+   {
+    "species": "grimlet",
+    "min": 23,
+    "max": 26,
+    "weight": 5
+   },
+   {
+    "species": "umbrat",
+    "min": 23,
+    "max": 26,
+    "weight": 5
+   },
+   {
+    "species": "pallwick",
+    "min": 23,
+    "max": 26,
+    "weight": 4
+   },
+   {
+    "species": "acornip",
+    "min": 23,
+    "max": 26,
+    "weight": 4
+   },
+   {
+    "species": "rimeshade",
+    "min": 23,
+    "max": 26,
+    "weight": 1
+   }
+  ]
+ },
+ "route19": {
+  "id": "route19",
+  "name": "Route 19",
+  "tiles": [
+   "########################################",
+   "##.#.....#####..####.###..##############",
+   "##.#...#.#...######..##...##############",
+   "#...........#######.####..##############",
+   "#.......F....#####.#####################",
+   "###=========================############",
+   "###=========================############",
+   "#.#==########,,,,,.#######..###,,,######",
+   "##S==########,,,,,.######...###.,,######",
+   "===============================.,,######",
+   "===============================#####====",
+   "########,,,,...==,,,..###.,##==#####====",
+   "#..#####,,,,,..==========.,##=========.#",
+   "##.###,,,,,,#,,==========.,,#=========.#",
+   "#.####......#,,,######.==.,,,,,,,,,,,,.#",
+   "######.#.#.#,,,,######,==,,,,,,,,,,,,..#",
+   "#########...,,,,#######==,,,,,,,..#.#.##",
+   "######....##,,,,,###,##==#,,,,,#.###..##",
+   "#.#####.##.#.,,,,,,,,##==#,###....#.####",
+   "#######################==###############"
+  ],
+  "connections": {
+   "left": {
+    "map": "route7",
+    "offset": 0
+   },
+   "right": {
+    "map": "bramblegate",
+    "offset": 0
+   },
+   "down": {
+    "map": "route30",
+    "offset": -7
+   }
+  },
+  "trainers": [
+   {
+    "id": "route19_t0",
+    "name": "Bug Catcher Odile",
+    "palette": "boy",
+    "x": 4,
+    "y": 1,
+    "dir": "down",
+    "sight": 4,
+    "pay": 32,
+    "party": [
+     [
+      "dreadspore",
+      28
+     ]
+    ],
+    "double": false,
+    "intro": "The woods are full of bugs! Battle me!",
+    "defeat": "Squashed...",
+    "after": "Some trees can be cut down to reach hidden glades."
+   },
+   {
+    "id": "route19_t1",
+    "name": "Aroma Lady Isla",
+    "palette": "beauty",
+    "x": 25,
+    "y": 8,
+    "dir": "down",
+    "sight": 4,
+    "pay": 32,
+    "party": [
+     [
+      "musklet",
+      26
+     ],
+     [
+      "lullamoth",
+      26
+     ]
+    ],
+    "double": false,
+    "intro": "Shh... you scared off my creature! Now you battle me.",
+    "defeat": "I lost the trail too...",
+    "after": "Bug creatures love the shade here."
+   },
+   {
+    "id": "route19_t2",
+    "name": "Twins Hugo & Rafe",
+    "palette": "girl",
+    "x": 26,
+    "y": 12,
+    "dir": "up",
+    "sight": 4,
+    "pay": 32,
+    "party": [
+     [
+      "brightwing",
+      29
+     ],
+     [
+      "dreadspore",
+      29
+     ]
+    ],
+    "double": true,
+    "intro": "Lost in the trees? Me too! Let's battle!",
+    "defeat": "I'm still lost.",
+    "after": "Follow the path and you'll find the exit."
+   },
+   {
+    "id": "route19_t3",
+    "name": "Picnicker Lio",
+    "palette": "girl",
+    "x": 8,
+    "y": 3,
+    "dir": "down",
+    "sight": 3,
+    "pay": 32,
+    "party": [
+     [
+      "ozlug",
+      26
+     ],
+     [
+      "encasa",
+      28
+     ]
+    ],
+    "double": false,
+    "intro": "The forest spirits sent you to me...",
+    "defeat": "The spirits are pleased.",
+    "after": "Ghosts drift between these old trunks."
+   },
+   {
+    "id": "route19_t4",
+    "name": "Camper Kira",
+    "palette": "boy",
+    "x": 34,
+    "y": 14,
+    "dir": "up",
+    "sight": 2,
+    "pay": 32,
+    "party": [
+     [
+      "ozlug",
+      27
+     ],
+     [
+      "rimewing",
+      30
+     ]
+    ],
+    "double": false,
+    "intro": "The woods are full of bugs! Battle me!",
+    "defeat": "Squashed...",
+    "after": "Some trees can be cut down to reach hidden glades."
+   }
+  ],
+  "signs": {
+   "2,8": [
+    "ROUTE 19",
+    "Route 7 <-> Bramblegate <-> Route 30"
+   ]
+  },
+  "items": [
+   {
+    "id": "route19_i1",
+    "x": 12,
+    "y": 2,
+    "item": "revive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route19_i2",
+    "x": 7,
+    "y": 18,
+    "item": "superPotion",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route19_i3",
+    "x": 35,
+    "y": 16,
+    "item": "nugget",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 19,
+  "levels": [
+   26,
+   29
+  ],
+  "backdrop": "forest",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "rimewing",
+    "min": 26,
+    "max": 29,
+    "weight": 20
+   },
+   {
+    "species": "ozlug",
+    "min": 26,
+    "max": 29,
+    "weight": 20
+   },
+   {
+    "species": "jellip",
+    "min": 26,
+    "max": 29,
+    "weight": 10
+   },
+   {
+    "species": "dreadspore",
+    "min": 28,
+    "max": 29,
+    "weight": 10
+   },
+   {
+    "species": "lullamoth",
+    "min": 26,
+    "max": 29,
+    "weight": 10
+   },
+   {
+    "species": "encasa",
+    "min": 26,
+    "max": 29,
+    "weight": 10
+   },
+   {
+    "species": "musklet",
+    "min": 26,
+    "max": 29,
+    "weight": 5
+   },
+   {
+    "species": "brightwing",
+    "min": 28,
+    "max": 29,
+    "weight": 5
+   },
+   {
+    "species": "hopvault",
+    "min": 26,
+    "max": 29,
+    "weight": 4
+   },
+   {
+    "species": "pulsecarab",
+    "min": 26,
+    "max": 29,
+    "weight": 4
+   },
+   {
+    "species": "venomwing",
+    "min": 26,
+    "max": 29,
+    "weight": 1
+   }
+  ],
+  "between": [
+   "route7",
+   "right",
+   "bramblegate",
+   1
+  ]
+ },
+ "route30": {
+  "id": "route30",
+  "name": "Route 30",
+  "tiles": [
+   "################==####",
+   "#....,,,,,......==...#",
+   "#...,,,,,,,....S==...#",
+   "#...,,,===========,,,#",
+   "#..F,,,===========,,,#",
+   "#....,,===,,,,,,==,,.#",
+   "#......===,,,,,,==...#",
+   "#......===,,,,,,==F..#",
+   "#...,,,===###,,,==...#",
+   "#..,,,,===####,,==.F.#",
+   "#..,,,,===####,.==...#",
+   "#..,,##===####..==...#",
+   "#..,##====###..R==...#",
+   "#..,##====#..R..==...#",
+   "#...##====#....R==...#",
+   "#...F#====......==...#",
+   "#.....====......==...#",
+   "#,,,,.====......==...#",
+   "#,,,,,====......==...#",
+   "#,,,,,====..,,,,==...#",
+   "#,,,,,====.,,###==,..#",
+   "#,,,,,====,,####==#..#",
+   "#,,,,,====,,####==#..#",
+   "#,,,..====,,####==#..#",
+   "####.,====.,,###==...#",
+   "######====,.,,,,==####",
+   "######====,,....==####",
+   "######====,,....==####",
+   "#######,==,,...R==...#",
+   "#######,==###...==#..#",
+   "######,#==###=====##.#",
+   "#,,###,,==###=====##.#",
+   "#,,#####==,#########.#",
+   "#,,#####==##########.#",
+   "#..#####==##########.#",
+   "#.,,####=======####..#",
+   "#.,,####=======,.###.#",
+   "#..,,######,,,,..###.#",
+   "#....#####,,,,,..###.#",
+   "######################"
+  ],
+  "connections": {
+   "up": {
+    "map": "route19",
+    "offset": 7
+   }
+  },
+  "trainers": [
+   {
+    "id": "route30_t0",
+    "name": "Youngster Ulla",
+    "palette": "boy",
+    "x": 10,
+    "y": 23,
+    "dir": "left",
+    "sight": 4,
+    "pay": 33,
+    "party": [
+     [
+      "cragmaw",
+      31
+     ],
+     [
+      "rocklobber",
+      30
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like you want a battle!",
+    "defeat": "Hmph. You got lucky.",
+    "after": "There are more trainers up the road."
+   },
+   {
+    "id": "route30_t1",
+    "name": "Lass Vash",
+    "palette": "girl",
+    "x": 20,
+    "y": 19,
+    "dir": "left",
+    "sight": 4,
+    "pay": 33,
+    "party": [
+     [
+      "cairnox",
+      31
+     ],
+     [
+      "cragmaw",
+      30
+     ]
+    ],
+    "double": false,
+    "intro": "This road is my training ground!",
+    "defeat": "Well, I tried.",
+    "after": "Tall grass hides the most creatures."
+   },
+   {
+    "id": "route30_t2",
+    "name": "Twins Pax & Alden",
+    "palette": "girl",
+    "x": 14,
+    "y": 29,
+    "dir": "down",
+    "sight": 2,
+    "pay": 33,
+    "party": [
+     [
+      "anvilfist",
+      30
+     ],
+     [
+      "lavalith",
+      30
+     ]
+    ],
+    "double": true,
+    "intro": "I won't let you pass that easily!",
+    "defeat": "Fine, go ahead.",
+    "after": "A ledge is a one-way shortcut. Jump down, but never up."
+   },
+   {
+    "id": "route30_t3",
+    "name": "Bird Keeper Yuki",
+    "palette": "bird",
+    "x": 10,
+    "y": 5,
+    "dir": "up",
+    "sight": 4,
+    "pay": 33,
+    "party": [
+     [
+      "anvilfist",
+      30
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see how strong your team is!",
+    "defeat": "Strong indeed!",
+    "after": "Rest at a Lodge before you go much farther."
+   }
+  ],
+  "signs": {
+   "15,2": [
+    "ROUTE 30",
+    "Route 19"
+   ]
+  },
+  "items": [
+   {
+    "id": "route30_i1",
+    "x": 19,
+    "y": 35,
+    "item": "revive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route30_i2",
+    "x": 20,
+    "y": 38,
+    "item": "ppUp",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route30_i3",
+    "x": 13,
+    "y": 12,
+    "item": "rareCandy",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 30,
+  "levels": [
+   27,
+   30
+  ],
+  "backdrop": "mountain",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "rocklobber",
+    "min": 30,
+    "max": 30,
+    "weight": 20
+   },
+   {
+    "species": "anvilfist",
+    "min": 30,
+    "max": 30,
+    "weight": 20
+   },
+   {
+    "species": "cairnox",
+    "min": 30,
+    "max": 30,
+    "weight": 10
+   },
+   {
+    "species": "cragmaw",
+    "min": 27,
+    "max": 30,
+    "weight": 10
+   },
+   {
+    "species": "kobblet",
+    "min": 27,
+    "max": 30,
+    "weight": 10
+   },
+   {
+    "species": "lavalith",
+    "min": 30,
+    "max": 30,
+    "weight": 10
+   },
+   {
+    "species": "mantrill",
+    "min": 27,
+    "max": 30,
+    "weight": 5
+   },
+   {
+    "species": "kragshell",
+    "min": 27,
+    "max": 30,
+    "weight": 5
+   },
+   {
+    "species": "bruisant",
+    "min": 27,
+    "max": 30,
+    "weight": 4
+   },
+   {
+    "species": "tussler",
+    "min": 27,
+    "max": 30,
+    "weight": 4
+   },
+   {
+    "species": "cuffling",
+    "min": 27,
+    "max": 30,
+    "weight": 1
+   }
+  ]
+ },
+ "route20": {
+  "id": "route20",
+  "name": "Route 20",
+  "tiles": [
+   "############==########",
+   "#,,,,####...==####,,,#",
+   "#,,,,#####..==#####,,#",
+   "#,,,,#####..==#####,,#",
+   "#,,,,~~~~~..==#####,,#",
+   "#.,,~~~~~~~~==#####,,#",
+   "#..~~~~~~~~~==#####,,#",
+   "#..~~~~~~~~~==####,,,#",
+   "#..~~~~~~~~~==#.,,,,,#",
+   "#..~~~~~~~~~==..F.F..#",
+   "#..~~~~~~~~~==###....#",
+   "#...~~~~~~~.==###,,,,#",
+   "#....~~~~~,.==###,,,,#",
+   "#...#######,==###,,,,#",
+   "#...#######,==###,,,,#",
+   "#...########==####,,,#",
+   "#....######.==###,...#",
+   "#FF..######.==,,,,,..#",
+   "#..F#######.==,,,###.#",
+   "#...####...#==########",
+   "#..........#==########",
+   "#,,,,,,....#==########",
+   "#,,,,,,.....==,,,###.#",
+   "#,,,,,,.....==,,,,...#",
+   "#..........#==,,,,,..#",
+   "================,,,,.#",
+   "================,,,,.#",
+   "#.........##====,,,,.#",
+   "#.....vvvv##====,,,,.#",
+   "#.........##====,,,..#",
+   "#..vvvvv...#=====,...#",
+   "#.........=======....#",
+   "#.........========...#",
+   "#.........========...#",
+   "#.F.......==...==##..#",
+   "#..,,,....==..#==##..#",
+   "#.,,,,,..S=======##..#",
+   "#.,,,,,...=======,,..#",
+   "#.,,,,,...==..,,,,...#",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "route8",
+    "offset": 0
+   },
+   "up": {
+    "map": "skyreach",
+    "offset": 0
+   },
+   "left": {
+    "map": "elderglen",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route20_t0",
+    "name": "Fisherman Hale",
+    "palette": "old",
+    "x": 18,
+    "y": 32,
+    "dir": "left",
+    "sight": 4,
+    "pay": 35,
+    "party": [
+     [
+      "psyowl",
+      33
+     ],
+     [
+      "glacifin",
+      31
+     ]
+    ],
+    "double": false,
+    "intro": "Nothing's biting. Battle me instead!",
+    "defeat": "Reeled in...",
+    "after": "Fishing rods catch creatures that never leave the water."
+   },
+   {
+    "id": "route20_t1",
+    "name": "Swimmer Ines",
+    "palette": "swimmer",
+    "x": 7,
+    "y": 23,
+    "dir": "down",
+    "sight": 4,
+    "pay": 35,
+    "party": [
+     [
+      "dartwing",
+      29
+     ]
+    ],
+    "double": false,
+    "intro": "The water here is perfect for training!",
+    "defeat": "Splashed!",
+    "after": "Surf lets you cross the water."
+   },
+   {
+    "id": "route20_t2",
+    "name": "Twins Fia & Zora",
+    "palette": "girl",
+    "x": 10,
+    "y": 4,
+    "dir": "right",
+    "sight": 3,
+    "pay": 35,
+    "party": [
+     [
+      "brightwing",
+      32
+     ],
+     [
+      "nudibrant",
+      32
+     ]
+    ],
+    "double": true,
+    "intro": "I can see the future... and it holds a battle!",
+    "defeat": "I did not see that coming.",
+    "after": "Calm water hides strong creatures."
+   },
+   {
+    "id": "route20_t3",
+    "name": "Bird Keeper Lumi",
+    "palette": "bird",
+    "x": 10,
+    "y": 12,
+    "dir": "right",
+    "sight": 3,
+    "pay": 35,
+    "party": [
+     [
+      "driftail",
+      32
+     ],
+     [
+      "nudibrant",
+      33
+     ]
+    ],
+    "double": false,
+    "intro": "Nothing's biting. Battle me instead!",
+    "defeat": "Reeled in...",
+    "after": "Fishing rods catch creatures that never leave the water."
+   },
+   {
+    "id": "route20_t4",
+    "name": "Psychic Joss",
+    "palette": "psychic",
+    "x": 17,
+    "y": 9,
+    "dir": "left",
+    "sight": 4,
+    "pay": 35,
+    "party": [
+     [
+      "psyowl",
+      29
+     ],
+     [
+      "larkspire",
+      32
+     ]
+    ],
+    "double": false,
+    "intro": "The water here is perfect for training!",
+    "defeat": "Splashed!",
+    "after": "Surf lets you cross the water."
+   }
+  ],
+  "signs": {
+   "9,36": [
+    "ROUTE 20",
+    "Route 8 <-> Skyreach <-> Elderglen Forest"
+   ]
+  },
+  "items": [
+   {
+    "id": "route20_i1",
+    "x": 20,
+    "y": 18,
+    "item": "nugget",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route20_i2",
+    "x": 4,
+    "y": 12,
+    "item": "elixir",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route20_i3",
+    "x": 20,
+    "y": 22,
+    "item": "bigPearl",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 20,
+  "levels": [
+   29,
+   32
+  ],
+  "backdrop": "field",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "glacifin",
+    "min": 29,
+    "max": 32,
+    "weight": 20
+   },
+   {
+    "species": "psyowl",
+    "min": 29,
+    "max": 32,
+    "weight": 20
+   },
+   {
+    "species": "larkspire",
+    "min": 29,
+    "max": 32,
+    "weight": 10
+   },
+   {
+    "species": "nudibrant",
+    "min": 30,
+    "max": 32,
+    "weight": 10
+   },
+   {
+    "species": "driftail",
+    "min": 29,
+    "max": 32,
+    "weight": 10
+   },
+   {
+    "species": "brightwing",
+    "min": 29,
+    "max": 32,
+    "weight": 10
+   },
+   {
+    "species": "icefin",
+    "min": 29,
+    "max": 32,
+    "weight": 5
+   },
+   {
+    "species": "dartwing",
+    "min": 29,
+    "max": 32,
+    "weight": 5
+   },
+   {
+    "species": "lumoth",
+    "min": 29,
+    "max": 32,
+    "weight": 4
+   },
+   {
+    "species": "twirlfin",
+    "min": 29,
+    "max": 32,
+    "weight": 4
+   },
+   {
+    "species": "arclure",
+    "min": 29,
+    "max": 32,
+    "weight": 1
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "jabcrab",
+    "min": 26,
+    "max": 32,
+    "weight": 40
+   },
+   {
+    "species": "fenspawn",
+    "min": 26,
+    "max": 32,
+    "weight": 25
+   },
+   {
+    "species": "ripplet",
+    "min": 26,
+    "max": 32,
+    "weight": 15
+   },
+   {
+    "species": "polarpup",
+    "min": 26,
+    "max": 32,
+    "weight": 12
+   },
+   {
+    "species": "arclure",
+    "min": 26,
+    "max": 32,
+    "weight": 8
+   }
+  ],
+  "between": [
+   "route8",
+   "up",
+   "skyreach",
+   2
+  ]
+ },
+ "elderglen": {
+  "id": "elderglen",
+  "name": "Elderglen Forest",
+  "tiles": [
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################",
+   "#......#############################",
+   "#..,,,..####...#########.,,,,#######",
+   "#.,,,,,..#T....########..,,,,,######",
+   "#.,,,,,...##...###..,,,,,,,,,,######",
+   "#.,,,,,...#######..,,,,,,,....######",
+   "#..,,,,...#######..,,,,,,.....######",
+   "#........,,.#####.............######",
+   "######,,,,,..#####.......###..######",
+   "######,,,,,......####..#####..######",
+   "######.,,,.......####..#####..######",
+   "#######.....#.....###..#####..######",
+   "###########...,,,F..#..#####..######",
+   "###########..,,,,,.....#####..######",
+   "###########..,,,,,.....###.....#####",
+   "############.,,,,,.######...,,,.####",
+   "#########################F.,,,,,.S==",
+   "#########################..,,,,,..==",
+   "##########################.,,,,#####",
+   "####################################",
+   "####################################",
+   "####################################",
+   "####################################"
+  ],
+  "connections": {
+   "right": {
+    "map": "route20",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "elderglen_t0",
+    "name": "Bug Catcher Milo",
+    "palette": "boy",
+    "x": 9,
+    "y": 16,
+    "dir": "up",
+    "sight": 3,
+    "pay": 36,
+    "party": [
+     [
+      "venomwing",
+      30
+     ],
+     [
+      "elderoak",
+      34
+     ]
+    ],
+    "double": false,
+    "intro": "The woods are full of bugs! Battle me!",
+    "defeat": "Squashed...",
+    "after": "Some trees can be cut down to reach hidden glades."
+   },
+   {
+    "id": "elderglen_t1",
+    "name": "Aroma Lady Arlo",
+    "palette": "beauty",
+    "x": 12,
+    "y": 19,
+    "dir": "up",
+    "sight": 2,
+    "pay": 36,
+    "party": [
+     [
+      "willowhart",
+      35
+     ],
+     [
+      "elderoak",
+      34
+     ],
+     [
+      "somnulet",
+      32
+     ]
+    ],
+    "double": false,
+    "intro": "Shh... you scared off my creature! Now you battle me.",
+    "defeat": "I lost the trail too...",
+    "after": "Bug creatures love the shade here."
+   },
+   {
+    "id": "elderglen_t2",
+    "name": "Twins Finn & Zora",
+    "palette": "girl",
+    "x": 26,
+    "y": 27,
+    "dir": "up",
+    "sight": 4,
+    "pay": 36,
+    "party": [
+     [
+      "somnulet",
+      34
+     ],
+     [
+      "mantrill",
+      34
+     ]
+    ],
+    "double": true,
+    "intro": "Lost in the trees? Me too! Let's battle!",
+    "defeat": "I'm still lost.",
+    "after": "Follow the path and you'll find the exit."
+   },
+   {
+    "id": "elderglen_t3",
+    "name": "Picnicker Pia",
+    "palette": "girl",
+    "x": 16,
+    "y": 24,
+    "dir": "up",
+    "sight": 4,
+    "pay": 36,
+    "party": [
+     [
+      "mantrill",
+      30
+     ],
+     [
+      "willowhart",
+      35
+     ]
+    ],
+    "double": false,
+    "intro": "The forest spirits sent you to me...",
+    "defeat": "The spirits are pleased.",
+    "after": "Ghosts drift between these old trunks."
+   }
+  ],
+  "signs": {
+   "33,25": [
+    "ELDERGLEN FOREST",
+    "Route 20"
+   ]
+  },
+  "items": [
+   {
+    "id": "elderglen_i1",
+    "x": 13,
+    "y": 12,
+    "item": "repeatOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "elderglen_i2",
+    "x": 24,
+    "y": 11,
+    "item": "maxEther",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "elderglen_i3",
+    "x": 1,
+    "y": 16,
+    "item": "leafStone",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "elderglen_i4",
+    "x": 6,
+    "y": 19,
+    "item": "spellTag",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "elderglen_i5",
+    "x": 25,
+    "y": 24,
+    "item": "rareCandy",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "levels": [
+   30,
+   34
+  ],
+  "backdrop": "forest",
+  "generatedBy": "build_routes",
+  "encounterRate": 25,
+  "encounters": [
+   {
+    "species": "elderoak",
+    "min": 34,
+    "max": 34,
+    "weight": 20
+   },
+   {
+    "species": "somnulet",
+    "min": 30,
+    "max": 34,
+    "weight": 20
+   },
+   {
+    "species": "ramparant",
+    "min": 30,
+    "max": 34,
+    "weight": 10
+   },
+   {
+    "species": "omenwraith",
+    "min": 34,
+    "max": 34,
+    "weight": 10
+   },
+   {
+    "species": "mantrill",
+    "min": 30,
+    "max": 34,
+    "weight": 10
+   },
+   {
+    "species": "fernhart",
+    "min": 30,
+    "max": 34,
+    "weight": 10
+   },
+   {
+    "species": "willowhart",
+    "min": 34,
+    "max": 34,
+    "weight": 5
+   },
+   {
+    "species": "venomwing",
+    "min": 30,
+    "max": 34,
+    "weight": 5
+   },
+   {
+    "species": "dreadspore",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "blightcap",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "mystrakoi",
+    "min": 30,
+    "max": 34,
+    "weight": 1
+   }
+  ]
+ },
+ "route21": {
+  "id": "route21",
+  "name": "Route 21",
+  "tiles": [
+   "########################################",
+   "#,,########aa~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#,,#########aa~~~~aaa~~~~~~aaaaa~~~~~~~#",
+   "#,,#########aa~~~~aaaaaa~~aaaaaaa~~~~~~#",
+   "#,,#########Faa~~~aaaaaa~~aaaaaa~~~~~~~#",
+   "#.,########aa~~~~~~~~aaa~~~~~~~~~~~~~~~#",
+   "#..########aa~~~~~~~~aaa~~~~~~~~~~~~~~~#",
+   "#,,,#####...aa~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#,#S###,...Faa~~~~~~~~~~~~~~~~~~~~aaaaa#",
+   "=====##....,,aa~~~~~~~~~~~~~~~~~~~aaaaa#",
+   "============a~~~~~~~~~~~~~~~~~~~~~a=====",
+   "#..=========a~~~~~~~~~~~~~~~~~~~~~a=====",
+   "#...F.,,,,,,aa~~~~~~~~~~~~~~~~~~~~aaaaa#",
+   "#....,,,,,,,aa~~~~~~~~~~~~~~~~~~~~aaaaa#",
+   "#....,,,,,,,,aa~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#...,,,,,,,aa~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#...,,,,,,,aa~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#...,,,,,,,.aa~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#....,,,,,,.aa~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "########################################"
+  ],
+  "connections": {
+   "left": {
+    "map": "route9",
+    "offset": 0
+   },
+   "right": {
+    "map": "saltmarsh",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route21_t0",
+    "name": "Swimmer Xeno",
+    "palette": "swimmer",
+    "x": 12,
+    "y": 7,
+    "dir": "right",
+    "sight": 4,
+    "pay": 37,
+    "party": [
+     [
+      "glacifin",
+      33
+     ],
+     [
+      "bogmonarch",
+      34
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route21_t1",
+    "name": "Swimmer Nico",
+    "palette": "swimmer",
+    "x": 13,
+    "y": 18,
+    "dir": "up",
+    "sight": 4,
+    "pay": 37,
+    "party": [
+     [
+      "glacifin",
+      34
+     ],
+     [
+      "glacifin",
+      33
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route21_t2",
+    "name": "Fisherman Dash",
+    "palette": "old",
+    "x": 18,
+    "y": 3,
+    "dir": "up",
+    "sight": 2,
+    "pay": 37,
+    "party": [
+     [
+      "rocklobber",
+      35
+     ],
+     [
+      "psyowl",
+      36
+     ],
+     [
+      "rubythrush",
+      36
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route21_t3",
+    "name": "Sailor Milo",
+    "palette": "blackbelt",
+    "x": 29,
+    "y": 2,
+    "dir": "down",
+    "sight": 4,
+    "pay": 37,
+    "party": [
+     [
+      "glacifin",
+      36
+     ],
+     [
+      "bogmonarch",
+      35
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route21_t4",
+    "name": "Bird Keeper Lio",
+    "palette": "bird",
+    "x": 26,
+    "y": 4,
+    "dir": "up",
+    "sight": 3,
+    "pay": 37,
+    "party": [
+     [
+      "bogmonarch",
+      34
+     ],
+     [
+      "rubythrush",
+      35
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   }
+  ],
+  "signs": {
+   "3,8": [
+    "ROUTE 21",
+    "Route 9 <-> Saltmarsh"
+   ]
+  },
+  "items": [
+   {
+    "id": "route21_i1",
+    "x": 32,
+    "y": 3,
+    "item": "elixir",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route21_i2",
+    "x": 14,
+    "y": 9,
+    "item": "nugget",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route21_i3",
+    "x": 11,
+    "y": 1,
+    "item": "starPiece",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 21,
+  "levels": [
+   32,
+   35
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "falcrest",
+    "min": 34,
+    "max": 35,
+    "weight": 20
+   },
+   {
+    "species": "bogmonarch",
+    "min": 32,
+    "max": 35,
+    "weight": 20
+   },
+   {
+    "species": "rubythrush",
+    "min": 33,
+    "max": 35,
+    "weight": 10
+   },
+   {
+    "species": "psyowl",
+    "min": 32,
+    "max": 35,
+    "weight": 10
+   },
+   {
+    "species": "raylet",
+    "min": 32,
+    "max": 35,
+    "weight": 10
+   },
+   {
+    "species": "rocklobber",
+    "min": 32,
+    "max": 35,
+    "weight": 10
+   },
+   {
+    "species": "fenspawn",
+    "min": 32,
+    "max": 35,
+    "weight": 5
+   },
+   {
+    "species": "glacifin",
+    "min": 32,
+    "max": 35,
+    "weight": 5
+   },
+   {
+    "species": "glimmerfin",
+    "min": 32,
+    "max": 35,
+    "weight": 4
+   },
+   {
+    "species": "brightwing",
+    "min": 32,
+    "max": 35,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "ripplet",
+    "min": 29,
+    "max": 32,
+    "weight": 40
+   },
+   {
+    "species": "tuskling",
+    "min": 29,
+    "max": 35,
+    "weight": 25
+   },
+   {
+    "species": "icefin",
+    "min": 29,
+    "max": 35,
+    "weight": 15
+   },
+   {
+    "species": "polarpup",
+    "min": 29,
+    "max": 35,
+    "weight": 12
+   },
+   {
+    "species": "brookit",
+    "min": 29,
+    "max": 35,
+    "weight": 8
+   }
+  ],
+  "weather": "rain",
+  "between": [
+   "route9",
+   "right",
+   "saltmarsh",
+   1
+  ]
+ },
+ "route22": {
+  "id": "route22",
+  "name": "Route 22",
+  "tiles": [
+   "############==########",
+   "#..........,==,,.....#",
+   "#F........,,==,,####.#",
+   "#.F.......,,==,#####.#",
+   "#...,,,,,,,,==,#####.#",
+   "#,,,,,,,,,,,==,,,,,..#",
+   "#,,,,,,,,,,.==,#,,,,.#",
+   "#,,,,,,,,,,.==###,,,.#",
+   "#,,,,,,,,,,,==###,,,.#",
+   "#,,,,,,,,,,#==###,,..#",
+   "#,,,,,,,,,,#==###....#",
+   "#,,,,,,,,,,#==###....#",
+   "#.....,==,,,==###....#",
+   "#......==,,,==,,###,.#",
+   "#...~~~==..,==,#####,#",
+   "#~~~~~~==~~,==,#####.#",
+   "#~~~~~~==~~~==,#######",
+   "#~~~~~~==~~~==,~####~#",
+   "#~~~~~~~~~~~~~~~#~~~~#",
+   "==~~~~~~~~~~~~~~~~~~~#",
+   "==~~~~~~~~~~~~~#~~~~.#",
+   "#~~==~~==~~~==,,~....#",
+   "###==~~==~..==.,,,####",
+   "###===========,,,#####",
+   "###===========,,,#####",
+   "#..==..==.==..,,,#####",
+   "#..==..==.==..,,,#####",
+   "#..=========..,,,#####",
+   "#..=========...,,,####",
+   "#......==.==.........#",
+   "#......==.==.........#",
+   "#......==.==.........#",
+   "#F.....==#==..,,,,,,.#",
+   "#......==#==#,,,,,,,,#",
+   "#......==#==#,###,,,,#",
+   "#......==S==#,###,,,,#",
+   "#......=====,,###,,,,#",
+   "#......=====.,###,,,,#",
+   "#.........==..##,,,,,#",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "route10",
+    "offset": 0
+   },
+   "up": {
+    "map": "lumenvale",
+    "offset": 0
+   },
+   "left": {
+    "map": "route31",
+    "offset": -5
+   }
+  },
+  "trainers": [
+   {
+    "id": "route22_t0",
+    "name": "Fisherman Soren",
+    "palette": "old",
+    "x": 11,
+    "y": 5,
+    "dir": "right",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "floodfang",
+      39
+     ]
+    ],
+    "double": false,
+    "intro": "Nothing's biting. Battle me instead!",
+    "defeat": "Reeled in...",
+    "after": "Fishing rods catch creatures that never leave the water."
+   },
+   {
+    "id": "route22_t1",
+    "name": "Swimmer Milo",
+    "palette": "swimmer",
+    "x": 6,
+    "y": 29,
+    "dir": "up",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "hoarwhal",
+      38
+     ],
+     [
+      "somnulet",
+      35
+     ]
+    ],
+    "double": false,
+    "intro": "The water here is perfect for training!",
+    "defeat": "Splashed!",
+    "after": "Surf lets you cross the water."
+   },
+   {
+    "id": "route22_t2",
+    "name": "Twins Zora & Odile",
+    "palette": "girl",
+    "x": 15,
+    "y": 26,
+    "dir": "left",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "bogmonarch",
+      38
+     ],
+     [
+      "hoarwhal",
+      38
+     ]
+    ],
+    "double": true,
+    "intro": "I can see the future... and it holds a battle!",
+    "defeat": "I did not see that coming.",
+    "after": "Calm water hides strong creatures."
+   },
+   {
+    "id": "route22_t3",
+    "name": "Bird Keeper Dena",
+    "palette": "bird",
+    "x": 9,
+    "y": 26,
+    "dir": "up",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "mossling",
+      38
+     ],
+     [
+      "velvedream",
+      37
+     ],
+     [
+      "mahasage",
+      39
+     ]
+    ],
+    "double": false,
+    "intro": "Nothing's biting. Battle me instead!",
+    "defeat": "Reeled in...",
+    "after": "Fishing rods catch creatures that never leave the water."
+   },
+   {
+    "id": "route22_t4",
+    "name": "Psychic Jory",
+    "palette": "psychic",
+    "x": 4,
+    "y": 33,
+    "dir": "right",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "bogmonarch",
+      35
+     ],
+     [
+      "mahasage",
+      38
+     ]
+    ],
+    "double": false,
+    "intro": "The water here is perfect for training!",
+    "defeat": "Splashed!",
+    "after": "Surf lets you cross the water."
+   }
+  ],
+  "signs": {
+   "9,35": [
+    "ROUTE 22",
+    "Route 10 <-> Lumenvale <-> Route 31"
+   ]
+  },
+  "items": [
+   {
+    "id": "route22_i1",
+    "x": 20,
+    "y": 15,
+    "item": "revive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route22_i2",
+    "x": 20,
+    "y": 20,
+    "item": "ultraOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route22_i3",
+    "x": 19,
+    "y": 1,
+    "item": "rareCandy",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 22,
+  "levels": [
+   35,
+   38
+  ],
+  "backdrop": "field",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "hoarwhal",
+    "min": 38,
+    "max": 38,
+    "weight": 20
+   },
+   {
+    "species": "mahasage",
+    "min": 38,
+    "max": 38,
+    "weight": 20
+   },
+   {
+    "species": "velvedream",
+    "min": 36,
+    "max": 38,
+    "weight": 10
+   },
+   {
+    "species": "floodfang",
+    "min": 36,
+    "max": 38,
+    "weight": 10
+   },
+   {
+    "species": "elderoak",
+    "min": 35,
+    "max": 38,
+    "weight": 10
+   },
+   {
+    "species": "somnulet",
+    "min": 35,
+    "max": 36,
+    "weight": 10
+   },
+   {
+    "species": "mossling",
+    "min": 35,
+    "max": 38,
+    "weight": 5
+   },
+   {
+    "species": "bogmonarch",
+    "min": 35,
+    "max": 38,
+    "weight": 5
+   },
+   {
+    "species": "fernhart",
+    "min": 35,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "lullamoth",
+    "min": 35,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "raylet",
+    "min": 35,
+    "max": 38,
+    "weight": 1
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "mirrakoi",
+    "min": 32,
+    "max": 38,
+    "weight": 40
+   },
+   {
+    "species": "twirlfin",
+    "min": 32,
+    "max": 38,
+    "weight": 25
+   },
+   {
+    "species": "nipshell",
+    "min": 32,
+    "max": 38,
+    "weight": 15
+   },
+   {
+    "species": "ozlug",
+    "min": 32,
+    "max": 38,
+    "weight": 12
+   },
+   {
+    "species": "glimmerfin",
+    "min": 32,
+    "max": 38,
+    "weight": 8
+   }
+  ],
+  "between": [
+   "route10",
+   "up",
+   "lumenvale",
+   2
+  ]
+ },
+ "route31": {
+  "id": "route31",
+  "name": "Route 31",
+  "tiles": [
+   "########################################",
+   "#..,,,,,...........,,,,,...............#",
+   "#..###,,....F..,~~~~~~,,,..............#",
+   "#..###,,,,,,,,~~~~~~~~~,,.............F#",
+   "#..###,,,,,,,~~~~~~~~~~~,F.............#",
+   "#..,,,,,,,,,,~~~~~~~~~~~,.........====.#",
+   "#...,,,,,,,,,~~~~~~~~~~~,.........====F#",
+   "#.....,,~~~~~=========================.#",
+   "#.....,~~~~~~=========================.#",
+   "#......~~~~~~~~~~~~~~~~~#########,,,==.#",
+   "#..======~~~~~#~~~~~~~###########,,,==.#",
+   "###======~~~~##,~~~~~~~##########,,,==.#",
+   "####.=================================.#",
+   "####.=================================.#",
+   "#...###=================================",
+   "#...###=================================",
+   "#...###,###,,...,~~~~~#######.......S..#",
+   "#...###,###,,....~~~~,#######..........#",
+   "#...###.##.......,.,,.#######......F...#",
+   "########################################"
+  ],
+  "connections": {
+   "right": {
+    "map": "route22",
+    "offset": 5
+   }
+  },
+  "trainers": [
+   {
+    "id": "route31_t0",
+    "name": "Fisherman Pia",
+    "palette": "old",
+    "x": 24,
+    "y": 3,
+    "dir": "down",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "floodfang",
+      37
+     ],
+     [
+      "gorsling",
+      40
+     ]
+    ],
+    "double": false,
+    "intro": "Nothing's biting. Battle me instead!",
+    "defeat": "Reeled in...",
+    "after": "Fishing rods catch creatures that never leave the water."
+   },
+   {
+    "id": "route31_t1",
+    "name": "Swimmer Orrin",
+    "palette": "swimmer",
+    "x": 36,
+    "y": 3,
+    "dir": "down",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "floodfang",
+      36
+     ],
+     [
+      "jabcrab",
+      36
+     ]
+    ],
+    "double": false,
+    "intro": "The water here is perfect for training!",
+    "defeat": "Splashed!",
+    "after": "Surf lets you cross the water."
+   },
+   {
+    "id": "route31_t2",
+    "name": "Twins Dov & Soren",
+    "palette": "girl",
+    "x": 5,
+    "y": 8,
+    "dir": "down",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "seepling",
+      39
+     ],
+     [
+      "floodfang",
+      39
+     ]
+    ],
+    "double": true,
+    "intro": "I can see the future... and it holds a battle!",
+    "defeat": "I did not see that coming.",
+    "after": "Calm water hides strong creatures."
+   },
+   {
+    "id": "route31_t3",
+    "name": "Bird Keeper Rhea",
+    "palette": "bird",
+    "x": 21,
+    "y": 17,
+    "dir": "up",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "seepling",
+      36
+     ],
+     [
+      "seepling",
+      40
+     ]
+    ],
+    "double": false,
+    "intro": "Nothing's biting. Battle me instead!",
+    "defeat": "Reeled in...",
+    "after": "Fishing rods catch creatures that never leave the water."
+   }
+  ],
+  "signs": {
+   "36,16": [
+    "ROUTE 31",
+    "Route 22"
+   ]
+  },
+  "items": [
+   {
+    "id": "route31_i1",
+    "x": 10,
+    "y": 18,
+    "item": "ultraOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route31_i2",
+    "x": 1,
+    "y": 1,
+    "item": "nugget",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route31_i3",
+    "x": 18,
+    "y": 1,
+    "item": "ppUp",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 31,
+  "levels": [
+   36,
+   39
+  ],
+  "backdrop": "night",
+  "generatedBy": "build_routes",
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "jellicrown",
+    "min": 36,
+    "max": 39,
+    "weight": 20
+   },
+   {
+    "species": "driftail",
+    "min": 36,
+    "max": 39,
+    "weight": 20
+   },
+   {
+    "species": "hexapede",
+    "min": 36,
+    "max": 39,
+    "weight": 10
+   },
+   {
+    "species": "lobsmash",
+    "min": 36,
+    "max": 39,
+    "weight": 10
+   },
+   {
+    "species": "jabcrab",
+    "min": 36,
+    "max": 39,
+    "weight": 10
+   },
+   {
+    "species": "floodfang",
+    "min": 36,
+    "max": 39,
+    "weight": 10
+   },
+   {
+    "species": "gorsling",
+    "min": 36,
+    "max": 39,
+    "weight": 5
+   },
+   {
+    "species": "seepling",
+    "min": 36,
+    "max": 39,
+    "weight": 5
+   },
+   {
+    "species": "hoarwhal",
+    "min": 38,
+    "max": 39,
+    "weight": 4
+   },
+   {
+    "species": "glacifin",
+    "min": 36,
+    "max": 39,
+    "weight": 4
+   },
+   {
+    "species": "elderoak",
+    "min": 36,
+    "max": 39,
+    "weight": 1
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "ozlug",
+    "min": 33,
+    "max": 39,
+    "weight": 40
+   },
+   {
+    "species": "fenspawn",
+    "min": 33,
+    "max": 39,
+    "weight": 25
+   },
+   {
+    "species": "brookit",
+    "min": 33,
+    "max": 39,
+    "weight": 15
+   },
+   {
+    "species": "arclure",
+    "min": 33,
+    "max": 39,
+    "weight": 12
+   },
+   {
+    "species": "icefin",
+    "min": 33,
+    "max": 36,
+    "weight": 8
+   }
+  ]
+ },
+ "route23": {
+  "id": "route23",
+  "name": "Route 23",
+  "tiles": [
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~aaaaaaa~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~aa,,,,,#a~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#aaaaaaaaaaaa~~aaaa~~~~~~~~~~~~~~~~~~~~#",
+   "#aaaaaaa~~~~~~aaaaa~~~~~~~~~~~~~~aaaaaa#",
+   "#aaaaaaaa~~~~~aaaa~~~~~aaa~~~~~~aaaaaaa#",
+   "#aaSaaaaa~~~~~~~~~~~~~~aaa~~~~~aaaaaaaa#",
+   "=====aaaa~~~~~~~~~~~~aaaaa~~~~~aaaaaaaa#",
+   "=====aaaa~~~~~~~~~~~aaaaa~~~~~~aaaa=====",
+   "#aaaaaaaa~~~~~~~~~~~aaaaa~~~~~~aaaa=====",
+   "#aaaaaaaaaaa~~~~~~~~aaaaa~~~~~~aaaaaaaa#",
+   "#aaaaa,,,,,aaaa~~~~~~aaa~~~~~~~~aaaaaaa#",
+   "#~~~~aaaaaa,,,#a~~~~~~~~~~~~~~~~~aaaaaa#",
+   "#~~~~~~~~aa,,,aa~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~aa,,,aa~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~aaaaa~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#"
+  ],
+  "connections": {
+   "left": {
+    "map": "route11",
+    "offset": 0
+   },
+   "right": {
+    "map": "coralhaven",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route23_t0",
+    "name": "Swimmer Alden",
+    "palette": "swimmer",
+    "x": 32,
+    "y": 7,
+    "dir": "up",
+    "sight": 4,
+    "pay": 42,
+    "party": [
+     [
+      "pyrefinch",
+      42
+     ],
+     [
+      "pyrefinch",
+      41
+     ],
+     [
+      "falcrest",
+      41
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route23_t1",
+    "name": "Swimmer Ulla",
+    "palette": "swimmer",
+    "x": 6,
+    "y": 11,
+    "dir": "down",
+    "sight": 4,
+    "pay": 42,
+    "party": [
+     [
+      "pyrefinch",
+      41
+     ],
+     [
+      "pyrefinch",
+      42
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route23_t2",
+    "name": "Fisherman Greta",
+    "palette": "old",
+    "x": 10,
+    "y": 5,
+    "dir": "up",
+    "sight": 4,
+    "pay": 42,
+    "party": [
+     [
+      "falcrest",
+      40
+     ],
+     [
+      "nudibrant",
+      42
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route23_t3",
+    "name": "Sailor Dash",
+    "palette": "blackbelt",
+    "x": 23,
+    "y": 8,
+    "dir": "up",
+    "sight": 4,
+    "pay": 42,
+    "party": [
+     [
+      "falcrest",
+      42
+     ],
+     [
+      "hoarwhal",
+      39
+     ],
+     [
+      "mystrakoi",
+      40
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route23_t4",
+    "name": "Bird Keeper Nell",
+    "palette": "bird",
+    "x": 14,
+    "y": 16,
+    "dir": "down",
+    "sight": 3,
+    "pay": 42,
+    "party": [
+     [
+      "nudibrant",
+      42
+     ],
+     [
+      "nudibrant",
+      40
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   }
+  ],
+  "signs": {
+   "3,8": [
+    "ROUTE 23",
+    "Route 11 <-> Coralhaven"
+   ]
+  },
+  "items": [
+   {
+    "id": "route23_i1",
+    "x": 13,
+    "y": 4,
+    "item": "starPiece",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route23_i2",
+    "x": 14,
+    "y": 13,
+    "item": "ultraOrb",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route23_i3",
+    "x": 21,
+    "y": 13,
+    "item": "ppUp",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 23,
+  "levels": [
+   38,
+   41
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "falcrest",
+    "min": 38,
+    "max": 41,
+    "weight": 20
+   },
+   {
+    "species": "pyrefinch",
+    "min": 38,
+    "max": 41,
+    "weight": 20
+   },
+   {
+    "species": "nudibrant",
+    "min": 38,
+    "max": 41,
+    "weight": 10
+   },
+   {
+    "species": "mystrakoi",
+    "min": 38,
+    "max": 41,
+    "weight": 10
+   },
+   {
+    "species": "hoarwhal",
+    "min": 38,
+    "max": 41,
+    "weight": 10
+   },
+   {
+    "species": "cascadon",
+    "min": 38,
+    "max": 41,
+    "weight": 10
+   },
+   {
+    "species": "rubythrush",
+    "min": 38,
+    "max": 41,
+    "weight": 5
+   },
+   {
+    "species": "lumoth",
+    "min": 38,
+    "max": 41,
+    "weight": 5
+   },
+   {
+    "species": "floodfang",
+    "min": 38,
+    "max": 41,
+    "weight": 4
+   },
+   {
+    "species": "polarpup",
+    "min": 38,
+    "max": 41,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "twirlfin",
+    "min": 35,
+    "max": 38,
+    "weight": 40
+   },
+   {
+    "species": "ozlug",
+    "min": 35,
+    "max": 41,
+    "weight": 25
+   },
+   {
+    "species": "raylet",
+    "min": 35,
+    "max": 41,
+    "weight": 15
+   },
+   {
+    "species": "mirrakoi",
+    "min": 35,
+    "max": 41,
+    "weight": 12
+   },
+   {
+    "species": "jabcrab",
+    "min": 35,
+    "max": 41,
+    "weight": 8
+   }
+  ],
+  "between": [
+   "route11",
+   "right",
+   "coralhaven",
+   1
+  ]
+ },
+ "route26": {
+  "id": "route26",
+  "name": "Route 26",
+  "tiles": [
+   "##########==##########",
+   "~~~~~aaaaa==aaaa~~~~~#",
+   "~~~~~aaaaa==aaaa~~~~~#",
+   "~~~~~aaaaa==aaaa~~~~~#",
+   "~~~~~aaaaa==aaaa~~~~~#",
+   "~~~~~aaaaaaaaaaa~~~~~#",
+   "~~~~~~aaaaaaaaa~~~~~~#",
+   "~~~~~~~aaaaaaa~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "############WW########",
+   "############WW########",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~aaaaa~~~~~~~~~~~~~",
+   "~~~aa,,,#a~~~~aaaaa~~~",
+   "~~~aa,,,aa~~~aa,,,aa~~",
+   "~~~aa,,,aa~~~aa,,,aa~~",
+   "~aaaaaaaa~~~~aa,,,aa~~",
+   "~aa,,,aa~~aaaaaaaaa~~#",
+   "~~aaaaaaaaaaaaaaa~~~~#",
+   "~~~~~~~aaaaaaaaaa~~~~#",
+   "~~~~~~~aaaaa==aaaa~~~#",
+   "~~~~~~~aaaaS==aaaa~~~#",
+   "~~~~~~~aaaaa==aaaa~~~#",
+   "~~~~~~~aaaaa==aaaa~~~#",
+   "############==########"
+  ],
+  "connections": {
+   "down": {
+    "map": "coralhaven",
+    "offset": 0
+   },
+   "up": {
+    "map": "route12",
+    "offset": 0
+   },
+   "right": {
+    "map": "route24",
+    "offset": -16
+   }
+  },
+  "trainers": [
+   {
+    "id": "route26_t0",
+    "name": "Swimmer Ulla",
+    "palette": "swimmer",
+    "x": 17,
+    "y": 37,
+    "dir": "up",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "rimewing",
+      45
+     ],
+     [
+      "rimeshade",
+      45
+     ],
+     [
+      "frostkit",
+      44
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route26_t1",
+    "name": "Swimmer Dena",
+    "palette": "swimmer",
+    "x": 14,
+    "y": 29,
+    "dir": "up",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "rimewing",
+      43
+     ],
+     [
+      "drakelet",
+      45
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route26_t2",
+    "name": "Fisherman Bram",
+    "palette": "old",
+    "x": 9,
+    "y": 29,
+    "dir": "up",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "drakelet",
+      45
+     ],
+     [
+      "lithwyrm",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route26_t3",
+    "name": "Sailor Corin",
+    "palette": "blackbelt",
+    "x": 7,
+    "y": 6,
+    "dir": "down",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "scalekin",
+      42
+     ],
+     [
+      "drakelet",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   }
+  ],
+  "signs": {
+   "11,36": [
+    "ROUTE 26",
+    "Coralhaven <-> Victory Road <-> Route 24"
+   ]
+  },
+  "items": [
+   {
+    "id": "route26_i1",
+    "x": 8,
+    "y": 27,
+    "item": "starPiece",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route26_i2",
+    "x": 2,
+    "y": 33,
+    "item": "maxRevive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route26_i3",
+    "x": 10,
+    "y": 32,
+    "item": "stardust",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 26,
+  "levels": [
+   42,
+   45
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "lithwyrm",
+    "min": 42,
+    "max": 45,
+    "weight": 20
+   },
+   {
+    "species": "scalekin",
+    "min": 42,
+    "max": 45,
+    "weight": 20
+   },
+   {
+    "species": "drakelet",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "frostkit",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "puffwyrm",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "rimeshade",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "nudibrant",
+    "min": 42,
+    "max": 45,
+    "weight": 5
+   },
+   {
+    "species": "rimewing",
+    "min": 42,
+    "max": 45,
+    "weight": 5
+   },
+   {
+    "species": "floodfang",
+    "min": 42,
+    "max": 45,
+    "weight": 4
+   },
+   {
+    "species": "driftail",
+    "min": 42,
+    "max": 45,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "polarpup",
+    "min": 39,
+    "max": 42,
+    "weight": 40
+   },
+   {
+    "species": "fenspawn",
+    "min": 39,
+    "max": 45,
+    "weight": 25
+   },
+   {
+    "species": "nipshell",
+    "min": 39,
+    "max": 45,
+    "weight": 15
+   },
+   {
+    "species": "raylet",
+    "min": 39,
+    "max": 45,
+    "weight": 12
+   },
+   {
+    "species": "arclure",
+    "min": 39,
+    "max": 45,
+    "weight": 8
+   }
+  ],
+  "between": [
+   "coralhaven",
+   "up",
+   "route12",
+   -2
+  ]
+ },
+ "route24": {
+  "id": "route24",
+  "name": "Route 24",
+  "tiles": [
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~aaa~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~aaaaa~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~aaaaaaa~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~aaa,,,,aa~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~aa,,,,,aa~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~aaa,,,aaa~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~aaaaaa~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~aaaaa~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~aa,,,#a#",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~~aaaaaaaa,,,aa#",
+   "~~~~~~~~~~~~~~~aaa~~~~~~~~aaaaa,,,,,,aa#",
+   "~~~~~~~~~~~~~~aaaaa~~~~~~~aaaaa,,,aaaa~#",
+   "~~~~~~~~~~~~~~aaaaa~~~~~~~~~~aa,,,aa~~~#",
+   "#~~~~~~~~~~~~~aaaaa~~~~~~~~~~~aaaaa~~~~#",
+   "#~~~~~~~~~~~~~~aaa~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#"
+  ],
+  "connections": {
+   "left": {
+    "map": "route26",
+    "offset": 16
+   },
+   "right": {
+    "map": "route25",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route24_t0",
+    "name": "Swimmer Xeno",
+    "palette": "swimmer",
+    "x": 30,
+    "y": 14,
+    "dir": "up",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "rocklobber",
+      46
+     ],
+     [
+      "driftail",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route24_t1",
+    "name": "Swimmer Hale",
+    "palette": "swimmer",
+    "x": 16,
+    "y": 16,
+    "dir": "up",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "bogmonarch",
+      46
+     ],
+     [
+      "rimewing",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route24_t2",
+    "name": "Fisherman Kael",
+    "palette": "old",
+    "x": 36,
+    "y": 14,
+    "dir": "down",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "driftail",
+      45
+     ],
+     [
+      "lobsmash",
+      46
+     ],
+     [
+      "driftail",
+      46
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route24_t3",
+    "name": "Sailor Zora",
+    "palette": "blackbelt",
+    "x": 26,
+    "y": 12,
+    "dir": "up",
+    "sight": 4,
+    "pay": 45,
+    "party": [
+     [
+      "frostkit",
+      42
+     ],
+     [
+      "bogmonarch",
+      43
+     ],
+     [
+      "cascadon",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   }
+  ],
+  "signs": {},
+  "items": [
+   {
+    "id": "route24_i1",
+    "x": 38,
+    "y": 11,
+    "item": "ppUp",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route24_i2",
+    "x": 14,
+    "y": 16,
+    "item": "starPiece",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route24_i3",
+    "x": 18,
+    "y": 4,
+    "item": "heartScale",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 24,
+  "levels": [
+   42,
+   45
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "frostkit",
+    "min": 42,
+    "max": 45,
+    "weight": 20
+   },
+   {
+    "species": "rocklobber",
+    "min": 42,
+    "max": 45,
+    "weight": 20
+   },
+   {
+    "species": "cascadon",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "driftail",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "lobsmash",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "bogmonarch",
+    "min": 42,
+    "max": 45,
+    "weight": 10
+   },
+   {
+    "species": "mirrakoi",
+    "min": 42,
+    "max": 45,
+    "weight": 5
+   },
+   {
+    "species": "rimewing",
+    "min": 42,
+    "max": 45,
+    "weight": 5
+   },
+   {
+    "species": "glacifin",
+    "min": 42,
+    "max": 45,
+    "weight": 4
+   },
+   {
+    "species": "rimeshade",
+    "min": 42,
+    "max": 45,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "polarpup",
+    "min": 39,
+    "max": 42,
+    "weight": 40
+   },
+   {
+    "species": "jabcrab",
+    "min": 39,
+    "max": 44,
+    "weight": 25
+   },
+   {
+    "species": "nipshell",
+    "min": 39,
+    "max": 45,
+    "weight": 15
+   },
+   {
+    "species": "glimmerfin",
+    "min": 39,
+    "max": 45,
+    "weight": 12
+   },
+   {
+    "species": "arclure",
+    "min": 39,
+    "max": 45,
+    "weight": 8
+   }
+  ]
+ },
+ "route25": {
+  "id": "route25",
+  "name": "Route 25",
+  "tiles": [
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~aaa~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~aaaaaaaa~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~aaaa,,,aa~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~~aaaaaaaaa~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~~~aaa~~aaa~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~aaaaa~~~",
+   "~~~~~~~~~~~aaaaa~~~~~~~~~~~~~~~~~aaaaa~~",
+   "~~~~~~~~~~~aaaaa~~~~~~~~~~~~~~~~~~aaa~~~",
+   "~~~~~~~~~~~aaaaa~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~aaaaaa~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~aa,,,#a~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~aaaaaa~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~aaa~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~aaaaa~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~aaaaa~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "########~~~~~~##########################"
+  ],
+  "connections": {
+   "left": {
+    "map": "route24",
+    "offset": 0
+   },
+   "down": {
+    "map": "route32",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route25_t0",
+    "name": "Swimmer Vito",
+    "palette": "swimmer",
+    "x": 29,
+    "y": 6,
+    "dir": "down",
+    "sight": 4,
+    "pay": 46,
+    "party": [
+     [
+      "joltfang",
+      45
+     ],
+     [
+      "kiloclaw",
+      46
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route25_t1",
+    "name": "Swimmer Yuki",
+    "palette": "swimmer",
+    "x": 33,
+    "y": 7,
+    "dir": "down",
+    "sight": 4,
+    "pay": 46,
+    "party": [
+     [
+      "joltfang",
+      43
+     ],
+     [
+      "kiloclaw",
+      47
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route25_t2",
+    "name": "Fisherman Uma",
+    "palette": "old",
+    "x": 12,
+    "y": 8,
+    "dir": "up",
+    "sight": 4,
+    "pay": 46,
+    "party": [
+     [
+      "fulgorax",
+      47
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route25_t3",
+    "name": "Sailor Joss",
+    "palette": "blackbelt",
+    "x": 14,
+    "y": 11,
+    "dir": "up",
+    "sight": 4,
+    "pay": 46,
+    "party": [
+     [
+      "hoarwhal",
+      47
+     ],
+     [
+      "amperix",
+      47
+     ],
+     [
+      "nimbolt",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   }
+  ],
+  "signs": {},
+  "items": [
+   {
+    "id": "route25_i1",
+    "x": 10,
+    "y": 12,
+    "item": "fullRestore",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route25_i2",
+    "x": 37,
+    "y": 8,
+    "item": "maxElixir",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route25_i3",
+    "x": 11,
+    "y": 8,
+    "item": "pearl",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 25,
+  "levels": [
+   43,
+   46
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "fulgorax",
+    "min": 43,
+    "max": 46,
+    "weight": 20
+   },
+   {
+    "species": "kiloclaw",
+    "min": 43,
+    "max": 46,
+    "weight": 20
+   },
+   {
+    "species": "nimbolt",
+    "min": 43,
+    "max": 46,
+    "weight": 10
+   },
+   {
+    "species": "amperix",
+    "min": 43,
+    "max": 46,
+    "weight": 10
+   },
+   {
+    "species": "pulsecarab",
+    "min": 43,
+    "max": 46,
+    "weight": 10
+   },
+   {
+    "species": "joltfang",
+    "min": 43,
+    "max": 46,
+    "weight": 10
+   },
+   {
+    "species": "rocklobber",
+    "min": 43,
+    "max": 46,
+    "weight": 5
+   },
+   {
+    "species": "hoarwhal",
+    "min": 43,
+    "max": 46,
+    "weight": 5
+   },
+   {
+    "species": "galvanfly",
+    "min": 43,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "dynamoth",
+    "min": 43,
+    "max": 46,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "arclure",
+    "min": 40,
+    "max": 46,
+    "weight": 40
+   },
+   {
+    "species": "raylet",
+    "min": 40,
+    "max": 46,
+    "weight": 25
+   },
+   {
+    "species": "glimmerfin",
+    "min": 40,
+    "max": 46,
+    "weight": 15
+   },
+   {
+    "species": "ozlug",
+    "min": 40,
+    "max": 46,
+    "weight": 12
+   },
+   {
+    "species": "mirrakoi",
+    "min": 40,
+    "max": 46,
+    "weight": 8
+   }
+  ],
+  "weather": "rain"
+ },
+ "route32": {
+  "id": "route32",
+  "name": "Route 32",
+  "tiles": [
+   "########~~~~~~########",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~aa~~~~~~~~~~",
+   "~~~~~~~~~aaa~~~~~~~~~~",
+   "~~~~~~~~~aaa~~~~~~~~~~",
+   "~~~~~~~~~aaa~~~~~~~~~~",
+   "~~~~~~~~~~aa~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~aaa~~~~~~~~~~~~~~~",
+   "~~~aaaaa~~~~~~~~~~~~~~",
+   "~~~aaaaa~~~~~~~~~~~~~~",
+   "~~~aaaaa~~aaaaaaa~~~~~",
+   "~~~~aaa~~aa,,,,a#a~~~~",
+   "~~~~~~~~~aa,,,,,aa~~~~",
+   "~~~~~~~~~aa,,,,aaa~~~~",
+   "~~~~~~~~~~aaaaaaa~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~aaaa~~~~~~~~~~~~~~~",
+   "~~~aaaaaa~~~~~~~~~~~~~",
+   "~~~aaaaaaa~~~~~~~~~~~~",
+   "~~~aaa~aaa~~~~~~~~~~~~",
+   "~~aaaaaaaa~~~~~~~~~~~~",
+   "~~aaaaaaaa~~~~~~~~~~~~",
+   "~~~~~~aaaaaaa~~~~~~~~~",
+   "~~~~~aa,,,,,aa~~~~~~~~",
+   "~~~~~aaaaaaaa~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "#######~~~~~~#########"
+  ],
+  "connections": {
+   "up": {
+    "map": "route25",
+    "offset": 0
+   },
+   "down": {
+    "map": "route33",
+    "offset": 0
+   }
+  },
+  "trainers": [
+   {
+    "id": "route32_t0",
+    "name": "Swimmer Yara",
+    "palette": "swimmer",
+    "x": 8,
+    "y": 32,
+    "dir": "up",
+    "sight": 4,
+    "pay": 47,
+    "party": [
+     [
+      "jellicrown",
+      44
+     ],
+     [
+      "fungloom",
+      48
+     ],
+     [
+      "musklet",
+      44
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route32_t1",
+    "name": "Swimmer Maren",
+    "palette": "swimmer",
+    "x": 17,
+    "y": 21,
+    "dir": "up",
+    "sight": 4,
+    "pay": 47,
+    "party": [
+     [
+      "mystrakoi",
+      48
+     ],
+     [
+      "gorsebrier",
+      48
+     ],
+     [
+      "musklet",
+      44
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route32_t2",
+    "name": "Fisherman Odile",
+    "palette": "old",
+    "x": 10,
+    "y": 20,
+    "dir": "up",
+    "sight": 4,
+    "pay": 47,
+    "party": [
+     [
+      "fungloom",
+      44
+     ],
+     [
+      "musklet",
+      44
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route32_t3",
+    "name": "Sailor Greta",
+    "palette": "blackbelt",
+    "x": 11,
+    "y": 7,
+    "dir": "up",
+    "sight": 4,
+    "pay": 47,
+    "party": [
+     [
+      "jellicrown",
+      47
+     ],
+     [
+      "jellicrown",
+      44
+     ],
+     [
+      "gorsebrier",
+      47
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   }
+  ],
+  "signs": {},
+  "items": [
+   {
+    "id": "route32_i1",
+    "x": 17,
+    "y": 19,
+    "item": "maxPotion",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route32_i2",
+    "x": 13,
+    "y": 35,
+    "item": "maxRevive",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route32_i3",
+    "x": 7,
+    "y": 16,
+    "item": "heartScale",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 32,
+  "levels": [
+   44,
+   47
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "venomwing",
+    "min": 44,
+    "max": 47,
+    "weight": 20
+   },
+   {
+    "species": "jellip",
+    "min": 44,
+    "max": 47,
+    "weight": 20
+   },
+   {
+    "species": "hexapede",
+    "min": 44,
+    "max": 47,
+    "weight": 10
+   },
+   {
+    "species": "jellicrown",
+    "min": 44,
+    "max": 47,
+    "weight": 10
+   },
+   {
+    "species": "gorsebrier",
+    "min": 44,
+    "max": 47,
+    "weight": 10
+   },
+   {
+    "species": "fungloom",
+    "min": 44,
+    "max": 47,
+    "weight": 10
+   },
+   {
+    "species": "mystrakoi",
+    "min": 44,
+    "max": 47,
+    "weight": 5
+   },
+   {
+    "species": "musklet",
+    "min": 44,
+    "max": 44,
+    "weight": 5
+   },
+   {
+    "species": "lobsmash",
+    "min": 44,
+    "max": 47,
+    "weight": 4
+   },
+   {
+    "species": "dreadspore",
+    "min": 44,
+    "max": 47,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "fenspawn",
+    "min": 41,
+    "max": 46,
+    "weight": 40
+   },
+   {
+    "species": "ozlug",
+    "min": 41,
+    "max": 46,
+    "weight": 25
+   },
+   {
+    "species": "glimmerfin",
+    "min": 41,
+    "max": 47,
+    "weight": 15
+   },
+   {
+    "species": "raylet",
+    "min": 41,
+    "max": 47,
+    "weight": 12
+   },
+   {
+    "species": "nipshell",
+    "min": 41,
+    "max": 46,
+    "weight": 8
+   }
+  ]
+ },
+ "route33": {
+  "id": "route33",
+  "name": "Route 33",
+  "tiles": [
+   "#######~~~~~~#########",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~aaaaa~~~~~~~~~~~~~~#",
+   "~aa,,,aa~~~~~~~~~~~~~#",
+   "~aa,,,aa~~~~~~~~~~~~~#",
+   "~aa,,,aa~~~~~~~~~~~~~#",
+   "~~aaaaa~~~~~~~~~~~~~~#",
+   "~~~aaaaa~~~~aaaa~~~~~#",
+   "~~aa,,,aa~~aaaaa~~~~~#",
+   "~~~aaaaa~~~aaaaa~~~~~#",
+   "~~~~~~~~~~~aaaaa~~~~~#",
+   "~~~~~~~~~~~~aaa~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~aaaa~~~~~~~~~~#",
+   "~~~~~~~aaaaa~~~~~~~~~~",
+   "~~~~~~~~aaaa~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~aaa~~~~~~~~~~",
+   "~~~~~~~~~aaa~~~~~~~~~~",
+   "~~~~~~~~~aaa~~~~~~~~~#",
+   "~~~~~aaa~~~~~~~~~~~~~#",
+   "~~~~~aaa~~~~~~~~~~~~~#",
+   "~~~~~aaa~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~aaaaaa~~#",
+   "~~~~~~~~~~~~~aa,,,#a~#",
+   "~~~~~~~~~~~~~~aaaaa~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#",
+   "~~~~~~~~~~~~~~~~~~~~~#"
+  ],
+  "connections": {
+   "up": {
+    "map": "route32",
+    "offset": 0
+   },
+   "right": {
+    "map": "route34",
+    "offset": -12
+   }
+  },
+  "trainers": [
+   {
+    "id": "route33_t0",
+    "name": "Swimmer Dov",
+    "palette": "swimmer",
+    "x": 2,
+    "y": 9,
+    "dir": "up",
+    "sight": 4,
+    "pay": 48,
+    "party": [
+     [
+      "puffwyrm",
+      46
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route33_t1",
+    "name": "Swimmer Cleo",
+    "palette": "swimmer",
+    "x": 5,
+    "y": 31,
+    "dir": "up",
+    "sight": 4,
+    "pay": 48,
+    "party": [
+     [
+      "drakelet",
+      49
+     ],
+     [
+      "lithwyrm",
+      46
+     ],
+     [
+      "glacifin",
+      49
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route33_t2",
+    "name": "Fisherman Fern",
+    "palette": "old",
+    "x": 9,
+    "y": 23,
+    "dir": "up",
+    "sight": 4,
+    "pay": 48,
+    "party": [
+     [
+      "bogmonarch",
+      46
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route33_t3",
+    "name": "Sailor Xeno",
+    "palette": "blackbelt",
+    "x": 15,
+    "y": 36,
+    "dir": "up",
+    "sight": 4,
+    "pay": 48,
+    "party": [
+     [
+      "drakelet",
+      47
+     ],
+     [
+      "puffwyrm",
+      46
+     ],
+     [
+      "driftail",
+      48
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   }
+  ],
+  "signs": {},
+  "items": [
+   {
+    "id": "route33_i1",
+    "x": 19,
+    "y": 35,
+    "item": "rareCandy",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route33_i2",
+    "x": 8,
+    "y": 13,
+    "item": "ppUp",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route33_i3",
+    "x": 2,
+    "y": 13,
+    "item": "pearl",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 33,
+  "levels": [
+   46,
+   49
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "scalekin",
+    "min": 46,
+    "max": 46,
+    "weight": 20
+   },
+   {
+    "species": "drakelet",
+    "min": 46,
+    "max": 49,
+    "weight": 20
+   },
+   {
+    "species": "puffwyrm",
+    "min": 46,
+    "max": 46,
+    "weight": 10
+   },
+   {
+    "species": "lithwyrm",
+    "min": 46,
+    "max": 49,
+    "weight": 10
+   },
+   {
+    "species": "kragshell",
+    "min": 46,
+    "max": 49,
+    "weight": 10
+   },
+   {
+    "species": "bogmonarch",
+    "min": 46,
+    "max": 49,
+    "weight": 10
+   },
+   {
+    "species": "glacifin",
+    "min": 46,
+    "max": 49,
+    "weight": 5
+   },
+   {
+    "species": "driftail",
+    "min": 46,
+    "max": 49,
+    "weight": 5
+   },
+   {
+    "species": "hoarwhal",
+    "min": 46,
+    "max": 49,
+    "weight": 4
+   },
+   {
+    "species": "rocklobber",
+    "min": 46,
+    "max": 49,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "raylet",
+    "min": 43,
+    "max": 48,
+    "weight": 40
+   },
+   {
+    "species": "fenspawn",
+    "min": 43,
+    "max": 46,
+    "weight": 25
+   },
+   {
+    "species": "mirrakoi",
+    "min": 43,
+    "max": 46,
+    "weight": 15
+   },
+   {
+    "species": "glimmerfin",
+    "min": 43,
+    "max": 49,
+    "weight": 12
+   },
+   {
+    "species": "nipshell",
+    "min": 43,
+    "max": 46,
+    "weight": 8
+   }
+  ]
+ },
+ "route34": {
+  "id": "route34",
+  "name": "Route 34",
+  "tiles": [
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~aaaaa~~~~",
+   "#~~~~~~~~~~~~~~~~~~~aaaaaaa~~~aa,,,#a~~~",
+   "#~~~~~~~~~~~~~~~~~~aaa,,,,#a~~aaaaaaa~~~",
+   "#~~~~~~~~~~~~~~~~~~aa,,,,,aa~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~aa,,,,aaa~~~~aaa~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~aaaaaaa~~~~aaaaa~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~aaaaa~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~aaa~~~aaaaa~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~aaa~~~aaaa~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~aaa~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~~aaa~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~aa~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  ],
+  "connections": {
+   "left": {
+    "map": "route33",
+    "offset": 12
+   }
+  },
+  "trainers": [
+   {
+    "id": "route34_t0",
+    "name": "Swimmer Edda",
+    "palette": "swimmer",
+    "x": 21,
+    "y": 6,
+    "dir": "up",
+    "sight": 4,
+    "pay": 50,
+    "party": [
+     [
+      "kragshell",
+      51
+     ],
+     [
+      "kragshell",
+      49
+     ],
+     [
+      "kragshell",
+      48
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   },
+   {
+    "id": "route34_t1",
+    "name": "Swimmer Rafe",
+    "palette": "swimmer",
+    "x": 23,
+    "y": 10,
+    "dir": "down",
+    "sight": 4,
+    "pay": 50,
+    "party": [
+     [
+      "cascadon",
+      52
+     ]
+    ],
+    "double": false,
+    "intro": "Ahoy! Fancy a battle, landlubber?",
+    "defeat": "Sunk!",
+    "after": "Keep surfing and you'll find islands no map shows."
+   },
+   {
+    "id": "route34_t2",
+    "name": "Fisherman Ulla",
+    "palette": "old",
+    "x": 33,
+    "y": 9,
+    "dir": "up",
+    "sight": 4,
+    "pay": 50,
+    "party": [
+     [
+      "kragshell",
+      53
+     ],
+     [
+      "kragshell",
+      51
+     ]
+    ],
+    "double": false,
+    "intro": "Swim with me, battle with me!",
+    "defeat": "You're faster than the current.",
+    "after": "Deep water creatures get stronger the farther out you go."
+   },
+   {
+    "id": "route34_t3",
+    "name": "Sailor Ebon",
+    "palette": "blackbelt",
+    "x": 26,
+    "y": 16,
+    "dir": "down",
+    "sight": 3,
+    "pay": 50,
+    "party": [
+     [
+      "lithwyrm",
+      51
+     ],
+     [
+      "frostkit",
+      48
+     ]
+    ],
+    "double": false,
+    "intro": "The open sea is my home!",
+    "defeat": "I'm all washed up...",
+    "after": "Rest on the islets if your team gets tired."
+   }
+  ],
+  "signs": {},
+  "items": [
+   {
+    "id": "route34_i1",
+    "x": 35,
+    "y": 5,
+    "item": "rareCandy",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route34_i2",
+    "x": 26,
+    "y": 6,
+    "item": "maxPotion",
+    "count": 1,
+    "hidden": false
+   },
+   {
+    "id": "route34_i3",
+    "x": 25,
+    "y": 16,
+    "item": "stardust",
+    "count": 1,
+    "hidden": true
+   }
+  ],
+  "route": 34,
+  "levels": [
+   48,
+   52
+  ],
+  "backdrop": "beach",
+  "generatedBy": "build_routes",
+  "sea": true,
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "frostkit",
+    "min": 48,
+    "max": 52,
+    "weight": 20
+   },
+   {
+    "species": "lithwyrm",
+    "min": 48,
+    "max": 52,
+    "weight": 20
+   },
+   {
+    "species": "drakelet",
+    "min": 48,
+    "max": 52,
+    "weight": 10
+   },
+   {
+    "species": "kragshell",
+    "min": 48,
+    "max": 52,
+    "weight": 10
+   },
+   {
+    "species": "floodfang",
+    "min": 48,
+    "max": 52,
+    "weight": 10
+   },
+   {
+    "species": "mystrakoi",
+    "min": 48,
+    "max": 52,
+    "weight": 10
+   },
+   {
+    "species": "cascadon",
+    "min": 48,
+    "max": 52,
+    "weight": 5
+   },
+   {
+    "species": "lobsmash",
+    "min": 48,
+    "max": 52,
+    "weight": 5
+   },
+   {
+    "species": "rimeshade",
+    "min": 48,
+    "max": 52,
+    "weight": 4
+   },
+   {
+    "species": "glacifin",
+    "min": 48,
+    "max": 52,
+    "weight": 4
+   }
+  ],
+  "waterEncounters": [
+   {
+    "species": "raylet",
+    "min": 45,
+    "max": 48,
+    "weight": 40
+   },
+   {
+    "species": "arclure",
+    "min": 45,
+    "max": 52,
+    "weight": 25
+   },
+   {
+    "species": "glimmerfin",
+    "min": 45,
+    "max": 52,
+    "weight": 15
+   }
+  ],
+  "weather": "rain"
  }
 }
