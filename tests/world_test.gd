@@ -51,6 +51,14 @@ func _initialize() -> void:
 			for wp in other.get("warps", {}).values():
 				if wp.map == m.id and wp.get("script", "") != "baseExit":
 					starts.append([wp.x, wp.y, "warp"])
+		# Ferry stops (the Battle Frontier, the event islands) are entered next to the ferry.
+		for n in m.get("npcs", []):
+			if n.get("service", "") == "ferry":
+				for d: Vector2i in DX.values():
+					if ok.call(n.x + d.x, n.y + d.y):
+						starts.append([n.x + d.x, n.y + d.y, "ferry"])
+						break
+				break
 		# Trick House puzzle rooms are entered at their bottom door, after finding the Trick Master.
 		if m.has("trickLevel"):
 			starts.append([7, 11, "trick master"])
@@ -162,6 +170,7 @@ func _initialize() -> void:
 		for n in maps[id].get("npcs", []):
 			if n.get("service", "") == "ferry":
 				nexts.append(n.to)
+				nexts.append_array(n.get("islands", []))
 		if maps[id].get("trickHouse", false):
 			for i in range(1, 4):
 				nexts.append("trickpuzzle%d" % i)

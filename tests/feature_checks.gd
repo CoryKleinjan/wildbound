@@ -74,6 +74,7 @@ func run() -> void:
 	_misc_tests()
 	_rest_of_emerald_tests()
 	_frontier_tests()
+	_last_of_emerald_tests()
 
 func _evolution_tests() -> void:
 	Game.gs = GameState.new_game("solo")
@@ -516,3 +517,143 @@ func _frontier_tests() -> void:
 	Frontier._award(gs, "dome", [])
 	_drain()
 	check("frontier record and BP", int(gs.frontier.dome.best) == 1 and gs.bp >= 5)
+
+func _pick_first_creature() -> void:
+	var ps = Game.top
+	ps.o.on_select.call(0)
+
+func _last_of_emerald_tests() -> void:
+	check("six new legendaries", DB.SPECIES.size() == 206 and DB.species("cragolem").rarity == "legendary"
+		and not DB.species("auroquil").tms.is_empty())
+	var ow := _new_world("route6", 5, 5, "down")
+	var gs: Dictionary = Game.gs
+	var m: Dictionary = gs.players[0].party[0]
+	# Move Deleter.
+	TownLife.move_deleter(["I'm the Move Deleter."])
+	_drain()
+	_pick_first_creature()
+	(Game.top as ListMenu)._o.on_select.call(3)
+	_drain()
+	check("move deleter", m.moves.size() == 3 and not Creatures.knows(m, "secretPower"))
+	# Glass Workshop: the Soot Sack collects ash in ashy grass, then ash buys flutes.
+	TownLife.glass(["Hi"])
+	_drain()
+	TownLife.on_step(ow, ",")
+	check("soot sack collects ash", gs.bag.get("sootSack", 0) == 1 and gs.ash == 1)
+	gs.ash = 300
+	TownLife.glass(["Hi"])
+	(Game.top as ListMenu)._o.on_select.call(0)
+	_drain()
+	check("blue flute from ash", gs.bag.get("blueFlute", 0) == 1 and gs.ash == 50)
+	gs.flute = "more"
+	check("white flute raises encounters", TownLife.flute_rate(20) == 30)
+	TownLife.play_flute("whiteFlute")
+	_drain()
+	check("flute stops", gs.flute == "")
+	# Rare fishing spots and outbreaks.
+	var spots := TownLife.rare_spots(gs)
+	check("rare fishing spots", spots.size() == 2 and DB.EMERALD.rareFish.tiles.has(spots[0]))
+	gs.flags.badge2 = true
+	var ob := TownLife.outbreak(gs)
+	ow.load_map(ob.map, 5, 5, "down")
+	var seen_swarm := false
+	for i in 30:
+		if TownLife.outbreak_table(ow, ow.map.encounters)[0].species == ob.species:
+			seen_swarm = true
+	check("mass outbreak", seen_swarm)
+	Tv.watch()
+	check("tv news", " ".join(_drain()).contains("swarm"))
+	# Fan Club: badges and the Championship make fans, who hand out gifts.
+	for i in 8:
+		gs.flags["badge%d" % (i + 1)] = true
+	gs.flags.champion = true
+	var before: int = gs.bag.size()
+	TownLife.fan({"fan": 2}, ["Hi"])
+	_drain()
+	check("fan gift", TownLife.fame(gs) >= 10 and gs.bag.size() >= before and int(gs.flags.get("fan2_day", -1)) == Options.today())
+	for k in DB.STAT_KEYS:
+		m.evs[k] = 85
+	TownLife.effort_ribbon(["Hi"])
+	_drain()
+	_pick_first_creature()
+	_drain()
+	check("effort ribbon", (m.ribbons as Array).has("Effort"))
+	# National dex.
+	var regional := TownLife.dex_species(gs).size()
+	TownLife.national_dex(["Hi"])
+	_drain()
+	check("national dex", regional == 193 and TownLife.dex_species(gs).size() == 206)
+	# Fossils: pick one, leave it at the lab, walk, collect.
+	TownLife.fossil_pick(["Hi"])
+	_drain(0)
+	TownLife.fossil_lab(["Hi"])
+	_drain(0)
+	gs.steps = int(gs.steps) + 60
+	var n: int = gs.players[0].party.size()
+	TownLife.fossil_lab(["Hi"])
+	_drain()
+	check("fossil revived", gs.players[0].party.size() == n + 1 and gs.players[0].party[-1].species == "orecrag")
+	# Shoal Cave: the tide, and the Shell Bell.
+	ow.load_map("shoalcave", 10, 8, "up")
+	_drain()
+	ow.field.low = true
+	var low := Field.tile(ow, 2, 2)
+	ow.field.low = false
+	check("tide", low == "g" and Field.tile(ow, 2, 2) == "~")
+	gs.bag.shoalSalt = 4
+	gs.bag.shoalShell = 4
+	TownLife.shell_bell(["Hi"])
+	_drain(0)
+	check("shell bell", gs.bag.get("shellBell", 0) >= 1 and gs.bag.shoalSalt == 0)
+	# Art museum, Battle Tents.
+	Museum.paint(gs, "cool", m)
+	check("museum painting", gs.paintings.has("cool") and gs.paintings.cool.species == m.species)
+	check("tent level cap", BattleTent.at_level(m, 30).level == 30 and BattleTent._opponent(0).party[0].level == 30)
+	# Record Mixing.
+	var friend := GameState.new_game("solo", ["Ash"])
+	friend.players[0].party.append(_mon("nibbit", 10))
+	RecordMix.mix(gs, friend, {"trendy": "WOW WOW", "tower": {"best": 14}})
+	check("record mixing", gs.mixed.size() == 1 and gs.mixed[0].tower == 14 and friend.mixed.size() == 1
+		and friend.trendy == gs.trendy)
+	# The Sealed Chamber: a creature of the sea first, one of stone last, then Dig.
+	gs.players[0].party = [_mon("ripplet", 40, ["dig", "surf"]), _mon("kobbrute", 40, ["strength", "fly"])]
+	ow.load_map("sealedchamber", 7, 2, "up")
+	_drain()
+	Legends._chamber(ow)
+	_drain(0)
+	check("golems awake", gs.flags.get("golems_awake", false))
+	ow.load_map("tomb_rock", 7, 2, "up")
+	_drain()
+	Legends._tomb(ow)
+	_drain(0)
+	check("rock tomb opens", gs.flags.get("tomb_rock_open", false) and Field._statics(ow).size() == 1)
+	ow.load_map("tomb_ice", 7, 2, "up")
+	_drain()
+	Legends._tomb(ow)
+	_drain()
+	ow.field.wait.t = Game.time - 200.0
+	Legends._tomb(ow)
+	_drain()
+	check("frost tomb opens after waiting", gs.flags.get("tomb_ice_open", false))
+	# Birth Island's triangle.
+	ow.load_map("birthisland", 9, 9, "up")
+	_drain()
+	for i in 8:
+		var p: Vector2i = Legends.triangle_pos(ow)
+		Legends.triangle_interact(ow, p.x, p.y)
+		_drain()
+	check("triangle puzzle", gs.flags.get("birth_puzzle", false) and Field._statics(ow).size() == 1)
+	# Southern Island: only one Eon creature, while it still roams.
+	gs.roamers = {DB.ROAMERS[0]: {"map": "", "level": 50, "hp": -1}, DB.ROAMERS[1]: {"map": "", "level": 50, "hp": -1}}
+	ow.load_map("southernisland", 9, 11, "up")
+	_drain()
+	check("eon on southern island", Field._statics(ow).size() == 1 and Field._statics(ow)[0].species == DB.ROAMERS[0])
+	# Tickets and the ferry.
+	gs.hallOfFame = [{}, {}]
+	Legends.ticket({"ticket": "mysticTicket", "need": "hof"}, ["Hi"])
+	_drain()
+	var ferry: Dictionary = {}
+	for f in DB.MAPS.saltmarsh.npcs:
+		if f.get("service", "") == "ferry" and f.has("islands"):
+			ferry = f
+	check("mystic ticket and ferry", gs.bag.get("mysticTicket", 0) == 1 and Legends.ferry_stops(ferry).has("navelrock"))
