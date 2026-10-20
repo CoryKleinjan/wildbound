@@ -186,10 +186,16 @@ static func open_bag(o: Dictionary) -> void:
 			Gfx.rect(10 + k * 9, 24, 6, 6, "#f8f0d0" if k == st.pocket else "#b89050")
 		Game.player_tag(o.player, 100, 4))
 	var ref := {}
-	var close := func() -> void:
+	# Takes the bag's own scenes (list, pocket switcher, background) off the stack.
+	var pop_bag := func() -> void:
 		if ref.has("menu"):
 			Game.pop(ref.menu)
+			ref.erase("menu")
+		if ref.has("sw"):
+			Game.pop(ref.sw)
 		Game.pop(bg)
+	var close := func() -> void:
+		pop_bag.call()
 		on_close.call()
 	var build := func(self_ref: Callable) -> void:
 		var ids: Array = ids_in.call(POCKETS[st.pocket])
@@ -211,10 +217,7 @@ static func open_bag(o: Dictionary) -> void:
 				if i == ids.size():
 					close.call()
 					return
-				(o.on_pick as Callable).call(ids[i], func() -> void:
-					Game.pop(ref.menu)
-					ref.erase("menu")
-					Game.pop(bg)),
+				(o.on_pick as Callable).call(ids[i], pop_bag),
 		})
 		ref.menu = menu
 		Game.push(menu)

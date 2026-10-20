@@ -70,6 +70,7 @@ func run() -> void:
 	_field_tests()
 	_daycare_tests()
 	_item_tests()
+	_bag_close_tests()
 	_misc_tests()
 
 func _evolution_tests() -> void:
@@ -269,6 +270,35 @@ func _daycare_tests() -> void:
 	var lines := _drain()
 	check("egg hatches", hatched and not egg.egg and lines.size() > 0 and Game.gs.caught.has(egg.species))
 	check("eggs can't battle", not Battle.can_battle({"hp": 10, "egg": true}))
+
+## The bag must take all of its scenes off the stack, the pocket switcher too. A switcher left on top of the
+## battle swallowed every update, so throwing a Capture Orb froze the game.
+func _bag_close_tests() -> void:
+	Game.gs = GameState.new_game("solo")
+	Game.gs.bag.orb = 3
+	var base := Menus.FnScene.new(func() -> void: pass)
+	Game.replace(base)
+	var picked := []
+	Menus.open_bag({"player": 0, "in_battle": true, "can_throw": true, "pocket": 1, "on_close": func() -> void: pass,
+		"on_pick": func(id: String, done: Callable) -> void:
+			picked.append(id)
+			done.call()})
+	check("bag opens on top", Game.stack.size() > 1)
+	var menu = null
+	for sc in Game.stack:
+		if sc is ListMenu:
+			menu = sc
+	menu._o.on_select.call(0)
+	check("picking an item closes the whole bag", picked == ["orb"] and Game.stack.size() == 1 and Game.top == base,
+		str(Game.stack))
+	var closed := [false]
+	Menus.open_bag({"player": 0, "in_battle": false, "can_throw": false, "on_close": func() -> void: closed[0] = true,
+		"on_pick": func(_id: String, _done: Callable) -> void: pass})
+	for sc in Game.stack:
+		if sc is ListMenu:
+			menu = sc
+	menu._o.on_cancel.call()
+	check("closing the bag closes the whole bag", closed[0] and Game.stack.size() == 1 and Game.top == base, str(Game.stack))
 
 func _item_tests() -> void:
 	Game.gs = GameState.new_game("solo")
