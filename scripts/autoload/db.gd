@@ -16,6 +16,18 @@ var TYPE_CHART: Dictionary = {}
 var GYMS: Array = []
 var ROUTE_LEVELS: Array = []
 var PALETTES: Dictionary = {}
+## From data/features.json (tools/build_features.py): TMs, HMs, tutors, shops and the postgame/contest tables.
+var TMS: Array = []
+var HMS: Array = []
+var HM_BADGES: Dictionary = {}
+var TUTORS: Array = []
+var FLY_POINTS: Dictionary = {}
+var DECORATIONS: Dictionary = {}
+var SHOPS: Dictionary = {}
+var CONTEST: Dictionary = {}
+var TOWER: Dictionary = {}
+var ROAMERS: Array = []
+var GYM_TMS: Dictionary = {}
 const STAT_KEYS := ["hp", "atk", "def", "spa", "spd", "spe"]
 
 func _init() -> void:
@@ -44,6 +56,7 @@ func _init() -> void:
 	_apply_interiors(_fix_ints(_load("interiors")))
 	_apply_story(_fix_ints(_load("story")))
 	_apply_styles(_load("town_styles"))
+	_apply_features(_fix_ints(_load("features")))
 
 ## Attaches each town's look (data/town_styles.json, see TownStyle) to the town and the rooms inside it.
 func _apply_styles(styles: Dictionary) -> void:
@@ -76,6 +89,47 @@ func _apply_story(story: Dictionary) -> void:
 		for t in m.get("trainers", []):
 			if story.trainerPatches.has(t.id):
 				t.merge(story.trainerPatches[t.id], true)
+
+const _APPEND_KEYS := ["npcs", "trainers", "items", "statics", "secretSpots", "soil"]
+
+## Merges data/features.json: new moves, abilities, items and maps, plus patches to species and existing maps.
+func _apply_features(f: Dictionary) -> void:
+	for id in f.moves:
+		MOVES[id] = f.moves[id]
+	for id in f.movePatches:
+		MOVES[id].merge(f.movePatches[id], true)
+	for id in f.abilities:
+		ABILITIES[id] = f.abilities[id]
+	for id in f.items:
+		if ITEMS.has(id):
+			ITEMS[id].merge(f.items[id], true)
+		else:
+			ITEMS[id] = f.items[id]
+	for id in f.species:
+		SPECIES[id].merge(f.species[id], true)
+	for id in f.maps:
+		MAPS[id] = f.maps[id]
+	for id in f.mapPatches:
+		var m: Dictionary = MAPS[id]
+		var patch: Dictionary = f.mapPatches[id]
+		for k in patch:
+			if _APPEND_KEYS.has(k):
+				m[k] = m.get(k, []) + patch[k]
+			elif patch[k] is Dictionary and m.get(k, null) is Dictionary:
+				m[k].merge(patch[k], true)
+			else:
+				m[k] = patch[k]
+	TMS = f.tms
+	HMS = f.hms
+	HM_BADGES = f.hmBadges
+	TUTORS = f.tutors
+	FLY_POINTS = f.flyPoints
+	DECORATIONS = f.decorations
+	SHOPS = f.shops
+	CONTEST = f.contest
+	TOWER = f.tower
+	ROAMERS = f.roamers
+	GYM_TMS = f.gymTms
 
 func _load(name: String) -> Variant:
 	var f := FileAccess.open("res://data/%s.json" % name, FileAccess.READ)
