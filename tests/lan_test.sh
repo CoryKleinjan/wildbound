@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
-# Runs a host and a joining game side by side under xvfb and saves screenshots and logs to $1.
-# Delete any save file first: with a save, the title menu starts at CONTINUE.
+# Drop-in co-op check: runs a host and a friend who joins with their own save, side by side under
+# xvfb. Saves screenshots and logs to $1. Uses (and overwrites) the two save files in user://.
 set -u
 cd "$(dirname "$0")/.."
 G=${GODOT:-godot}
 OUT=${1:-/tmp/wildbound-lan}; rm -rf $OUT; mkdir -p $OUT
 xvfb-run -a $G --path . --rendering-driver opengl3 -s res://tests/drive.gd -- $OUT/h \
-  wait:30 key:Z wait:10 key:DOWN key:Z wait:90 shot:lobby \
-  "until:K:40:Net.client_id != 0" wait:200 "print:Net.client_id" shot:joined \
-  "top:NameEntryScene" shot:p1name key:ESCAPE wait:30 \
-  "until:Z:60:Game.gs != null" "print:Game.gs.players" wait:120 shot:fern \
-  "print:Net._last_frame.size()" "print:Net.recorder.cmds.size()" "print:var_to_bytes(Net.recorder.cmds).size()" \
-  wait:120 > $OUT/host.log 2>&1 &
-sleep 4
+  'gd:var gs = GameState.new_game("solo", ["Wren"]) ;; GameState.give_starter(gs, 0, "sproutle") ;; gs.flags.starter = true ;; gs.flags.intro_mom = true ;; GameState.save(gs)' \
+  wait:30 key:Z wait:10 key:Z wait:90 top:OverworldScene shot:start \
+  "until:K:60:Net.guest_in_world()" wait:200 shot:joined \
+  "print:Game.views[1].gs.players[0].name" "print:Game.views[1].gs.players[0].party.size()" \
+  "print:Vector2i(Game.views[1].stack[0].player.x, Game.views[1].stack[0].player.y)" wait:400 \
+  "print:Vector2i(Game.views[1].stack[0].player.x, Game.views[1].stack[0].player.y)" "gd:game.views[1].gs.money = 1234" \
+  "gd:game.in_view(1, game.views[1].stack[0].load_map.bind(\"route1\", 10, 20, \"up\"))" wait:60 "print:Game.views[1].gs.map" "print:Game.views[0].gs.map" shot:apart \
+  "print:Game.views[1].gs.flags == Game.views[0].gs.flags" wait:200 > $OUT/host.log 2>&1 &
+sleep 5
 xvfb-run -a $G --path . --rendering-driver opengl3 -s res://tests/drive.gd -- $OUT/c \
+  'gd:GameState.SAVE_PATH = "user://p2-save.json" ;; var gs = GameState.new_game("solo", ["Mira"]) ;; GameState.give_starter(gs, 0, "cindercub") ;; GameState.give_starter(gs, 0, "ripplet") ;; gs.flags.starter = true ;; gs.money = 777 ;; GameState.save(gs)' \
   wait:30 key:Z wait:10 key:DOWN key:DOWN key:Z wait:150 shot:joinlist "print:Net.found" \
-  key:Z wait:120 "print:Net.connected" shot:connected \
-  wait:400 shot:mirror key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:40 \
-  key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:40 key:ESCAPE:6 wait:200 shot:mirror2 \
-  "print:Net.frame.size()" "print:Net.textures.size()" > $OUT/client.log 2>&1
+  key:Z wait:200 "print:Net.connected" shot:joined key:Z:4 wait:30 key:Z:4 wait:30 \
+  key:A:60 wait:200 wait:120 shot:route "print:Net.frame.size()" \
+  "gd:return GameState.load_game().players[0].name + str(GameState.load_game().players[0].party.size()) + str(GameState.load_game().money)" \
+  wait:200 "gd:return GameState.load_game().money" > $OUT/client.log 2>&1
 wait

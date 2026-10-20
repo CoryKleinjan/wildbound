@@ -1,6 +1,6 @@
 class_name LanScenes
-## Screens for LAN co-op: hosting (waiting for player 2), finding a game to join, typing a host's
-## address, and player 2's view of the host's screen.
+## Screens for joining a friend's game over the network: finding a game, typing a host's address,
+## and the joined player's screen (drawn by the host's computer).
 
 static func _backdrop(title: String) -> void:
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#e8e0c8")
@@ -15,68 +15,20 @@ static func _lines(lines: Array, y: float) -> float:
 		y += 3
 	return y
 
-## Host side: listens for player 2, then runs on_ready (which starts or continues the game).
-class HostLobby extends Scene:
-	var _on_ready: Callable
-	var _error := ""
-	var _joined_at := -1.0
-	var _addresses: Array = []
-
-	func _init(game_name: String, on_ready: Callable) -> void:
-		_on_ready = on_ready
-		if Net.host(game_name) != OK:
-			_error = "Couldn't start hosting on port %d. Is another Wildbound game already hosting on this computer?" % Net.PORT
-		_addresses = Net.local_addresses()
-
-	func update(_dt: float) -> void:
-		var inp := Game.input.p(0)
-		if _joined_at >= 0:
-			if Game.time - _joined_at > 1.2:
-				_start()
-			return
-		if Net.client_id != 0:
-			_joined_at = Game.time
-			return
-		if inp.pressed("b"):
-			Audio.sfx("cancel")
-			Net.stop()
-			Game.transition(func() -> void: Game.replace(TitleScene.new()))
-		elif inp.pressed("start") and _error == "":
-			# Both players on this keyboard; player 2 can still join later from their own computer.
-			Audio.sfx("confirm")
-			_start()
-
-	func _start() -> void:
-		_joined_at = INF
-		Game.input.coop = true
-		Game.transition(_on_ready)
-
-	func draw() -> void:
-		LanScenes._backdrop("CO-OP: HOSTING")
-		if _error != "":
-			LanScenes._lines([_error, "B: back"], 32)
-			return
-		if _joined_at >= 0:
-			Gfx.text("PLAYER 2 JOINED!", Gfx.W / 2.0, 70, {"size": 9, "align": "center", "color": "#3858a8"})
-			return
-		var dots := ".".repeat(1 + floori(Game.time * 2) % 3)
-		var y := LanScenes._lines([
-			"Waiting for player 2" + dots,
-			"On their computer, start Wildbound and pick JOIN CO-OP. Both computers need to be on the same network.",
-		], 30)
-		if not _addresses.is_empty():
-			LanScenes._lines(["If this game isn't listed there, type this address: " + ", ".join(_addresses)], y)
-		Gfx.text("B: back    MENU: play on one keyboard", Gfx.W / 2.0, 146, {"size": 5, "align": "center", "color": "#707880", "shadow": null})
-
 ## Client side: lists games announced on the network, or connects to a typed address.
 class Join extends Scene:
 	var _sel := 0
 	var _connecting := ""
 	var _since := 0.0
 	var _message := ""
+	var _name := ""
 
 	func _init() -> void:
 		Net.browse()
+
+	func _set_name(n: String, ip: String) -> void:
+		_name = n
+		_connect(ip)
 
 	func _items() -> Array:
 		var out: Array = []
@@ -125,7 +77,12 @@ class Join extends Scene:
 
 	func _connect(ip: String) -> void:
 		_message = ""
-		if Net.join(ip) != OK:
+		# Without a save, ask for a name first; creatures come from PROF. ALDER once they arrive.
+		var save: Variant = GameState.load_game()
+		if save == null and _name == "":
+			Game.push(NameEntryScene.new(0, "YOUR NAME?", "p2", "Juno", func(n: String) -> void: _set_name(n, ip)))
+			return
+		if Net.join(ip, _name) != OK:
 			_message = "Couldn't connect to %s." % ip
 			return
 		_connecting = ip
@@ -138,7 +95,7 @@ class Join extends Scene:
 		Game.transition(func() -> void: Game.replace(TitleScene.new()))
 
 	func draw() -> void:
-		LanScenes._backdrop("JOIN CO-OP")
+		LanScenes._backdrop("JOIN A GAME")
 		if _connecting != "":
 			LanScenes._lines(["Connecting to %s..." % _connecting], 70)
 			return
@@ -154,7 +111,7 @@ class Join extends Scene:
 		if _message != "":
 			Gfx.text(_message, Gfx.W / 2.0, 142, {"size": 5, "align": "center", "color": "#c03030", "shadow": null})
 		else:
-			Gfx.text("The host needs to be on its hosting screen.", Gfx.W / 2.0, 142, {"size": 5, "align": "center", "color": "#707880", "shadow": null})
+			Gfx.text("Your friend needs to be playing (past the title screen).", Gfx.W / 2.0, 142, {"size": 5, "align": "center", "color": "#707880", "shadow": null})
 
 ## Typing an IP address with the number keys. Enter connects, Esc cancels.
 class AddressEntry extends Scene:
@@ -207,25 +164,26 @@ class AddressEntry extends Scene:
 		Gfx.text("Number keys and . to type", Gfx.W / 2.0, 90, {"size": 5, "align": "center", "color": "#707880", "shadow": null})
 		Gfx.text("Enter: join   Esc: cancel", Gfx.W / 2.0, 99, {"size": 5, "align": "center", "color": "#707880", "shadow": null})
 
-## Player 2's computer: shows the host's screen and sends this keyboard's buttons.
+## The joined player's computer: shows the frames the host draws for them and sends this
+## computer's buttons.
 class RemoteScreen extends Scene:
 	func _init() -> void:
 		Audio.stop_music()
 		if DisplayServer.get_name() != "headless":
-			DisplayServer.window_set_title("Wildbound - Player 2")
+			DisplayServer.window_set_title("Wildbound - joined game")
 
 	func update(_dt: float) -> void:
 		if Net.lost or Net.role != Net.Role.CLIENT:
 			Net.stop()
 			Audio.stop_music()
 			Game.replace(TitleScene.new())
-			Game.say(["The connection to the host's game was lost."])
+			Game.say(["The connection to your friend's game was lost. Your progress there was saved on this computer."])
 			return
 		Net.send_buttons(Game.input.p(0).held)
 
 	func draw() -> void:
 		if Net.frame.is_empty():
-			LanScenes._backdrop("JOIN CO-OP")
-			LanScenes._lines(["Connected! Waiting for the host's screen..."], 70)
+			LanScenes._backdrop("JOIN A GAME")
+			LanScenes._lines(["Connected! Waiting for your friend's game..."], 70)
 			return
 		DrawRecorder.replay(Net.frame, Gfx.ci, Net.textures)
