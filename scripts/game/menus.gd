@@ -162,9 +162,8 @@ static func badge_count(gs: Dictionary) -> int:
 			n += 1
 	return n
 
-static func open_shop(player: int, on_close: Callable) -> void:
-	var gs: Dictionary = Game.gs
-	var badges := badge_count(gs)
+## Trail Mart stock: grows with badges.
+static func mart_stock(badges: int) -> Array:
 	var stock: Array = ["orb"]
 	if badges >= 1: stock.append("greatOrb")
 	if badges >= 3: stock.append("ultraOrb")
@@ -174,6 +173,12 @@ static func open_shop(player: int, on_close: Callable) -> void:
 	if badges >= 2: stock.append("revive")
 	stock.append_array(["antidote", "parlyzHeal", "awakening", "burnHeal"])
 	if badges >= 3: stock.append("fullHeal")
+	return stock
+
+## fixed_stock: item ids for a counter with its own list (department store); empty = the Trail Mart's badge-based stock.
+static func open_shop(player: int, on_close: Callable, fixed_stock: Array = []) -> void:
+	var gs: Dictionary = Game.gs
+	var stock: Array = fixed_stock if not fixed_stock.is_empty() else mart_stock(badge_count(gs))
 	var header := FnScene.new(func() -> void:
 		Gfx.panel(4, 4, 90, 22)
 		Gfx.text("$%d" % gs.money, 12, 12, {"size": 6}), true)

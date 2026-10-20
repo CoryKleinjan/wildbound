@@ -133,5 +133,57 @@
    "mult10": 20
   },
   "desc": "High catch rate (2x)."
+ },
+ "maxPotion": {
+  "id": "maxPotion",
+  "name": "Max Potion",
+  "price": 2500,
+  "effect": {
+   "kind": "heal",
+   "amount": 999
+  },
+  "desc": "Fully restores HP."
+ },
+ "iceHeal": {
+  "id": "iceHeal",
+  "name": "Ice Heal",
+  "price": 250,
+  "effect": {
+   "kind": "cure",
+   "statuses": [
+    "frz"
+   ]
+  },
+  "desc": "Thaws a frozen creature."
+ },
+ "freshWater": {
+  "id": "freshWater",
+  "name": "Fresh Water",
+  "price": 200,
+  "effect": {
+   "kind": "heal",
+   "amount": 50
+  },
+  "desc": "Restores 50 HP."
+ },
+ "sodaPop": {
+  "id": "sodaPop",
+  "name": "Soda Pop",
+  "price": 300,
+  "effect": {
+   "kind": "heal",
+   "amount": 60
+  },
+  "desc": "Restores 60 HP."
+ },
+ "lemonade": {
+  "id": "lemonade",
+  "name": "Lemonade",
+  "price": 350,
+  "effect": {
+   "kind": "heal",
+   "amount": 80
+  },
+  "desc": "Restores 80 HP."
  }
 }

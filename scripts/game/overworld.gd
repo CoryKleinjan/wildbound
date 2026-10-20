@@ -333,15 +333,17 @@ const FURNITURE_TEXT := {
 	"q": ["The shelves are stocked with Potions and Capture Orbs.", "Pay at the counter."],
 }
 
+const DRINKS := ["freshWater", "sodaPop", "lemonade"]
+
 ## Runs a building NPC's job after (or instead of) their lines: the Rest Lodge nurse, the Mart clerk,
 ## or a resident who lets your creatures rest.
-func _npc_action(action: String, text: Array) -> void:
-	match action:
+func _npc_action(npc: Dictionary, text: Array) -> void:
+	match npc.get("action", ""):
 		"lodge":
 			Game.say(["Welcome to the Rest Lodge!"], _lodge_menu)
 		"mart":
-			Game.say(["Welcome to the Trail Mart! What do you need?"], func() -> void:
-				Menus.open_shop(0, func() -> void: Game.say(["Please come again!"])))
+			Game.say([npc.get("greeting", "Welcome to the Trail Mart! What do you need?")], func() -> void:
+				Menus.open_shop(0, func() -> void: Game.say(["Please come again!"]), npc.get("stock", [])))
 		"heal":
 			Game.say(text, func() -> void:
 				for m in GameState.all_party_mons(gs):
@@ -400,7 +402,7 @@ func _interact() -> void:
 				if gs.flags.get(v.if, false):
 					text = v.text
 					break
-			_npc_action(n.npc.get("action", ""), text)
+			_npc_action(n.npc, text)
 			return
 		if n.trainer != null:
 			if gs.flags.get(n.trainer.id, false):
@@ -413,7 +415,10 @@ func _interact() -> void:
 		Game.say(sign)
 		return
 	var tile := Maps.tile_at(map, tx, ty)
-	if tile == "M":
+	if tile == "V":
+		Game.say(["A drink machine! What will you buy?"], func() -> void:
+			Menus.open_shop(0, func() -> void: pass, DRINKS))
+	elif tile == "M":
 		Game.say(["It's a storage machine for creatures."], func() -> void: _lodge_menu(false))
 	elif FURNITURE_TEXT.has(tile) and map.get("interior", false):
 		Game.say(FURNITURE_TEXT[tile])
@@ -626,6 +631,7 @@ func draw() -> void:
 	var anim: int = floori(_frame * 2)
 	var theme: String = map.get("theme", "#d8d0c0")
 	var indoor: bool = map.get("indoor", false)
+	var style: Dictionary = map.get("style", {})
 	var h := _map_h()
 	var w := _map_w()
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#000000")
@@ -634,7 +640,7 @@ func draw() -> void:
 			if indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w):
 				continue
 			var ch := Maps.tile_at(map, tx, ty)
-			var tex: Texture2D = Tiles.tile_texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), Maps.tile_at(map, tx, ty + 1), theme)
+			var tex: Texture2D = TownStyle.apply(Tiles.tile_texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), Maps.tile_at(map, tx, ty + 1), theme), ch, style)
 			Gfx.image(tex, tx * 16 - cam_x, ty * 16 - cam_y)
 	var actors: Array[Actor] = []
 	actors.append_array(npcs)
@@ -653,7 +659,7 @@ func draw() -> void:
 		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy))
 		# Tall grass covers the feet.
 		if a.move == null and Maps.tile_at(map, a.x, a.y) == ",":
-			var gt: Texture2D = Tiles.tile_texture(",", a.x, a.y, anim)
+			var gt: Texture2D = TownStyle.apply(Tiles.tile_texture(",", a.x, a.y, anim), ",", style)
 			Gfx.ci.draw_texture_rect_region(gt, Rect2(ap.x - cam_x, ap.y - cam_y + 9, 16, 7), Rect2(0, 9, 16, 7))
 		if _exclaim != null and _exclaim.a == a:
 			Gfx.rect(sx + 4, sy - 14, 9, 11, "#303030")

@@ -25,6 +25,7 @@ Gamepads work too (pad 1 = Player 1, pad 2 = Player 2). Saves go to Godot's user
 
 - 200 creatures across all 17 types, with evolutions, learnsets, abilities and 7 legendaries.
 - 12 towns joined by 12 routes, 8 gyms (badge needed to leave each gym town onward) and the League in Summitcrown (needs all 8 badges).
+- Each town has its own look (`data/town_styles.json`, applied by `scripts/art/town_style.gd` on top of whatever tile art is loaded): autumn fields in Harrowfield, snow and pines in Summit Crown, palms and white sand in Coralhaven, and so on. Cinder City is the big city, with avenues, street lamps, a fountain plaza and a two-floor department store (`tools/build_towns.py`).
 - Every town door leads inside: your house, Rest Lodges (nurse + storage machine), Trail Marts (clerk at the counter) and homes with people to talk to. Rooms are built by `tools/build_interiors.py` into `data/interiors.json`.
 - Trainers with line of sight, a rival, wild encounters, catching with Capture Orbs, Rest Lodges, Marts, storage, bag, party, summary (stats, IVs, EVs, nature), a Creaturedex and saving.
 
