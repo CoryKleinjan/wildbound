@@ -71,7 +71,7 @@ func draw() -> void:
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#e8e0c8")
 	Gfx.rect(0, 0, Gfx.W, 20, "#5868a8")
 	Gfx.text(_title, Gfx.W / 2.0, 7, {"size": 6, "align": "center", "color": "#ffffff"})
-	TrainerArt.draw_char(20, 30, "down", 0, DB.PALETTES[_palette])
+	TrainerArt.draw_char(20, 30, "down", 0, DB.PALETTES[_palette], _palette)
 	Gfx.panel(44, 26, 150, 24)
 	for i in MAX_LEN:
 		var x := 56 + i * 16

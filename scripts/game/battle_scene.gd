@@ -644,16 +644,40 @@ static func _ellipse(cx: float, cy: float, rx: float, ry: float, color: Variant)
 static func _tex(tex: Texture2D, x: float, y: float, w: float, h: float, modulate: Color = Color.WHITE) -> void:
 	Gfx.ci.draw_texture_rect(tex, Rect2(x, y, w, h), false, modulate)
 
-static func _plat(cx: float, cy: float, rx: float, ry: float) -> void:
-	_ellipse(cx, cy, rx, ry, "#a8d088")
-	_ellipse(cx, cy + 2, rx - 6, ry - 3, "#88b870")
+## Platform colors (rim, inner) per battle backdrop.
+const PLATFORMS := {
+	"field": ["#a8d088", "#88b870"], "forest": ["#90c070", "#70a058"], "beach": ["#f0e0a8", "#d8c888"],
+	"mountain": ["#c0b098", "#a09078"], "town": ["#d0c8b8", "#b0a898"], "gym": ["#e0d0b0", "#c0b090"],
+	"league": ["#c8b8e8", "#a898d0"], "night": ["#6878a0", "#506088"],
+}
+
+## Which battle backdrop a map uses (assets/backdrops/<name>.png).
+static func backdrop_for(m: Dictionary) -> String:
+	var id: String = m.get("id", "")
+	if id == "league":
+		return "league"
+	if id.begins_with("gym"):
+		return "gym"
+	if m.get("town", false) or not m.has("route"):
+		return "town"
+	return ["field", "forest", "field", "mountain", "forest", "beach", "field", "forest", "beach", "night", "field", "mountain"][(int(m.route) - 1) % 12]
+
+func _plat(cx: float, cy: float, rx: float, ry: float) -> void:
+	var c: Array = PLATFORMS.get(_setup.get("bg", "field"), PLATFORMS.field)
+	_ellipse(cx, cy, rx, ry, c[0])
+	_ellipse(cx, cy + 2, rx - 6, ry - 3, c[1])
 
 func draw() -> void:
 	# Background.
-	var top := Color("#f8f0d8")
-	var bot := Color("#d8f0c0")
-	Gfx.ci.draw_polygon(PackedVector2Array([Vector2(0, 0), Vector2(Gfx.W, 0), Vector2(Gfx.W, 112), Vector2(0, 112)]),
-		PackedColorArray([top, top, bot, bot]))
+	var bg: String = _setup.get("bg", "field")
+	var bg_tex := ArtAssets.texture("backdrops/" + bg)
+	if bg_tex != null:
+		Gfx.image(bg_tex, 0, 0)
+	else:
+		var top := Color("#f8f0d8")
+		var bot := Color("#d8f0c0")
+		Gfx.ci.draw_polygon(PackedVector2Array([Vector2(0, 0), Vector2(Gfx.W, 0), Vector2(Gfx.W, 112), Vector2(0, 112)]),
+			PackedColorArray([top, top, bot, bot]))
 	var tm := Game.time
 	if _weather == "rain":
 		for i in 40:
@@ -670,7 +694,7 @@ func draw() -> void:
 	_plat(64 - intro * 140, 112, 60, 12)
 
 	if _mode == "intro" and _setup.kind == "trainer":
-		TrainerArt.draw_trainer_big(152 + intro * 140, 18, DB.PALETTES.get(_setup.trainer.palette, DB.PALETTES.boy), false)
+		TrainerArt.draw_trainer_big(152 + intro * 140, 18, DB.PALETTES.get(_setup.trainer.palette, DB.PALETTES.boy), false, _setup.trainer.palette if DB.PALETTES.has(_setup.trainer.palette) else "boy")
 
 	for side in [1, 0]:
 		var slots: Array = _slots[side]

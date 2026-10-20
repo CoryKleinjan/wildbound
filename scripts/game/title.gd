@@ -51,13 +51,17 @@ func _on_pick(pick: String) -> void:
 		Game.transition(func() -> void: Game.replace(IntroScene.new(false)))
 
 func draw() -> void:
-	# Sky gradient.
-	var top := Color("#78b8f0")
-	var bottom := Color("#c8f0b0")
-	Gfx.ci.draw_polygon(
-		PackedVector2Array([Vector2(0, 0), Vector2(Gfx.W, 0), Vector2(Gfx.W, Gfx.H), Vector2(0, Gfx.H)]),
-		PackedColorArray([top, top, bottom, bottom]))
-	Gfx.rect(0, 120, Gfx.W, 40, "#78c060")
+	var backdrop := ArtAssets.texture("title")
+	if backdrop != null:
+		Gfx.image(backdrop, 0, 0)
+	else:
+		# Sky gradient.
+		var top := Color("#78b8f0")
+		var bottom := Color("#c8f0b0")
+		Gfx.ci.draw_polygon(
+			PackedVector2Array([Vector2(0, 0), Vector2(Gfx.W, 0), Vector2(Gfx.W, Gfx.H), Vector2(0, Gfx.H)]),
+			PackedColorArray([top, top, bottom, bottom]))
+		Gfx.rect(0, 120, Gfx.W, 40, "#78c060")
 	var bob := sin(_t * 2) * 2
 	var s := 56.0 / 64.0
 	Gfx.image(CreatureArt.creature_sprite("cindercub"), 20, 64 + bob, {"scale": s})

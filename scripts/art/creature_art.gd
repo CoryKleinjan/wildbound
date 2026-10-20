@@ -75,6 +75,13 @@ static func creature_sprite(species_id: String, shiny: bool = false, back: bool 
 
 ## The raw 64x64 RGBA8 image behind creature_sprite (uncached).
 static func sprite_image(species_id: String, shiny: bool = false, back: bool = false) -> Image:
+	var png := ArtAssets.image("creatures/%s%s" % [species_id, "_back" if back else ""])
+	if png != null:
+		return ArtAssets.hue_rotate(png, 140) if shiny else png.duplicate()
+	return procedural_image(species_id, shiny, back)
+
+## The procedural sprite (fallback when assets/creatures/<id>.png is missing).
+static func procedural_image(species_id: String, shiny: bool = false, back: bool = false) -> Image:
 	var spec0: Dictionary = _species(species_id).sprite
 	var spec := spec0
 	if shiny:
