@@ -5,7 +5,9 @@ class_name GameState
 ## Emerald additions (see _extra): daycare {mons, steps, egg}, berries {map: {"x,y": {berry, planted, watered}}},
 ## repel (steps left), bike (riding), safari (null or {steps, balls}), secretBase (null or {map, x, y, decor}),
 ## decor (owned decoration ids), bp (Battle Points), tower {streak, best}, roamers {species: {map, level, hp}},
-## steps, rematch {trainer id: times beaten again}, fly (unlocked towns)}
+## steps, rematch {trainer id: times beaten again}, fly (unlocked towns), pcItems {item: count}, mailbox [mail],
+## hallOfFame [{date, team}], coins, frontier {facility: {streak, best}}, pyramid (null or the run in progress),
+## trick {level, spot}, matchCall (registered trainer ids), calls (queued Match Call messages), lastDay, trades}
 
 static var SAVE_PATH := "user://wildbound-save.json"
 
@@ -53,6 +55,17 @@ static func _extra() -> Dictionary:
 		"rematch": {},
 		"fly": ["fernhollow"],
 		"contest": {},
+		"pcItems": {"potion": 1},
+		"mailbox": [],
+		"hallOfFame": [],
+		"coins": 0,
+		"frontier": {},
+		"pyramid": null,
+		"trick": {"level": 0, "spot": ""},
+		"matchCall": [],
+		"calls": [],
+		"lastDay": 0,
+		"trades": 0,
 	}
 
 ## Gives a player their first creature (from PROF. ALDER's bag).
@@ -132,6 +145,8 @@ static func load_game() -> Variant:
 	for m in all_party_mons(gs) + gs.box + gs.daycare.mons:
 		max_uid = maxi(max_uid, m.uid)
 	Creatures.set_next_uid(max_uid + 1)
+	# A save made inside the Battle Pyramid: the run is over, and the real team and bag come back.
+	Frontier.restore_after_load(gs)
 	return gs
 
 # ---------------------------------------------------------------- drop-in co-op
@@ -170,6 +185,14 @@ static func guest_state(save: Variant, name: String, host_gs: Dictionary) -> Dic
 		var decor: Variant = s.get("decor")
 		if decor is Array:
 			gs.decor = decor.filter(func(d: Variant) -> bool: return d is String and DB.DECORATIONS.has(d))
+		if s.get("coins") is int:
+			gs.coins = clampi(s.coins, 0, 9999)
+		var pc: Variant = s.get("pcItems")
+		if pc is Dictionary:
+			gs.pcItems = {}
+			for k in pc:
+				if k is String and DB.ITEMS.has(k) and pc[k] is int and pc[k] > 0:
+					gs.pcItems[k] = mini(pc[k], 999)
 	# Fresh ids, so they can't clash with the host's creatures.
 	for m in gs.players[0].party + gs.box:
 		Creatures.migrate(m)
@@ -232,6 +255,13 @@ static func _valid_mon(m: Variant) -> bool:
 	if m.has("ribbons") and not m.ribbons is Array:
 		return false
 	if m.has("condition") and not m.condition is Dictionary:
+		return false
+	var pk: Variant = m.get("pkrs")
+	if pk != null and not (pk is Dictionary and pk.get("strain") is int and pk.get("days") is int):
+		return false
+	var mail: Variant = m.get("mail")
+	if mail != null and not (mail is Dictionary and mail.get("text") is String and (mail.text as String).length() <= 120
+			and mail.get("from") is String and mail.get("item") is String and DB.ITEMS.has(mail.item)):
 		return false
 	return true
 
