@@ -1952,6 +1952,51 @@ for _mid in sorted(set(MAPS) | set(OUT['maps'])):
         (OUT['maps'][_mid] if _mid in OUT['maps'] else patch(_mid))['mouths'] = _mouths
 
 
+
+# Cave exits at the bottom of a map: in Emerald these are just a gap in the bottom wall that you walk out of, but
+# the paintings draw an arch with a black hole (or stairs). The game covers that hole with the painting's own
+# floor, from the tile above it down to the map's edge (overworld.gd), so it reads as an opening.
+# "exitFloor" maps each covered cell "x,y" to the [x, y] cell of the painting its floor is copied from.
+def cell_dark(px, x, y):
+    return sum(px[x * 16 + i, y * 16 + j] < 60 for j in range(16) for i in range(16)) / 256
+
+
+for _mid in sorted(set(MAPS) | set(OUT['maps'])):
+    _m = OUT['maps'].get(_mid) or MAPS[_mid]
+    _path = os.path.join(ROOT, 'assets', 'maps', _mid + '.png')
+    if not _m.get('cave') or not os.path.exists(_path):
+        continue
+    from PIL import Image
+    _px = Image.open(_path).convert('L').load()
+    _g = game_grid(_mid)
+    _h, _w = len(_g), len(_g[0])
+    _floor = {}
+    for y, row in enumerate(_g):
+        for x, ch in enumerate(row):
+            # A mouth with nothing but wall below it, all the way to the edge. A mouth higher up that leads to
+            # another cave (the Seafloor's way into the Sea Cavern) is a real cave mouth and stays.
+            if ch != 'y' or y == 0 or _g[y - 1][x] not in WALKABLE or any(_g[yy][x] in WALKABLE for yy in range(y + 1, _h)):
+                continue
+            _to = _m.get('warps', {}).get('%d,%d' % (x, y), {}).get('map', '')
+            if y < _h - 1 and (OUT['maps'].get(_to) or MAPS.get(_to) or {}).get('cave'):
+                continue
+            top = y
+            while top - 1 > 0 and _g[top - 1][x] in WALKABLE and cell_dark(_px, x, top - 1) > 0.15:
+                top -= 1
+            # Copy plain floor: the nearest cell above with no dark edges, and floor above it too.
+            src = None
+            for yy in range(top - 1, 0, -1):
+                if _g[yy][x] in WALKABLE and _g[yy - 1][x] in WALKABLE and cell_dark(_px, x, yy) < 0.01:
+                    src = [x, yy]
+                    break
+            if src is None:
+                continue
+            for yy in range(top, _h):
+                _floor['%d,%d' % (x, yy)] = src
+    if _floor:
+        (OUT['maps'][_mid] if _mid in OUT['maps'] else patch(_mid))['exitFloor'] = _floor
+
+
 # ---------- validation ----------
 def all_maps():
     out = {}

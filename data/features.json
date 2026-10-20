@@ -27728,7 +27728,13 @@
      "max": 36,
      "weight": 10
     }
-   ]
+   ],
+   "exitFloor": {
+    "7,10": [
+     7,
+     9
+    ]
+   }
   },
   "skyspire": {
    "id": "skyspire",
@@ -27905,7 +27911,17 @@
      "weight": 10
     }
    ],
-   "items": []
+   "items": [],
+   "exitFloor": {
+    "13,16": [
+     13,
+     14
+    ],
+    "13,17": [
+     13,
+     14
+    ]
+   }
   },
   "granitecave_b1": {
    "id": "granitecave_b1",
@@ -28014,7 +28030,13 @@
      "requires": "champion",
      "text": "The ground glows red-hot..."
     }
-   ]
+   ],
+   "exitFloor": {
+    "7,10": [
+     7,
+     7
+    ]
+   }
   },
   "safarizone": {
    "id": "safarizone",
@@ -29539,7 +29561,17 @@
      6,
      "shoalSalt"
     ]
-   ]
+   ],
+   "exitFloor": {
+    "10,9": [
+     10,
+     8
+    ],
+    "10,10": [
+     10,
+     8
+    ]
+   }
   },
   "sealedchamber": {
    "id": "sealedchamber",
@@ -29572,7 +29604,13 @@
     "12,1": "BUT WE SEALED THE CREATURES AWAY. WE FEARED THEM.",
     "7,1": "FIRST COMES A CREATURE OF THE SEA. LAST COMES A CREATURE OF STONE. THEN DIG."
    },
-   "chamber": "7,1"
+   "chamber": "7,1",
+   "exitFloor": {
+    "7,10": [
+     7,
+     8
+    ]
+   }
   },
   "tomb_rock": {
    "id": "tomb_rock",
@@ -29618,7 +29656,17 @@
      "requires": "tomb_rock_open",
      "text": "The golem's eyes light up..."
     }
-   ]
+   ],
+   "exitFloor": {
+    "7,9": [
+     7,
+     8
+    ],
+    "7,10": [
+     7,
+     8
+    ]
+   }
   },
   "tomb_ice": {
    "id": "tomb_ice",
@@ -29664,7 +29712,17 @@
      "requires": "tomb_ice_open",
      "text": "The golem's eyes light up..."
     }
-   ]
+   ],
+   "exitFloor": {
+    "7,9": [
+     7,
+     8
+    ],
+    "7,10": [
+     7,
+     8
+    ]
+   }
   },
   "tomb_steel": {
    "id": "tomb_steel",
@@ -29710,7 +29768,13 @@
      "requires": "tomb_steel_open",
      "text": "The golem's eyes light up..."
     }
-   ]
+   ],
+   "exitFloor": {
+    "7,10": [
+     7,
+     8
+    ]
+   }
   },
   "southernisland": {
    "id": "southernisland",
