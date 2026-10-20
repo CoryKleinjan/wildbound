@@ -117,6 +117,9 @@ func sfx(sfx_name: String) -> void:
 	if Game.cur == 1:
 		Net.relay_sfx(sfx_name)
 		return
+	# A joint battle runs in this view but the friend is in it too.
+	if Game.input.joint:
+		Net.relay_sfx(sfx_name)
 	if _pool.is_empty() or not sfx_name in SFX_NAMES:
 		return
 	var s: AudioStreamWAV = streams.get(sfx_name)
@@ -197,6 +200,8 @@ func play_music(track: String) -> void:
 	if Game.cur == 1:
 		Net.relay_music(track)
 		return
+	if Game.input.joint:
+		Net.relay_music(track)
 	_log("music:" + track)
 	var stream := _load_music(track)
 	# Fade whatever is playing out.

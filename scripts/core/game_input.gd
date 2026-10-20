@@ -36,6 +36,8 @@ class PlayerInput:
 
 var players: Array[PlayerInput] = [PlayerInput.new(), PlayerInput.new()]
 var view := 0
+## During a joint battle (see JointBattle) p(i) reads player i, whichever view is updating.
+var joint := false
 ## Physical keycodes currently down.
 var keys := {}
 var _remote_held := {}
@@ -82,10 +84,14 @@ func update(dt: float) -> void:
 	players[0].end_frame(now, dt)
 	players[1].end_frame(remote, dt)
 
-## The buttons of the view being updated. The player index is from the old shared-keyboard co-op
-## and is ignored: each view has one player.
-func p(_i: int = 0) -> PlayerInput:
+## The buttons of the view being updated. The player index only counts in a joint battle, where
+## player 0 is this computer and player 1 is the friend; otherwise each view has one player.
+func p(i: int = 0) -> PlayerInput:
+	if joint:
+		return players[clampi(i, 0, 1)]
 	return players[view]
 
 func any(b: String) -> bool:
+	if joint:
+		return players[0].pressed(b) or players[1].pressed(b)
 	return players[view].pressed(b)

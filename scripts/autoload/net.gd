@@ -213,6 +213,7 @@ func _guest_name() -> String:
 	return g.players[0].name if g != null else ""
 
 func _drop_guest() -> void:
+	JointBattle.abort()
 	Game.clear_guest()
 	Game.input.clear_remote()
 	Audio.reset_view(1)

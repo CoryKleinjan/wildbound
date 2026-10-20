@@ -495,7 +495,23 @@ func _trainer_battle(n: Actor) -> void:
 		for e in t.party:
 			party.append(Creatures.create_creature(e[0], e[1], {"owner": 9}))
 		_flash_then(func() -> void:
-			_run_battle({"kind": "trainer", "double": t.get("double", false) or gs.mode == "coop", "trainer": t, "trainerParty": party}, t)))
+			var setup := {"kind": "trainer", "double": t.get("double", false) or gs.mode == "coop", "trainer": t, "trainerParty": party}
+			# The champion battle leads into the ending, so it stays one player's.
+			if not t.get("champion", false) and JointBattle.partner_ready(self):
+				JointBattle.start(setup, t)
+			else:
+				_run_battle(setup, t)))
+
+## Removes a beaten trainer who leaves (leaveAfter) from this map.
+func remove_trainer(id: String) -> void:
+	for n in npcs:
+		if n.trainer != null and n.trainer.id == id:
+			npcs.erase(n)
+			return
+
+## True while a scripted sequence (a trainer walking up, a battle flash) is running.
+func is_busy() -> bool:
+	return _script.is_valid()
 
 # ---------- wild ----------
 func _start_wild() -> void:
@@ -512,12 +528,18 @@ func _start_wild() -> void:
 				found = e
 				break
 		return Creatures.create_creature(found.species, found.min + Rng.global_rng.int_below(found.max - found.min + 1), {"owner": 9})
-	var count := 2 if gs.mode == "coop" else 1
+	# With the other player on screen, two wild creatures appear and both players fight.
+	var count := 2 if gs.mode == "coop" or JointBattle.partner_ready(self) else 1
 	var wild: Array = []
 	for i in count:
 		wild.append(pick.call())
 	Audio.sfx("encounter")
-	_flash_then(func() -> void: _run_battle({"kind": "wild", "double": count > 1, "wild": wild}))
+	_flash_then(func() -> void:
+		var setup := {"kind": "wild", "double": count > 1, "wild": wild}
+		if count > 1 and JointBattle.partner_ready(self):
+			JointBattle.start(setup, null)
+		else:
+			_run_battle(setup))
 
 func _flash_then(cb: Callable) -> void:
 	var st := {"t": 0.0}
@@ -562,10 +584,7 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 			if trainer != null and result == "win":
 				g.flags[trainer.id] = true
 				if trainer.get("leaveAfter", false):
-					for n in npcs:
-						if n.trainer != null and n.trainer.id == trainer.id:
-							npcs.erase(n)
-							break
+					remove_trainer(trainer.id)
 				if trainer.get("badge"):
 					g.flags["badge%d" % trainer.badge] = true
 					var gym: Dictionary = {}
