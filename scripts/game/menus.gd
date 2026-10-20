@@ -144,6 +144,7 @@ static func open_bag_overworld(player: int, on_close: Callable) -> void:
 			ps.o.on_cancel = func() -> void: Game.pop(ps)
 			ps.o.on_select = func(i: int) -> void:
 				var r: Variant = use_item_on(gs, id, party[i])
+				Audio.sfx("recover" if r != null else "error")
 				Game.say([r if r != null else "It won't have any effect."], func() -> void:
 					Game.pop(ps)
 					if r != null:
@@ -197,6 +198,7 @@ static func open_shop(player: int, on_close: Callable) -> void:
 				return
 			var it: Dictionary = DB.item(stock[i])
 			if gs.money < it.price:
+				Audio.sfx("error")
 				Game.say(["You don't have enough money."], Callable(), player)
 				return
 			Game.ask("Buy a %s for $%d?" % [it.name, it.price], ["YES", "NO"], func(c: int) -> void:
@@ -204,6 +206,7 @@ static func open_shop(player: int, on_close: Callable) -> void:
 					return
 				gs.money -= it.price
 				gs.bag[it.id] = gs.bag.get(it.id, 0) + 1
+				Audio.sfx("buy")
 				Game.say(["Here you go! Thank you."], Callable(), player), player),
 	})
 	ref.menu = menu

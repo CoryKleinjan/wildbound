@@ -1,24 +1,25 @@
 class_name StarterScene
 extends Scene
-## PROF. ALDER's starter choice (one pick per player in co-op).
+## Choosing a creature from PROF. ALDER's bag (one pick per player in co-op).
+## Pushed over the overworld during the Route 1 event; on_done receives the picked species ids.
 
 var _coop: bool
+var _on_done: Callable
 var _picker := 0
 var _sel := 1
 var _picks: Array = []
 var _busy := false
 var _started := false
 
-func _init(coop: bool) -> void:
+func _init(coop: bool, on_done: Callable) -> void:
 	_coop = coop
+	_on_done = on_done
 
 func _intro() -> void:
 	_busy = true
 	Game.say([
-		"PROF. ALDER: Welcome to the world of creatures!",
-		"Two new trainers at once? Wonderful! Each of you may carry up to 3 creatures, and you'll battle side by side." if _coop
-			else "You may carry up to 6 creatures on your journey.",
-		"First, choose a partner from these three.",
+		"PROF. ALDER: My bag! There are three Capture Orbs inside!",
+		"Each of you, grab one and send it out!" if _coop else "Grab one and send it out, quick!",
 	], func() -> void: _busy = false)
 
 func update(_dt: float) -> void:
@@ -61,23 +62,20 @@ func _on_choose(i: int, sp: String) -> void:
 			if not _picks.has(DB.STARTERS[k]):
 				_sel = k
 				break
-		Game.say(["Player 1 chose %s!" % s.name, "Player 2, your turn! (Arrow keys, Enter = A)"], func() -> void: _busy = false, 1)
+		Game.say(["%s chose %s!" % [Game.gs.players[0].name, s.name], "%s, your turn! (Arrow keys, Enter = A)" % Game.gs.players[1].name], func() -> void: _busy = false, 1)
 		return
-	Game.gs = GameState.new_game("coop" if _coop else "solo", _picks)
 	var names: Array = []
 	for p in _picks:
 		names.append(DB.species(p).name)
-	Game.say([
-		"%s! Great choice%s!" % [" and ".join(names), "s" if _coop else ""],
-		"Tall grass on Route 1, north of town, is full of wild creatures.",
-		"Visit the Rest Lodge to heal, and the Trail Mart for Capture Orbs. Good luck!",
-	], func() -> void: Game.transition(func() -> void: Game.replace(OverworldScene.new())))
+	Game.say(["%s, I choose you!" % " and ".join(names)], func() -> void:
+		Game.pop(self)
+		_on_done.call(_picks))
 
 func draw() -> void:
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#f0e8d0")
 	Gfx.rect(0, 0, Gfx.W, 20, "#b07850")
-	Gfx.text("PLAYER %d: CHOOSE YOUR PARTNER" % (_picker + 1) if _coop else "CHOOSE YOUR PARTNER", Gfx.W / 2.0, 7, {"size": 6, "align": "center", "color": "#ffffff"})
-	TrainerArt.draw_char(112, 26, "down", 0, DB.PALETTES.old)
+	Gfx.text("%s: CHOOSE A CREATURE" % Game.gs.players[_picker].name.to_upper() if _coop else "PROF. ALDER'S BAG", Gfx.W / 2.0, 7, {"size": 6, "align": "center", "color": "#ffffff"})
+	TrainerArt.draw_char(112, 26, "down", 0, DB.PALETTES.prof)
 	for i in DB.STARTERS.size():
 		var sp: String = DB.STARTERS[i]
 		var x := 12 + i * 76

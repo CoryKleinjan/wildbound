@@ -21,13 +21,22 @@ func update(_dt: float) -> void:
 	var n := items.size()
 	if inp.pressed("up"):
 		sel = (sel + n - 1) % n
+		if n > 1:
+			Audio.sfx("cursor")
 		_emit("on_move", [sel])
 	if inp.pressed("down"):
 		sel = (sel + 1) % n
+		if n > 1:
+			Audio.sfx("cursor")
 		_emit("on_move", [sel])
-	if inp.pressed("a") and not items[sel].get("disabled", false):
-		_emit("on_select", [sel])
+	if inp.pressed("a"):
+		if items[sel].get("disabled", false):
+			Audio.sfx("error")
+		else:
+			Audio.sfx("confirm")
+			_emit("on_select", [sel])
 	elif inp.pressed("b") and _o.has("on_cancel"):
+		Audio.sfx("cancel")
 		_emit("on_cancel", [])
 	var vis: int = _o.get("max_visible", 99)
 	if sel < _scroll:

@@ -41,6 +41,18 @@ func _init() -> void:
 	_fix_ints(GYMS)
 	_fix_ints(ROUTE_LEVELS)
 	_fix_ints(TYPE_CHART)
+	_apply_story(_fix_ints(_load("story")))
+
+## Merges data/story.json (story NPCs, Hollow Order trainers, rival lines) into MAPS.
+func _apply_story(story: Dictionary) -> void:
+	for map_id in story.npcs:
+		MAPS[map_id].npcs = MAPS[map_id].get("npcs", []) + story.npcs[map_id]
+	for map_id in story.trainers:
+		MAPS[map_id].trainers = MAPS[map_id].get("trainers", []) + story.trainers[map_id]
+	for m in MAPS.values():
+		for t in m.get("trainers", []):
+			if story.trainerPatches.has(t.id):
+				t.merge(story.trainerPatches[t.id], true)
 
 func _load(name: String) -> Variant:
 	var f := FileAccess.open("res://data/%s.json" % name, FileAccess.READ)

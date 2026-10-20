@@ -1,0 +1,595 @@
+{
+ "npcs": {
+  "stonecrest": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "hiker",
+    "text": [
+     "Strangers in grey cloaks came through the quarry last week.",
+     "They carried off a stone that glowed like a star. Called it a 'shard'."
+    ]
+   }
+  ],
+  "duskmere": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "gentleman",
+    "text": [
+     "A man in grey asked me to join the Hollow Order.",
+     "He said soon every creature would obey without question. What a sad world that would be."
+    ]
+   }
+  ],
+  "voltara": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "ace",
+    "text": [
+     "The power plant keeps browning out at night.",
+     "Someone's been draining power to 'tune' something. The Order, if you ask me."
+    ]
+   }
+  ],
+  "cindercity": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "hiker",
+    "text": [
+     "The ground's been rumbling under Cinder Peak.",
+     "Old folks say Terrasolis sleeps there. I hope nobody wakes it."
+    ]
+   }
+  ],
+  "harrowfield": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "girl",
+    "text": [
+     "A boy with a teal jacket ran through here chasing an Order Admin!",
+     "He said his name was Kai. He seemed to know you."
+    ]
+   }
+  ],
+  "bramblegate": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "old",
+    "text": [
+     "The Order took the old shrine bell from our square.",
+     "Bells, chimes, shards... They're obsessed with the Starchime."
+    ]
+   }
+  ],
+  "skyreach": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "bird",
+    "text": [
+     "Storms every day now. Zenithar must be restless.",
+     "My Flying creatures won't even leave the roost."
+    ]
+   }
+  ],
+  "saltmarsh": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "old",
+    "text": [
+     "PROF. ALDER: There you are! I've been following the Order's trail.",
+     "Seven Wardens watch over Wildbound. When one stirs, it sheds a Star Shard.",
+     "With enough shards, Vane could force the Starchime to ring and take its wish for himself.",
+     "The Order will go after the observatory in Lumenvale next. Please, be careful."
+    ],
+    "variants": [
+     {
+      "if": "champion",
+      "text": [
+       "PROF. ALDER: The Starchime rang for you, Champion. I've never been prouder.",
+       "They say the Wardens now roam Victory Road. Perhaps you'll meet one!"
+      ]
+     }
+    ]
+   }
+  ],
+  "lumenvale": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "psychic",
+    "text": [
+     "The Order broke into the observatory and stole the Star Map!",
+     "It shows where every Warden rests. They're heading north, toward Summit Crown."
+    ]
+   }
+  ],
+  "coralhaven": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "swimmer",
+    "text": [
+     "The tide keeps rising higher every day. Thalassor is stirring.",
+     "Whatever the Order is doing up north, the sea can feel it."
+    ]
+   }
+  ],
+  "summitcrown": [
+   {
+    "x": 14,
+    "y": 2,
+    "dir": "down",
+    "palette": "rival",
+    "text": [
+     "KAI: The Starchime is up there, past the League.",
+     "Vane is waiting in front of the League doors. You're the only one strong enough to stop him."
+    ],
+    "variants": [
+     {
+      "if": "champion",
+      "text": [
+       "KAI: Champion, huh? Don't get comfortable. I'm coming for that title!"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "trainers": {
+  "route2": [
+   {
+    "id": "order_route2_0",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 10,
+    "y": 20,
+    "dir": "right",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "musklet",
+      8
+     ],
+     [
+      "shadepup",
+      9
+     ]
+    ],
+    "intro": "Halt! The Hollow Order is searching this area. Wild-hearted kids aren't welcome!",
+    "defeat": "You fight like a creature with no leash...",
+    "after": "Magister Vane says creatures were made to obey. Someday you'll see it."
+   },
+   {
+    "id": "order_route2_1",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 9,
+    "y": 9,
+    "dir": "right",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "pilfur",
+      8
+     ],
+     [
+      "seepling",
+      9
+     ]
+    ],
+    "intro": "A Star Shard hums somewhere near here. Get lost before you get hurt!",
+    "defeat": "Ugh, the Admins are going to hear about this.",
+    "after": "When the Starchime rings, the world will have one will. His."
+   }
+  ],
+  "route3": [
+   {
+    "id": "order_route3_2",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 20,
+    "y": 10,
+    "dir": "down",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "lurkit",
+      12
+     ],
+     [
+      "stingrub",
+      13
+     ]
+    ],
+    "intro": "You've seen our grey cloaks? Then you've seen too much!",
+    "defeat": "No fair! My creatures listened to you more than me!",
+    "after": "Free creatures are wasted creatures. That's what the Order teaches."
+   }
+  ],
+  "route5": [
+   {
+    "id": "order_route5_3",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 10,
+    "y": 4,
+    "dir": "down",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "jellip",
+      20
+     ],
+     [
+      "pilfur",
+      21
+     ]
+    ],
+    "intro": "The Order doesn't need trainers. We need shards!",
+    "defeat": "Fine, fine. Keep walking.",
+    "after": "Every Warden we wake gives up a shard. Then the chime is ours."
+   },
+   {
+    "id": "order_route5_0",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 22,
+    "y": 2,
+    "dir": "down",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "blightcap",
+      20
+     ],
+     [
+      "sablemaw",
+      21
+     ]
+    ],
+    "intro": "Halt! The Hollow Order is searching this area. Wild-hearted kids aren't welcome!",
+    "defeat": "You fight like a creature with no leash...",
+    "after": "Magister Vane says creatures were made to obey. Someday you'll see it."
+   },
+   {
+    "id": "order_sable_1",
+    "name": "Order Admin Sable",
+    "palette": "orderAdmin",
+    "x": 35,
+    "y": 8,
+    "dir": "down",
+    "sight": 4,
+    "pay": 90,
+    "party": [
+     [
+      "scorchnewt",
+      24
+     ],
+     [
+      "pilfur",
+      24
+     ],
+     [
+      "sablemaw",
+      25
+     ]
+    ],
+    "intro": "So you're the trainer my grunts keep whining about. I'm Sable, Admin of the Hollow Order. The volcano past Cinder City holds a Warden's shard, and I won't let a child get in the way.",
+    "defeat": "Tch. Cinder Peak will answer us whether you like it or not.",
+    "after": "Terrasolis sleeps under Cinder Peak. One good shake and its shard comes loose."
+   }
+  ],
+  "route6": [
+   {
+    "id": "order_route6_1",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 4,
+    "y": 20,
+    "dir": "left",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "fenspawn",
+      24
+     ],
+     [
+      "lurkit",
+      25
+     ]
+    ],
+    "intro": "A Star Shard hums somewhere near here. Get lost before you get hurt!",
+    "defeat": "Ugh, the Admins are going to hear about this.",
+    "after": "When the Starchime rings, the world will have one will. His."
+   }
+  ],
+  "route8": [
+   {
+    "id": "order_route8_2",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 4,
+    "y": 25,
+    "dir": "right",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "noxferret",
+      29
+     ],
+     [
+      "omenkin",
+      30
+     ],
+     [
+      "ransackle",
+      31
+     ]
+    ],
+    "intro": "You've seen our grey cloaks? Then you've seen too much!",
+    "defeat": "No fair! My creatures listened to you more than me!",
+    "after": "Free creatures are wasted creatures. That's what the Order teaches."
+   },
+   {
+    "id": "order_route8_3",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 7,
+    "y": 12,
+    "dir": "left",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "ozlug",
+      29
+     ],
+     [
+      "duskhound",
+      30
+     ],
+     [
+      "venomwing",
+      31
+     ]
+    ],
+    "intro": "The Order doesn't need trainers. We need shards!",
+    "defeat": "Fine, fine. Keep walking.",
+    "after": "Every Warden we wake gives up a shard. Then the chime is ours."
+   }
+  ],
+  "route9": [
+   {
+    "id": "order_corvin_1",
+    "name": "Order Admin Corvin",
+    "palette": "orderAdmin",
+    "x": 22,
+    "y": 9,
+    "dir": "up",
+    "sight": 4,
+    "pay": 120,
+    "party": [
+     [
+      "omenwraith",
+      36
+     ],
+     [
+      "vespermaw",
+      36
+     ],
+     [
+      "grimveil",
+      37
+     ],
+     [
+      "jellicrown",
+      38
+     ]
+    ],
+    "intro": "These storms over Skyreach? Zenithar is restless, and restless Wardens shed shards. I'm Corvin. Admin. Please don't make this tedious.",
+    "defeat": "Tedious after all. Sable warned me about you.",
+    "after": "Three shards, then four. Lumenvale's observatory has the Star Map that shows where the rest are buried."
+   }
+  ],
+  "route10": [
+   {
+    "id": "order_route10_0",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 17,
+    "y": 25,
+    "dir": "left",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "toxomire",
+      36
+     ],
+     [
+      "larcenox",
+      37
+     ],
+     [
+      "grimveil",
+      38
+     ]
+    ],
+    "intro": "Halt! The Hollow Order is searching this area. Wild-hearted kids aren't welcome!",
+    "defeat": "You fight like a creature with no leash...",
+    "after": "Magister Vane says creatures were made to obey. Someday you'll see it."
+   },
+   {
+    "id": "order_route10_1",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 6,
+    "y": 12,
+    "dir": "right",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "dreadspore",
+      36
+     ],
+     [
+      "vespermaw",
+      37
+     ],
+     [
+      "noxferret",
+      38
+     ]
+    ],
+    "intro": "A Star Shard hums somewhere near here. Get lost before you get hurt!",
+    "defeat": "Ugh, the Admins are going to hear about this.",
+    "after": "When the Starchime rings, the world will have one will. His."
+   }
+  ],
+  "route11": [
+   {
+    "id": "order_route11_2",
+    "name": "Order Grunt",
+    "palette": "orderGrunt",
+    "x": 12,
+    "y": 9,
+    "dir": "down",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "omenwraith",
+      40
+     ],
+     [
+      "jellicrown",
+      41
+     ],
+     [
+      "ransackle",
+      42
+     ]
+    ],
+    "intro": "You've seen our grey cloaks? Then you've seen too much!",
+    "defeat": "No fair! My creatures listened to you more than me!",
+    "after": "Free creatures are wasted creatures. That's what the Order teaches."
+   },
+   {
+    "id": "order_admins",
+    "name": "Admins Sable & Corvin",
+    "palette": "orderAdmin",
+    "x": 29,
+    "y": 8,
+    "dir": "left",
+    "sight": 4,
+    "pay": 160,
+    "double": true,
+    "party": [
+     [
+      "vulcandra",
+      43
+     ],
+     [
+      "vespermaw",
+      43
+     ],
+     [
+      "omenwraith",
+      44
+     ],
+     [
+      "grimwraith",
+      44
+     ]
+    ],
+    "intro": "SABLE: You again! We have the Star Map now. CORVIN: Then let's finish this properly. Two of us, one of you.",
+    "defeat": "CORVIN: ...We have six shards. It's enough. SABLE: The Magister is already at Summit Crown. Go and watch him win.",
+    "after": "SABLE: When the Starchime rings, none of this will matter."
+   }
+  ],
+  "summitcrown": [
+   {
+    "id": "order_vane",
+    "name": "Magister Vane",
+    "palette": "orderBoss",
+    "x": 5,
+    "y": 17,
+    "dir": "down",
+    "sight": 2,
+    "pay": 300,
+    "leaveAfter": true,
+    "party": [
+     [
+      "vespermaw",
+      48
+     ],
+     [
+      "grimwraith",
+      48
+     ],
+     [
+      "requiember",
+      49
+     ],
+     [
+      "toxomire",
+      49
+     ],
+     [
+      "omenwraith",
+      50
+     ],
+     [
+      "bogmonarch",
+      51
+     ]
+    ],
+    "intro": "So the wild-hearted child climbed all this way. Above us the Starchime waits, and I hold six shards of the Wardens. One more chime and every creature in Wildbound will answer to a single will. Mine. Show me why I should not.",
+    "defeat": "The shards... they're going dark. The chime will not ring for someone who chains it.",
+    "after": ""
+   }
+  ]
+ },
+ "trainerPatches": {
+  "r2_kai": {
+   "intro": "There you are! Did you see those grey cloaks digging by the shrine? Whatever. Battle first, questions later!",
+   "defeat": "Argh, again?! Okay, okay. I'm heading to Stonecrest. Grandpa says the Order is looking for something called a Star Shard.",
+   "after": "Grey cloaks, Star Shards... Grandpa's worried. That's never good."
+  },
+  "rival_r7": {
+   "intro": "Hey! I chased an Order Admin all the way from Cinder Peak. Before I go after her again, let's see who's grown stronger!",
+   "defeat": "You're still ahead of me... Fine. Then you'll be the one who stops them. Don't let me down.",
+   "after": "The Order wants the Starchime to ring early. Grandpa says that could change everything."
+  },
+  "rival_r12": {
+   "intro": "This is it, Victory Road. Vane is up at the summit. One last battle between us before we face him!",
+   "defeat": "That's my rival. Go. I'll be right behind you.",
+   "after": "Whatever happens up there, I've got your back."
+  }
+ }
+}

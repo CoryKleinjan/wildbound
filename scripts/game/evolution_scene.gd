@@ -11,6 +11,7 @@ var _into: String
 var _player: int
 var _on_done: Callable
 var _from: String
+var _music_before := ""
 
 func _init(mon: Dictionary, into: String, player: int, on_done: Callable) -> void:
 	_mon = mon
@@ -19,7 +20,11 @@ func _init(mon: Dictionary, into: String, player: int, on_done: Callable) -> voi
 	_on_done = on_done
 	_from = mon.species
 	Game.push(self)
-	Game.say(["What? %s is evolving!" % Creatures.display_name(mon)], func() -> void: stage = "morph", player)
+	_music_before = Audio.current_track()
+	Game.say(["What? %s is evolving!" % Creatures.display_name(mon)], func() -> void:
+		stage = "morph"
+		Audio.play_music("evolution")
+		Audio.sfx("evolve_start"), player)
 
 func update(dt: float) -> void:
 	if stage != "morph":
@@ -27,12 +32,16 @@ func update(dt: float) -> void:
 	t += dt
 	if Game.input.p(_player).pressed("b") and t < 3.5:
 		stage = "done"
+		Audio.stop_sfx()
+		Audio.sfx("cancel")
+		Audio.play_music(_music_before)
 		Game.say(["Huh? %s stopped evolving!" % Creatures.display_name(_mon)], _finish, _player)
 		return
 	if t > 4:
 		stage = "done"
 		var old_name := Creatures.display_name(_mon)
 		Creatures.evolve(_mon, _into)
+		Audio.sfx("evolve_done")
 		var gs: Dictionary = Game.gs
 		if not gs.caught.has(_into):
 			gs.caught.append(_into)
@@ -53,6 +62,7 @@ func _learn_next(learn: Array) -> void:
 	Menus.learn_move_flow(_mon, id, _player, func() -> void: _learn_next(learn))
 
 func _finish() -> void:
+	Audio.play_music(_music_before)
 	Game.pop(self)
 	_on_done.call()
 
