@@ -11,6 +11,7 @@ of maps.json while the painting is present.
 python3 tools/artgen/mapfit.py [map_id ...]        # writes data/map_fit.json and raw/fit/<id>.png previews
 """
 import json
+import os
 import sys
 from concurrent.futures import ThreadPoolExecutor
 
@@ -20,6 +21,7 @@ from common import RAW, ROOT, ask_vision
 
 MODEL = "gemini-3.1-pro-preview"  # whole-map comparison
 CELL_MODEL = "gemini-3.5-flash"  # one-cell close-ups: easy, and there are many
+PASSES = int(os.environ.get("FIT_PASSES", "3"))  # whole-map proposal runs; 1 is about a third of the cost
 FIT = ROOT / "data" / "map_fit.json"
 BUILDING = "rpbknw"
 DOORS = "hlmju"
@@ -103,7 +105,7 @@ def proposals(mid: str, m: dict) -> set[tuple[int, int]]:
 			return []
 
 	with ThreadPoolExecutor(3) as ex:
-		for res in ex.map(run, range(3)):
+		for res in ex.map(run, range(PASSES)):
 			cells |= {(int(e["x"]), int(e["y"])) for e in res if 0 <= int(e["x"]) < W and 0 <= int(e["y"]) < H}
 	return cells
 
