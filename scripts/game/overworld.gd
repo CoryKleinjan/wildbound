@@ -691,7 +691,8 @@ func _ride_look(look: String) -> String:
 		return "%s_%s" % [look, ride]
 	return look
 
-## Field objects that can be cleared or pushed, so a painted map leaves them out and they are drawn on top.
+## Field objects that can be cleared or pushed, so a painted map leaves them out and they are drawn on top. Tiles
+## listed in a map's "overpaint" (changed since it was painted) are drawn on top too.
 const DYNAMIC := "TRO"
 
 func draw() -> void:
@@ -717,6 +718,7 @@ func draw() -> void:
 	# A painted whole-map image (assets/maps/<id>.png) replaces the tiles inside the map; tiles still fill the border.
 	var painted := ArtAssets.texture("maps/" + str(map.get("id", "")))
 	var inside := func(tx: int, ty: int) -> bool: return tx >= 0 and ty >= 0 and tx < w and ty < h
+	var newer: Array = map.get("overpaint", [])
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#000000")
 	if painted != null:
 		Gfx.image(painted, -cam_x, -cam_y)
@@ -727,7 +729,7 @@ func draw() -> void:
 			var raw := Maps.tile_at(map, tx, ty)
 			var ch := Field.tile(self, tx, ty)
 			# Inside a painted map only the things that can change (Cut trees, rocks, boulders) are drawn.
-			if painted != null and inside.call(tx, ty) and not DYNAMIC.contains(ch):
+			if painted != null and inside.call(tx, ty) and not DYNAMIC.contains(ch) and not newer.has("%d,%d" % [tx, ty]):
 				continue
 			if ch == "#" and cave:
 				ch = "x"

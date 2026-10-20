@@ -1456,6 +1456,18 @@ OUT['frontier'] = {
 # ---------- the last of Emerald: Move Deleter, ash and glass flutes, rare fishing spots, TV and outbreaks, the
 # trendy phrase, Quiz Lady, Fan Club, art museum, national dex, fossils, Battle Tents, Shoal Cave ----------
 INTERIORS = load('interiors')['maps']
+
+
+def any_grid(mid):
+    if mid in OUT['mapPatches'] and 'tiles' in OUT['mapPatches'][mid]:
+        return [list(r) for r in OUT['mapPatches'][mid]['tiles']]
+    if mid in OUT['maps']:
+        return grid(OUT['maps'][mid])
+    return grid(MAPS[mid] if mid in MAPS else INTERIORS[mid])
+
+
+# The maps as they were when they were painted (assets/maps): tiles changed below are drawn over the painting.
+PAINTED_GRIDS = {mid: any_grid(mid) for mid in set(MAPS) | set(INTERIORS) | set(OUT['maps'])}
 EM = {}
 for it in [
     FD.item('sootSack', 'Soot Sack', 0, {'kind': 'key', 'use': 'ash'}, 'Collects volcanic ash as you walk through ashy grass.', 'key'),
@@ -1787,6 +1799,13 @@ patch('fernhollow_lab')['npcs'].append(
         service='ticket', ticket='auroraTicket', need='dex'))
 add_npc('summitcrown', 'gentleman', ['Enter the Hall of Fame twice and I\'ll give you a Mystic Ticket.'],
         service='ticket', ticket='mysticTicket', need='hof')
+for mid, before in PAINTED_GRIDS.items():
+    after = any_grid(mid)
+    changed = ['%d,%d' % (x, y) for y, row in enumerate(after) for x, ch in enumerate(row)
+               if y >= len(before) or x >= len(before[y]) or before[y][x] != ch]
+    if changed:
+        target = OUT['maps'][mid] if mid in OUT['maps'] else patch(mid)
+        target['overpaint'] = changed
 OUT['emerald'] = EM
 
 

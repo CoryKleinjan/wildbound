@@ -76,7 +76,11 @@ func _apply_map_fit(fit: Dictionary) -> void:
 		if not MAPS.has(map_id) or not ResourceLoader.exists("res://assets/maps/%s.png" % map_id):
 			continue
 		var rows: Array = MAPS[map_id].tiles.duplicate()
+		var newer: Array = MAPS[map_id].get("overpaint", [])
 		for k in fit[map_id]:
+			# Tiles changed since the painting was made keep their new layout.
+			if newer.has(k):
+				continue
 			var xy: PackedStringArray = k.split(",")
 			var x := int(xy[0])
 			var y := int(xy[1])
