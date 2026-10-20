@@ -57,7 +57,6 @@ func _setup(game, scenario: String) -> void:
 			game.gs = C.GameState.new_game("solo")
 			C.GameState.give_starter(game.gs, 0, "sproutle")
 			game.gs.bag.orb = 6
-			game.input.coop = false
 			var p: Array = game.gs.players[0].party
 			p[0] = C.Creatures.create_creature("sproutle", 15, {"owner": 0, "otId": game.gs.players[0].otId})
 			p.append(C.Creatures.create_creature("cindercub", 12, {"owner": 0}))
@@ -76,7 +75,6 @@ func _setup(game, scenario: String) -> void:
 			C.GameState.give_starter(game.gs, 0, "sproutle")
 			C.GameState.give_starter(game.gs, 1, "cindercub")
 			game.gs.bag.orb = 6
-			game.input.coop = true
 	game.replace(C.Menus.FnScene.new(func() -> void: C.Gfx.rect(0, 0, 240, 160, "#000000")))
 	var on_end := func(result: String, battle) -> void:
 		print("BATTLE END: ", result, " caught=", battle.caught.size(), " money=", game.gs.money)

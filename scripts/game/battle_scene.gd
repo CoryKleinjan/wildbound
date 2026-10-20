@@ -565,6 +565,9 @@ func _open_party_for(r: Dictionary) -> void:
 func _open_bag_for(r: Dictionary) -> void:
 	_mode = "busy"
 	var gs := _gs
+	# Joint battles: each player uses their own bag.
+	if _setup.has("bags"):
+		gs.bag = _setup.bags[r.player]
 	Menus.open_bag({
 		"player": r.player, "in_battle": true, "can_throw": battle.kind == "wild",
 		"on_close": func() -> void: _mode = "choose",

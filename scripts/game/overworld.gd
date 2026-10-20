@@ -53,6 +53,9 @@ var _bump_t := 0.0
 func _init() -> void:
 	var gs: Dictionary = Game.gs
 	load_map(gs.map, gs.x, gs.y, gs.dir)
+	# Whoever is playing hosts, so a friend can drop in at any time.
+	if Game.cur == 0 and Net.role == Net.Role.NONE:
+		Net.host("%s's game" % gs.players[0].name)
 
 var gs: Dictionary:
 	get:
@@ -61,7 +64,8 @@ var gs: Dictionary:
 func load_map(id: String, x: int, y: int, dir: String) -> void:
 	map = DB.MAPS[id]
 	gs.map = id
-	player = Actor.new(x, y, dir, "p1")
+	# The friend who joined (view 1) looks like player 2.
+	player = Actor.new(x, y, dir, "p1" if Game.cur == 0 else "p2")
 	if gs.mode == "coop":
 		var d: Vector2i = DX[OPP[dir]]
 		var fx := x + d.x
@@ -427,7 +431,7 @@ func _open_start_menu(pl: int) -> void:
 	var ref: Array = []
 	var opts := {
 		"x": 158, "y": 4, "w": 78, "player": pl,
-		"items": ["DEX", "PARTY", "BAG", "SAVE", "CONTROLS", "EXIT"],
+		"items": ["DEX", "PARTY", "BAG", "SAVE", "CO-OP", "CONTROLS", "EXIT"],
 		"on_cancel": func() -> void: Game.pop(ref[0]),
 		"on_select": func(i: int) -> void:
 			if i == 0:
@@ -448,8 +452,10 @@ func _open_start_menu(pl: int) -> void:
 						Audio.sfx("save")
 						Game.say(["Your progress was saved!" if GameState.save(gs) else "Saving failed (the save file could not be written)."], Callable(), pl), pl)
 			if i == 4:
-				Game.say(OverworldScene.controls_text(gs.mode == "coop"), Callable(), pl)
+				Game.say(OverworldScene.coop_text(), Callable(), pl)
 			if i == 5:
+				Game.say(OverworldScene.controls_text(false), Callable(), pl)
+			if i == 6:
 				Game.pop(ref[0]),
 	}
 	if gs.mode == "coop":
@@ -505,7 +511,23 @@ func _trainer_battle(n: Actor) -> void:
 		for e in t.party:
 			party.append(Creatures.create_creature(e[0], e[1], {"owner": 9}))
 		_flash_then(func() -> void:
-			_run_battle({"kind": "trainer", "double": t.get("double", false) or gs.mode == "coop", "trainer": t, "trainerParty": party}, t)))
+			var setup := {"kind": "trainer", "double": t.get("double", false) or gs.mode == "coop", "trainer": t, "trainerParty": party}
+			# The champion battle leads into the ending, so it stays one player's.
+			if not t.get("champion", false) and JointBattle.partner_ready(self):
+				JointBattle.start(setup, t)
+			else:
+				_run_battle(setup, t)))
+
+## Removes a beaten trainer who leaves (leaveAfter) from this map.
+func remove_trainer(id: String) -> void:
+	for n in npcs:
+		if n.trainer != null and n.trainer.id == id:
+			npcs.erase(n)
+			return
+
+## True while a scripted sequence (a trainer walking up, a battle flash) is running.
+func is_busy() -> bool:
+	return _script.is_valid()
 
 # ---------- wild ----------
 func _start_wild() -> void:
@@ -522,12 +544,18 @@ func _start_wild() -> void:
 				found = e
 				break
 		return Creatures.create_creature(found.species, found.min + Rng.global_rng.int_below(found.max - found.min + 1), {"owner": 9})
-	var count := 2 if gs.mode == "coop" else 1
+	# With the other player on screen, two wild creatures appear and both players fight.
+	var count := 2 if gs.mode == "coop" or JointBattle.partner_ready(self) else 1
 	var wild: Array = []
 	for i in count:
 		wild.append(pick.call())
 	Audio.sfx("encounter")
-	_flash_then(func() -> void: _run_battle({"kind": "wild", "double": count > 1, "wild": wild}))
+	_flash_then(func() -> void:
+		var setup := {"kind": "wild", "double": count > 1, "wild": wild}
+		if count > 1 and JointBattle.partner_ready(self):
+			JointBattle.start(setup, null)
+		else:
+			_run_battle(setup))
 
 func _flash_then(cb: Callable) -> void:
 	var st := {"t": 0.0}
@@ -572,10 +600,7 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 			if trainer != null and result == "win":
 				g.flags[trainer.id] = true
 				if trainer.get("leaveAfter", false):
-					for n in npcs:
-						if n.trainer != null and n.trainer.id == trainer.id:
-							npcs.erase(n)
-							break
+					remove_trainer(trainer.id)
 				if trainer.get("badge"):
 					g.flags["badge%d" % trainer.badge] = true
 					var gym: Dictionary = {}
@@ -647,6 +672,10 @@ func draw() -> void:
 	actors.append(player)
 	if follower != null:
 		actors.append(follower)
+	# The other player, when they're on this map. They walk through people rather than block them.
+	var other := Game.other_overworld()
+	if other != null and other.map.id == map.id:
+		actors.append(other.player)
 	actors.sort_custom(func(a: Actor, b: Actor) -> bool: return actor_pixel(a).y < actor_pixel(b).y)
 	for a in actors:
 		var ap := actor_pixel(a)
@@ -675,15 +704,28 @@ func draw() -> void:
 		if posmod(floori(_flash_t * 10), 2) == 0:
 			Gfx.rect(0, 0, Gfx.W, Gfx.H, Color(1, 1, 1, 0.7))
 
-static func controls_text(coop: bool) -> Array:
-	if not coop:
-		return ["CONTROLS: Arrows or WASD to move. Z, Enter, Space or F = A (confirm).", "X, Shift or G = B (back; hold to run). Esc, C or R = Menu. Gamepads work too."]
-	return [
-		"CO-OP over your network: each player uses their own computer. Arrows or WASD move, Z or Enter = A, X or Shift = B, Esc = Menu.",
-		"On one keyboard instead: PLAYER 1 uses WASD to move, F = A, G = B (hold to run), R = Menu.",
-		"PLAYER 2 uses the arrow keys, Enter = A, Right Shift = B, Backspace = Menu.",
-		"P1 leads in the overworld. In battle each player picks moves for their own creature.",
-	]
+## What the CO-OP menu item says: how a friend joins, or whose world the friend is in.
+static func coop_text() -> Array:
+	if Game.cur == 1:
+		var host: Dictionary = Game.views[0].gs.players[0]
+		return [
+			"You're in %s's world. Go anywhere you like: you don't have to stay together." % host.name,
+			"Your creatures, items and money are saved on your own computer as you play. Close the game to leave.",
+		]
+	if Net.role != Net.Role.HOST:
+		return ["Co-op isn't available right now: this computer couldn't open network port %d." % Net.PORT]
+	var lines: Array = []
+	if Net.guest_in_world():
+		lines.append("%s is playing in your world." % Game.views[1].gs.players[0].name)
+	else:
+		lines.append("A friend can join any time from their own computer on this network: they pick JOIN A GAME on the title screen and bring their own creatures.")
+	var addr := Net.local_addresses()
+	if not addr.is_empty():
+		lines.append("If your game isn't listed for them, they can type this address: %s" % ", ".join(addr))
+	return lines
+
+static func controls_text(_coop := false) -> Array:
+	return ["CONTROLS: Arrows or WASD to move. Z, Enter, Space or F = A (confirm).", "X, Shift or G = B (back; hold to run). Esc, C or R = Menu. Gamepads work too."]
 
 class DexScreen extends Scene:
 	var sel := 0

@@ -3,7 +3,7 @@ class_name GameState
 ## GameState: {version, mode ("solo" | "coop"), players: [{name, party, otId}], box, bag, money, map, x, y, dir,
 ## respawn: {map, x, y}, flags, seen, caught, playTime}
 
-const SAVE_PATH := "user://wildbound-save.json"
+static var SAVE_PATH := "user://wildbound-save.json"
 
 ## A new game before the starter event: players have names but no creatures yet.
 static func new_game(mode: String, names: Array = []) -> Dictionary:
@@ -62,6 +62,10 @@ static func receive_creature(gs: Dictionary, mon: Dictionary, player: int) -> St
 	return "box"
 
 static func save(gs: Dictionary) -> bool:
+	# A joined friend's progress is saved on their own computer.
+	if Game.cur == 1:
+		Net.sync_guest()
+		return true
 	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if f == null:
 		return false
@@ -83,6 +87,14 @@ static func load_game() -> Variant:
 		return null
 	var gs: Dictionary = DB._fix_ints(parsed)
 	gs.playTime = float(gs.get("playTime", 0.0))
+	# Old shared-keyboard co-op saves: player 2's creatures go to storage.
+	if gs.mode == "coop":
+		for p in gs.players.slice(1):
+			gs.box.append_array(p.party)
+		gs.players = [gs.players[0]]
+		gs.mode = "solo"
+		for m in gs.players[0].party + gs.box:
+			m.owner = 0
 	# Saves from before the story existed already have their starters.
 	if not gs.flags.has("starter") and not all_party_mons(gs).is_empty():
 		gs.flags.starter = true
@@ -91,3 +103,102 @@ static func load_game() -> Variant:
 		max_uid = maxi(max_uid, m.uid)
 	Creatures.set_next_uid(max_uid + 1)
 	return gs
+
+# ---------------------------------------------------------------- drop-in co-op
+## The save state for a friend joining host_gs's world (see Net). Their trainer, creatures, items
+## and money come from their own save (checked, since it arrives over the network); position and
+## story/trainer flags are the host's. flags is the host's own dictionary, so the world is shared.
+static func guest_state(save: Variant, name: String, host_gs: Dictionary) -> Dictionary:
+	var gs := new_game("solo", [name if name != "" else "Juno"])
+	if save is Dictionary:
+		var s: Dictionary = save
+		var pl: Variant = s.get("players", [])
+		if pl is Array and pl.size() > 0 and pl[0] is Dictionary:
+			var p: Dictionary = pl[0]
+			if p.get("name") is String and p.name != "":
+				gs.players[0].name = (p.name as String).substr(0, 8)
+			if p.get("otId") is int:
+				gs.players[0].otId = p.otId
+			gs.players[0].party = _valid_mons(p.get("party"), 6)
+		gs.box = _valid_mons(s.get("box"), 600)
+		var bag: Variant = s.get("bag")
+		if bag is Dictionary:
+			gs.bag = {}
+			for k in bag:
+				if k is String and DB.ITEMS.has(k) and bag[k] is int and bag[k] > 0:
+					gs.bag[k] = mini(bag[k], 999)
+		if s.get("money") is int:
+			gs.money = clampi(s.money, 0, 999999)
+		for key in ["seen", "caught"]:
+			var list: Variant = s.get(key)
+			if list is Array:
+				gs[key] = list.filter(func(sp: Variant) -> bool: return sp is String and DB.SPECIES.has(sp))
+		if s.get("playTime") is float or s.get("playTime") is int:
+			gs.playTime = float(s.playTime)
+	# Fresh ids, so they can't clash with the host's creatures.
+	for m in gs.players[0].party + gs.box:
+		m.uid = Creatures.next_uid
+		Creatures.next_uid += 1
+		m.owner = 0
+	gs.map = host_gs.map
+	gs.x = host_gs.x
+	gs.y = host_gs.y
+	gs.dir = host_gs.dir
+	gs.respawn = host_gs.respawn.duplicate()
+	gs.flags = host_gs.flags
+	return gs
+
+const _MON_KEYS := {
+	"uid": TYPE_INT, "species": TYPE_STRING, "level": TYPE_INT, "exp": TYPE_INT, "personality": TYPE_INT,
+	"otId": TYPE_INT, "ivs": TYPE_DICTIONARY, "evs": TYPE_DICTIONARY, "moves": TYPE_ARRAY, "hp": TYPE_INT,
+	"sleepTurns": TYPE_INT, "toxicCount": TYPE_INT,
+}
+
+static func _valid_mons(list: Variant, cap: int) -> Array:
+	var out: Array = []
+	if not list is Array:
+		return out
+	for m in list:
+		if out.size() < cap and _valid_mon(m):
+			out.append((m as Dictionary).duplicate(true))
+	return out
+
+static func _valid_mon(m: Variant) -> bool:
+	if not m is Dictionary:
+		return false
+	for k in _MON_KEYS:
+		if typeof(m.get(k)) != _MON_KEYS[k]:
+			return false
+	if not DB.SPECIES.has(m.species) or m.level < 1 or m.level > 100 or m.hp < 0:
+		return false
+	for k in DB.STAT_KEYS:
+		if not m.ivs.get(k) is int or not m.evs.get(k) is int:
+			return false
+	if m.moves.is_empty() or m.moves.size() > 4:
+		return false
+	for mv in m.moves:
+		if not mv is Dictionary or not DB.MOVES.has(mv.get("id")) or not mv.get("pp") is int or not mv.get("maxPp") is int:
+			return false
+	var st: Variant = m.get("status")
+	if st != null and not (st is String and (st == "" or Gfx.STATUS_LABEL.has(st))):
+		return false
+	var nick: Variant = m.get("nickname")
+	if nick != null and not nick is String:
+		return false
+	return true
+
+## On a friend's computer: saves the progress the host sent (own: OWN_KEYS of their state in the
+## host's world) into this computer's save, keeping this computer's own map, position and flags.
+static func save_progress_from_host(own: Dictionary, name: String) -> void:
+	var gs: Variant = load_game()
+	if gs == null:
+		gs = new_game("solo", [name])
+		# They have their creatures already, so skip the starter event at home.
+		gs.flags.starter = true
+		gs.flags.intro_mom = true
+	var incoming := guest_state(own, name, gs)
+	for k in Net.OWN_KEYS:
+		gs[k] = incoming[k]
+	if not gs.players[0].party.is_empty():
+		gs.flags.starter = true
+	save(gs)

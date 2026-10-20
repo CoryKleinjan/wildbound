@@ -1,7 +1,10 @@
 extends Node
-## LAN co-op. The host's computer runs the whole game. Player 2's computer joins over the local
-## network, sends its button presses, and shows the host's screen (replayed draw calls) and sound.
-## Hosts announce themselves with a UDP broadcast so the join screen can list them.
+## Drop-in co-op over the local network. Whoever is playing hosts: their computer runs the world.
+## A friend can join at any time from their own computer with the creatures, items and money from
+## their own save. They get their own view of the world (Game view 1): they walk around on their
+## own, on any map, while their computer sends its buttons and shows the frames (replayed draw
+## calls) and sound the host makes for them. Their progress is sent back and saved on their
+## computer. Hosts announce themselves with a UDP broadcast so the join screen can list them.
 
 const PORT := 47777
 const DISCOVERY_PORT := 47778
@@ -10,23 +13,32 @@ const M_TEX := 2
 const M_SFX := 3
 const M_MUSIC := 4
 const M_INPUT := 5
+## Friend -> host: [M_HELLO, their save (or null), their name].
+const M_HELLO := 6
+## Host -> friend: [M_SAVE, their progress] to save on their computer.
+const M_SAVE := 7
 const CH_RELIABLE := 0
 const CH_FRAMES := 1
-## An unchanged screen is still re-sent this often (ms), in case a frame packet was lost.
-const RESEND_MS := 500
+## An unchanged frame is still re-sent this often (ms).
+const RESEND_MS := 1000
+## How often the friend's progress is checked for changes and sent home (ms).
+const SYNC_MS := 3000
+## The parts of a save that belong to the player rather than the world they're in.
+const OWN_KEYS := ["players", "box", "bag", "money", "seen", "caught", "playTime"]
 
 enum Role { NONE, HOST, CLIENT }
 var role := Role.NONE
 var _peer: ENetMultiplayerPeer
 
 # Host
-## The joined player's peer id, 0 while nobody is connected.
+## The friend's peer id, 0 while nobody is connected.
 var client_id := 0
 var recorder := DrawRecorder.new()
 var game_name := ""
-var _recording := false
 var _last_frame := PackedByteArray()
 var _last_sent_ms := 0
+var _last_sync := PackedByteArray()
+var _sync_ms := 0
 var _beacon: PacketPeerUDP
 var _beacon_t := 0.0
 
@@ -34,18 +46,20 @@ var _beacon_t := 0.0
 var connected := false
 ## Set when the connection to the host failed or dropped.
 var lost := false
-## The host's latest screen (DrawRecorder format) and the textures it uses.
+## The host's latest frame for us (DrawRecorder format) and the textures it uses.
 var frame: Array = []
 var textures := {}
 var _sent_mask := -1
+var _hello_sent := false
+var _my_name := ""
 var _browse: PacketPeerUDP
 ## Games found on the network: ip -> {name, seen (msec)}.
 var found := {}
 
-var _toast := ""
-var _toast_until := 0
+## One toast per view (shown on top of that view's screen).
+var _toasts := [{"text": "", "until": 0}, {"text": "", "until": 0}]
 
-## Starts listening for player 2. name is shown in the join list.
+## Starts accepting a friend. name is shown in their join list.
 func host(name: String) -> Error:
 	stop()
 	_peer = ENetMultiplayerPeer.new()
@@ -63,7 +77,8 @@ func host(name: String) -> Error:
 	_beacon_t = 0.0
 	return OK
 
-func join(ip: String) -> Error:
+## Joins the game at ip as name (used when this computer has no save yet).
+func join(ip: String, name: String) -> Error:
 	stop()
 	_peer = ENetMultiplayerPeer.new()
 	var err := _peer.create_client(ip, PORT, 2)
@@ -76,6 +91,8 @@ func join(ip: String) -> Error:
 	frame = []
 	textures = {}
 	_sent_mask = -1
+	_hello_sent = false
+	_my_name = name
 	return OK
 
 func stop() -> void:
@@ -85,13 +102,18 @@ func stop() -> void:
 	if _beacon:
 		_beacon.close()
 		_beacon = null
+	if role == Role.HOST and client_id != 0:
+		_drop_guest()
 	role = Role.NONE
 	client_id = 0
 	connected = false
-	Game.input.set_remote(false)
 
 func is_hosting_with_player() -> bool:
 	return role == Role.HOST and client_id != 0
+
+## True once the friend is in the world (their view is running).
+func guest_in_world() -> bool:
+	return is_hosting_with_player() and Game.views[1].gs != null
 
 ## Starts listening for host announcements; results land in found.
 func browse() -> void:
@@ -113,9 +135,9 @@ static func local_addresses() -> Array:
 			out.append(a)
 	return out
 
-func toast(msg: String, seconds := 4.0) -> void:
-	_toast = msg
-	_toast_until = Time.get_ticks_msec() + int(seconds * 1000)
+## Shows msg on top of view v's screen for a few seconds.
+func toast(msg: String, v := 0, seconds := 4.0) -> void:
+	_toasts[v] = {"text": msg, "until": Time.get_ticks_msec() + int(seconds * 1000)}
 
 func _process(dt: float) -> void:
 	if _browse:
@@ -129,7 +151,9 @@ func _process(dt: float) -> void:
 		_beacon_t -= dt
 		if _beacon_t <= 0:
 			_beacon_t = 1.0
-			_beacon.put_packet(JSON.stringify({"game": "wildbound", "v": 1, "name": game_name, "open": client_id == 0}).to_utf8_buffer())
+			_beacon.put_packet(JSON.stringify({"game": "wildbound", "v": 2, "name": game_name, "open": client_id == 0}).to_utf8_buffer())
+		if guest_in_world() and Time.get_ticks_msec() - _sync_ms > SYNC_MS:
+			sync_guest()
 	while _peer != null and _peer.get_available_packet_count() > 0:
 		var data: Variant = bytes_to_var(_peer.get_packet())
 		if data is Array and data.size() > 0:
@@ -138,6 +162,9 @@ func _process(dt: float) -> void:
 		match _peer.get_connection_status():
 			MultiplayerPeer.CONNECTION_CONNECTED:
 				connected = true
+				if not _hello_sent:
+					_hello_sent = true
+					_send([M_HELLO, GameState.load_game(), _my_name])
 			MultiplayerPeer.CONNECTION_DISCONNECTED:
 				lost = true
 				connected = false
@@ -149,14 +176,17 @@ func _poll_browse() -> void:
 		var pkt := _browse.get_packet()
 		var ip := _browse.get_packet_ip()
 		var d: Variant = JSON.parse_string(pkt.get_string_from_utf8())
-		if d is Dictionary and d.get("game") == "wildbound" and d.get("open", true):
+		if not d is Dictionary or d.get("game") != "wildbound":
+			continue
+		if d.get("open", true):
 			found[ip] = {"name": str(d.get("name", "")).substr(0, 24), "seen": Time.get_ticks_msec()}
-		elif d is Dictionary and d.get("game") == "wildbound":
+		else:
 			found.erase(ip)
 	for ip in found.keys():
 		if Time.get_ticks_msec() - found[ip].seen > 4000:
 			found.erase(ip)
 
+# ---------------------------------------------------------------- host: the friend's view
 func _on_joined(id: int) -> void:
 	if client_id != 0:
 		_peer.disconnect_peer(id)
@@ -164,19 +194,75 @@ func _on_joined(id: int) -> void:
 	client_id = id
 	recorder.reset()
 	_last_frame = PackedByteArray()
-	Game.input.set_remote(true)
-	if Audio.current_track() != "":
-		_send([M_MUSIC, Audio.current_track()])
-	Audio.sfx("confirm")
-	toast("Player 2 joined!")
+	_last_sync = PackedByteArray()
+	Game.input.clear_remote()
+	Audio.reset_view(1)
 
 func _on_left(id: int) -> void:
 	if id != client_id:
 		return
+	var name := _guest_name()
 	client_id = 0
-	Game.input.set_remote(false)
-	if Game.input.coop:
-		toast("Player 2 left. They can rejoin with JOIN CO-OP, or play on this keyboard (arrows + Enter).", 6.0)
+	_drop_guest()
+	if name != "":
+		Audio.sfx("cancel")
+		toast("%s left. Their progress was saved on their computer." % name)
+
+func _guest_name() -> String:
+	var g: Variant = Game.views[1].gs
+	return g.players[0].name if g != null else ""
+
+func _drop_guest() -> void:
+	JointBattle.abort()
+	Game.clear_guest()
+	Game.input.clear_remote()
+	Audio.reset_view(1)
+
+## The friend arrives next to the host, with their own trainer, creatures, items and money, but in
+## the host's world: story and trainer flags are shared (the same dictionary).
+func _welcome(save: Variant, name: String) -> void:
+	var host_gs: Variant = Game.views[0].gs
+	if host_gs == null:
+		_peer.disconnect_peer(client_id)
+		return
+	var gs := GameState.guest_state(save, name, host_gs)
+	# Arrive next to the host rather than on top of them.
+	var host_ow: Variant = Game.views[0].stack[0] if Game.views[0].stack.size() else null
+	if host_ow is OverworldScene and host_ow.map.id == gs.map:
+		for d in [Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1)]:
+			if host_ow._walkable(host_ow.player.x + d.x, host_ow.player.y + d.y):
+				gs.x = host_ow.player.x + d.x
+				gs.y = host_ow.player.y + d.y
+				break
+	Game.views[1].gs = gs
+	Game.in_view(1, _start_guest_view.bind(host_gs.players[0].name))
+	Audio.sfx("confirm")
+	toast("%s joined your game!" % gs.players[0].name)
+	sync_guest()
+
+func _start_guest_view(host_name: String) -> void:
+	Game.replace(OverworldScene.new())
+	if Game.gs.players[0].party.is_empty():
+		Story.gift_starter(host_name)
+	else:
+		Game.say(["Welcome to %s's world!" % host_name])
+
+## Sends the friend's progress home if it changed.
+func sync_guest() -> void:
+	_sync_ms = Time.get_ticks_msec()
+	var gs: Variant = Game.views[1].gs
+	if gs == null:
+		return
+	var own := {}
+	for k in OWN_KEYS:
+		own[k] = gs[k]
+	var bytes := var_to_bytes(own)
+	# playTime always changes; compare without it so an idle friend isn't re-sent every few seconds.
+	var cmp := var_to_bytes([own.players, own.box, own.bag, own.money, own.seen, own.caught])
+	if cmp == _last_sync:
+		return
+	_last_sync = cmp
+	_send([M_SAVE, bytes])
 
 func _handle(data: Array) -> void:
 	match int(data[0]):
@@ -187,6 +273,9 @@ func _handle(data: Array) -> void:
 					if int(data[1]) & (1 << i):
 						held[GameInput.BUTTONS[i]] = true
 				Game.input.set_remote_buttons(held)
+		M_HELLO:
+			if role == Role.HOST and Game.views[1].gs == null and data.size() >= 3:
+				_welcome(data[1], str(data[2]).substr(0, 8))
 		M_FRAME:
 			if role == Role.CLIENT:
 				var raw: PackedByteArray = (data[1] as PackedByteArray).decompress(int(data[2]), FileAccess.COMPRESSION_ZSTD)
@@ -207,28 +296,30 @@ func _handle(data: Array) -> void:
 					Audio.stop_music()
 				else:
 					Audio.play_music(str(data[1]))
+		M_SAVE:
+			if role == Role.CLIENT:
+				var own: Variant = bytes_to_var(data[1])
+				if own is Dictionary:
+					GameState.save_progress_from_host(own, _my_name)
 
 func _send(data: Array, reliable := true) -> void:
 	if _peer == null:
 		return
+	# Frames are bigger than one network packet, and unreliable packets that need splitting are
+	# often lost, so they're sent reliably too, on their own channel so they don't hold up input.
 	_peer.transfer_channel = CH_RELIABLE if reliable else CH_FRAMES
-	_peer.transfer_mode = MultiplayerPeer.TRANSFER_MODE_RELIABLE if reliable else MultiplayerPeer.TRANSFER_MODE_UNRELIABLE_ORDERED
+	_peer.transfer_mode = MultiplayerPeer.TRANSFER_MODE_RELIABLE
 	_peer.put_packet(var_to_bytes(data))
 
-# ---------------------------------------------------------------- host: screen and sound
-## Called by main.gd before drawing; returns what Gfx should draw on.
-func begin_frame(canvas: CanvasItem) -> Variant:
-	_recording = is_hosting_with_player()
-	if not _recording:
-		return canvas
-	recorder.begin(canvas)
+# ---------------------------------------------------------------- host: the friend's screen and sound
+## Called by main.gd before drawing the friend's view; Gfx draws on the returned recorder, which
+## records without touching this computer's screen.
+func begin_frame() -> DrawRecorder:
+	recorder.begin(null)
 	return recorder
 
-## Called by main.gd after drawing: sends the frame to player 2 if it changed.
+## Called by main.gd after drawing the friend's view: sends the frame if it changed.
 func end_frame() -> void:
-	if not _recording:
-		return
-	_recording = false
 	for t in recorder.take_new_textures():
 		_send([M_TEX, t[0], (t[1] as Texture2D).get_image().save_png_to_buffer()])
 	var raw := var_to_bytes(recorder.cmds)
@@ -249,7 +340,7 @@ func relay_music(track: String) -> void:
 		_send([M_MUSIC, track])
 
 # ---------------------------------------------------------------- client: buttons
-## Sends player 2's held buttons to the host whenever they change.
+## Sends this computer's held buttons to the host whenever they change.
 func send_buttons(held: Dictionary) -> void:
 	if role != Role.CLIENT or not connected:
 		return
@@ -261,11 +352,12 @@ func send_buttons(held: Dictionary) -> void:
 		_sent_mask = mask
 		_send([M_INPUT, mask])
 
-## Toasts (player 2 joined or left) on top of the game, on both screens.
+## The current view's toast (a friend joined or left).
 func draw_overlay() -> void:
-	if _toast == "" or Time.get_ticks_msec() > _toast_until:
+	var t: Dictionary = _toasts[Game.cur]
+	if t.text == "" or Time.get_ticks_msec() > t.until:
 		return
-	var lines := Gfx.wrap(_toast, 208, 6)
+	var lines := Gfx.wrap(t.text, 208, 6)
 	var h := 8 + lines.size() * 9
 	Gfx.panel(8, 4, 224, h, "dark")
 	for i in lines.size():

@@ -11,16 +11,21 @@ var _picks: Array = []
 var _busy := false
 var _started := false
 
-func _init(coop: bool, on_done: Callable) -> void:
+var _lines: Array
+
+## lines replaces PROF. ALDER's opening lines.
+func _init(coop: bool, on_done: Callable, lines: Array = []) -> void:
 	_coop = coop
 	_on_done = on_done
+	_lines = lines
 
 func _intro() -> void:
 	_busy = true
-	Game.say([
+	var lines := _lines if not _lines.is_empty() else [
 		"PROF. ALDER: My bag! There are three Capture Orbs inside!",
 		"Each of you, grab one and send it out!" if _coop else "Grab one and send it out, quick!",
-	], func() -> void: _busy = false)
+	]
+	Game.say(lines, func() -> void: _busy = false)
 
 func update(_dt: float) -> void:
 	if not _started:

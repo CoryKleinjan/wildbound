@@ -1,15 +1,61 @@
 extends Node
-## Scene stack, input, the current save state and screen fades.
+## Scene stacks, input, the current save state and screen fades.
+## There are two views of one world: view 0 is the player at this computer and view 1 is a friend
+## who joined over the network (see Net). Each view has its own scene stack, save state and fade.
+## stack, gs, push, pop, say and the rest act on the view being updated or drawn (cur).
 
-var stack: Array[Scene] = []
+class View:
+	var stack: Array[Scene] = []
+	## The view's GameState dictionary (see GameState.new_game), or null on the title screen.
+	var gs: Variant = null
+	## 0..1 black overlay.
+	var fade := 0.0
+	var fade_target := 0
+	var fade_cb := Callable()
+
+var views: Array[View] = [View.new(), View.new()]
+var cur := 0
 var input := GameInput.new()
-## The current GameState dictionary (see GameState.new_game), or null on the title screen.
-var gs: Variant = null
 var time := 0.0
-## 0..1 black overlay.
-var fade := 0.0
-var _fade_target := 0
-var _fade_cb := Callable()
+
+var stack: Array[Scene]:
+	get:
+		return views[cur].stack
+	set(v):
+		views[cur].stack = v
+
+var gs: Variant:
+	get:
+		return views[cur].gs
+	set(v):
+		views[cur].gs = v
+
+var fade: float:
+	get:
+		return views[cur].fade
+	set(v):
+		views[cur].fade = v
+
+## Runs cb with view v as the current one (for code outside update and draw, like Net).
+func in_view(v: int, cb: Callable) -> Variant:
+	var was := cur
+	cur = v
+	input.view = v
+	var r: Variant = cb.call()
+	cur = was
+	input.view = was
+	return r
+
+## The other view's overworld, when that view is in the world.
+func other_overworld() -> OverworldScene:
+	var v := views[1 - cur]
+	if v.stack.size() and v.stack[0] is OverworldScene:
+		return v.stack[0]
+	return null
+
+## Drops the friend's view (they left).
+func clear_guest() -> void:
+	views[1] = View.new()
 
 func start() -> void:
 	replace(TitleScene.new())
@@ -37,25 +83,36 @@ var top: Scene:
 
 ## Fades to black, runs cb, fades back in.
 func transition(cb: Callable) -> void:
-	_fade_target = 1
-	_fade_cb = cb
+	views[cur].fade_target = 1
+	views[cur].fade_cb = cb
 
 func update(dt: float) -> void:
 	time += dt
 	input.update(dt)
+	for v in views.size():
+		if views[v].stack.is_empty():
+			continue
+		cur = v
+		input.view = v
+		_update_view(dt)
+	cur = 0
+	input.view = 0
+
+func _update_view(dt: float) -> void:
+	var v := views[cur]
 	if gs != null:
 		gs.playTime += dt
-	if _fade_target == 1:
-		fade = minf(1, fade + dt * 4)
-		if fade >= 1:
-			var cb := _fade_cb
-			_fade_cb = Callable()
-			_fade_target = 0
+	if v.fade_target == 1:
+		v.fade = minf(1, v.fade + dt * 4)
+		if v.fade >= 1:
+			var cb := v.fade_cb
+			v.fade_cb = Callable()
+			v.fade_target = 0
 			if cb.is_valid():
 				cb.call()
 		return
-	if fade > 0:
-		fade = maxf(0, fade - dt * 4)
+	if v.fade > 0:
+		v.fade = maxf(0, v.fade - dt * 4)
 	if top:
 		top.update(dt)
 

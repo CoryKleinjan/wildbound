@@ -53,8 +53,19 @@ var _music: Array[AudioStreamPlayer] = []
 var _mvol := [0.0, 0.0]
 var _mtarget := [0.0, 0.0]
 var _active := 0
-var _current := ""
-var _saved := ""
+## Music state per view (Game.cur). View 1's sound plays on the friend's computer (see Net).
+var _tracks := ["", ""]
+var _saved_tracks := ["", ""]
+var _current: String:
+	get:
+		return _tracks[Game.cur]
+	set(v):
+		_tracks[Game.cur] = v
+var _saved: String:
+	get:
+		return _saved_tracks[Game.cur]
+	set(v):
+		_saved_tracks[Game.cur] = v
 var _music_cache := {}
 
 func _ready() -> void:
@@ -103,6 +114,12 @@ func _exit_tree() -> void:
 
 # ---------------------------------------------------------------- playback
 func sfx(sfx_name: String) -> void:
+	if Game.cur == 1:
+		Net.relay_sfx(sfx_name)
+		return
+	# A joint battle runs in this view but the friend is in it too.
+	if Game.input.joint:
+		Net.relay_sfx(sfx_name)
 	if _pool.is_empty() or not sfx_name in SFX_NAMES:
 		return
 	var s: AudioStreamWAV = streams.get(sfx_name)
@@ -113,7 +130,6 @@ func sfx(sfx_name: String) -> void:
 	if _clock - float(_last_play.get(sfx_name, -1.0)) < 0.035:
 		return
 	_last_play[sfx_name] = _clock
-	Net.relay_sfx(sfx_name)
 	_log("sfx:" + sfx_name)
 	var idx := -1
 	# Short UI blips reuse their own player so they cut themselves off instead of piling up.
@@ -181,8 +197,12 @@ func play_music(track: String) -> void:
 	if track == _current:
 		return
 	_current = track
+	if Game.cur == 1:
+		Net.relay_music(track)
+		return
+	if Game.input.joint:
+		Net.relay_music(track)
 	_log("music:" + track)
-	Net.relay_music(track)
 	var stream := _load_music(track)
 	# Fade whatever is playing out.
 	_mtarget[_active] = 0.0
@@ -197,11 +217,19 @@ func play_music(track: String) -> void:
 	m.play()
 
 func stop_music() -> void:
-	if _current != "":
-		Net.relay_music("")
+	if Game.cur == 1:
+		if _current != "":
+			Net.relay_music("")
+		_current = ""
+		return
 	_current = ""
 	_mtarget[0] = 0.0
 	_mtarget[1] = 0.0
+
+## Forgets view v's music (a friend joined or left).
+func reset_view(v: int) -> void:
+	_tracks[v] = ""
+	_saved_tracks[v] = ""
 
 func has_music(track: String) -> bool:
 	return _music_path(track) != ""

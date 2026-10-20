@@ -11,8 +11,14 @@ func _process(dt: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	Gfx.ci = Net.begin_frame(self)
+	Gfx.ci = self
 	Game.draw()
 	Net.draw_overlay()
-	Net.end_frame()
-	Gfx.ci = self
+	# A friend who joined over the network: draw their view for their computer, not this screen.
+	if Net.guest_in_world():
+		Game.in_view(1, func() -> void:
+			Gfx.ci = Net.begin_frame()
+			Game.draw()
+			Net.draw_overlay()
+			Net.end_frame())
+		Gfx.ci = self

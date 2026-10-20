@@ -23,7 +23,8 @@ static func on_map_loaded(ow: OverworldScene) -> void:
 ## Returns true when a story event takes over this step.
 static func intercept_move(ow: OverworldScene, dir: String, tx: int, ty: int) -> bool:
 	var gs: Dictionary = Game.gs
-	if ow.map.id == "fernhollow" and dir == "up" and ty < 0 and not gs.flags.get("starter", false):
+	# Keyed on the party rather than flags.starter: a friend who joined can have creatures before the host does.
+	if ow.map.id == "fernhollow" and dir == "up" and ty < 0 and gs.players[0].party.is_empty():
 		_starter_event(ow)
 		return true
 	return false
@@ -101,6 +102,20 @@ static func _kai_arrives(ow: OverworldScene, alder) -> void:
 				], func() -> void:
 					ow.remove_actor(alder)
 					gs.flags.starter = true))}))
+
+## A friend who joined with no creatures gets one from PROF. ALDER's bag right away.
+static func gift_starter(host_name: String) -> void:
+	Game.push(StarterScene.new(false, _on_gift, [
+		"PROF. ALDER: Welcome to %s's world! You'll need a partner out there." % host_name,
+		"Pick a creature from my bag!",
+	]))
+
+static func _on_gift(picks: Array) -> void:
+	var gs: Dictionary = Game.gs
+	GameState.give_starter(gs, 0, picks[0])
+	gs.bag.orb = gs.bag.get("orb", 0) + 5
+	Game.say(["PROF. ALDER: And take these 5 Capture Orbs. Good luck out there!"])
+	GameState.save(gs)
 
 # ---------- ending ----------
 static func epilogue_lines(gs: Dictionary) -> Array:
