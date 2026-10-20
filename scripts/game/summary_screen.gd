@@ -24,8 +24,7 @@ func update(_dt: float) -> void:
 func draw() -> void:
 	var m := _mon
 	if m.get("egg", false):
-		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#f0f0e8")
-		Gfx.rect(0, 0, Gfx.W, 16, "#486088")
+		Gfx.screen("summary", "#f0f0e8", "#486088")
 		Gfx.text("EGG", 6, 5, {"color": "#ffffff", "size": 6})
 		Gfx.rect(4, 20, 76, 76, "#c8e0f0")
 		Menus.draw_egg(42, 58, 2.2)
@@ -35,8 +34,7 @@ func draw() -> void:
 			Gfx.text(lines[i], 94, 30 + i * 11, {"size": 6})
 		return
 	var sp: Dictionary = DB.species(m.species)
-	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#f0f0e8")
-	Gfx.rect(0, 0, Gfx.W, 16, "#486088")
+	Gfx.screen("summary", "#f0f0e8", "#486088")
 	Gfx.text("INFO & STATS" if page == 0 else "MOVES", 6, 5, {"color": "#ffffff", "size": 6})
 	Gfx.text("◀▶ page   B: back", Gfx.W - 6, 5, {"color": "#c8d8f0", "size": 5, "align": "right"})
 	# Left column: sprite and identity.

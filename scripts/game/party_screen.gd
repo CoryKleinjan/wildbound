@@ -38,7 +38,11 @@ func _cancel() -> void:
 		cb.call()
 
 func draw() -> void:
-	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#5880b8")
+	var bg := ArtAssets.texture("screens/party")
+	if bg != null:
+		Gfx.image(bg, 0, 0)
+	else:
+		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#5880b8")
 	for i in 12:
 		Gfx.rect(0, i * 14, Gfx.W, 7, "#6890c8")
 	var party: Array = o.party

@@ -680,6 +680,20 @@ static func badge_count(g: Dictionary) -> int:
 	return n
 
 # ---------- drawing ----------
+## The player's sprite sheet name while riding the Bicycle or Surfing (or diving), when that art exists.
+func _ride_look(look: String) -> String:
+	var ride := ""
+	if Field.surfing(self) or map.get("underwater", false):
+		ride = "surf"
+	elif Game.gs.get("bike", false) and not map.get("indoor", false):
+		ride = "bike"
+	if ride != "" and ArtAssets.texture("trainers/%s_%s_walk" % [look, ride]) != null:
+		return "%s_%s" % [look, ride]
+	return look
+
+## Field objects that can be cleared or pushed, so a painted map leaves them out and they are drawn on top.
+const DYNAMIC := "TRO"
+
 func draw() -> void:
 	var p := actor_pixel(player)
 	var cam_x: int = roundi(p.x + 8 - Gfx.W / 2.0)
@@ -700,13 +714,21 @@ func draw() -> void:
 	var cave: bool = map.get("cave", false)
 	var h := _map_h()
 	var w := _map_w()
+	# A painted whole-map image (assets/maps/<id>.png) replaces the tiles inside the map; tiles still fill the border.
+	var painted := ArtAssets.texture("maps/" + str(map.get("id", "")))
+	var inside := func(tx: int, ty: int) -> bool: return tx >= 0 and ty >= 0 and tx < w and ty < h
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#000000")
+	if painted != null:
+		Gfx.image(painted, -cam_x, -cam_y)
 	for ty in range(y0, y0 + Gfx.H / 16 + 3):
 		for tx in range(x0, x0 + Gfx.W / 16 + 3):
 			if indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w):
 				continue
 			var raw := Maps.tile_at(map, tx, ty)
 			var ch := Field.tile(self, tx, ty)
+			# Inside a painted map only the things that can change (Cut trees, rocks, boulders) are drawn.
+			if painted != null and inside.call(tx, ty) and not DYNAMIC.contains(ch):
+				continue
 			if ch == "#" and cave:
 				ch = "x"
 			var tex: Texture2D
@@ -723,12 +745,16 @@ func draw() -> void:
 	if gen_trees and not cave:
 		for ty in range(y0, y0 + Gfx.H / 16 + 4):
 			for tx in range(x0 - 1, x0 + Gfx.W / 16 + 4):
+				if painted != null and inside.call(tx, ty):
+					continue
 				if Field.tile(self, tx, ty) == "#" and not (indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w)):
 					Gfx.image(TownStyle.apply(Tiles.tree_sprite(tx, ty), "#", style), tx * 16 - cam_x - 8, ty * 16 - cam_y - 16)
 	# Generated whole-building sprites (when present) over their footprint, doors on top.
-	for b in Tiles.buildings(map):
-		var btex := ArtAssets.texture("buildings/" + b.kind)
+	for b in ([] if painted != null else Tiles.buildings(map)):
 		var r: Rect2i = b.rect
+		var btex := ArtAssets.texture("buildings/%s_%dx%d" % [b.kind, r.size.x, r.size.y])
+		if btex == null:
+			btex = ArtAssets.texture("buildings/" + b.kind)
 		if btex == null or r.position.x * 16 - cam_x > Gfx.W or r.end.x * 16 - cam_x < 0 or r.position.y * 16 - cam_y > Gfx.H or r.end.y * 16 - cam_y < 0:
 			continue
 		btex = TownStyle.apply(btex, b.roof, style)
@@ -754,9 +780,16 @@ func draw() -> void:
 			step = (a.step_count % 2) + 1
 		var sx: float = ap.x - cam_x
 		var sy: float = ap.y - cam_y - 4 - ap.hop
-		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy), a.palette if DB.PALETTES.has(a.palette) else "boy")
+		var look: String = a.palette if DB.PALETTES.has(a.palette) else "boy"
+		if a == player:
+			look = _ride_look(look)
+			if look.ends_with("_surf"):
+				step = floori(Game.time * 3) % 3  # the surf ride paddles even when still
+		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy), look)
 		# Tall grass covers the feet.
-		if a.move == null and Maps.tile_at(map, a.x, a.y) == ",":
+		if a.move == null and Maps.tile_at(map, a.x, a.y) == "," and painted != null:
+			Gfx.ci.draw_texture_rect_region(painted, Rect2(ap.x - cam_x, ap.y - cam_y + 9, 16, 7), Rect2(a.x * 16, a.y * 16 + 9, 16, 7))
+		elif a.move == null and Maps.tile_at(map, a.x, a.y) == ",":
 			var gt: Texture2D = TownStyle.apply(Tiles.tile_texture(",", a.x, a.y, anim), ",", style)
 			Gfx.ci.draw_texture_rect_region(gt, Rect2(ap.x - cam_x, ap.y - cam_y + 9, 16, 7), Rect2(0, 9, 16, 7))
 		if _exclaim != null and _exclaim.a == a:

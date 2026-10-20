@@ -37,7 +37,11 @@ func update(dt: float) -> void:
 		_on_close.call()
 
 func draw() -> void:
-	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#181830")
+	var bg := ArtAssets.texture("screens/halloffame")
+	if bg != null:
+		Gfx.image(bg, 0, 0)
+	else:
+		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#181830")
 	for i in 30:
 		var tw := 0.5 + 0.5 * sin(_t * 2 + i)
 		Gfx.rect(fposmod(i * 53.7, Gfx.W), fposmod(i * 37.3, Gfx.H), 1, 1, Color(1, 1, 0.8, 0.3 + 0.6 * tw))
