@@ -1,7 +1,11 @@
 class_name GameState
 ## The save state (a plain Dictionary with the TS GameState keys) and its save file.
 ## GameState: {version, mode ("solo" | "coop"), players: [{name, party, otId}], box, bag, money, map, x, y, dir,
-## respawn: {map, x, y}, flags, seen, caught, playTime}
+## respawn: {map, x, y}, flags, seen, caught, playTime,
+## Emerald additions (see _extra): daycare {mons, steps, egg}, berries {map: {"x,y": {berry, planted, watered}}},
+## repel (steps left), bike (riding), safari (null or {steps, balls}), secretBase (null or {map, x, y, decor}),
+## decor (owned decoration ids), bp (Battle Points), tower {streak, best}, roamers {species: {map, level, hp}},
+## steps, rematch {trainer id: times beaten again}, fly (unlocked towns)}
 
 static var SAVE_PATH := "user://wildbound-save.json"
 
@@ -31,6 +35,24 @@ static func new_game(mode: String, names: Array = []) -> Dictionary:
 		"seen": [],
 		"caught": [],
 		"playTime": 0.0,
+	}.merged(_extra())
+
+static func _extra() -> Dictionary:
+	return {
+		"daycare": {"mons": [], "steps": 0, "egg": false},
+		"berries": {},
+		"repel": 0,
+		"bike": false,
+		"safari": null,
+		"secretBase": null,
+		"decor": [],
+		"bp": 0,
+		"tower": {"streak": 0, "best": 0},
+		"roamers": {},
+		"steps": 0,
+		"rematch": {},
+		"fly": ["fernhollow"],
+		"contest": {},
 	}
 
 ## Gives a player their first creature (from PROF. ALDER's bag).
@@ -53,6 +75,7 @@ static func all_party_mons(gs: Dictionary) -> Array:
 ## Puts a newly caught creature in its catcher's party, or in storage when the party is full.
 static func receive_creature(gs: Dictionary, mon: Dictionary, player: int) -> String:
 	var p: Dictionary = gs.players[mini(player, gs.players.size() - 1)]
+	Creatures.migrate(mon)
 	if not gs.caught.has(mon.species):
 		gs.caught.append(mon.species)
 	if p.party.size() < party_cap(gs):
@@ -98,8 +121,15 @@ static func load_game() -> Variant:
 	# Saves from before the story existed already have their starters.
 	if not gs.flags.has("starter") and not all_party_mons(gs).is_empty():
 		gs.flags.starter = true
+	# Saves from before the Emerald features get the new fields.
+	var extra := _extra()
+	for k in extra:
+		if not gs.has(k):
+			gs[k] = extra[k]
+	for m in all_party_mons(gs) + gs.box + gs.daycare.mons:
+		Creatures.migrate(m)
 	var max_uid := 0
-	for m in all_party_mons(gs) + gs.box:
+	for m in all_party_mons(gs) + gs.box + gs.daycare.mons:
 		max_uid = maxi(max_uid, m.uid)
 	Creatures.set_next_uid(max_uid + 1)
 	return gs
@@ -135,8 +165,14 @@ static func guest_state(save: Variant, name: String, host_gs: Dictionary) -> Dic
 				gs[key] = list.filter(func(sp: Variant) -> bool: return sp is String and DB.SPECIES.has(sp))
 		if s.get("playTime") is float or s.get("playTime") is int:
 			gs.playTime = float(s.playTime)
+		if s.get("bp") is int:
+			gs.bp = clampi(s.bp, 0, 9999)
+		var decor: Variant = s.get("decor")
+		if decor is Array:
+			gs.decor = decor.filter(func(d: Variant) -> bool: return d is String and DB.DECORATIONS.has(d))
 	# Fresh ids, so they can't clash with the host's creatures.
 	for m in gs.players[0].party + gs.box:
+		Creatures.migrate(m)
 		m.uid = Creatures.next_uid
 		Creatures.next_uid += 1
 		m.owner = 0
@@ -184,6 +220,18 @@ static func _valid_mon(m: Variant) -> bool:
 		return false
 	var nick: Variant = m.get("nickname")
 	if nick != null and not nick is String:
+		return false
+	var item: Variant = m.get("item")
+	if item != null and not (item is String and DB.ITEMS.has(item)):
+		return false
+	for k in ["friendship", "eggSteps", "metLevel"]:
+		if m.has(k) and not m[k] is int:
+			return false
+	if m.has("egg") and not m.egg is bool:
+		return false
+	if m.has("ribbons") and not m.ribbons is Array:
+		return false
+	if m.has("condition") and not m.condition is Dictionary:
 		return false
 	return true
 

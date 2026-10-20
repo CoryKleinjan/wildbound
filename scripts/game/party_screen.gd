@@ -53,6 +53,11 @@ func draw() -> void:
 			Gfx.rect(7, y + 1, 4, 15, "#e05050")
 		Menus.draw_mini(m, 10, y - 4, 22, (int(Game.time * 4) % 2) if selected else 0)
 		Gfx.text(Creatures.display_name(m), 36, y + 5, {"size": 6})
+		if m.get("egg", false):
+			continue
+		if m.get("item", null) != null:
+			Gfx.rect(28, y + 10, 5, 5, "#303030")
+			Gfx.rect(29, y + 11, 3, 3, "#f8c040")
 		var g: Variant = Creatures.gender_of(m)
 		if g != null:
 			Gfx.text("♂" if g == "M" else "♀", 104, y + 4, {"size": 7, "color": "#3870e0" if g == "M" else "#e04870", "shadow": null})

@@ -24,7 +24,7 @@ const RESEND_MS := 1000
 ## How often the friend's progress is checked for changes and sent home (ms).
 const SYNC_MS := 3000
 ## The parts of a save that belong to the player rather than the world they're in.
-const OWN_KEYS := ["players", "box", "bag", "money", "seen", "caught", "playTime"]
+const OWN_KEYS := ["players", "box", "bag", "money", "seen", "caught", "playTime", "bp", "decor"]
 
 enum Role { NONE, HOST, CLIENT }
 var role := Role.NONE

@@ -7,6 +7,7 @@ var _menu_open := false
 
 func _init() -> void:
 	Net.stop()
+	Options.apply()
 
 func update(dt: float) -> void:
 	_t += dt
@@ -21,7 +22,7 @@ func _open_menu() -> void:
 	var items: Array = []
 	if GameState.has_save():
 		items.append("CONTINUE")
-	items.append_array(["NEW GAME", "JOIN A GAME", "CONTROLS"])
+	items.append_array(["NEW GAME", "JOIN A GAME", "OPTIONS", "CONTROLS"])
 	var ref: Array = []
 	var menu := ListMenu.new({
 		"x": 40, "y": 92, "w": 160, "items": items,
@@ -43,6 +44,8 @@ func _on_pick(pick: String) -> void:
 		Game.transition(func() -> void: Game.replace(OverworldScene.new()))
 	elif pick == "JOIN A GAME":
 		Game.transition(func() -> void: Game.replace(LanScenes.Join.new()))
+	elif pick == "OPTIONS":
+		Options.open_menu(0, func() -> void: pass)
 	elif pick == "CONTROLS":
 		Game.say(OverworldScene.controls_text() + [
 			"CO-OP: while you play, a friend on the same network can join from their own computer with JOIN A GAME, bringing their own creatures.",
