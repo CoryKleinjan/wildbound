@@ -41,17 +41,23 @@ func update(dt: float) -> void:
 	if last and choices.size():
 		if _pressed("up"):
 			_choice = (_choice + choices.size() - 1) % choices.size()
+			Audio.sfx("cursor")
 		if _pressed("down"):
 			_choice = (_choice + 1) % choices.size()
+			Audio.sfx("cursor")
 		if _pressed("a"):
+			Audio.sfx("confirm")
 			Game.pop(self)
 			_call("on_choice", [_choice])
 		elif _pressed("b"):
+			Audio.sfx("cancel")
 			Game.pop(self)
 			_call("on_choice", [choices.size() - 1])
 		return
 	_wait += dt
 	if _pressed("a") or _pressed("b") or (_o.has("auto") and _wait > _o.auto):
+		if _pressed("a") or _pressed("b"):
+			Audio.sfx("text")
 		_wait = 0
 		if last:
 			Game.pop(self)

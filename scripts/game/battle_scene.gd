@@ -45,6 +45,7 @@ var _weather: Variant = null
 var _ball: Variant = null
 var _level_panel: Variant = null
 var _after_events := Callable()
+var _victory_played := false
 
 func _init(setup: Dictionary) -> void:
 	_setup = setup
@@ -71,6 +72,48 @@ func _init(setup: Dictionary) -> void:
 	for m in setup.get("wild", []):
 		if not gs.seen.has(m.species):
 			gs.seen.append(m.species)
+	Audio.push_music(battle_music(setup))
+
+## Music track for a battle setup: battle_wild / battle_trainer / battle_gym / battle_rival /
+## battle_champion / battle_villain.
+static func battle_music(setup: Dictionary) -> String:
+	if setup.get("kind", "wild") == "wild":
+		return "battle_wild"
+	var t: Dictionary = setup.get("trainer", {})
+	var id: String = str(t.get("id", ""))
+	if t.get("champion", false) or id == "champion" or id.begins_with("elite_") or id.contains("league"):
+		return "battle_champion"
+	if id.begins_with("order_"):
+		return "battle_villain"
+	if id.contains("rival"):
+		return "battle_rival"
+	if t.has("badge"):
+		return "battle_gym"
+	return "battle_trainer"
+
+func _play_victory() -> void:
+	if _victory_played:
+		return
+	_victory_played = true
+	Audio.play_music("victory_wild" if _setup.kind == "wild" else "victory_trainer")
+
+## Looks ahead in the event queue (up to the next hit) for the effectiveness message of this hit.
+func _hit_sfx() -> String:
+	for e in _queue:
+		if e.t == "anim" and (e.kind == "hit" or e.kind == "move"):
+			break
+		if e.t == "msg":
+			if e.text == "It's super effective!":
+				return "hit_super"
+			if e.text == "It's not very effective...":
+				return "hit_weak"
+	return "hit"
+
+func _foe_faint_pending() -> bool:
+	for e in _queue:
+		if e.t == "faint" and e.side == 1:
+			return true
+	return false
 
 func _trainer_party() -> Array:
 	return _setup.get("trainerParty", _setup.get("trainer_party", []))
@@ -101,6 +144,8 @@ func _next_event() -> void:
 	match e.t:
 		"msg":
 			_message = e.text
+			if e.text == "Got away safely!":
+				Audio.sfx("run")
 			_msg_shown = 0
 			_msg_wait = 0
 			_anim = {"kind": "msg", "t": 0.0, "dur": INF}
@@ -112,6 +157,8 @@ func _next_event() -> void:
 			sl.visible = true
 			sl.faint = 0
 			sl.appear = 0
+			if e.side == 0 or _setup.kind == "trainer":
+				Audio.sfx("send_out")
 			if e.side == 1 and not _gs.seen.has(e.mon.species):
 				_gs.seen.append(e.mon.species)
 			_anim = {"kind": "appear", "t": 0.0, "dur": 0.35, "data": sl}
@@ -130,7 +177,10 @@ func _next_event() -> void:
 				sl.view.maxHp = e.maxHp
 			var diff := absf(e.hp - from)
 			var dur := minf(0.9, maxf(0.15, (diff / maxf(1, e.maxHp)) * 1.4))
+			var low_from := from / maxf(1, e.maxHp) > 0.25
 			_anim = {"kind": "hp", "t": 0.0, "dur": dur, "data": {"sl": sl, "from": from, "to": e.hp}, "done": func() -> void:
+				if e.side == 0 and low_from and e.hp > 0 and float(e.hp) / maxf(1, e.maxHp) <= 0.25:
+					Audio.sfx("low_hp")
 				sl.shown_hp = e.hp
 				if sl.view != null:
 					sl.view.hp = e.hp}
@@ -141,21 +191,29 @@ func _next_event() -> void:
 			_next_event()
 			return
 		"faint":
-			_anim = {"kind": "faint", "t": 0.0, "dur": 0.45, "data": sl, "done": func() -> void: sl.visible = false}
+			Audio.sfx("faint")
+			var last_foe: bool = e.side == 1 and battle.result == "win" and not _foe_faint_pending()
+			_anim = {"kind": "faint", "t": 0.0, "dur": 0.45, "data": sl, "done": func() -> void:
+				sl.visible = false
+				if last_foe:
+					_play_victory()}
 			return
 		"anim":
 			if e.kind == "move":
 				_anim = {"kind": "lunge", "t": 0.0, "dur": 0.25, "data": sl}
 				return
 			if e.kind == "hit":
+				Audio.sfx(_hit_sfx())
 				_anim = {"kind": "flash", "t": 0.0, "dur": 0.45, "data": sl}
 				return
+			Audio.sfx({"stat-up": "stat_up", "stat-down": "stat_down", "heal": "recover"}.get(e.kind, "status"))
 			var color := "#f08040" if e.kind == "stat-up" else ("#4080f0" if e.kind == "stat-down" else ("#60e070" if e.kind == "heal" else "#c060e0"))
 			sl.tint = {"color": color, "t": 0.0}
 			_anim = {"kind": "tint", "t": 0.0, "dur": 0.4, "data": sl, "done": func() -> void: sl.tint = null}
 			return
 		"ball":
-			_ball = {"side": e.side, "slot": e.slot, "shakes": e.shakes, "caught": e.caught, "t": 0.0}
+			_ball = {"side": e.side, "slot": e.slot, "shakes": e.shakes, "caught": e.caught, "t": 0.0, "sounds": 0}
+			Audio.sfx("orb_throw")
 			_anim = {"kind": "ball", "t": 0.0, "dur": 0.6 + e.shakes * 0.5 + 0.4, "done": func() -> void:
 				if e.caught:
 					sl.visible = false
@@ -163,12 +221,15 @@ func _next_event() -> void:
 			return
 		"exp":
 			var from := sl.shown_exp
+			if e.expFrac > from:
+				Audio.sfx("exp")
 			_anim = {"kind": "exp", "t": 0.0, "dur": 0.5, "data": {"sl": sl, "from": from, "to": e.expFrac}, "done": func() -> void: sl.shown_exp = e.expFrac}
 			return
 		"levelUp":
 			if not leveled.has(e.uid):
 				leveled.append(e.uid)
 			_level_panel = {"name": e.name, "old": e.old, "now": e.now}
+			Audio.sfx("level_up")
 			_anim = {"kind": "levelPanel", "t": 0.0, "dur": INF}
 			return
 		"learnPrompt":
@@ -233,6 +294,16 @@ func _update_anim(dt: float) -> void:
 		"ball":
 			if _ball != null:
 				_ball.t = a.t
+				# Sounds: land at 0.6s, a shake every 0.5s, then the result.
+				var due := 0
+				if a.t >= 0.6:
+					due = 1 + mini(_ball.shakes, int((a.t - 0.6) / 0.5))
+				while _ball.sounds < due:
+					_ball.sounds += 1
+					if _ball.sounds - 1 < _ball.shakes:
+						Audio.sfx("orb_shake")
+					else:
+						Audio.sfx("catch" if _ball.caught else "breakout")
 	if a.t >= a.dur:
 		var done: Callable = a.get("done", Callable())
 		if done.is_valid():
@@ -335,6 +406,8 @@ func _finish() -> void:
 		var prize: int = t.pay * last.level
 		gs.money += prize
 		msgs.append_array([t.defeat, "You got $%d for winning!" % prize])
+	if b.result == "win":
+		_play_victory()
 	if b.result == "lose":
 		var lost: int = gs.money / 2
 		gs.money -= lost
@@ -373,11 +446,15 @@ func update(dt: float) -> void:
 	if _menu == "action":
 		if inp.pressed("left") or inp.pressed("right"):
 			_action_sel ^= 1
+			Audio.sfx("cursor")
 		if inp.pressed("up") or inp.pressed("down"):
 			_action_sel ^= 2
-		if inp.pressed("b"):
+			Audio.sfx("cursor")
+		if inp.pressed("b") and _req_idx > 0:
+			Audio.sfx("cancel")
 			_undo_choice()
 		if inp.pressed("a"):
+			Audio.sfx("confirm")
 			if _action_sel == 0:
 				if not battle.has_usable_move(mon):
 					Game.say(["%s has no moves left!" % Creatures.display_name(mon)], func() -> void: _push_choice({"kind": "move", "moveIdx": -1}), r.player)
@@ -396,14 +473,19 @@ func update(dt: float) -> void:
 					_push_choice({"kind": "run"})
 	elif _menu == "move":
 		var n: int = mon.moves.size()
+		var before_sel := _move_sel
 		if inp.pressed("left") or inp.pressed("right"):
 			_move_sel = mini(n - 1, _move_sel ^ 1)
 		if inp.pressed("up") or inp.pressed("down"):
 			_move_sel = mini(n - 1, _move_sel ^ 2)
+		if _move_sel != before_sel:
+			Audio.sfx("cursor")
 		if inp.pressed("b"):
+			Audio.sfx("cancel")
 			_menu = "action"
 		if inp.pressed("a"):
 			var ms: Dictionary = mon.moves[_move_sel]
+			Audio.sfx("error" if ms.pp <= 0 else "confirm")
 			if ms.pp <= 0:
 				_mode = "busy"
 				Game.say(["There's no PP left for this move!"], func() -> void: _mode = "choose", r.player)
@@ -430,11 +512,15 @@ func update(dt: float) -> void:
 		var n := _target_list.size()
 		if inp.pressed("left") or inp.pressed("up"):
 			_target_sel = (_target_sel + n - 1) % n
+			Audio.sfx("cursor")
 		if inp.pressed("right") or inp.pressed("down"):
 			_target_sel = (_target_sel + 1) % n
+			Audio.sfx("cursor")
 		if inp.pressed("b"):
+			Audio.sfx("cancel")
 			_menu = "move"
 		if inp.pressed("a"):
+			Audio.sfx("confirm")
 			_push_choice({"kind": "move", "moveIdx": _pending_move, "target": _target_list[_target_sel]})
 
 func _open_party_for(r: Dictionary) -> void:

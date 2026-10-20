@@ -803,6 +803,34 @@
    "pants": "#f0f0f0",
    "hair": "#283878",
    "skin": "#d8a070"
+  },
+  "orderGrunt": {
+   "hat": "#686878",
+   "shirt": "#787888",
+   "pants": "#383848",
+   "hair": "#303038",
+   "skin": "#e8c8a8"
+  },
+  "orderAdmin": {
+   "hat": "#484858",
+   "shirt": "#a03848",
+   "pants": "#282830",
+   "hair": "#c8c8d0",
+   "skin": "#f0d0b8"
+  },
+  "orderBoss": {
+   "hat": "#202028",
+   "shirt": "#e8d8a0",
+   "pants": "#202028",
+   "hair": "#e8e8f0",
+   "skin": "#f0d0b8"
+  },
+  "prof": {
+   "hat": "#8a7a6a",
+   "shirt": "#f0f0e8",
+   "pants": "#6a5a48",
+   "hair": "#b8b0a8",
+   "skin": "#f0c8a0"
   }
  }
 }

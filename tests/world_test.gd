@@ -18,7 +18,9 @@ func _initialize() -> void:
 		var w: int = (m.tiles[0] as String).length()
 		var blocked := {}
 		for a in m.get("npcs", []) + m.get("trainers", []):
-			blocked["%d,%d" % [a.x, a.y]] = true
+			# Story bosses that leave once beaten only block until then.
+			if not a.get("leaveAfter", false):
+				blocked["%d,%d" % [a.x, a.y]] = true
 		var ok := func(x: int, y: int) -> bool:
 			return Maps.WALKABLE.has(Maps.tile_at(m, x, y)) and not blocked.has("%d,%d" % [x, y])
 		# Entry points: each connection edge gap and each warp landing.

@@ -5,22 +5,22 @@ class_name GameState
 
 const SAVE_PATH := "user://wildbound-save.json"
 
-static func new_game(mode: String, starters: Array) -> Dictionary:
+## A new game before the starter event: players have names but no creatures yet.
+static func new_game(mode: String, names: Array = []) -> Dictionary:
 	var players: Array = []
-	for i in starters.size():
-		var sp: String = starters[i]
-		var ot_id: int = Rng.global_rng.u32()
+	for i in (2 if mode == "coop" else 1):
+		var default_name: String = ["Wren", "Juno"][i]
 		players.append({
-			"name": "You" if mode == "solo" else ("P1" if i == 0 else "P2"),
-			"otId": ot_id,
-			"party": [Creatures.create_creature(sp, 5, {"owner": i, "otId": ot_id})],
+			"name": names[i] if i < names.size() and names[i] != "" else default_name,
+			"otId": Rng.global_rng.u32(),
+			"party": [],
 		})
 	return {
 		"version": 1,
 		"mode": mode,
 		"players": players,
 		"box": [],
-		"bag": {"potion": 4, "orb": 6},
+		"bag": {"potion": 4},
 		"money": 3000,
 		"map": "fernhollow",
 		"x": 4,
@@ -28,10 +28,18 @@ static func new_game(mode: String, starters: Array) -> Dictionary:
 		"dir": "down",
 		"respawn": {"map": "fernhollow", "x": 19, "y": 5},
 		"flags": {},
-		"seen": starters.duplicate(),
-		"caught": starters.duplicate(),
+		"seen": [],
+		"caught": [],
 		"playTime": 0.0,
 	}
+
+## Gives a player their first creature (from PROF. ALDER's bag).
+static func give_starter(gs: Dictionary, player: int, sp: String) -> void:
+	var p: Dictionary = gs.players[player]
+	p.party.append(Creatures.create_creature(sp, 5, {"owner": player, "otId": p.otId}))
+	for list in [gs.seen, gs.caught]:
+		if not list.has(sp):
+			list.append(sp)
 
 static func party_cap(gs: Dictionary) -> int:
 	return 3 if gs.mode == "coop" else 6
@@ -75,6 +83,9 @@ static func load_game() -> Variant:
 		return null
 	var gs: Dictionary = DB._fix_ints(parsed)
 	gs.playTime = float(gs.get("playTime", 0.0))
+	# Saves from before the story existed already have their starters.
+	if not gs.flags.has("starter") and not all_party_mons(gs).is_empty():
+		gs.flags.starter = true
 	var max_uid := 0
 	for m in all_party_mons(gs) + gs.box:
 		max_uid = maxi(max_uid, m.uid)

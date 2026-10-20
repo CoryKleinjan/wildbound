@@ -46,6 +46,9 @@ var _banner := {"text": "", "t": 0.0}
 var _exclaim: Variant = null
 var _frame := 0.0
 var _flash_t := 0.0
+## Story hooks run on the first update after a map loads (dialogs pushed earlier would be lost by Game.replace).
+var _map_fresh := false
+var _bump_t := 0.0
 
 func _init() -> void:
 	var gs: Dictionary = Game.gs
@@ -73,10 +76,41 @@ func load_map(id: String, x: int, y: int, dir: String) -> void:
 		a.npc = n
 		npcs.append(a)
 	for t in map.get("trainers", []):
+		if t.get("leaveAfter", false) and gs.flags.get(t.id, false):
+			continue
 		var a := Actor.new(t.x, t.y, t.dir, t.palette)
 		a.trainer = t
 		npcs.append(a)
 	_banner = {"text": map.name, "t": 2.2}
+	_map_fresh = true
+	Audio.play_music(map_track(map))
+
+## Music for a map: gym, league, town or route.
+static func map_track(m: Dictionary) -> String:
+	var id: String = m.id
+	if id.begins_with("gym"):
+		return "gym"
+	if id == "league":
+		return "league"
+	if m.get("town", false):
+		return "town"
+	return "route"
+
+## Adds a temporary actor for a story scene (not saved).
+func add_actor(x: int, y: int, dir: String, palette: String) -> Actor:
+	var a := Actor.new(x, y, dir, palette)
+	npcs.append(a)
+	return a
+
+func remove_actor(a: Actor) -> void:
+	npcs.erase(a)
+
+## Shows the "!" bubble over an actor.
+func exclaim(a: Actor) -> void:
+	_exclaim = {"a": a, "t": 0.8}
+
+func run_battle(setup: Dictionary, trainer: Variant = null) -> void:
+	_flash_then(func() -> void: _run_battle(setup, trainer))
 
 func _map_h() -> int:
 	return map.tiles.size()
@@ -117,6 +151,7 @@ func _can_leave(x: int, y: int, dir: String) -> bool:
 
 func update(dt: float) -> void:
 	_frame += dt
+	_bump_t -= dt
 	if _banner.t > 0:
 		_banner.t -= dt
 	if _exclaim != null:
@@ -125,6 +160,11 @@ func update(dt: float) -> void:
 			_exclaim = null
 	for n in npcs:
 		_advance(n, dt)
+	if _map_fresh:
+		_map_fresh = false
+		Story.on_map_loaded(self)
+		if Game.top != self:
+			return
 	if _script.is_valid():
 		if _script.call(dt):
 			_script = Callable()
@@ -163,6 +203,11 @@ func update(dt: float) -> void:
 		return
 	_try_move(held, RUN if p1.is_held("b") else WALK)
 
+func _bump() -> void:
+	if _bump_t <= 0:
+		_bump_t = 0.35
+		Audio.sfx("bump")
+
 func _advance(a: Actor, dt: float) -> bool:
 	if a.move == null:
 		return false
@@ -182,10 +227,16 @@ func _try_move(dir: String, dur: float) -> void:
 	var t := Maps.tile_at(map, tx, ty)
 	if t == "v":
 		if dir != "down" or not _walkable(tx, ty + 1):
+			_bump()
 			return
 		ty += 1
 		jump = true
+		Audio.sfx("ledge")
 	elif not _walkable(tx, ty) and not _can_leave(tx, ty, dir):
+		_bump()
+		return
+	if Story.intercept_move(self, dir, tx, ty):
+		_hold_time = 0
 		return
 	var gate: Variant = map.get("exitGate")
 	if gate != null and gate.side == dir and _can_leave(tx, ty, dir) and not gs.flags.get(gate.flag, false):
@@ -252,6 +303,7 @@ func _on_step() -> void:
 	var t := Maps.tile_at(map, p.x, p.y)
 	var warp: Variant = map.get("warps", {}).get("%d,%d" % [p.x, p.y])
 	if warp != null:
+		Audio.sfx("door")
 		Game.transition(func() -> void:
 			load_map(warp.map, warp.x, warp.y, warp.dir)
 			gs.x = warp.x
@@ -282,6 +334,7 @@ func _enter_door(x: int, y: int) -> void:
 	if door == null:
 		do_exit.call()
 		return
+	Audio.sfx("door")
 	if door.kind == "house":
 		Game.transition(func() -> void:
 			for m in GameState.all_party_mons(gs):
@@ -313,6 +366,7 @@ func _lodge_menu() -> void:
 				for m in GameState.all_party_mons(gs):
 					Creatures.heal_fully(m)
 				gs.respawn = {"map": map.id, "x": player.x, "y": player.y}
+				Audio.sfx("heal")
 				Game.say(["Let me take your creatures for a moment...", "... ... ...", "They're fully healed! We hope to see you again!"], _lodge_menu)
 			elif i <= players:
 				var pl := i - 1
@@ -336,7 +390,12 @@ func _interact() -> void:
 	if n != null:
 		n.dir = OPP[p.dir]
 		if n.npc != null:
-			Game.say(n.npc.text)
+			var text: Array = n.npc.text
+			for v in n.npc.get("variants", []):
+				if gs.flags.get(v.if, false):
+					text = v.text
+					break
+			Game.say(text)
 			return
 		if n.trainer != null:
 			if gs.flags.get(n.trainer.id, false):
@@ -360,6 +419,9 @@ func _open_start_menu(pl: int) -> void:
 				var d := DexScreen.new(pl, func() -> void: Game.pop(dref[0]))
 				dref.append(d)
 				Game.push(d)
+			if (i == 1 or i == 2) and gs.players[pl].party.is_empty():
+				Game.say(["You don't have any creatures yet."], Callable(), pl)
+				return
 			if i == 1:
 				Menus.open_party_menu(pl, func() -> void: pass)
 			if i == 2:
@@ -367,6 +429,7 @@ func _open_start_menu(pl: int) -> void:
 			if i == 3:
 				Game.ask("Save your progress?", ["YES", "NO"], func(c: int) -> void:
 					if c == 0:
+						Audio.sfx("save")
 						Game.say(["Your progress was saved!" if GameState.save(gs) else "Saving failed (the save file could not be written)."], Callable(), pl), pl)
 			if i == 4:
 				Game.say(OverworldScene.controls_text(gs.mode == "coop"), Callable(), pl)
@@ -399,6 +462,7 @@ func _check_trainers() -> bool:
 
 func _spotted(n: Actor, steps: int) -> void:
 	_exclaim = {"a": n, "t": 0.8}
+	Audio.sfx("spotted")
 	# Lambdas capture locals by value, so the mutable script state lives in a Dictionary.
 	var st := {"wait": 0.8, "left": steps}
 	_script = func(dt: float) -> bool:
@@ -446,6 +510,7 @@ func _start_wild() -> void:
 	var wild: Array = []
 	for i in count:
 		wild.append(pick.call())
+	Audio.sfx("encounter")
 	_flash_then(func() -> void: _run_battle({"kind": "wild", "double": count > 1, "wild": wild}))
 
 func _flash_then(cb: Callable) -> void:
@@ -465,7 +530,16 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 		Game.transition(func() -> void:
 			var scene = ref[0]
 			Game.pop(scene)
+			Audio.play_music(map_track(map))
 			var msgs: Array = []
+			if setup.has("storyEnd"):
+				for c in battle.caught:
+					GameState.receive_creature(g, c.mon, c.player)
+				if result == "lose":
+					for m in GameState.all_party_mons(g):
+						Creatures.heal_fully(m)
+				setup.storyEnd.call(result)
+				return
 			for c in battle.caught:
 				var where := GameState.receive_creature(g, c.mon, c.player)
 				if where == "box":
@@ -478,17 +552,23 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 				g.x = r.x
 				g.y = r.y
 				return
+			var champion := false
 			if trainer != null and result == "win":
 				g.flags[trainer.id] = true
+				if trainer.get("leaveAfter", false):
+					for n in npcs:
+						if n.trainer != null and n.trainer.id == trainer.id:
+							npcs.erase(n)
+							break
 				if trainer.get("badge"):
 					g.flags["badge%d" % trainer.badge] = true
 					var gym: Dictionary = {}
 					for gy in DB.GYMS:
 						if gy.badge == trainer.badge:
 							gym = gy
+					Audio.sfx("badge")
 					msgs.append("You received the %s! (%d/8 badges)" % [gym.badgeName, OverworldScene.badge_count(g)])
-				if trainer.get("champion", false):
-					msgs.append_array(["Your creatures are entered into the Hall of Fame!", "Congratulations, Champion! Thanks for playing Wildbound."])
+				champion = trainer.get("champion", false)
 			var evolve_queue: Array = []
 			for uid in scene.leveled:
 				for m in GameState.all_party_mons(g):
@@ -497,6 +577,8 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 						break
 			var run_evos := func(self_ref: Callable) -> void:
 				if evolve_queue.is_empty():
+					if champion:
+						Story.ending(self)
 					return
 				var m: Dictionary = evolve_queue.pop_front()
 				EvolutionScene.new(m, Creatures.pending_evolution(m), 1 if m.owner == 1 and g.mode == "coop" else 0, func() -> void: self_ref.call(self_ref))

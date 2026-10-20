@@ -26,11 +26,15 @@ func update(_dt: float) -> void:
 	if inp.pressed("left") or inp.pressed("right"):
 		col = 1 - col
 		sel = 0
+		Audio.sfx("cursor")
 	if inp.pressed("up") and list.size():
 		sel = (sel + list.size() - 1) % list.size()
+		Audio.sfx("cursor")
 	if inp.pressed("down") and list.size():
 		sel = (sel + 1) % list.size()
+		Audio.sfx("cursor")
 	if inp.pressed("b"):
+		Audio.sfx("cancel")
 		_on_close.call()
 		return
 	if inp.pressed("a") and list.size():
@@ -38,13 +42,17 @@ func update(_dt: float) -> void:
 		if col == 0:
 			if party.size() <= 1:
 				msg = "That's your last creature!"
+				Audio.sfx("error")
 			else:
+				Audio.sfx("confirm")
 				var m: Dictionary = party.pop_at(sel)
 				box.append(m)
 				msg = "%s was stored." % Creatures.display_name(m)
 		elif party.size() >= GameState.party_cap(gs):
 			msg = "Your party is full (%d max)." % GameState.party_cap(gs)
+			Audio.sfx("error")
 		else:
+			Audio.sfx("confirm")
 			var m: Dictionary = box.pop_at(sel)
 			m.hp = Creatures.max_hp(m)
 			party.append(m)

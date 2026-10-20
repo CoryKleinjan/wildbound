@@ -16,7 +16,9 @@ func update(_dt: float) -> void:
 	var inp := Game.input.p(_player)
 	if inp.pressed("left") or inp.pressed("right"):
 		page = 1 - page
+		Audio.sfx("cursor")
 	if inp.pressed("b") or inp.pressed("a"):
+		Audio.sfx("cancel")
 		_on_close.call()
 
 func draw() -> void:

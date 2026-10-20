@@ -17,14 +17,19 @@ func update(_dt: float) -> void:
 	var n := party.size() + 1 # + Cancel
 	if inp.pressed("up"):
 		sel = (sel + n - 1) % n
+		Audio.sfx("cursor")
 	if inp.pressed("down"):
 		sel = (sel + 1) % n
+		Audio.sfx("cursor")
 	if inp.pressed("a"):
 		if sel == party.size():
+			Audio.sfx("cancel")
 			_cancel()
 		else:
+			Audio.sfx("confirm")
 			(o.on_select as Callable).call(sel)
 	elif inp.pressed("b"):
+		Audio.sfx("cancel")
 		_cancel()
 
 func _cancel() -> void:

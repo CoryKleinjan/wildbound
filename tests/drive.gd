@@ -6,6 +6,9 @@ extends SceneTree
 ##        shot:<name>              save <out_dir>/<name>.png
 ##        eval:<expr>              evaluate a GDScript expression with Game and DB in scope; result is printed
 ##        print:<expr>             same as eval
+##        gd:<statements>          run GDScript statements (separated by " ;; ") with Game and DB in scope
+##        until:<KEY>:<max>:<expr> press KEY (then wait 20 frames) up to max times until expr is true
+##        top:<Name>               shorthand for until:Z:60:<top scene class is Name>
 ## Errors raised by the game show up on stderr as SCRIPT ERROR lines.
 
 func _initialize() -> void:
@@ -39,12 +42,45 @@ func _initialize() -> void:
 					await process_frame
 			"shot":
 				root.get_texture().get_image().save_png("%s/%s.png" % [out, rest])
+			"gd":
+				var src := GDScript.new()
+				src.source_code = "extends RefCounted\nfunc run(game, db):\n\t" + "\n\t".join(rest.split(" ;; "))
+				if src.reload() != OK:
+					print("GD COMPILE ERROR in ", rest)
+				else:
+					print("=> ", src.new().run(game, db))
+			"until", "top":
+				var key := "Z"
+				var tries := 60
+				var expr := rest
+				if cmd == "top":
+					expr = "Game.top.get_script().get_global_name() == '%s'" % rest
+				else:
+					var up := rest.split(":", true, 2)
+					key = up[0]
+					tries = int(up[1])
+					expr = up[2]
+				var e := Expression.new()
+				e.parse(expr, ["Game", "DB"])
+				var ok := false
+				for i in tries:
+					if e.execute([game, db], null, true):
+						ok = true
+						break
+					var code := OS.find_keycode_from_string(key)
+					_key(code, true)
+					for f in 4:
+						await process_frame
+					_key(code, false)
+					for f in 20:
+						await process_frame
+				print("UNTIL ", "ok" if ok else "TIMEOUT", ": ", expr)
 			"eval", "print":
 				var e := Expression.new()
 				if e.parse(rest, ["Game", "DB"]) != OK:
 					print("PARSE ERROR: ", e.get_error_text(), " in ", rest)
 				else:
-					var r = e.execute([game, db], null, true)
+					var r = e.execute([game, db], game, true)
 					if e.has_execute_failed():
 						print("EXEC ERROR: ", e.get_error_text(), " in ", rest)
 					else:

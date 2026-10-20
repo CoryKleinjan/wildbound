@@ -7,6 +7,7 @@ var _menu_open := false
 
 func update(dt: float) -> void:
 	_t += dt
+	Audio.play_music("title")
 	if _menu_open:
 		return
 	if Game.input.any("a") or Game.input.any("start"):
@@ -43,7 +44,7 @@ func _on_pick(pick: String) -> void:
 	else:
 		var coop := pick.contains("CO-OP")
 		Game.input.coop = coop
-		Game.transition(func() -> void: Game.replace(StarterScene.new(coop)))
+		Game.transition(func() -> void: Game.replace(IntroScene.new(coop)))
 
 func draw() -> void:
 	# Sky gradient.
