@@ -24,7 +24,7 @@ const RESEND_MS := 1000
 ## How often the friend's progress is checked for changes and sent home (ms).
 const SYNC_MS := 3000
 ## The parts of a save that belong to the player rather than the world they're in.
-const OWN_KEYS := ["players", "box", "bag", "money", "seen", "caught", "playTime", "bp", "decor", "coins", "pcItems"]
+const OWN_KEYS := ["players", "box", "bag", "money", "seen", "caught", "playTime", "bp", "decor", "coins", "pcItems", "mixed", "trendy"]
 
 enum Role { NONE, HOST, CLIENT }
 var role := Role.NONE
@@ -226,6 +226,7 @@ func _welcome(save: Variant, name: String) -> void:
 		_peer.disconnect_peer(client_id)
 		return
 	var gs := GameState.guest_state(save, name, host_gs)
+	RecordMix.mix(host_gs, gs, save)
 	# Arrive next to the host rather than on top of them.
 	var host_ow: Variant = Game.views[0].stack[0] if Game.views[0].stack.size() else null
 	if host_ow is OverworldScene and host_ow.map.id == gs.map:

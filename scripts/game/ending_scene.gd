@@ -13,7 +13,7 @@ const CREDITS := [
 	["THE ELITE", "Vesna  Brannoc  Champion Rowan"],
 	["THE HOLLOW ORDER", "Magister Vane  Sable  Corvin"],
 	["THE WARDENS", "Orrerion  Thalassor  Terrasolis\nZenithar  Solvara  Velunox  Starchime"],
-	["200 CREATURES", "Gen 3 battle rules"],
+	["206 CREATURES", "Gen 3 battle rules"],
 	["MADE WITH", "Godot Engine"],
 	["THANK YOU FOR PLAYING!", ""],
 	["THE END", ""],

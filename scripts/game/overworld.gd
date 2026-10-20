@@ -691,7 +691,8 @@ func _ride_look(look: String) -> String:
 		return "%s_%s" % [look, ride]
 	return look
 
-## Field objects that can be cleared or pushed, so a painted map leaves them out and they are drawn on top.
+## Field objects that can be cleared or pushed, so a painted map leaves them out and they are drawn on top. Tiles
+## listed in a map's "overpaint" (changed since it was painted) are drawn on top too.
 const DYNAMIC := "TRO"
 
 func draw() -> void:
@@ -717,6 +718,7 @@ func draw() -> void:
 	# A painted whole-map image (assets/maps/<id>.png) replaces the tiles inside the map; tiles still fill the border.
 	var painted := ArtAssets.texture("maps/" + str(map.get("id", "")))
 	var inside := func(tx: int, ty: int) -> bool: return tx >= 0 and ty >= 0 and tx < w and ty < h
+	var newer: Array = map.get("overpaint", [])
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#000000")
 	if painted != null:
 		Gfx.image(painted, -cam_x, -cam_y)
@@ -727,7 +729,7 @@ func draw() -> void:
 			var raw := Maps.tile_at(map, tx, ty)
 			var ch := Field.tile(self, tx, ty)
 			# Inside a painted map only the things that can change (Cut trees, rocks, boulders) are drawn.
-			if painted != null and inside.call(tx, ty) and not DYNAMIC.contains(ch):
+			if painted != null and inside.call(tx, ty) and not DYNAMIC.contains(ch) and not newer.has("%d,%d" % [tx, ty]):
 				continue
 			if ch == "#" and cave:
 				ch = "x"
@@ -839,8 +841,7 @@ class DexScreen extends Scene:
 	func _init(player: int, on_close: Callable) -> void:
 		_player = player
 		_on_close = on_close
-		_list = DB.SPECIES.values()
-		_list.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.dex < b.dex)
+		_list = TownLife.dex_species(Game.gs)
 
 	func update(_dt: float) -> void:
 		var inp := Game.input.p(_player)
@@ -855,7 +856,8 @@ class DexScreen extends Scene:
 		var gs: Dictionary = Game.gs
 		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#d84848")
 		Gfx.rect(0, 0, Gfx.W, 16, "#a83030")
-		Gfx.text("CREATUREDEX   Seen %d  Caught %d" % [gs.seen.size(), gs.caught.size()], 6, 5, {"color": "#ffffff", "size": 5})
+		var mode := "NATIONAL" if gs.flags.get("nationalDex", false) else "WILDBOUND"
+		Gfx.text("%s DEX   Seen %d  Caught %d" % [mode, gs.seen.size(), gs.caught.size()], 6, 5, {"color": "#ffffff", "size": 5})
 		Gfx.panel(118, 20, 118, 136)
 		var start := maxi(0, mini(sel - 4, _list.size() - 9))
 		var shown := _list.slice(start, start + 9)
@@ -869,7 +871,9 @@ class DexScreen extends Scene:
 				Gfx.rect(120, y - 3, 114, 13, "#f8e0a0")
 			if caught:
 				Gfx.rect(124, y + 1, 4, 4, "#e04040")
-			Gfx.text("%03d %s" % [sp.dex, sp.name if seen else "-----"], 132, y, {"size": 5})
+			# The regional dex numbers its own creatures; the national dex uses the full numbering.
+			var no: int = sp.dex if gs.flags.get("nationalDex", false) else i + 1
+			Gfx.text("%03d %s" % [no, sp.name if seen else "-----"], 132, y, {"size": 5})
 		var sp: Dictionary = _list[sel]
 		Gfx.panel(4, 20, 110, 136)
 		if gs.seen.has(sp.id):

@@ -35,6 +35,8 @@ var TRICK: Dictionary = {}
 var FRONTIER: Dictionary = {}
 var REGION_MAP: Dictionary = {}
 var MAP_PARENT: Dictionary = {}
+## The last of the Emerald extras: glass flutes, rare fishing, outbreaks, quiz and fan prizes, Battle Tents.
+var EMERALD: Dictionary = {}
 const STAT_KEYS := ["hp", "atk", "def", "spa", "spd", "spe"]
 
 func _init() -> void:
@@ -74,7 +76,11 @@ func _apply_map_fit(fit: Dictionary) -> void:
 		if not MAPS.has(map_id) or not ResourceLoader.exists("res://assets/maps/%s.png" % map_id):
 			continue
 		var rows: Array = MAPS[map_id].tiles.duplicate()
+		var newer: Array = MAPS[map_id].get("overpaint", [])
 		for k in fit[map_id]:
+			# Tiles changed since the painting was made keep their new layout.
+			if newer.has(k):
+				continue
 			var xy: PackedStringArray = k.split(",")
 			var x := int(xy[0])
 			var y := int(xy[1])
@@ -130,7 +136,10 @@ func _apply_features(f: Dictionary) -> void:
 		else:
 			ITEMS[id] = f.items[id]
 	for id in f.species:
-		SPECIES[id].merge(f.species[id], true)
+		if SPECIES.has(id):
+			SPECIES[id].merge(f.species[id], true)
+		else:
+			SPECIES[id] = f.species[id]
 	for id in f.maps:
 		MAPS[id] = f.maps[id]
 	for id in f.mapPatches:
@@ -159,6 +168,7 @@ func _apply_features(f: Dictionary) -> void:
 	FRONTIER = f.get("frontier", {})
 	REGION_MAP = f.get("regionMap", {})
 	MAP_PARENT = f.get("mapParent", {})
+	EMERALD = f.get("emerald", {})
 
 func _load(name: String) -> Variant:
 	var f := FileAccess.open("res://data/%s.json" % name, FileAccess.READ)

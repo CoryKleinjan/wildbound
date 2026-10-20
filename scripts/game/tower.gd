@@ -47,6 +47,10 @@ static func _copy(m: Dictionary) -> Dictionary:
 static func _opponent(n: int) -> Dictionary:
 	var rng := Rng.global_rng
 	var tycoon := n == 6
+	if not tycoon:
+		var friend := RecordMix.tower_opponent(Game.gs, 50)
+		if not friend.is_empty():
+			return friend
 	var i := rng.int_below(NAMES.size())
 	var t := {
 		"id": "tower", "name": "Tower Tycoon Vale" if tycoon else NAMES[i], "palette": "prof" if tycoon else PALETTES[i], "pay": 0,

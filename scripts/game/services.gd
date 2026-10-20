@@ -1,7 +1,8 @@
 class_name Services
 ## What townsfolk with a "service" do when you talk to them (data/features.json gives each NPC its service):
 ## the Day Care, contests and the Berry Blender, the Dept. Store counters, the Battle Tower, gifts, Move Tutors,
-## the Move Relearner, the friendship checker, the Name Rater, in-game trades and the daily berry.
+## the Move Relearner, the friendship checker, the Name Rater, in-game trades and the daily berry, and the rest of
+## the townsfolk in TownLife (Move Deleter, Glass Workshop, Quiz Lady, Fan Club, fossils, ...).
 
 static func run(o: OverworldScene, npc: Dictionary, text: Array) -> void:
 	var gs: Dictionary = Game.gs
@@ -56,6 +57,34 @@ static func run(o: OverworldScene, npc: Dictionary, text: Array) -> void:
 			Game.say(text, func() -> void: Frontier.start(o, npc.facility))
 		"trickPrize":
 			Trick.prize(text)
+		"moveDeleter":
+			TownLife.move_deleter(text)
+		"glass":
+			TownLife.glass(text)
+		"trendy":
+			TownLife.trendy(text)
+		"quiz":
+			TownLife.quiz(text)
+		"fanClub":
+			TownLife.fan_club(text)
+		"fan":
+			TownLife.fan(npc, text)
+		"effortRibbon":
+			TownLife.effort_ribbon(text)
+		"museum":
+			Museum.curator(text)
+		"nationalDex":
+			TownLife.national_dex(text)
+		"fossilPick":
+			TownLife.fossil_pick(text)
+		"fossilLab":
+			TownLife.fossil_lab(text)
+		"tent":
+			Game.say(text, func() -> void: BattleTent.start(o, npc.facility))
+		"shellBell":
+			TownLife.shell_bell(text)
+		"ticket":
+			Legends.ticket(npc, text)
 		_:
 			Game.say(text)
 
@@ -124,15 +153,19 @@ static func _berry_master(npc: Dictionary, n: int, min_hours: int) -> void:
 	Game.say(lines)
 
 ## The ferry between Saltmarsh and the Battle Frontier (Champions only).
+## With a ticket, it also sails to the event islands.
 static func _ferry(o: OverworldScene, npc: Dictionary, text: Array) -> void:
-	var gs: Dictionary = Game.gs
-	if npc.to == "battlefrontier" and not gs.flags.get("champion", false):
+	var stops := Legends.ferry_stops(npc)
+	if stops.is_empty():
 		Game.say(text + ["Sorry, the Battle Frontier is only open to League Champions."])
 		return
-	var dest: String = npc.to
-	Game.ask("%s Shall we set sail for %s?" % [" ".join(text), DB.MAPS[dest].name], ["YES", "NO"], func(c: int) -> void:
-		if c != 0:
+	var labels: Array = stops.map(func(id: String) -> String: return DB.MAPS[id].name.to_upper())
+	labels.append("CANCEL")
+	var q := "%s Shall we set sail for %s?" % [" ".join(text), DB.MAPS[stops[0]].name] if stops.size() == 1 else "%s Where to?" % " ".join(text)
+	Game.ask(q, ["YES", "NO"] if stops.size() == 1 else labels, func(c: int) -> void:
+		if c >= stops.size():
 			return
+		var dest: String = stops[c]
 		var spot := ferry_landing(dest)
 		Audio.sfx("door")
 		Game.say(["The ferry sets sail...", "... ... ..."], func() -> void:
