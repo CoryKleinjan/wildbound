@@ -258,3 +258,29 @@ static func braille_tablet() -> Texture2D:
 	var tex := ImageTexture.create_from_image(img)
 	Tiles._cache[key] = tex
 	return tex
+
+## The rock either side of a cave's bottom exit gap, in the painting's wall colors [dark, mid, light]: a strip of rock
+## face along the gap that hides the painted arch frame, transparent beyond it so the painted wall shows through.
+## side is the side of the gap the rock is on ("left" rock has the gap on its right).
+static func gap_edge(side: String, colors: Array, y: int) -> Texture2D:
+	var key := "fx_gap_%s_%s_%d" % [side, "".join(colors), y % 2]
+	if Tiles._cache.has(key):
+		return Tiles._cache[key]
+	var dark := Color(colors[0])
+	var mid := Color(colors[1])
+	var light := Color(colors[2])
+	var img := Image.create(16, 16, false, Image.FORMAT_RGBA8)
+	var at := func(i: int) -> int: return 15 - i if side == "left" else i
+	# From the gap outward: outline, lit lip, rock face, then a ragged fade into the painting.
+	for r in 16:
+		var reach: int = 8 + (r * 7 + y * 3) % 3
+		for i in reach:
+			var c: Color = dark if i < 1 else (light if i < 3 else mid)
+			if i >= 3 and (r + y * 2) % 5 == 0:
+				c = mid.darkened(0.22)
+			if i == reach - 1:
+				c = dark
+			img.set_pixel(at.call(i), r, c)
+	var tex := ImageTexture.create_from_image(img)
+	Tiles._cache[key] = tex
+	return tex

@@ -794,14 +794,18 @@ func draw() -> void:
 			else:
 				tex = TownStyle.apply(Tiles.tile_texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), Maps.tile_at(map, tx, ty + 1), theme), ch, style)
 			Gfx.image(tex, tx * 16 - cam_x, ty * 16 - cam_y)
-	# Cave exits at the bottom edge are painted as holes; the painting's own floor covers them so they're an opening.
-	if painted != null:
-		var exits: Dictionary = map.get("exitFloor", {})
-		for k in exits:
+	# Cave exits at the bottom edge are painted as holes; the painting's own floor covers them, with a plain rock
+	# edge either side, so they're a gap in the wall to walk out of.
+	if painted != null and map.has("exitGap"):
+		var gap: Dictionary = map.exitGap
+		for k in gap.floor:
 			var xy: PackedStringArray = k.split(",")
-			var src: Array = exits[k]
+			var src: Array = gap.floor[k]
 			Gfx.ci.draw_texture_rect_region(painted, Rect2(int(xy[0]) * 16 - cam_x, int(xy[1]) * 16 - cam_y, 16, 16),
 				Rect2(int(src[0]) * 16, int(src[1]) * 16, 16, 16))
+		for k in gap.edges:
+			var xy: PackedStringArray = k.split(",")
+			Gfx.image(FieldTiles.gap_edge(gap.edges[k], gap.colors, int(xy[1])), int(xy[0]) * 16 - cam_x, int(xy[1]) * 16 - cam_y)
 	# Braille walls are painted like doorways; a carved tablet over them shows they're walls to read.
 	for t in tablets:
 		Gfx.image(FieldTiles.braille_tablet(), t.x * 16 - 8 - cam_x, t.y * 16 - 16 - cam_y)

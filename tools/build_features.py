@@ -1954,11 +1954,19 @@ for _mid in sorted(set(MAPS) | set(OUT['maps'])):
 
 
 # Cave exits at the bottom of a map: in Emerald these are just a gap in the bottom wall that you walk out of, but
-# the paintings draw an arch with a black hole (or stairs). The game covers that hole with the painting's own
-# floor, from the tile above it down to the map's edge (overworld.gd), so it reads as an opening.
-# "exitFloor" maps each covered cell "x,y" to the [x, y] cell of the painting its floor is copied from.
+# the paintings draw an arch with a black hole (or stairs). The game covers the hole with the painting's own floor,
+# from the tile above it down to the map's edge, and the arch's frame either side with a plain rock edge in the
+# painting's wall colors (overworld.gd), so it reads as an opening. "exitGap" holds, per map, the floor cells
+# ({"x,y": [src_x, src_y]}, the painting cell copied there), the rock edges ({"x,y": "left" | "right"}, the side
+# of the gap the rock is on) and the wall colors [dark, mid, light].
 def cell_dark(px, x, y):
-    return sum(px[x * 16 + i, y * 16 + j] < 60 for j in range(16) for i in range(16)) / 256
+    return sum(px[x * 16 + i, y * 16 + j][0] * 0.3 + px[x * 16 + i, y * 16 + j][1] * 0.59 + px[x * 16 + i, y * 16 + j][2] * 0.11 < 60
+               for j in range(16) for i in range(16)) / 256
+
+
+def cell_diff(px, a, b):
+    return sum(abs(px[a[0] * 16 + i, a[1] * 16 + j][c] - px[b[0] * 16 + i, b[1] * 16 + j][c])
+               for j in range(0, 16, 2) for i in range(0, 16, 2) for c in range(3)) / (64 * 3)
 
 
 for _mid in sorted(set(MAPS) | set(OUT['maps'])):
@@ -1967,10 +1975,11 @@ for _mid in sorted(set(MAPS) | set(OUT['maps'])):
     if not _m.get('cave') or not os.path.exists(_path):
         continue
     from PIL import Image
-    _px = Image.open(_path).convert('L').load()
+    _im = Image.open(_path).convert('RGB')
+    _px = _im.load()
     _g = game_grid(_mid)
     _h, _w = len(_g), len(_g[0])
-    _floor = {}
+    _floor, _edges = {}, {}
     for y, row in enumerate(_g):
         for x, ch in enumerate(row):
             # A mouth with nothing but wall below it, all the way to the edge. A mouth higher up that leads to
@@ -1980,22 +1989,31 @@ for _mid in sorted(set(MAPS) | set(OUT['maps'])):
             _to = _m.get('warps', {}).get('%d,%d' % (x, y), {}).get('map', '')
             if y < _h - 1 and (OUT['maps'].get(_to) or MAPS.get(_to) or {}).get('cave'):
                 continue
-            top = y
-            while top - 1 > 0 and _g[top - 1][x] in WALKABLE and cell_dark(_px, x, top - 1) > 0.15:
-                top -= 1
-            # Copy plain floor: the nearest cell above with no dark edges, and floor above it too.
+            # Plain floor to copy: the nearest cell above with no dark edges, and floor above it too.
             src = None
-            for yy in range(top - 1, 0, -1):
+            for yy in range(y - 1, 0, -1):
                 if _g[yy][x] in WALKABLE and _g[yy - 1][x] in WALKABLE and cell_dark(_px, x, yy) < 0.01:
                     src = [x, yy]
                     break
             if src is None:
                 continue
+            # The arch reaches up into the floor above the mouth: cover every cell that doesn't look like that floor.
+            top = y
+            while top - 1 > src[1] and cell_diff(_px, (x, top - 1), src) > (9 if top == y else 18):
+                top -= 1
             for yy in range(top, _h):
                 _floor['%d,%d' % (x, yy)] = src
+            for side, name in ((-1, 'left'), (1, 'right')):
+                xx = x + side
+                for yy in range(top, _h):
+                    if 0 <= xx < _w and _g[yy][xx] not in WALKABLE:
+                        _edges['%d,%d' % (xx, yy)] = name
     if _floor:
-        (OUT['maps'][_mid] if _mid in OUT['maps'] else patch(_mid))['exitFloor'] = _floor
-
+        wall = sorted((_px[x * 16 + i, y * 16 + j] for y in range(_h) for x in range(_w) if _g[y][x] in 'x#'
+                       for j in range(0, 16, 4) for i in range(0, 16, 4)), key=lambda c: sum(c))
+        cols = ['#%02x%02x%02x' % wall[int(len(wall) * q)] for q in (0.12, 0.5, 0.85)]
+        (OUT['maps'][_mid] if _mid in OUT['maps'] else patch(_mid))['exitGap'] = {
+            'floor': _floor, 'edges': _edges, 'colors': cols}
 
 # ---------- validation ----------
 def all_maps():
