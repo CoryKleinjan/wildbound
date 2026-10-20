@@ -7,7 +7,12 @@ const OL := "#282830"
 
 ## Draws a 16x20 overworld character with its feet at (x+8, y+16) in logical pixels.
 ## dir: "up" | "down" | "left" | "right"; step 0..2 (1 and 2 lift one leg).
-static func draw_char(x: float, y: float, dir: String, step: int, pal: Dictionary) -> void:
+## name: the palette's key in DB.PALETTES; when assets/trainers/<name>_walk.png exists it is drawn instead.
+static func draw_char(x: float, y: float, dir: String, step: int, pal: Dictionary, name: String = "") -> void:
+	var walk := ArtAssets.texture("trainers/%s_walk" % name) if name != "" else null
+	if walk != null:
+		_draw_walk(walk, x, y, dir, step)
+		return
 	var p := func(dx: float, dy: float, w: float, h: float, c: Variant) -> void:
 		Gfx.rect(x + dx, y + dy, w, h, c)
 	var leg_a := 1 if step == 1 else 0
@@ -50,7 +55,12 @@ static func draw_char(x: float, y: float, dir: String, step: int, pal: Dictionar
 		p.call(11, 0, 3, 1, pal.hat)
 
 ## Larger trainer portrait for the battle intro (48px tall).
-static func draw_trainer_big(x: float, y: float, pal: Dictionary, back_view: bool) -> void:
+static func draw_trainer_big(x: float, y: float, pal: Dictionary, back_view: bool, name: String = "") -> void:
+	var tex := ArtAssets.texture("trainers/" + name) if name != "" and not back_view else null
+	if tex != null:
+		# 64x64 portrait standing where the procedural one stands (feet at y + 52).
+		Gfx.image(tex, x - 8, y - 10)
+		return
 	var p := func(dx: float, dy: float, w: float, h: float, c: Variant) -> void:
 		Gfx.rect(x + dx, y + dy, w, h, c)
 	p.call(10, 30, 28, 22, OL)
@@ -69,3 +79,31 @@ static func draw_trainer_big(x: float, y: float, pal: Dictionary, back_view: boo
 	p.call(36, 34, 6, 14, OL)
 	p.call(7, 35, 4, 12, pal.shirt)
 	p.call(37, 35, 4, 12, pal.shirt)
+
+## Generated overworld strip: 48x20, frames down | up | left (right is left mirrored).
+## Walking frames bob the body up a pixel and keep one foot planted.
+static func _draw_walk(tex: Texture2D, x: float, y: float, dir: String, step: int) -> void:
+	Gfx.ellipse(x + 8, y + 15, 6, 2, Color(0, 0, 0, 0.2))
+	var col: int = {"down": 0, "up": 1, "left": 2, "right": 2}.get(dir, 0)
+	var flip := dir == "right"
+	var top := y - 4
+	var lift := 1 if step != 0 else 0
+	_region(tex, col, 0, 17, x, top - lift, flip)
+	if step == 0:
+		_region(tex, col, 17, 3, x, top, flip)
+	else:
+		# the planted half of the feet stays down, the other half lifts with the body
+		var planted_left := (step == 1) != flip
+		_region_part(tex, col, 17, 3, x, top - lift, flip, not planted_left)
+		_region_part(tex, col, 17, 3, x, top, flip, planted_left)
+
+static func _region(tex: Texture2D, col: int, sy: int, h: int, x: float, top: float, flip: bool) -> void:
+	var dst := Rect2(x + (16 if flip else 0), top + sy, -16 if flip else 16, h)
+	Gfx.ci.draw_texture_rect_region(tex, dst, Rect2(col * 16, sy, 16, h))
+
+static func _region_part(tex: Texture2D, col: int, sy: int, h: int, x: float, top: float, flip: bool, left_half: bool) -> void:
+	# left_half is in screen space
+	var sx := 0 if (left_half != flip) else 8
+	var dx := x + (0 if left_half else 8)
+	var dst := Rect2(dx + (8 if flip else 0), top + sy, -8 if flip else 8, h)
+	Gfx.ci.draw_texture_rect_region(tex, dst, Rect2(col * 16 + sx, sy, 8, h))

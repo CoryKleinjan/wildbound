@@ -105,29 +105,29 @@ func draw() -> void:
 	# A soft spotlight on the stage.
 	Gfx.ellipse(120, 100, 84, 12, Color(1, 1, 1, 0.12))
 	if _show.has("prof"):
-		_figure("prof", DB.PALETTES.prof, 96, false)
+		_figure("prof", "prof", 96, false)
 	if _show.has("creature"):
 		var k := _appear("creature")
 		var s := 0.25 + 0.6 * k
 		var tex := CreatureArt.creature_sprite("chirpling")
 		Gfx.image(tex, 168 - 32 * s, 100 - 64 * s + sin(Game.time * 3) * 1.5, {"scale": s, "modulate": Color(1, 1, 1, k)})
 	if _show.has("kai"):
-		_figure("kai", DB.PALETTES.rival, 150, false)
+		_figure("kai", "rival", 150, false)
 	var scale := 1.0 if _shrink_at < 0 else maxf(0.0, 1.0 - (Game.time - _shrink_at) * 1.2)
 	if _show.has("player"):
-		_figure("player", DB.PALETTES.p1, 40 if _show.has("partner") else 150, false, scale)
+		_figure("player", "p1", 40 if _show.has("partner") else 150, false, scale)
 	if _show.has("partner"):
-		_figure("partner", DB.PALETTES.p2, 150, false, scale)
+		_figure("partner", "p2", 150, false, scale)
 
 func _appear(key: String) -> float:
 	return clampf((Game.time - _show[key]) * 2.5, 0.0, 1.0)
 
-func _figure(key: String, pal: Dictionary, x: float, back: bool, scale := 1.0) -> void:
+func _figure(key: String, pal_name: String, x: float, back: bool, scale := 1.0) -> void:
 	var k := _appear(key)
 	if scale <= 0.02:
 		return
 	# Slide in from the side and fade in.
 	var dx := (1.0 - k) * (30.0 if x > 100 else -30.0)
 	Gfx.ci.draw_set_transform(Vector2(x + 24 + dx, 100), 0, Vector2(scale, scale))
-	TrainerArt.draw_trainer_big(-24, -52, pal, back)
+	TrainerArt.draw_trainer_big(-24, -52, DB.PALETTES[pal_name], back, pal_name)
 	Gfx.ci.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)

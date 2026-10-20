@@ -80,7 +80,7 @@ func draw() -> void:
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#f0e8d0")
 	Gfx.rect(0, 0, Gfx.W, 20, "#b07850")
 	Gfx.text("%s: CHOOSE A CREATURE" % Game.gs.players[_picker].name.to_upper() if _coop else "PROF. ALDER'S BAG", Gfx.W / 2.0, 7, {"size": 6, "align": "center", "color": "#ffffff"})
-	TrainerArt.draw_char(112, 26, "down", 0, DB.PALETTES.prof)
+	TrainerArt.draw_char(112, 26, "down", 0, DB.PALETTES.prof, "prof")
 	for i in DB.STARTERS.size():
 		var sp: String = DB.STARTERS[i]
 		var x := 12 + i * 76

@@ -628,6 +628,7 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 				Game.say(msgs, start_evos)
 			else:
 				start_evos.call())
+	setup.bg = BattleScene.backdrop_for(map)
 	var scene = BattleScene.new(setup)
 	ref.append(scene)
 	Game.push(scene)
@@ -685,7 +686,7 @@ func draw() -> void:
 			step = (a.step_count % 2) + 1
 		var sx: float = ap.x - cam_x
 		var sy: float = ap.y - cam_y - 4 - ap.hop
-		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy))
+		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy), a.palette if DB.PALETTES.has(a.palette) else "boy")
 		# Tall grass covers the feet.
 		if a.move == null and Maps.tile_at(map, a.x, a.y) == ",":
 			var gt: Texture2D = TownStyle.apply(Tiles.tile_texture(",", a.x, a.y, anim), ",", style)

@@ -49,6 +49,38 @@ static func _make(key: String, draw: Callable) -> Texture2D:
 	_cache[key] = tex
 	return tex
 
+## Generated tile (assets/tiles/<name>.png) as a cached texture, with optional procedural overlays
+## drawn on top (draw gets the same painter as _make). null when the PNG is missing.
+static func _gen(key: String, name: String, draw: Callable = Callable(), tint: String = "", shift: int = 0) -> Texture2D:
+	key = "png|" + key
+	if _cache.has(key):
+		return _cache[key]
+	var src := ArtAssets.image("tiles/" + name)
+	if src == null:
+		return null
+	var painter := _Painter.new()
+	painter.img = src.duplicate()
+	if shift != 0:
+		var copy := painter.img.duplicate() as Image
+		for y in 16:
+			for x in 16:
+				painter.img.set_pixel(x, y, copy.get_pixel((x + shift) % 16, y))
+	if tint != "":
+		_tint_greys(painter.img, Color(tint))
+	if draw.is_valid():
+		draw.call(painter.p)
+	var tex := ImageTexture.create_from_image(painter.img)
+	_cache[key] = tex
+	return tex
+
+## Multiplies the light, unsaturated pixels (generated floors) by the room's theme color.
+static func _tint_greys(img: Image, theme: Color) -> void:
+	for y in img.get_height():
+		for x in img.get_width():
+			var c := img.get_pixel(x, y)
+			if c.s < 0.12 and c.v > 0.55:
+				img.set_pixel(x, y, Color(c.r * theme.r / 0.85, c.g * theme.g / 0.85, c.b * theme.b / 0.85, c.a).clamp())
+
 static func _grass(p: Callable, v: int) -> void:
 	p.call(0, 0, 16, 16, GRASS)
 	var spots := [[2, 3], [10, 2], [6, 9], [13, 11], [3, 13], [9, 6]]
@@ -65,6 +97,9 @@ static func _grass(p: Callable, v: int) -> void:
 ## ("" for none), theme the interior floor color.
 static func tile_texture(ch: String, x: int, y: int, frame: int, above: String = "", below: String = "", theme: String = "#d8d0c0") -> Texture2D:
 	var v := (x * 7 + y * 13) % 4
+	var gen := _generated(ch, x, y, frame, above, below, theme, v)
+	if gen != null:
+		return gen
 	match ch:
 		".":
 			return _make("g%d" % v, func(p: Callable): _grass(p, v))
@@ -303,3 +338,51 @@ static func tile_texture(ch: String, x: int, y: int, frame: int, above: String =
 				p.call(6, 1, 4, 2, "#f8e890")
 				p.call(4, 4, 8, 1, Color(1.0, 0.95, 0.6, 0.35)))
 	return _make("void", func(p: Callable): p.call(0, 0, 16, 16, "#000000"))
+
+## Generated-art version of tile_texture (null for anything without a PNG, so the procedural tile is used).
+static func _generated(ch: String, x: int, y: int, frame: int, above: String, below: String, theme: String, v: int) -> Texture2D:
+	match ch:
+		".":
+			return _gen("grass", "grass")
+		",":
+			return _gen("tallgrass", "tallgrass")
+		"=":
+			return _gen("path", "path")
+		"F":
+			var n := "flowers" if v % 2 == 0 else "flowers2"
+			return _gen(n + str(frame % 2), n, Callable(), "", 0)
+		"~":
+			var n := "water" if above == "~" else "shore"
+			return _gen("%s%d" % [n, frame % 2], n, Callable(), "", 3 if frame % 2 else 0)
+		"#":
+			var n := "tree" if (x + y) % 2 == 0 else "tree2"
+			return _gen(n, n)
+		"v":
+			return _gen("ledge", "ledge")
+		"S":
+			return _gen("sign", "sign")
+		"r", "p", "b", "k", "n":
+			var top := above != ch
+			var bottom := below != ch
+			var hi: String = {"r": "#e87060", "p": "#f898b0", "b": "#78a0e8", "k": "#e8c050", "n": "#e8d070"}[ch]
+			return _gen("roof%s%d%d" % [ch, 1 if top else 0, 1 if bottom else 0], "roof_" + ch, func(p: Callable):
+				if top:
+					p.call(0, 0, 16, 1, hi)
+				if bottom:
+					p.call(0, 14, 16, 2, "#504048"))
+		"w":
+			return _gen("wall%d" % (x % 2), "window" if x % 2 else "wall2")
+		"_":
+			return _gen("floor%s%d" % [theme, (x + y) % 2], "floor", func(p: Callable):
+				if (x + y) % 2:
+					p.call(0, 0, 16, 16, Color(0, 0, 0, 0.04)), theme)
+		"|":
+			var n := "iwall" if below == "|" else "iwall_base"
+			return _gen(n, n)
+		"o":
+			return _gen("statue" + theme, "statue", Callable(), theme)
+		"e":
+			return _gen("mat" + theme, "mat", Callable(), theme)
+		"h", "l", "m", "j", "u":
+			return _gen("door" + ch, "door_" + ch)
+	return null
