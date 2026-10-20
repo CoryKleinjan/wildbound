@@ -23,6 +23,17 @@ func update(_dt: float) -> void:
 
 func draw() -> void:
 	var m := _mon
+	if m.get("egg", false):
+		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#f0f0e8")
+		Gfx.rect(0, 0, Gfx.W, 16, "#486088")
+		Gfx.text("EGG", 6, 5, {"color": "#ffffff", "size": 6})
+		Gfx.rect(4, 20, 76, 76, "#c8e0f0")
+		Menus.draw_egg(42, 58, 2.2)
+		Gfx.panel(86, 20, 150, 76)
+		var lines := Gfx.wrap(Eggs.hatch_text(m), 136, 6)
+		for i in lines.size():
+			Gfx.text(lines[i], 94, 30 + i * 11, {"size": 6})
+		return
 	var sp: Dictionary = DB.species(m.species)
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#f0f0e8")
 	Gfx.rect(0, 0, Gfx.W, 16, "#486088")
@@ -43,6 +54,8 @@ func draw() -> void:
 		Gfx.type_badge(types[i], 4 + i * 36, 122)
 	Gfx.text("No.%03d %s" % [sp.dex, sp.name], 6, 136, {"size": 5})
 	Gfx.status_badge(m.status, 4, 146)
+	var held: Variant = m.get("item", null)
+	Gfx.text("Held: %s" % (DB.item(held).name if held != null else "-"), 28 if m.status else 6, 148, {"size": 5, "color": "#405070"})
 	if page == 0:
 		var st: Dictionary = Creatures.calc_stats(m)
 		var nat: int = Creatures.nature_of(m)
@@ -72,6 +85,8 @@ func draw() -> void:
 			Gfx.text(str(m.evs[k]), 222, y, {"size": 6, "align": "right", "color": "#606870"})
 		var e: Dictionary = Creatures.exp_to_next(m)
 		Gfx.text("EXP %d" % m.exp, 88, 128, {"size": 5})
+		if not m.get("ribbons", []).is_empty():
+			Gfx.text("Ribbons %d" % m.ribbons.size(), 222, 128, {"size": 5, "align": "right", "color": "#c05878"})
 		Gfx.text("To next Lv: %d" % maxi(0, e.span - e.into), 88, 137, {"size": 5})
 		Gfx.bar(88, 147, 120, (float(e.into) / e.span) if e.span else 0.0, "#40a0f0", 2)
 	else:

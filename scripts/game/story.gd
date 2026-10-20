@@ -138,4 +138,4 @@ static func ending(ow: OverworldScene) -> void:
 				gs.x = 5
 				gs.y = 17
 				GameState.save(gs)
-				Game.say(["Your journey was saved.", "Rumor has it the seven Wardens now roam Victory Road..."])))))
+				Game.say(["Your journey was saved.", "Rumor has it legendary creatures have woken across the region, and two of them now roam the routes..."])))))

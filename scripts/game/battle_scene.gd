@@ -1,8 +1,10 @@
 class_name BattleScene
 extends Scene
 ## The battle screen (TS battleScene.ts): plays back Battle events and collects each human player's actions.
-## setup keys (TS BattleSetup): kind ("wild" | "trainer"), double (bool), wild (Array of Creatures, wild battles),
+## setup keys (TS BattleSetup): kind ("wild" | "trainer" | "safari"), double (bool), wild (Array of Creatures, wild battles),
 ## trainer (TrainerDef dict from DB.MAPS), trainerParty (Array of Creatures), onEnd (Callable(result: String, battle: Battle)).
+## Optional: weather (the map's), location ("water"/"underwater"/"cave"), noExp (Battle Tower), noPrize, party (Array:
+## the creatures to use instead of the player's party, for the Battle Tower).
 ## The snake_case spellings trainer_party / on_end are accepted too.
 
 class Slot:
@@ -15,6 +17,7 @@ class Slot:
 	var flash := 0.0
 	var lunge := 0.0
 	var tint: Variant = null # {color, t}
+	var hidden := false # up in the sky, underground or underwater (Fly, Dig, Dive)
 
 var battle: Battle
 ## uids of creatures that levelled up (they get an evolution check afterwards).
@@ -56,15 +59,18 @@ func _init(setup: Dictionary) -> void:
 	if coop:
 		for i in gs.players.size():
 			var p: Dictionary = gs.players[i]
-			side0.append({"name": p.name, "party": p.party, "controller": "human", "slots": [i], "player": i})
+			side0.append({"name": p.name, "party": p.party, "controller": "human", "slots": [i], "player": i, "otId": p.otId})
 	else:
-		side0.append({"name": gs.players[0].name, "party": gs.players[0].party, "controller": "human", "slots": [0, 1] if double else [0], "player": 0})
+		side0.append({"name": gs.players[0].name, "party": setup.get("party", gs.players[0].party), "controller": "human",
+			"slots": [0, 1] if double else [0], "player": 0, "otId": gs.players[0].otId})
 	var side1: Array = []
-	if setup.kind == "wild":
+	if setup.kind != "trainer":
 		side1.append({"name": "Wild", "party": setup.wild, "controller": "wild", "slots": [0, 1] if double else [0]})
 	else:
 		side1.append({"name": setup.trainer.name, "party": _trainer_party(), "controller": "ai", "slots": [0, 1] if double else [0]})
-	battle = Battle.new({"kind": setup.kind, "double": double, "sides": [side0, side1]})
+	battle = Battle.new({"kind": setup.kind, "double": double, "sides": [side0, side1], "weather": setup.get("weather", null),
+		"location": setup.get("location", "land"), "noExp": setup.get("noExp", false), "caughtSpecies": gs.caught,
+		"shift": Options.shift_style()})
 	var n := 2 if double else 1
 	for side in [0, 1]:
 		for i in n:
@@ -77,7 +83,7 @@ func _init(setup: Dictionary) -> void:
 ## Music track for a battle setup: battle_wild / battle_trainer / battle_gym / battle_rival /
 ## battle_champion / battle_villain.
 static func battle_music(setup: Dictionary) -> String:
-	if setup.get("kind", "wild") == "wild":
+	if setup.get("kind", "wild") != "trainer":
 		return "battle_wild"
 	var t: Dictionary = setup.get("trainer", {})
 	var id: String = str(t.get("id", ""))
@@ -95,7 +101,7 @@ func _play_victory() -> void:
 	if _victory_played:
 		return
 	_victory_played = true
-	Audio.play_music("victory_wild" if _setup.kind == "wild" else "victory_trainer")
+	Audio.play_music("victory_trainer" if _setup.kind == "trainer" else "victory_wild")
 
 ## Looks ahead in the event queue (up to the next hit) for the effectiveness message of this hit.
 func _hit_sfx() -> String:
@@ -198,7 +204,16 @@ func _next_event() -> void:
 				if last_foe:
 					_play_victory()}
 			return
+		"semi":
+			sl.hidden = e.hidden
+			_next_event()
+			return
 		"anim":
+			if not Options.battle_scene():
+				if e.kind == "hit":
+					Audio.sfx(_hit_sfx())
+				_next_event()
+				return
 			if e.kind == "move":
 				_anim = {"kind": "lunge", "t": 0.0, "dur": 0.25, "data": sl}
 				return
@@ -317,6 +332,11 @@ func _update_anim(dt: float) -> void:
 
 # ---------- flow ----------
 func _begin_choices() -> void:
+	if battle.kind == "safari" and battle.phase != "over" and _safari_balls() <= 0:
+		battle.result = "ran"
+		battle.phase = "over"
+		_play([{"t": "msg", "text": "PA: Ding-dong! You're out of Safari Orbs!"}], _finish)
+		return
 	if battle.phase == "over":
 		_finish()
 		return
@@ -336,6 +356,8 @@ func _start_request() -> void:
 	_move_sel = 0
 	if r.kind == "replace":
 		_choose_replacement(r)
+	elif r.kind == "shift":
+		_offer_shift(r)
 
 func _taken(t: Dictionary, i: int) -> bool:
 	for c in _choices:
@@ -355,6 +377,9 @@ func _choose_replacement(r: Dictionary) -> void:
 		for b in battle.battlers[0]:
 			if is_same(b.mon, m) and b.alive:
 				active = true
+		if m.get("egg", false):
+			Game.say(["An Egg can't battle!"], Callable(), r.player)
+			return
 		if m.hp <= 0:
 			Game.say(["%s has no energy left to battle!" % Creatures.display_name(m)], Callable(), r.player)
 			return
@@ -364,6 +389,30 @@ func _choose_replacement(r: Dictionary) -> void:
 		Game.pop(ps)
 		_push_choice({"kind": "switch", "partyIdx": i})
 	Game.push(ps)
+
+## Battle style SHIFT: the foe trainer sent out a new creature, so the player may switch too.
+func _offer_shift(r: Dictionary) -> void:
+	_mode = "busy"
+	var foe: Variant = battle.battlers[1][0].mon
+	var foe_name: String = Creatures.display_name(foe) if foe != null else "a new creature"
+	Game.ask("%s is about to use %s. Will %s change creatures?" % [_setup.trainer.name, foe_name, _gs.players[r.player].name],
+		["YES", "NO"], func(c: int) -> void:
+			if c != 0:
+				_push_choice({"kind": "stay"})
+				return
+			var t: Dictionary = r.trainer
+			var ps := PartyScreen.new({"player": r.player, "party": t.party, "prompt": "Send out which creature?"})
+			ps.o.on_cancel = func() -> void:
+				Game.pop(ps)
+				_push_choice({"kind": "stay"})
+			ps.o.on_select = func(i: int) -> void:
+				var m: Dictionary = t.party[i]
+				if not battle.bench_for(t).has(i):
+					Game.say(["%s can't battle now!" % Creatures.display_name(m)], Callable(), r.player)
+					return
+				Game.pop(ps)
+				_push_choice({"kind": "switch", "partyIdx": i})
+			Game.push(ps), r.player)
 
 func _push_choice(action: Dictionary, refund: String = "") -> void:
 	_choices.append({"req": _reqs[_req_idx], "action": action, "refund": refund})
@@ -394,18 +443,42 @@ func _submit() -> void:
 	var events: Array = battle.submit(map)
 	_play(events, _begin_choices)
 
+func _safari_balls() -> int:
+	var sf: Variant = _gs.get("safari", null)
+	return int(sf.balls) if sf != null else 0
+
 func _finish() -> void:
 	_mode = "end"
 	var b := battle
 	var msgs: Array = []
 	var gs := _gs
-	if b.result == "win" and _setup.kind == "trainer":
+	var party_mons: Array = []
+	for t in b.trainers[0]:
+		party_mons.append_array(t.party)
+	# Knock Off only takes an item for the battle.
+	for m in party_mons:
+		if m.has("knockedOff"):
+			if m.get("item", null) == null:
+				m.item = m.knockedOff
+			m.erase("knockedOff")
+	var coin := false
+	for m in party_mons:
+		if m.get("item", null) == "amuletCoin":
+			coin = true
+	if b.result == "win" and _setup.kind == "trainer" and not _setup.get("noPrize", false):
 		var t: Dictionary = _setup.trainer
 		var tp := _trainer_party()
 		var last: Dictionary = tp[tp.size() - 1]
-		var prize: int = t.pay * last.level
+		var prize: int = t.pay * last.level * (2 if coin else 1)
 		gs.money += prize
 		msgs.append_array([t.defeat, "You got $%d for winning!" % prize])
+	elif b.result == "win" and _setup.kind == "trainer":
+		msgs.append(_setup.trainer.defeat)
+	if b.pay_day > 0 and b.result != "lose":
+		gs.money += b.pay_day * (2 if coin else 1)
+		msgs.append("You picked up $%d!" % (b.pay_day * (2 if coin else 1)))
+	if b.result == "win" and not _setup.has("party"):
+		msgs.append_array(Field.pickup(gs, party_mons))
 	if b.result == "win":
 		_play_victory()
 	if b.result == "lose":
@@ -455,8 +528,23 @@ func update(dt: float) -> void:
 			_undo_choice()
 		if inp.pressed("a"):
 			Audio.sfx("confirm")
+			if battle.kind == "safari":
+				match _action_sel:
+					0:
+						gs_safari_throw(r)
+					1:
+						_push_choice({"kind": "bait"})
+					2:
+						_push_choice({"kind": "rock"})
+					3:
+						_push_choice({"kind": "run"})
+				return
 			if _action_sel == 0:
-				if not battle.has_usable_move(mon):
+				var any_move := false
+				for k in mon.moves.size():
+					if battle.move_selectable(b, k) == "":
+						any_move = true
+				if not any_move:
 					Game.say(["%s has no moves left!" % Creatures.display_name(mon)], func() -> void: _push_choice({"kind": "move", "moveIdx": -1}), r.player)
 					_mode = "busy"
 					return
@@ -466,7 +554,11 @@ func update(dt: float) -> void:
 			elif _action_sel == 2:
 				_open_party_for(r)
 			elif _action_sel == 3:
-				if battle.kind == "trainer":
+				var why: String = battle.trapped(b)
+				if battle.kind != "trainer" and why != "" and b.ability != "runAway" and b.item != "smokeBall":
+					_mode = "busy"
+					Game.say([why], func() -> void: _mode = "choose", r.player)
+				elif battle.kind == "trainer":
 					_mode = "busy"
 					Game.say(["No! There's no running from a trainer battle!"], func() -> void: _mode = "choose", r.player)
 				else:
@@ -485,10 +577,11 @@ func update(dt: float) -> void:
 			_menu = "action"
 		if inp.pressed("a"):
 			var ms: Dictionary = mon.moves[_move_sel]
-			Audio.sfx("error" if ms.pp <= 0 else "confirm")
-			if ms.pp <= 0:
+			var why: String = battle.move_selectable(b, _move_sel)
+			Audio.sfx("error" if why != "" else "confirm")
+			if why != "":
 				_mode = "busy"
-				Game.say(["There's no PP left for this move!"], func() -> void: _mode = "choose", r.player)
+				Game.say([why], func() -> void: _mode = "choose", r.player)
 				return
 			var mv: Dictionary = DB.move(ms.id)
 			if battle.double and mv.target == "normal":
@@ -523,6 +616,11 @@ func update(dt: float) -> void:
 			Audio.sfx("confirm")
 			_push_choice({"kind": "move", "moveIdx": _pending_move, "target": _target_list[_target_sel]})
 
+func gs_safari_throw(r: Dictionary) -> void:
+	var sf: Dictionary = _gs.safari
+	sf.balls -= 1
+	_push_choice({"kind": "item", "itemId": "safariOrb", "target": {"side": 1, "slot": 0}})
+
 func _open_party_for(r: Dictionary) -> void:
 	_mode = "busy"
 	var t: Dictionary = r.trainer
@@ -549,6 +647,13 @@ func _open_party_for(r: Dictionary) -> void:
 						if is_same(b.mon, m):
 							active = true
 					var taken := _taken(t, i)
+					var why: String = battle.trapped(battle.at(r.ref))
+					if m.get("egg", false):
+						Game.say(["An Egg can't battle!"], Callable(), r.player)
+						return
+					if why != "" and not active:
+						Game.say([why], Callable(), r.player)
+						return
 					if m.hp <= 0:
 						Game.say(["%s has no energy left to battle!" % Creatures.display_name(m)], Callable(), r.player)
 						return
@@ -570,6 +675,7 @@ func _open_bag_for(r: Dictionary) -> void:
 		gs.bag = _setup.bags[r.player]
 	Menus.open_bag({
 		"player": r.player, "in_battle": true, "can_throw": battle.kind == "wild",
+		"usable": func(id: String) -> bool: return Menus.BATTLE_KINDS.has(DB.item(id).effect.kind),
 		"on_close": func() -> void: _mode = "choose",
 		"on_pick": func(id: String, close_bag: Callable) -> void:
 			var it: Dictionary = DB.item(id)
@@ -601,25 +707,43 @@ func _open_bag_for(r: Dictionary) -> void:
 				Game.push(menu)
 				return
 			var party: Array = r.trainer.party
+			# X items work on the creature that's out.
+			if it.effect.kind == "xStat":
+				var active_idx: int = party.find(battle.at(r.ref).mon)
+				gs.bag[id] -= 1
+				close_bag.call()
+				_push_choice({"kind": "item", "itemId": id, "partyIdx": active_idx}, id)
+				return
 			var ps := PartyScreen.new({"player": r.player, "party": party, "prompt": "Use %s on?" % it.name})
 			ps.o.on_cancel = func() -> void: Game.pop(ps)
 			ps.o.on_select = func(i: int) -> void:
 				var m: Dictionary = party[i]
 				var eff: Dictionary = it.effect
 				var useful := false
-				if eff.kind == "revive":
+				if m.get("egg", false):
+					useful = false
+				elif eff.kind == "revive":
 					useful = m.hp <= 0
 				elif eff.kind == "heal":
 					useful = m.hp > 0 and m.hp < Creatures.max_hp(m)
+				elif eff.kind == "fullRestore":
+					useful = m.hp > 0 and (m.hp < Creatures.max_hp(m) or m.status != null)
+				elif eff.kind == "pp":
+					useful = m.moves.any(func(ms: Dictionary) -> bool: return ms.pp < ms.maxPp)
 				else:
 					useful = eff.kind == "cure" and m.hp > 0 and m.status != null and (eff.statuses as Array).has(m.status)
 				if not useful:
 					Game.say(["It won't have any effect."], Callable(), r.player)
 					return
-				gs.bag[id] -= 1
-				Game.pop(ps)
-				close_bag.call()
-				_push_choice({"kind": "item", "itemId": id, "partyIdx": i}, id)
+				var use := func(move_idx: int) -> void:
+					gs.bag[id] -= 1
+					Game.pop(ps)
+					close_bag.call()
+					_push_choice({"kind": "item", "itemId": id, "partyIdx": i, "moveIdx": move_idx}, id)
+				if eff.kind == "pp" and not eff.get("all", false):
+					Menus.pick_move(m, r.player, "Restore which move?", func(k: int) -> void: use.call(k))
+					return
+				use.call(0)
 			Game.push(ps),
 	})
 
@@ -727,7 +851,7 @@ func draw() -> void:
 		_draw_level_panel()
 
 func _draw_sprite(s: Slot, side: int, slot: int, intro: float) -> void:
-	if not s.visible or s.view == null:
+	if not s.visible or s.view == null or s.hidden:
 		return
 	var p := _pos(side, slot)
 	var size: float = 64 * p.scale
@@ -867,7 +991,7 @@ func _draw_bottom() -> void:
 		for i in lines.size():
 			Gfx.text(lines[i], 10, 122 + i * 14, {"color": "#f8f8f8", "shadow": Color(0, 0, 0, 0.5)})
 		Gfx.panel(122, 114, 116, 44, "battle")
-		var labels := ["FIGHT", "BAG", "PARTY", "RUN"]
+		var labels := ["ORB x%d" % _safari_balls(), "BAIT", "ROCK", "RUN"] if battle.kind == "safari" else ["FIGHT", "BAG", "PARTY", "RUN"]
 		for i in labels.size():
 			var x := 136 + (i % 2) * 54
 			var y := 124 + (i / 2) * 16

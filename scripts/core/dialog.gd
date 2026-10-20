@@ -32,7 +32,7 @@ func _page_len() -> int:
 func update(dt: float) -> void:
 	var total := _page_len()
 	if _shown < total:
-		_shown += dt * 90
+		_shown += dt * Options.text_speed()
 		if _pressed("a") or _pressed("b"):
 			_shown = total
 		return

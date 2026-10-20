@@ -3,6 +3,9 @@ extends RefCounted
 ## Port of src/engine/creature.ts. A Creature is a Dictionary with the TS keys:
 ## uid, species, nickname (optional), level, exp, personality, otId, ivs, evs, moves: [{id, pp, maxPp}],
 ## hp, status (null or "brn"/"par"/"psn"/"tox"/"slp"/"frz"), sleepTurns, toxicCount, owner.
+## Emerald additions: item (held item id or null), friendship (0-255), ball, metLevel, ppUps [per move slot],
+## egg (bool) + eggSteps, ribbons [], condition {cool, beauty, cute, smart, tough, sheen}, pokerus-free.
+## Older saves lack these; migrate() fills them in.
 
 const EV_STAT_CAP := 255
 const EV_TOTAL_CAP := 510
@@ -13,6 +16,8 @@ static func set_next_uid(n: int) -> void:
 	next_uid = maxi(next_uid, n)
 
 static func display_name(c: Dictionary) -> String:
+	if c.get("egg", false):
+		return "Egg"
 	var nick: Variant = c.get("nickname", null)
 	if nick != null and str(nick) != "":
 		return str(nick)
@@ -134,6 +139,14 @@ static func create_creature(species_id: String, level: int, opts: Dictionary = {
 		"sleepTurns": 0,
 		"toxicCount": 0,
 		"owner": opts.get("owner", 0),
+		"item": opts.get("item", null),
+		"friendship": int(sp.get("friendship", 70)),
+		"ball": "orb",
+		"metLevel": level,
+		"egg": false,
+		"eggSteps": 0,
+		"ribbons": [],
+		"condition": {"cool": 0, "beauty": 0, "cute": 0, "smart": 0, "tough": 0, "sheen": 0},
 	}
 	next_uid += 1
 	c.hp = max_hp(c)
@@ -167,6 +180,9 @@ static func gain_exp(c: Dictionary, amount: int) -> Array:
 	while c.level < 100 and c.exp >= exp_for_level(sp.growth, c.level + 1):
 		var old_stats := calc_stats(c)
 		c.level += 1
+		if c.has("friendship"):
+			var f: int = c.friendship
+			add_friendship(c, 5 if f < 100 else (3 if f < 200 else 2))
 		var new_stats := calc_stats(c)
 		if c.hp > 0:
 			c.hp += new_stats.hp - old_stats.hp
@@ -210,9 +226,94 @@ static func evolve(c: Dictionary, into: String) -> String:
 		c.hp += after - before
 	return old
 
-## Species id or null.
-static func pending_evolution(c: Dictionary) -> Variant:
+## Adds the Emerald fields to a creature from an older save.
+static func migrate(c: Dictionary) -> void:
+	if not c.has("item"):
+		c.item = null
+	if not c.has("friendship"):
+		c.friendship = int(DB.species(c.species).get("friendship", 70))
+	if not c.has("ball"):
+		c.ball = "orb"
+	if not c.has("metLevel"):
+		c.metLevel = c.level
+	if not c.has("egg"):
+		c.egg = false
+		c.eggSteps = 0
+	if not c.has("ribbons"):
+		c.ribbons = []
+	if not c.has("condition"):
+		c.condition = {"cool": 0, "beauty": 0, "cute": 0, "smart": 0, "tough": 0, "sheen": 0}
+	# A Knock Off from the last battle hands the item back.
+	if c.has("knockedOff"):
+		if c.item == null:
+			c.item = c.knockedOff
+		c.erase("knockedOff")
+
+## Gen 3 friendship change; Soothe Bell boosts gains by half and Luxury Orbs add one.
+static func add_friendship(c: Dictionary, amount: int) -> void:
+	if not c.has("friendship"):
+		return
+	var a := amount
+	if a > 0:
+		if c.get("item", null) == "sootheBell":
+			a = (a * 150) / 100
+		if c.get("luxury", false):
+			a += 1
+		# Gains shrink as friendship grows, as in Gen 3.
+		if int(c.friendship) >= 200:
+			a = maxi(1, a / 2)
+	c.friendship = clampi(int(c.friendship) + a, 0, 255)
+
+## Teaches a move into a free slot, or returns false when all four are full.
+static func learn(c: Dictionary, id: String) -> bool:
+	for m in c.moves:
+		if m.id == id:
+			return true
+	if c.moves.size() >= 4:
+		return false
+	c.moves.push_back(move_slot(id))
+	return true
+
+static func knows(c: Dictionary, id: String) -> bool:
+	for m in c.moves:
+		if m.id == id:
+			return true
+	return false
+
+## Species id or null. `trigger` is "level" (after battle), "trade", or an evolution stone item id.
+## Everstone stops level, friendship and trade evolutions, as in Gen 3.
+static func pending_evolution(c: Dictionary, trigger: String = "level") -> Variant:
 	var e: Variant = DB.species(c.species).get("evolves", null)
-	if e and c.level >= int(e.level) and c.hp > 0:
+	if not e or c.hp <= 0 or c.get("egg", false):
+		return null
+	var method: String = e.get("method", "level")
+	if trigger == "level":
+		if c.get("item", null) == "everstone":
+			return null
+		if method == "level" and c.level >= int(e.level):
+			return e.into
+		if method == "friendship" and int(c.get("friendship", 0)) >= 220:
+			return e.into
+		return null
+	if trigger == "trade":
+		if method == "trade" and c.get("item", null) != "everstone":
+			return e.into
+		return null
+	if method == "stone" and e.get("item", "") == trigger:
 		return e.into
 	return null
+
+## Moves this species could relearn at its level that it doesn't already know.
+static func relearnable(c: Dictionary) -> Array:
+	var out: Array = []
+	for entry in DB.species(c.species).learnset:
+		if int(entry[0]) <= int(c.level) and not knows(c, entry[1]) and not out.has(entry[1]):
+			out.push_back(entry[1])
+	return out
+
+## Whether the species can learn a TM/HM (by item id, e.g. "tm26").
+static func can_learn_tm(c: Dictionary, tm_id: String) -> bool:
+	return (DB.species(c.species).get("tms", []) as Array).has(tm_id)
+
+static func can_learn_tutor(c: Dictionary, move_id: String) -> bool:
+	return (DB.species(c.species).get("tutor", []) as Array).has(move_id)
