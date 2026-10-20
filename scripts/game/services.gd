@@ -1,0 +1,173 @@
+class_name Services
+## What townsfolk with a "service" do when you talk to them (data/features.json gives each NPC its service):
+## the Day Care, contests and the Berry Blender, the Dept. Store counters, the Battle Tower, gifts, Move Tutors,
+## the Move Relearner, the friendship checker, the Name Rater, in-game trades and the daily berry.
+
+static func run(o: OverworldScene, npc: Dictionary, text: Array) -> void:
+	var gs: Dictionary = Game.gs
+	match npc.service:
+		"daycare":
+			Game.say(text, func() -> void: DayCare.lady())
+		"daycareMan":
+			DayCare.man(text)
+		"contest":
+			Game.say(text, func() -> void: Contest.start(0))
+		"blender":
+			Game.say(text, func() -> void: Contest.blender(0))
+		"shop":
+			Game.say(text, func() -> void:
+				var done := func() -> void: Game.say(["Please come again!"])
+				if npc.shop == "bp":
+					Menus.open_bp_shop(0, done)
+				else:
+					Menus.open_shop(0, done, DB.SHOPS.get(npc.shop, [])))
+		"tower":
+			Game.say(text, func() -> void: Tower.start(o))
+		"gift":
+			_gift(npc, text)
+		"tutor":
+			_tutor(npc, text)
+		"friendship":
+			Game.say(text, func() -> void: _friendship())
+		"relearner":
+			Game.say(text, func() -> void: _relearner())
+		"nameRater":
+			Game.say(text, func() -> void: _name_rater())
+		"npcTrade":
+			Trade.npc_trade(npc)
+		"berryGift":
+			Game.say(text, func() -> void: _berry_gift(npc))
+		_:
+			Game.say(text)
+
+static func _gift(npc: Dictionary, text: Array) -> void:
+	var gs: Dictionary = Game.gs
+	if gs.flags.get(npc.flag, false):
+		Game.say(npc.get("after", text))
+		return
+	Game.say(text, func() -> void:
+		var id: String = npc.gift
+		gs.flags[npc.flag] = true
+		gs.bag[id] = gs.bag.get(id, 0) + 1
+		Audio.sfx("item")
+		var lines: Array = ["%s received the %s!" % [gs.players[0].name, DB.item(id).name]]
+		lines.append_array(npc.get("after", []))
+		Game.say(lines))
+
+## Pick a creature from the party (eggs can't be picked). filter(m) -> String: "" if OK, otherwise why not.
+static func pick_creature(prompt: String, filter: Callable, on_pick: Callable, on_cancel: Callable = Callable()) -> void:
+	var gs: Dictionary = Game.gs
+	var party: Array = gs.players[0].party
+	var ps := PartyScreen.new({"player": 0, "party": party, "prompt": prompt})
+	ps.o.on_cancel = func() -> void:
+		Game.pop(ps)
+		if on_cancel.is_valid():
+			on_cancel.call()
+	ps.o.on_select = func(i: int) -> void:
+		var m: Dictionary = party[i]
+		var why: String = "An Egg can't do that." if m.get("egg", false) else filter.call(m)
+		if why != "":
+			Game.say([why], Callable(), 0)
+			return
+		Game.pop(ps)
+		on_pick.call(m)
+	Game.push(ps)
+
+static func _tutor(npc: Dictionary, text: Array) -> void:
+	var gs: Dictionary = Game.gs
+	var mv: String = npc.move
+	if gs.flags.get(npc.flag, false):
+		Game.say(["I've taught you everything I know. Use %s well!" % DB.move(mv).name])
+		return
+	Game.say(text, func() -> void:
+		Game.ask("Shall I teach %s to one of your creatures?" % DB.move(mv).name, ["YES", "NO"], func(c: int) -> void:
+			if c != 0:
+				return
+			pick_creature("Teach which creature?", func(m: Dictionary) -> String:
+				if Creatures.knows(m, mv):
+					return "%s already knows %s." % [Creatures.display_name(m), DB.move(mv).name]
+				return "" if Creatures.can_learn_tutor(m, mv) else "%s can't learn %s." % [Creatures.display_name(m), DB.move(mv).name],
+			func(m: Dictionary) -> void:
+				Menus.learn_move_flow(m, mv, 0, func() -> void:
+					if Creatures.knows(m, mv):
+						gs.flags[npc.flag] = true))))
+
+static func _friendship() -> void:
+	var m: Variant = Field.lead()
+	if m == null:
+		return
+	var f: int = m.get("friendship", 70)
+	var nm := Creatures.display_name(m)
+	var line: String
+	if f >= 255:
+		line = "It looks really happy! It must love you a lot."
+	elif f >= 200:
+		line = "I get the feeling it really trusts you."
+	elif f >= 150:
+		line = "It's quite friendly toward you."
+	elif f >= 100:
+		line = "It's warming up to you."
+	elif f >= 50:
+		line = "It's not very used to you yet."
+	else:
+		line = "Hmm... It doesn't seem to like you much. Maybe it needs more kindness."
+	Game.say(["Your %s... %s" % [nm, line]])
+
+static func _relearner() -> void:
+	var gs: Dictionary = Game.gs
+	if gs.bag.get("heartScale", 0) <= 0:
+		Game.say(["Bring me a Heart Scale and I'll help a creature remember a move."])
+		return
+	pick_creature("Which creature should remember a move?", func(m: Dictionary) -> String:
+		return "" if not Creatures.relearnable(m).is_empty() else "There's no move %s can remember." % Creatures.display_name(m),
+	func(m: Dictionary) -> void:
+		var moves: Array = Creatures.relearnable(m)
+		var items: Array = []
+		for id in moves:
+			items.append({"label": DB.move(id).name, "right": DB.move(id).type})
+		items.append({"label": "CANCEL"})
+		var ref := {}
+		var menu := ListMenu.new({
+			"x": 80, "y": 8, "w": 156, "player": 0, "title": "Remember which move?", "items": items, "max_visible": 7,
+			"footer": func(i: int) -> String: return DB.move(moves[i]).desc if i < moves.size() else "",
+			"on_cancel": func() -> void: Game.pop(ref.menu),
+			"on_select": func(i: int) -> void:
+				Game.pop(ref.menu)
+				if i >= moves.size():
+					return
+				Menus.learn_move_flow(m, moves[i], 0, func() -> void:
+					if Creatures.knows(m, moves[i]):
+						gs.bag.heartScale -= 1
+						Game.say(["%s handed over one Heart Scale in exchange." % gs.players[0].name])),
+		})
+		ref.menu = menu
+		Game.push(menu))
+
+static func _name_rater() -> void:
+	var gs: Dictionary = Game.gs
+	pick_creature("Rate which creature's nickname?", func(m: Dictionary) -> String:
+		return "" if int(m.otId) == int(gs.players[0].otId) else "This one came from another trainer. I can't rename it.",
+	func(m: Dictionary) -> void:
+		Game.ask("%s, is it? A fine name! Would you like to give it a nicer one?" % Creatures.display_name(m), ["YES", "NO"], func(c: int) -> void:
+			if c != 0:
+				return
+			var ref := {}
+			var scene := NameEntryScene.new(0, "%s's nickname?" % DB.species(m.species).name, "boy", Creatures.display_name(m), func(n: String) -> void:
+				Game.pop(ref.s)
+				m.nickname = n if n != DB.species(m.species).name else null
+				Game.say(["%s it is! That's a better name than before! Well done!" % Creatures.display_name(m)]))
+			ref.s = scene
+			Game.push(scene)))
+
+static func _berry_gift(npc: Dictionary) -> void:
+	var gs: Dictionary = Game.gs
+	var today := Options.today()
+	if int(gs.flags.get(npc.flag, -1)) == today:
+		Game.say(["Come back tomorrow for another berry!"])
+		return
+	var berries: Array = DB.ITEMS.keys().filter(func(k: String) -> bool: return DB.ITEMS[k].effect.kind == "berry")
+	var id: String = berries[Rng.global_rng.int_below(berries.size())]
+	gs.flags[npc.flag] = today
+	gs.bag[id] = gs.bag.get(id, 0) + 1
+	Audio.sfx("item")
+	Game.say(["%s received one %s!" % [gs.players[0].name, DB.item(id).name], "Plant it in soft soil and it'll grow."])
