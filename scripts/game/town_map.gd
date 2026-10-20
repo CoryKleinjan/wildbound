@@ -14,6 +14,9 @@ var _scale := 0.5
 var _ox := 0.0
 var _oy := 0.0
 var _here := ""
+var _maxx := 1.0
+var _maxy := 1.0
+var _painted_fits := false
 
 ## Where you are on the region map: the map itself, or the outdoor map a building or cave belongs to.
 static func region_id(map_id: String) -> String:
@@ -40,6 +43,9 @@ func _init(player: int, fly: bool, on_pick: Callable, on_close: Callable) -> voi
 		var r: Dictionary = DB.REGION_MAP[id]
 		maxx = maxf(maxx, r.x + r.w)
 		maxy = maxf(maxy, r.y + r.h)
+	_maxx = maxx
+	_maxy = maxy
+	_painted_fits = _painting_fits()
 	_scale = minf((Gfx.W - 24) / maxx, (Gfx.H - 46) / maxy)
 	_ox = (Gfx.W - maxx * _scale) / 2.0
 	_oy = 22 + (Gfx.H - 46 - maxy * _scale) / 2.0
@@ -52,6 +58,15 @@ func _init(player: int, fly: bool, on_pick: Callable, on_close: Callable) -> voi
 		_points.append(id)
 	_points.sort_custom(func(a: String, b: String) -> bool: return _center(a).x < _center(b).x)
 	_sel = maxi(0, _points.find(_here))
+
+## The painting only fits the region layout it was made for (assets/screens/townmap.json, written by
+## tools/artgen/townmap.py); after routes are added the map is drawn from the layout until it is repainted.
+func _painting_fits() -> bool:
+	var f := FileAccess.open("res://assets/screens/townmap.json", FileAccess.READ)
+	if f == null:
+		return false
+	var fit: Variant = JSON.parse_string(f.get_as_text())
+	return fit is Dictionary and is_equal_approx(float(fit.get("w", 0)), _maxx) and is_equal_approx(float(fit.get("h", 0)), _maxy)
 
 func _center(id: String) -> Vector2:
 	var r: Dictionary = DB.REGION_MAP[id]
@@ -95,7 +110,7 @@ func draw() -> void:
 	var gs: Dictionary = Game.gs
 	# The painted region map (assets/screens/townmap.png, from tools/artgen/townmap.py) has the land and routes;
 	# the Battle Frontier isn't on it, since it only appears after the League.
-	var painted := ArtAssets.texture("screens/townmap")
+	var painted := ArtAssets.texture("screens/townmap") if _painted_fits else null
 	if painted != null:
 		Gfx.image(painted, 0, 0)
 	else:
@@ -111,7 +126,7 @@ func draw() -> void:
 			continue
 		var x: float = _ox + r.x * _scale
 		var y: float = _oy + r.y * _scale
-		if id != "route13":
+		if not r.get("sea", false):
 			Gfx.rect(x - 2, y - 2, r.w * _scale + 4, r.h * _scale + 4, "#78b858")
 	for id in DB.REGION_MAP:
 		var r: Dictionary = DB.REGION_MAP[id]
@@ -124,8 +139,10 @@ func draw() -> void:
 			continue
 		var w: float = r.w * _scale
 		var h: float = r.h * _scale
-		if id == "route13":
+		if r.get("sea", false) and w > h:
 			Gfx.rect(c.x - w / 2, c.y - 1, w, 2, "#a8d0f8")
+		elif r.get("sea", false):
+			Gfx.rect(c.x - 1, c.y - h / 2, 2, h, "#a8d0f8")
 		elif w > h:
 			Gfx.rect(c.x - w / 2, c.y - 2, w, 4, "#e8d098")
 		else:

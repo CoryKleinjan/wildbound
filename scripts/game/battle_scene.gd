@@ -801,6 +801,8 @@ static func backdrop_for(m: Dictionary) -> String:
 		return "league"
 	if id.begins_with("gym"):
 		return "gym"
+	if m.has("backdrop"):
+		return m.backdrop
 	if m.get("town", false) or not m.has("route"):
 		return "town"
 	return ["field", "forest", "field", "mountain", "forest", "beach", "field", "forest", "beach", "night", "field", "mountain"][(int(m.route) - 1) % 12]

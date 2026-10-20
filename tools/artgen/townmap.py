@@ -1,5 +1,6 @@
 """The region map for the Town Map and Fly screens: the layout the screen draws (land, routes, the sea route) rendered
-at screen size, repainted by Nano Banana Pro as an Emerald-style region map. Output: assets/screens/townmap.png (240x160).
+at screen size, repainted by Nano Banana Pro as an Emerald-style region map. Output: assets/screens/townmap.png (240x160),
+plus townmap.json with the region size it was painted for (the game ignores a painting made for another layout).
 The screen still draws the town squares, the you-are-here marker and the cursor on top.
 
 python3 tools/artgen/townmap.py
@@ -29,17 +30,19 @@ def layout() -> Image.Image:
 	d = ImageDraw.Draw(im)
 	# Land: a rounded coast a few pixels around every route and town.
 	for k, r in rm.items():
-		if k != "route13":
+		if not r.get("sea"):
 			d.rounded_rectangle([ox + r["x"] * s - 9, oy + r["y"] * s - 9, ox + (r["x"] + r["w"]) * s + 9, oy + (r["y"] + r["h"]) * s + 9], 7, fill=(232, 216, 160))
 	for k, r in rm.items():
-		if k != "route13":
+		if not r.get("sea"):
 			d.rounded_rectangle([ox + r["x"] * s - 7, oy + r["y"] * s - 7, ox + (r["x"] + r["w"]) * s + 7, oy + (r["y"] + r["h"]) * s + 7], 6, fill=(120, 184, 88))
 	for k, r in rm.items():
 		if r.get("town"):
 			continue
 		cx, cy, w, h = ox + (r["x"] + r["w"] / 2) * s, oy + (r["y"] + r["h"] / 2) * s, r["w"] * s, r["h"] * s
-		if k == "route13":
+		if r.get("sea") and w > h:
 			d.rectangle([cx - w / 2, cy - 1, cx + w / 2, cy + 1], fill=(168, 208, 248))
+		elif r.get("sea"):
+			d.rectangle([cx - 1, cy - h / 2, cx + 1, cy + h / 2], fill=(168, 208, 248))
 		elif w > h:
 			d.rectangle([cx - w / 2, cy - 2, cx + w / 2, cy + 2], fill=(232, 208, 152))
 		else:
@@ -48,11 +51,11 @@ def layout() -> Image.Image:
 		if r.get("town"):
 			cx, cy = ox + (r["x"] + r["w"] / 2) * s, oy + (r["y"] + r["h"] / 2) * s
 			d.rectangle([cx - 5, cy - 5, cx + 5, cy + 5], fill=(224, 80, 64))
-	return im
+	return im, maxx, maxy
 
 
 if __name__ == "__main__":
-	lay = layout()
+	lay, maxx, maxy = layout()
 	ref = RAW / "screens" / "townmap_layout.png"
 	ref.parent.mkdir(parents=True, exist_ok=True)
 	lay.resize((W * 4, H * 4), Image.NEAREST).save(ref)
@@ -69,4 +72,5 @@ if __name__ == "__main__":
 	im = im.quantize(colors=64, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE).convert("RGB")
 	(ROOT / "assets" / "screens").mkdir(parents=True, exist_ok=True)
 	im.save(ROOT / "assets" / "screens" / "townmap.png")
+	(ROOT / "assets" / "screens" / "townmap.json").write_text(json.dumps({"w": maxx, "h": maxy}))
 	print("done")

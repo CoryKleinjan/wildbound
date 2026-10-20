@@ -24,7 +24,7 @@ Gamepads work too (pad 1 = Player 1, pad 2 = Player 2). Saves go to Godot's user
 ## What's in it
 
 - 200 creatures across all 17 types, with evolutions, learnsets, abilities and 7 legendaries.
-- 12 towns joined by 12 routes, 8 gyms (badge needed to leave each gym town onward) and the League in Summitcrown (needs all 8 badges).
+- 12 towns, 34 routes (as many as Emerald) and two forests, 8 gyms (badge needed to leave each gym town onward) and the League in Summitcrown (needs all 8 badges). Routes 14-34, Mossgrove Woods and Elderglen Forest come from `tools/build_routes.py`: most sit on the main road so towns are two or three routes apart, the rest are side trips, and nine are sea routes (Surf). Route 26 climbs a waterfall to Victory Road.
 - Each town has its own look (`data/town_styles.json`, applied by `scripts/art/town_style.gd` on top of whatever tile art is loaded): autumn fields in Harrowfield, snow and pines in Summit Crown, palms and white sand in Coralhaven, and so on. Cinder City is the big city, with avenues, street lamps, a fountain plaza and a two-floor department store (`tools/build_towns.py`).
 - Every town door leads inside: your house, Rest Lodges (nurse + storage machine), Trail Marts (clerk at the counter) and homes with people to talk to. Rooms are built by `tools/build_interiors.py` into `data/interiors.json`.
 - Trainers with line of sight, a rival, wild encounters, catching with Capture Orbs, Rest Lodges, Marts, storage, bag, party, summary (stats, IVs, EVs, nature), a Creaturedex and saving.
@@ -39,7 +39,7 @@ Gen 3 stat formulas with IVs/EVs/natures, the `CalculateBaseDamage` order with i
 - `scripts/game/` overworld, battle screen, menus, title and save state.
 - `scripts/art/` procedural creature sprites, trainers and tiles.
 - `scripts/core/` drawing helpers, input, dialog and list menus. Everything is drawn on a 240x160 screen scaled to the window.
-- `data/*.json` creatures, moves, items, abilities and all 33 maps (edit these to change content).
+- `data/*.json` creatures, moves, items, abilities and the maps (edit these to change content; `tools/build_*.py` rebuild the generated parts).
 
 ## Tests
 
