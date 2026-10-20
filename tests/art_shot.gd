@@ -36,7 +36,6 @@ func _initialize() -> void:
 		if own.is_empty():
 			own = ["cindercub", "ripplet"] if mode == "coop" else ["cindercub"]
 		game.gs = load("res://scripts/game/game_state.gd").new_game(mode, own)
-		game.input.coop = mode == "coop"
 		game.gs.map = map_id
 		var spawn := _walkable(root.get_node("DB").MAPS[map_id])
 		game.gs.x = spawn.x

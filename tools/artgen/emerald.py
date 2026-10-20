@@ -92,6 +92,19 @@ def generate():
 		generate_image(building_prompt(kind), RAW / "buildings" / f"{kind}.png", aspect="4:3" if w * 3 <= h * 4 + 1 else "16:9")
 
 
+# Seamless ground textures: their outer ring is reset to the dominant color so no cell border shows as a grid.
+SEAMLESS = {"grass", "grass2", "path", "sand", "water2", "floor", "flowers", "flowers2"}
+
+
+def clean_ring(im: Image.Image, width: int = 1) -> Image.Image:
+	a = np.array(im.convert("RGB"))
+	cols, counts = np.unique(a.reshape(-1, 3), axis=0, return_counts=True)
+	dom = cols[counts.argmax()]
+	for sl in (np.s_[:width, :], np.s_[-width:, :], np.s_[:, :width], np.s_[:, -width:]):
+		a[sl] = dom
+	return Image.fromarray(a)
+
+
 def labels(sheet, cells):
 	cache = RAW / "tiles" / f"{sheet}_labels.json"
 	if not cache.exists():
@@ -114,7 +127,8 @@ def process():
 		ims = grid_cells(src, 4, 4, 0.09)
 		for n, _ in cells:
 			if n in lab:
-				mode_resize(trim_light_border(ims[lab.index(n)]), (16, 16), 12).convert("RGB").save(out / f"{n}.png")
+				tile = mode_resize(trim_light_border(ims[lab.index(n)]), (18, 18), 12).convert("RGB").crop((1, 1, 17, 17))
+				(clean_ring(tile, 2 if n == "water2" else 1) if n in SEAMLESS else tile).save(out / f"{n}.png")  # drop the cell's border ring
 			else:
 				print("WARN no cell for", n)
 	src = RAW / "tiles" / "em_trees.png"
