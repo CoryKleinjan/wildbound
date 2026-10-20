@@ -1,0 +1,2140 @@
+{
+ "maps": {
+  "fernhollow_home": {
+   "id": "fernhollow_home",
+   "name": "Your House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "fernhollow",
+     "x": 4,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "mom",
+     "text": [
+      "MOM: Off on an adventure? Be safe out there!",
+      "Come home whenever you need a rest."
+     ],
+     "action": "heal"
+    }
+   ]
+  },
+  "fernhollow_lodge": {
+   "id": "fernhollow_lodge",
+   "name": "Fernhollow Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "fernhollow",
+     "x": 19,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "psychic",
+     "text": [
+      "The Rest Lodge nurse heals your creatures for free.",
+      "If you ever black out, you wake up at the last Lodge where you healed."
+     ]
+    }
+   ]
+  },
+  "fernhollow_mart": {
+   "id": "fernhollow_mart",
+   "name": "Fernhollow Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "fernhollow",
+     "x": 17,
+     "y": 12,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "old",
+     "text": [
+      "Capture Orbs are cheap. Buy a stack before heading into the grass!"
+     ]
+    }
+   ]
+  },
+  "fernhollow_lab": {
+   "id": "fernhollow_lab",
+   "name": "Prof. Alder's House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "fernhollow",
+     "x": 4,
+     "y": 14,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 2,
+     "y": 4,
+     "dir": "right",
+     "palette": "psychic",
+     "text": [
+      "The Professor? He went out to Route 1 early this morning.",
+      "He studies how creatures behave in the wild. He forgets to eat lunch half the time!"
+     ],
+     "hideIf": "starter"
+    },
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "prof",
+     "text": [
+      "PROF. ALDER: Creatures have Natures that raise one stat and lower another.",
+      "Hidden potential differs between each one too. No two are quite alike!"
+     ],
+     "action": "heal",
+     "showIf": "starter"
+    }
+   ]
+  },
+  "stonecrest_lodge": {
+   "id": "stonecrest_lodge",
+   "name": "Stonecrest Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "stonecrest",
+     "x": 7,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "swimmer",
+     "text": [
+      "The storage machine holds creatures that do not fit in your party.",
+      "Ask the nurse to open it for you."
+     ]
+    }
+   ]
+  },
+  "stonecrest_mart": {
+   "id": "stonecrest_mart",
+   "name": "Stonecrest Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "stonecrest",
+     "x": 18,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "gentleman",
+     "text": [
+      "Antidotes save a lot of trouble on long routes."
+     ]
+    }
+   ]
+  },
+  "stonecrest_house1": {
+   "id": "stonecrest_house1",
+   "name": "Stonecrest House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "stonecrest",
+     "x": 4,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "gentleman",
+     "text": [
+      "My grandpa says creatures caught at a low level grow up loyal."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "psychic",
+     "text": [
+      "Did you know a creature holding a grudge fights harder?",
+      "...Just kidding. I made that up."
+     ]
+    }
+   ]
+  },
+  "duskmere_lodge": {
+   "id": "duskmere_lodge",
+   "name": "Duskmere Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "duskmere",
+     "x": 18,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "battlegirl",
+     "text": [
+      "A full party heals in a flash here. Never head into a gym tired!"
+     ]
+    }
+   ]
+  },
+  "duskmere_house1": {
+   "id": "duskmere_house1",
+   "name": "Duskmere House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "duskmere",
+     "x": 7,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "beauty",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "swimmer",
+     "text": [
+      "Some creatures only evolve once they reach a certain level.",
+      "Don't press B during evolution unless you mean it!"
+     ]
+    }
+   ]
+  },
+  "duskmere_mart": {
+   "id": "duskmere_mart",
+   "name": "Duskmere Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "duskmere",
+     "x": 18,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "beauty",
+     "text": [
+      "I always buy a few Potions before a gym battle."
+     ]
+    }
+   ]
+  },
+  "voltara_house1": {
+   "id": "voltara_house1",
+   "name": "Voltara House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "voltara",
+     "x": 7,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "hiker",
+     "text": [
+      "Sleep is the best medicine. For people and creatures alike!"
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "battlegirl",
+     "text": [
+      "My big sister has all eight badges. She says the League is no joke."
+     ]
+    }
+   ]
+  },
+  "voltara_lodge": {
+   "id": "voltara_lodge",
+   "name": "Voltara Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "voltara",
+     "x": 19,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "boy",
+     "text": [
+      "I keep a spare Potion in my bag at all times. Old habit."
+     ]
+    }
+   ]
+  },
+  "voltara_mart": {
+   "id": "voltara_mart",
+   "name": "Voltara Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "voltara",
+     "x": 7,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "hiker",
+     "text": [
+      "The clerk said new stock comes in once you earn more badges. Or was that a rumor?"
+     ]
+    }
+   ]
+  },
+  "cindercity_mart": {
+   "id": "cindercity_mart",
+   "name": "Cinder City Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "cindercity",
+     "x": 6,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "mom",
+     "text": [
+      "Capture Orbs are cheap. Buy a stack before heading into the grass!"
+     ]
+    }
+   ]
+  },
+  "cindercity_lodge": {
+   "id": "cindercity_lodge",
+   "name": "Cinder City Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "cindercity",
+     "x": 21,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "girl",
+     "text": [
+      "Creatures that sleep a lot are easier to catch. Twice as easy, they say!"
+     ]
+    }
+   ]
+  },
+  "cindercity_house1": {
+   "id": "cindercity_house1",
+   "name": "Cinder City House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "cindercity",
+     "x": 21,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "mom",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "boy",
+     "text": [
+      "Paralysis lowers Speed to a quarter. Burns halve physical attacks.",
+      "Status moves win more battles than you would think."
+     ]
+    }
+   ]
+  },
+  "harrowfield_house1": {
+   "id": "harrowfield_house1",
+   "name": "Harrowfield House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "harrowfield",
+     "x": 7,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "old",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "girl",
+     "text": [
+      "I want to be a trainer when I grow up!",
+      "Do creatures get stronger if you talk to them? I talk to mine every day."
+     ]
+    }
+   ]
+  },
+  "harrowfield_house2": {
+   "id": "harrowfield_house2",
+   "name": "Harrowfield House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "harrowfield",
+     "x": 21,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "gentleman",
+     "text": [
+      "I trade stories with travelers. You've got a good one going!"
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "psychic",
+     "text": [
+      "A creature that knows four moves is ready for anything.",
+      "But pick them carefully. Each one only has so much PP!"
+     ]
+    }
+   ]
+  },
+  "harrowfield_lodge": {
+   "id": "harrowfield_lodge",
+   "name": "Harrowfield Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "harrowfield",
+     "x": 4,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "psychic",
+     "text": [
+      "The Rest Lodge nurse heals your creatures for free.",
+      "If you ever black out, you wake up at the last Lodge where you healed."
+     ]
+    }
+   ]
+  },
+  "harrowfield_mart": {
+   "id": "harrowfield_mart",
+   "name": "Harrowfield Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "harrowfield",
+     "x": 18,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "old",
+     "text": [
+      "Antidotes save a lot of trouble on long routes."
+     ]
+    }
+   ]
+  },
+  "bramblegate_house1": {
+   "id": "bramblegate_house1",
+   "name": "Bramblegate House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "bramblegate",
+     "x": 19,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "beauty",
+     "text": [
+      "I trade stories with travelers. You've got a good one going!"
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "swimmer",
+     "text": [
+      "Did you know a creature holding a grudge fights harder?",
+      "...Just kidding. I made that up."
+     ]
+    }
+   ]
+  },
+  "bramblegate_lodge": {
+   "id": "bramblegate_lodge",
+   "name": "Bramblegate Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "bramblegate",
+     "x": 4,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "swimmer",
+     "text": [
+      "The storage machine holds creatures that do not fit in your party.",
+      "Ask the nurse to open it for you."
+     ]
+    }
+   ]
+  },
+  "bramblegate_mart": {
+   "id": "bramblegate_mart",
+   "name": "Bramblegate Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "bramblegate",
+     "x": 19,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "gentleman",
+     "text": [
+      "I always buy a few Potions before a gym battle."
+     ]
+    }
+   ]
+  },
+  "skyreach_mart": {
+   "id": "skyreach_mart",
+   "name": "Skyreach Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "skyreach",
+     "x": 6,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "beauty",
+     "text": [
+      "The clerk said new stock comes in once you earn more badges. Or was that a rumor?"
+     ]
+    }
+   ]
+  },
+  "skyreach_lodge": {
+   "id": "skyreach_lodge",
+   "name": "Skyreach Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "skyreach",
+     "x": 20,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "battlegirl",
+     "text": [
+      "A full party heals in a flash here. Never head into a gym tired!"
+     ]
+    }
+   ]
+  },
+  "skyreach_house1": {
+   "id": "skyreach_house1",
+   "name": "Skyreach House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "skyreach",
+     "x": 6,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "hiker",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "battlegirl",
+     "text": [
+      "Some creatures only evolve once they reach a certain level.",
+      "Don't press B during evolution unless you mean it!"
+     ]
+    }
+   ]
+  },
+  "saltmarsh_lodge": {
+   "id": "saltmarsh_lodge",
+   "name": "Saltmarsh Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "saltmarsh",
+     "x": 5,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "boy",
+     "text": [
+      "I keep a spare Potion in my bag at all times. Old habit."
+     ]
+    }
+   ]
+  },
+  "saltmarsh_house1": {
+   "id": "saltmarsh_house1",
+   "name": "Saltmarsh House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "saltmarsh",
+     "x": 18,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "mom",
+     "text": [
+      "My grandpa says creatures caught at a low level grow up loyal."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "boy",
+     "text": [
+      "My big sister has all eight badges. She says the League is no joke."
+     ]
+    }
+   ]
+  },
+  "saltmarsh_house2": {
+   "id": "saltmarsh_house2",
+   "name": "Saltmarsh House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "saltmarsh",
+     "x": 8,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "old",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "girl",
+     "text": [
+      "Paralysis lowers Speed to a quarter. Burns halve physical attacks.",
+      "Status moves win more battles than you would think."
+     ]
+    }
+   ]
+  },
+  "saltmarsh_mart": {
+   "id": "saltmarsh_mart",
+   "name": "Saltmarsh Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "saltmarsh",
+     "x": 18,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "hiker",
+     "text": [
+      "Capture Orbs are cheap. Buy a stack before heading into the grass!"
+     ]
+    }
+   ]
+  },
+  "lumenvale_house1": {
+   "id": "lumenvale_house1",
+   "name": "Lumenvale House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "lumenvale",
+     "x": 8,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "gentleman",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "psychic",
+     "text": [
+      "I want to be a trainer when I grow up!",
+      "Do creatures get stronger if you talk to them? I talk to mine every day."
+     ]
+    }
+   ]
+  },
+  "lumenvale_mart": {
+   "id": "lumenvale_mart",
+   "name": "Lumenvale Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "lumenvale",
+     "x": 20,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "mom",
+     "text": [
+      "Antidotes save a lot of trouble on long routes."
+     ]
+    }
+   ]
+  },
+  "lumenvale_lodge": {
+   "id": "lumenvale_lodge",
+   "name": "Lumenvale Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "lumenvale",
+     "x": 4,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "girl",
+     "text": [
+      "Creatures that sleep a lot are easier to catch. Twice as easy, they say!"
+     ]
+    }
+   ]
+  },
+  "coralhaven_mart": {
+   "id": "coralhaven_mart",
+   "name": "Coralhaven Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "coralhaven",
+     "x": 6,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "old",
+     "text": [
+      "I always buy a few Potions before a gym battle."
+     ]
+    }
+   ]
+  },
+  "coralhaven_house1": {
+   "id": "coralhaven_house1",
+   "name": "Coralhaven House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "coralhaven",
+     "x": 21,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "beauty",
+     "text": [
+      "Make yourself at home! Your creatures look tired. Rest a while."
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "swimmer",
+     "text": [
+      "A creature that knows four moves is ready for anything.",
+      "But pick them carefully. Each one only has so much PP!"
+     ]
+    }
+   ]
+  },
+  "coralhaven_lodge": {
+   "id": "coralhaven_lodge",
+   "name": "Coralhaven Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "coralhaven",
+     "x": 18,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "psychic",
+     "text": [
+      "The Rest Lodge nurse heals your creatures for free.",
+      "If you ever black out, you wake up at the last Lodge where you healed."
+     ]
+    }
+   ]
+  },
+  "summitcrown_house1": {
+   "id": "summitcrown_house1",
+   "name": "Summit Crown House",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_____B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ],
+   "theme": "#e0c8a0",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "summitcrown",
+     "x": 7,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 5,
+     "dir": "left",
+     "palette": "hiker",
+     "text": [
+      "Sleep is the best medicine. For people and creatures alike!"
+     ],
+     "action": "heal"
+    },
+    {
+     "x": 2,
+     "y": 6,
+     "dir": "right",
+     "palette": "battlegirl",
+     "text": [
+      "Did you know a creature holding a grudge fights harder?",
+      "...Just kidding. I made that up."
+     ]
+    }
+   ]
+  },
+  "summitcrown_lodge": {
+   "id": "summitcrown_lodge",
+   "name": "Summit Crown Rest Lodge",
+   "connections": {},
+   "tiles": [
+    "|||||||||||||",
+    "|||||||||||||",
+    "|K_______M_K|",
+    "|___ccccc___|",
+    "|___________|",
+    "|tt_______tt|",
+    "|___________|",
+    "|P_________P|",
+    "||||||e||||||"
+   ],
+   "theme": "#f0d8d8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "6,8": {
+     "map": "summitcrown",
+     "x": 21,
+     "y": 6,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 6,
+     "y": 2,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [],
+     "action": "lodge"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "dir": "left",
+     "palette": "swimmer",
+     "text": [
+      "The storage machine holds creatures that do not fit in your party.",
+      "Ask the nurse to open it for you."
+     ]
+    }
+   ]
+  },
+  "summitcrown_mart": {
+   "id": "summitcrown_mart",
+   "name": "Summit Crown Trail Mart",
+   "connections": {},
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|_c_______|",
+    "|_c__qq_qq|",
+    "|_c_______|",
+    "|____qq_qq|",
+    "|_________|",
+    "|P_______P|",
+    "|||||e|||||"
+   ],
+   "theme": "#d0dce8",
+   "indoor": true,
+   "interior": true,
+   "music": "town",
+   "warps": {
+    "5,8": {
+     "map": "summitcrown",
+     "x": 19,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 1,
+     "y": 3,
+     "dir": "right",
+     "palette": "clerk",
+     "text": [],
+     "action": "mart"
+    },
+    {
+     "x": 6,
+     "y": 6,
+     "dir": "up",
+     "palette": "gentleman",
+     "text": [
+      "The clerk said new stock comes in once you earn more badges. Or was that a rumor?"
+     ]
+    }
+   ]
+  }
+ },
+ "warps": {
+  "fernhollow": {
+   "4,4": {
+    "map": "fernhollow_home",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "19,4": {
+    "map": "fernhollow_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "17,11": {
+    "map": "fernhollow_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "4,13": {
+    "map": "fernhollow_lab",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "stonecrest": {
+   "7,5": {
+    "map": "stonecrest_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "18,4": {
+    "map": "stonecrest_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "4,15": {
+    "map": "stonecrest_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "duskmere": {
+   "18,4": {
+    "map": "duskmere_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "7,15": {
+    "map": "duskmere_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "18,15": {
+    "map": "duskmere_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "voltara": {
+   "7,5": {
+    "map": "voltara_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "19,4": {
+    "map": "voltara_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "7,15": {
+    "map": "voltara_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "cindercity": {
+   "6,5": {
+    "map": "cindercity_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "21,5": {
+    "map": "cindercity_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "21,15": {
+    "map": "cindercity_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "harrowfield": {
+   "7,4": {
+    "map": "harrowfield_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "21,5": {
+    "map": "harrowfield_house2",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "4,15": {
+    "map": "harrowfield_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "18,15": {
+    "map": "harrowfield_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "bramblegate": {
+   "19,4": {
+    "map": "bramblegate_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "4,15": {
+    "map": "bramblegate_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "19,15": {
+    "map": "bramblegate_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "skyreach": {
+   "6,4": {
+    "map": "skyreach_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "20,5": {
+    "map": "skyreach_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "6,15": {
+    "map": "skyreach_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "saltmarsh": {
+   "5,4": {
+    "map": "saltmarsh_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "18,4": {
+    "map": "saltmarsh_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "8,15": {
+    "map": "saltmarsh_house2",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "18,15": {
+    "map": "saltmarsh_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "lumenvale": {
+   "8,4": {
+    "map": "lumenvale_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "20,4": {
+    "map": "lumenvale_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "4,15": {
+    "map": "lumenvale_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "coralhaven": {
+   "6,4": {
+    "map": "coralhaven_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "21,4": {
+    "map": "coralhaven_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "18,15": {
+    "map": "coralhaven_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   }
+  },
+  "summitcrown": {
+   "7,5": {
+    "map": "summitcrown_house1",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   },
+   "21,5": {
+    "map": "summitcrown_lodge",
+    "x": 6,
+    "y": 7,
+    "dir": "up"
+   },
+   "19,15": {
+    "map": "summitcrown_mart",
+    "x": 5,
+    "y": 7,
+    "dir": "up"
+   }
+  }
+ }
+}

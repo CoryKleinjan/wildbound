@@ -83,6 +83,16 @@ func _initialize() -> void:
 			for e in t.party:
 				if not db.SPECIES.has(e[0]):
 					errs.append("%s: trainer %s has unknown %s" % [m.id, t.id, e[0]])
+		# Every NPC can be talked to: from a reachable neighbour tile, or across a counter.
+		for n in m.get("npcs", []):
+			var talk := false
+			for d: Vector2i in DX.values():
+				if seen.has("%d,%d" % [n.x + d.x, n.y + d.y]):
+					talk = true
+				if Maps.tile_at(m, n.x + d.x, n.y + d.y) == "c" and seen.has("%d,%d" % [n.x + d.x * 2, n.y + d.y * 2]):
+					talk = true
+			if not talk:
+				errs.append("%s: npc at %d,%d can't be talked to" % [m.id, n.x, n.y])
 		if m.get("route") and m.get("encounters", []).is_empty():
 			errs.append("%s: no wild encounters" % m.id)
 		for e in m.get("encounters", []):

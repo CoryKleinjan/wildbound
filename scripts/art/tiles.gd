@@ -205,4 +205,74 @@ static func tile_texture(ch: String, x: int, y: int, frame: int, above: String =
 					var sign := {"l": "#e83850", "m": "#3858c8", "j": "#585068"}
 					p.call(2, 0, 12, 2, "#f8f8f8")
 					p.call(6, 0, 4, 2, sign.get(ch, "#583890")))
+		"c":
+			return _make("counter%s%d%d" % [theme, 1 if above == "c" else 0, 1 if below == "c" else 0], func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(0, 0 if above == "c" else 2, 16, 16, "#805838")
+				p.call(1, 0 if above == "c" else 3, 14, 8 if below != "c" else 13, "#c89060")
+				p.call(1, 0 if above == "c" else 3, 14, 1, "#e0b080")
+				if below != "c":
+					p.call(0, 12, 16, 4, "#604028")
+					p.call(0, 15, 16, 1, Color(0, 0, 0, 0.25)))
+		"t":
+			return _make("table%s" % theme, func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(0, 2, 16, 10, "#906040")
+				p.call(1, 3, 14, 8, "#b88058")
+				p.call(2, 4, 5, 1, "#d0a070")
+				p.call(1, 12, 2, 3, "#604028")
+				p.call(13, 12, 2, 3, "#604028"))
+		"K":
+			return _make("shelf%s" % theme, func(p: Callable):
+				p.call(0, 0, 16, 16, "#684830")
+				p.call(1, 1, 14, 6, "#402818")
+				p.call(1, 9, 14, 6, "#402818")
+				var books := ["#d05040", "#4878d0", "#e8c050", "#58a848", "#a060c0", "#f0f0e8"]
+				for i in 6:
+					p.call(2 + i * 2, 2 + (i % 2), 2, 5 - (i % 2), books[i])
+					p.call(2 + i * 2, 10 + ((i + 1) % 2), 2, 5 - ((i + 1) % 2), books[(i + 3) % 6])
+				p.call(0, 15, 16, 1, Color(0, 0, 0, 0.3)))
+		"B":
+			var head := above != "B"
+			return _make("bed%s%d" % [theme, 1 if head else 0], func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(1, 0 if not head else 1, 14, 15 if head else 14, "#705038")
+				p.call(2, 0 if not head else 2, 12, 13 if head else 12, "#5878c8")
+				if head:
+					p.call(3, 3, 10, 5, "#f8f8f0")
+					p.call(3, 7, 10, 1, "#c8c8c0")
+				else:
+					p.call(2, 0, 12, 2, "#7090e0")
+					p.call(1, 13, 14, 2, "#604028"))
+		"P":
+			return _make("plant%s" % theme, func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(4, 10, 8, 5, "#b06030")
+				p.call(5, 10, 6, 1, "#d08048")
+				p.call(3, 3, 10, 7, "#3c9040")
+				p.call(5, 1, 6, 4, "#3c9040")
+				p.call(4, 4, 3, 2, "#58b050")
+				p.call(9, 2, 2, 3, "#58b050"))
+		"q":
+			var shade := x % 2
+			return _make("mshelf%s%d" % [theme, shade], func(p: Callable):
+				p.call(0, 0, 16, 16, "#a8b0b8")
+				p.call(0, 0, 16, 1, "#d8e0e8")
+				p.call(1, 2, 14, 5, "#606870")
+				p.call(1, 9, 14, 5, "#606870")
+				var goods := ["#e05050", "#58a8e0", "#f0d050", "#70c070"]
+				for i in 4:
+					p.call(2 + i * 3, 3, 2, 4, goods[(i + shade) % 4])
+					p.call(2 + i * 3, 10, 2, 4, goods[(i + shade + 2) % 4])
+				p.call(0, 15, 16, 1, Color(0, 0, 0, 0.3)))
+		"M":
+			return _make("machine%s" % theme, func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(2, 0, 12, 15, "#585868")
+				p.call(3, 1, 10, 7, "#203040")
+				p.call(4, 2, 8, 5, "#58c0e8")
+				p.call(5, 3, 3, 1, "#c8f0f8")
+				p.call(4, 10, 3, 2, "#e05050")
+				p.call(9, 10, 3, 2, "#50c050")
+				p.call(2, 15, 12, 1, Color(0, 0, 0, 0.3)))
 	return _make("void", func(p: Callable): p.call(0, 0, 16, 16, "#000000"))
