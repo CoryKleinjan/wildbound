@@ -1,0 +1,3206 @@
+{
+ "tackle": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Tackle",
+  "type": "Normal",
+  "power": 35,
+  "acc": 95,
+  "pp": 35,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "A full-body charge.",
+  "id": "tackle"
+ },
+ "scratch": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Scratch",
+  "type": "Normal",
+  "power": 40,
+  "acc": 100,
+  "pp": 35,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Rakes the foe with claws.",
+  "id": "scratch"
+ },
+ "pound": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Pound",
+  "type": "Normal",
+  "power": 40,
+  "acc": 100,
+  "pp": 35,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Pounds the foe.",
+  "id": "pound"
+ },
+ "quickAttack": {
+  "priority": 1,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Quick Attack",
+  "type": "Normal",
+  "power": 40,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Always strikes first.",
+  "id": "quickAttack"
+ },
+ "growl": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Growl",
+  "type": "Normal",
+  "power": 0,
+  "acc": 100,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "atk": -1
+   }
+  },
+  "desc": "Lowers foes' Attack.",
+  "id": "growl"
+ },
+ "tailWhip": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Tail Whip",
+  "type": "Normal",
+  "power": 0,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "def": -1
+   }
+  },
+  "desc": "Lowers foes' Defense.",
+  "id": "tailWhip"
+ },
+ "leer": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Leer",
+  "type": "Normal",
+  "power": 0,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "def": -1
+   }
+  },
+  "desc": "Lowers foes' Defense.",
+  "id": "leer"
+ },
+ "doubleTeam": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Double Team",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "eva": 1
+   }
+  },
+  "desc": "Raises evasiveness.",
+  "id": "doubleTeam"
+ },
+ "swordsDance": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Swords Dance",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "atk": 2
+   }
+  },
+  "desc": "Sharply raises Attack.",
+  "id": "swordsDance"
+ },
+ "growth": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Growth",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "spa": 1
+   }
+  },
+  "desc": "Raises Sp. Atk.",
+  "id": "growth"
+ },
+ "harden": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Harden",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "def": 1
+   }
+  },
+  "desc": "Raises Defense.",
+  "id": "harden"
+ },
+ "focusEnergy": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Focus Energy",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 30,
+  "effect": {
+   "kind": "focusEnergy"
+  },
+  "desc": "Raises critical-hit ratio.",
+  "id": "focusEnergy"
+ },
+ "bodySlam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Body Slam",
+  "type": "Normal",
+  "power": 85,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 30,
+  "desc": "May paralyze.",
+  "id": "bodySlam"
+ },
+ "headbutt": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Headbutt",
+  "type": "Normal",
+  "power": 70,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 30,
+  "desc": "May cause flinching.",
+  "id": "headbutt"
+ },
+ "takeDown": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Take Down",
+  "type": "Normal",
+  "power": 90,
+  "acc": 85,
+  "pp": 20,
+  "effect": {
+   "kind": "recoil",
+   "div": 4
+  },
+  "desc": "Hurts the user too.",
+  "id": "takeDown"
+ },
+ "doubleEdge": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Double-Edge",
+  "type": "Normal",
+  "power": 120,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "recoil",
+   "div": 3
+  },
+  "desc": "Heavy recoil.",
+  "id": "doubleEdge"
+ },
+ "hyperBeam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Hyper Beam",
+  "type": "Normal",
+  "power": 150,
+  "acc": 90,
+  "pp": 5,
+  "effect": {
+   "kind": "recharge"
+  },
+  "desc": "User must recharge next turn.",
+  "id": "hyperBeam"
+ },
+ "furySwipes": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Fury Swipes",
+  "type": "Normal",
+  "power": 18,
+  "acc": 80,
+  "pp": 15,
+  "effect": {
+   "kind": "multihit"
+  },
+  "desc": "Hits 2-5 times.",
+  "id": "furySwipes"
+ },
+ "falseSwipe": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "False Swipe",
+  "type": "Normal",
+  "power": 40,
+  "acc": 100,
+  "pp": 40,
+  "effect": {
+   "kind": "falseSwipe"
+  },
+  "desc": "Always leaves 1 HP.",
+  "id": "falseSwipe"
+ },
+ "sonicBoom": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Sonic Boom",
+  "type": "Normal",
+  "power": 1,
+  "acc": 90,
+  "pp": 20,
+  "effect": {
+   "kind": "fixed",
+   "amount": 20
+  },
+  "desc": "Always does 20 damage.",
+  "id": "sonicBoom"
+ },
+ "helpingHand": {
+  "priority": 5,
+  "target": "ally",
+  "contact": false,
+  "protectable": false,
+  "name": "Helping Hand",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "helpingHand"
+  },
+  "desc": "Boosts ally's attack power.",
+  "id": "helpingHand"
+ },
+ "protect": {
+  "priority": 4,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Protect",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 10,
+  "effect": {
+   "kind": "protect"
+  },
+  "desc": "Blocks attacks this turn.",
+  "id": "protect"
+ },
+ "struggle": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Struggle",
+  "type": "Normal",
+  "power": 50,
+  "acc": 100,
+  "pp": 1,
+  "effect": {
+   "kind": "struggle"
+  },
+  "desc": "Used when out of PP.",
+  "id": "struggle"
+ },
+ "ember": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Ember",
+  "type": "Fire",
+  "power": 40,
+  "acc": 100,
+  "pp": 25,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "chance": 10,
+  "desc": "May burn.",
+  "id": "ember"
+ },
+ "flameWheel": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Flame Wheel",
+  "type": "Fire",
+  "power": 60,
+  "acc": 100,
+  "pp": 25,
+  "thawsUser": true,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "chance": 10,
+  "desc": "May burn. Thaws user.",
+  "id": "flameWheel"
+ },
+ "flamethrower": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Flamethrower",
+  "type": "Fire",
+  "power": 95,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "chance": 10,
+  "desc": "May burn.",
+  "id": "flamethrower"
+ },
+ "fireBlast": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Fire Blast",
+  "type": "Fire",
+  "power": 120,
+  "acc": 85,
+  "pp": 5,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "chance": 10,
+  "desc": "May burn.",
+  "id": "fireBlast"
+ },
+ "willOWisp": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Will-O-Wisp",
+  "type": "Fire",
+  "power": 0,
+  "acc": 75,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "desc": "Burns the foe.",
+  "id": "willOWisp"
+ },
+ "sunnyDay": {
+  "priority": 0,
+  "target": "field",
+  "contact": false,
+  "protectable": false,
+  "name": "Sunny Day",
+  "type": "Fire",
+  "power": 0,
+  "acc": 0,
+  "pp": 5,
+  "effect": {
+   "kind": "weather",
+   "weather": "sun"
+  },
+  "desc": "Harsh sunlight for 5 turns.",
+  "id": "sunnyDay"
+ },
+ "waterGun": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Water Gun",
+  "type": "Water",
+  "power": 40,
+  "acc": 100,
+  "pp": 25,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Squirts water.",
+  "id": "waterGun"
+ },
+ "bubble": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Bubble",
+  "type": "Water",
+  "power": 20,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spe": -1
+   }
+  },
+  "chance": 10,
+  "desc": "May lower Speed.",
+  "id": "bubble"
+ },
+ "bubbleBeam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Bubble Beam",
+  "type": "Water",
+  "power": 65,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spe": -1
+   }
+  },
+  "chance": 10,
+  "desc": "May lower Speed.",
+  "id": "bubbleBeam"
+ },
+ "surf": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Surf",
+  "type": "Water",
+  "power": 95,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Hits both foes.",
+  "id": "surf"
+ },
+ "hydroPump": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Hydro Pump",
+  "type": "Water",
+  "power": 120,
+  "acc": 80,
+  "pp": 5,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Blasts water.",
+  "id": "hydroPump"
+ },
+ "rainDance": {
+  "priority": 0,
+  "target": "field",
+  "contact": false,
+  "protectable": false,
+  "name": "Rain Dance",
+  "type": "Water",
+  "power": 0,
+  "acc": 0,
+  "pp": 5,
+  "effect": {
+   "kind": "weather",
+   "weather": "rain"
+  },
+  "desc": "Rain for 5 turns.",
+  "id": "rainDance"
+ },
+ "withdraw": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Withdraw",
+  "type": "Water",
+  "power": 0,
+  "acc": 0,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "def": 1
+   }
+  },
+  "desc": "Raises Defense.",
+  "id": "withdraw"
+ },
+ "thunderShock": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Thunder Shock",
+  "type": "Electric",
+  "power": 40,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 10,
+  "desc": "May paralyze.",
+  "id": "thunderShock"
+ },
+ "spark": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Spark",
+  "type": "Electric",
+  "power": 65,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 30,
+  "desc": "May paralyze.",
+  "id": "spark"
+ },
+ "thunderbolt": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Thunderbolt",
+  "type": "Electric",
+  "power": 95,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 10,
+  "desc": "May paralyze.",
+  "id": "thunderbolt"
+ },
+ "thunder": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Thunder",
+  "type": "Electric",
+  "power": 120,
+  "acc": 70,
+  "pp": 10,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 30,
+  "desc": "Never misses in rain.",
+  "id": "thunder"
+ },
+ "thunderWave": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Thunder Wave",
+  "type": "Electric",
+  "power": 0,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "desc": "Paralyzes the foe.",
+  "id": "thunderWave"
+ },
+ "absorb": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Absorb",
+  "type": "Grass",
+  "power": 20,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "drain"
+  },
+  "desc": "Drains half the damage.",
+  "id": "absorb"
+ },
+ "megaDrain": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Mega Drain",
+  "type": "Grass",
+  "power": 40,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "drain"
+  },
+  "desc": "Drains half the damage.",
+  "id": "megaDrain"
+ },
+ "gigaDrain": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Giga Drain",
+  "type": "Grass",
+  "power": 60,
+  "acc": 100,
+  "pp": 5,
+  "effect": {
+   "kind": "drain"
+  },
+  "desc": "Drains half the damage.",
+  "id": "gigaDrain"
+ },
+ "vineWhip": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Vine Whip",
+  "type": "Grass",
+  "power": 35,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Whips with vines.",
+  "id": "vineWhip"
+ },
+ "razorLeaf": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Razor Leaf",
+  "type": "Grass",
+  "power": 55,
+  "acc": 95,
+  "pp": 25,
+  "highCrit": true,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "High critical-hit ratio.",
+  "id": "razorLeaf"
+ },
+ "leechSeed": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Leech Seed",
+  "type": "Grass",
+  "power": 0,
+  "acc": 90,
+  "pp": 10,
+  "effect": {
+   "kind": "leechSeed"
+  },
+  "desc": "Steals HP every turn.",
+  "id": "leechSeed"
+ },
+ "sleepPowder": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Sleep Powder",
+  "type": "Grass",
+  "power": 0,
+  "acc": 75,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "slp"
+  },
+  "desc": "Puts the foe to sleep.",
+  "id": "sleepPowder"
+ },
+ "stunSpore": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Stun Spore",
+  "type": "Grass",
+  "power": 0,
+  "acc": 75,
+  "pp": 30,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "desc": "Paralyzes the foe.",
+  "id": "stunSpore"
+ },
+ "synthesis": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Synthesis",
+  "type": "Grass",
+  "power": 0,
+  "acc": 0,
+  "pp": 5,
+  "effect": {
+   "kind": "heal",
+   "weatherScaled": true
+  },
+  "desc": "Restores HP; more in sun.",
+  "id": "synthesis"
+ },
+ "solarBeam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Solar Beam",
+  "type": "Grass",
+  "power": 120,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "charge"
+  },
+  "desc": "Charges, then fires.",
+  "id": "solarBeam"
+ },
+ "poisonPowder": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Poison Powder",
+  "type": "Poison",
+  "power": 0,
+  "acc": 75,
+  "pp": 35,
+  "effect": {
+   "kind": "status",
+   "status": "psn"
+  },
+  "desc": "Poisons the foe.",
+  "id": "poisonPowder"
+ },
+ "poisonSting": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Poison Sting",
+  "type": "Poison",
+  "power": 15,
+  "acc": 100,
+  "pp": 35,
+  "effect": {
+   "kind": "status",
+   "status": "psn"
+  },
+  "chance": 30,
+  "desc": "May poison.",
+  "id": "poisonSting"
+ },
+ "sludge": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Sludge",
+  "type": "Poison",
+  "power": 65,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "status",
+   "status": "psn"
+  },
+  "chance": 30,
+  "desc": "May poison.",
+  "id": "sludge"
+ },
+ "sludgeBomb": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Sludge Bomb",
+  "type": "Poison",
+  "power": 90,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "status",
+   "status": "psn"
+  },
+  "chance": 30,
+  "desc": "May poison.",
+  "id": "sludgeBomb"
+ },
+ "toxic": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Toxic",
+  "type": "Poison",
+  "power": 0,
+  "acc": 85,
+  "pp": 10,
+  "effect": {
+   "kind": "status",
+   "status": "tox"
+  },
+  "desc": "Badly poisons the foe.",
+  "id": "toxic"
+ },
+ "peck": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Peck",
+  "type": "Flying",
+  "power": 35,
+  "acc": 100,
+  "pp": 35,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Jabs with a beak.",
+  "id": "peck"
+ },
+ "gust": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Gust",
+  "type": "Flying",
+  "power": 40,
+  "acc": 100,
+  "pp": 35,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Whips up a gust.",
+  "id": "gust"
+ },
+ "wingAttack": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Wing Attack",
+  "type": "Flying",
+  "power": 60,
+  "acc": 100,
+  "pp": 35,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Strikes with wings.",
+  "id": "wingAttack"
+ },
+ "aerialAce": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Aerial Ace",
+  "type": "Flying",
+  "power": 60,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Never misses.",
+  "id": "aerialAce"
+ },
+ "karateChop": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Karate Chop",
+  "type": "Fighting",
+  "power": 50,
+  "acc": 100,
+  "pp": 25,
+  "highCrit": true,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "High critical-hit ratio.",
+  "id": "karateChop"
+ },
+ "brickBreak": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Brick Break",
+  "type": "Fighting",
+  "power": 75,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "brickBreak"
+  },
+  "desc": "Shatters barriers.",
+  "id": "brickBreak"
+ },
+ "seismicToss": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Seismic Toss",
+  "type": "Fighting",
+  "power": 1,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "fixed",
+   "amount": "level"
+  },
+  "desc": "Damage equals level.",
+  "id": "seismicToss"
+ },
+ "sandAttack": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Sand-Attack",
+  "type": "Ground",
+  "power": 0,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "acc": -1
+   }
+  },
+  "desc": "Lowers accuracy.",
+  "id": "sandAttack"
+ },
+ "mudSlap": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Mud-Slap",
+  "type": "Ground",
+  "power": 20,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "acc": -1
+   }
+  },
+  "chance": 100,
+  "desc": "Lowers accuracy.",
+  "id": "mudSlap"
+ },
+ "mudShot": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Mud Shot",
+  "type": "Ground",
+  "power": 55,
+  "acc": 95,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spe": -1
+   }
+  },
+  "chance": 100,
+  "desc": "Lowers Speed.",
+  "id": "mudShot"
+ },
+ "earthquake": {
+  "priority": 0,
+  "target": "foesAndAlly",
+  "contact": false,
+  "protectable": true,
+  "name": "Earthquake",
+  "type": "Ground",
+  "power": 100,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Hits everyone else.",
+  "id": "earthquake"
+ },
+ "rockThrow": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Rock Throw",
+  "type": "Rock",
+  "power": 50,
+  "acc": 90,
+  "pp": 15,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Hurls a rock.",
+  "id": "rockThrow"
+ },
+ "rockTomb": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Rock Tomb",
+  "type": "Rock",
+  "power": 50,
+  "acc": 80,
+  "pp": 10,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spe": -1
+   }
+  },
+  "chance": 100,
+  "desc": "Lowers Speed.",
+  "id": "rockTomb"
+ },
+ "rockSlide": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Rock Slide",
+  "type": "Rock",
+  "power": 75,
+  "acc": 90,
+  "pp": 10,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 30,
+  "desc": "May cause flinching.",
+  "id": "rockSlide"
+ },
+ "confusion": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Confusion",
+  "type": "Psychic",
+  "power": 50,
+  "acc": 100,
+  "pp": 25,
+  "effect": {
+   "kind": "confuse"
+  },
+  "chance": 10,
+  "desc": "May confuse.",
+  "id": "confusion"
+ },
+ "psybeam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Psybeam",
+  "type": "Psychic",
+  "power": 65,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "confuse"
+  },
+  "chance": 10,
+  "desc": "May confuse.",
+  "id": "psybeam"
+ },
+ "psychic": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Psychic",
+  "type": "Psychic",
+  "power": 90,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spd": -1
+   }
+  },
+  "chance": 10,
+  "desc": "May lower Sp. Def.",
+  "id": "psychic"
+ },
+ "calmMind": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Calm Mind",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "spa": 1,
+    "spd": 1
+   }
+  },
+  "desc": "Raises Sp. Atk and Sp. Def.",
+  "id": "calmMind"
+ },
+ "hypnosis": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Hypnosis",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 60,
+  "pp": 20,
+  "effect": {
+   "kind": "status",
+   "status": "slp"
+  },
+  "desc": "Puts the foe to sleep.",
+  "id": "hypnosis"
+ },
+ "rest": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Rest",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 0,
+  "pp": 10,
+  "effect": {
+   "kind": "rest"
+  },
+  "desc": "Sleeps 2 turns to fully heal.",
+  "id": "rest"
+ },
+ "reflect": {
+  "priority": 0,
+  "target": "userSide",
+  "contact": false,
+  "protectable": false,
+  "name": "Reflect",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "screen",
+   "screen": "reflect"
+  },
+  "desc": "Weakens physical moves.",
+  "id": "reflect"
+ },
+ "lightScreen": {
+  "priority": 0,
+  "target": "userSide",
+  "contact": false,
+  "protectable": false,
+  "name": "Light Screen",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 0,
+  "pp": 30,
+  "effect": {
+   "kind": "screen",
+   "screen": "lightScreen"
+  },
+  "desc": "Weakens special moves.",
+  "id": "lightScreen"
+ },
+ "bite": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Bite",
+  "type": "Dark",
+  "power": 60,
+  "acc": 100,
+  "pp": 25,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 30,
+  "desc": "May cause flinching.",
+  "id": "bite"
+ },
+ "crunch": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Crunch",
+  "type": "Dark",
+  "power": 80,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spd": -1
+   }
+  },
+  "chance": 20,
+  "desc": "May lower Sp. Def.",
+  "id": "crunch"
+ },
+ "faintAttack": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Faint Attack",
+  "type": "Dark",
+  "power": 60,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Never misses.",
+  "id": "faintAttack"
+ },
+ "lick": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Lick",
+  "type": "Ghost",
+  "power": 20,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 30,
+  "desc": "May paralyze.",
+  "id": "lick"
+ },
+ "shadowBall": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Shadow Ball",
+  "type": "Ghost",
+  "power": 80,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spd": -1
+   }
+  },
+  "chance": 20,
+  "desc": "May lower Sp. Def.",
+  "id": "shadowBall"
+ },
+ "nightShade": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Night Shade",
+  "type": "Ghost",
+  "power": 1,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "fixed",
+   "amount": "level"
+  },
+  "desc": "Damage equals level.",
+  "id": "nightShade"
+ },
+ "confuseRay": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Confuse Ray",
+  "type": "Ghost",
+  "power": 0,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "confuse"
+  },
+  "desc": "Confuses the foe.",
+  "id": "confuseRay"
+ },
+ "powderSnow": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Powder Snow",
+  "type": "Ice",
+  "power": 40,
+  "acc": 100,
+  "pp": 25,
+  "effect": {
+   "kind": "status",
+   "status": "frz"
+  },
+  "chance": 10,
+  "desc": "May freeze.",
+  "id": "powderSnow"
+ },
+ "icyWind": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Icy Wind",
+  "type": "Ice",
+  "power": 55,
+  "acc": 95,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spe": -1
+   }
+  },
+  "chance": 100,
+  "desc": "Lowers Speed.",
+  "id": "icyWind"
+ },
+ "iceBeam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Ice Beam",
+  "type": "Ice",
+  "power": 95,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "status",
+   "status": "frz"
+  },
+  "chance": 10,
+  "desc": "May freeze.",
+  "id": "iceBeam"
+ },
+ "hail": {
+  "priority": 0,
+  "target": "field",
+  "contact": false,
+  "protectable": false,
+  "name": "Hail",
+  "type": "Ice",
+  "power": 0,
+  "acc": 0,
+  "pp": 10,
+  "effect": {
+   "kind": "weather",
+   "weather": "hail"
+  },
+  "desc": "Hail for 5 turns.",
+  "id": "hail"
+ },
+ "metalClaw": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Metal Claw",
+  "type": "Steel",
+  "power": 50,
+  "acc": 95,
+  "pp": 35,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "atk": 1
+   }
+  },
+  "chance": 10,
+  "desc": "May raise Attack.",
+  "id": "metalClaw"
+ },
+ "steelWing": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Steel Wing",
+  "type": "Steel",
+  "power": 70,
+  "acc": 90,
+  "pp": 25,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "def": 1
+   }
+  },
+  "chance": 10,
+  "desc": "May raise Defense.",
+  "id": "steelWing"
+ },
+ "ironTail": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Iron Tail",
+  "type": "Steel",
+  "power": 100,
+  "acc": 75,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "def": -1
+   }
+  },
+  "chance": 30,
+  "desc": "May lower Defense.",
+  "id": "ironTail"
+ },
+ "ironDefense": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Iron Defense",
+  "type": "Steel",
+  "power": 0,
+  "acc": 0,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "def": 2
+   }
+  },
+  "desc": "Sharply raises Defense.",
+  "id": "ironDefense"
+ },
+ "dragonRage": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Dragon Rage",
+  "type": "Dragon",
+  "power": 1,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "fixed",
+   "amount": 40
+  },
+  "desc": "Always does 40 damage.",
+  "id": "dragonRage"
+ },
+ "twister": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Twister",
+  "type": "Dragon",
+  "power": 40,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 20,
+  "desc": "May cause flinching.",
+  "id": "twister"
+ },
+ "dragonClaw": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Dragon Claw",
+  "type": "Dragon",
+  "power": 80,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Slashes with claws.",
+  "id": "dragonClaw"
+ },
+ "dragonDance": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Dragon Dance",
+  "type": "Dragon",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "atk": 1,
+    "spe": 1
+   }
+  },
+  "desc": "Raises Attack and Speed.",
+  "id": "dragonDance"
+ },
+ "stringShot": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "String Shot",
+  "type": "Bug",
+  "power": 0,
+  "acc": 95,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spe": -1
+   }
+  },
+  "desc": "Lowers foes' Speed.",
+  "id": "stringShot"
+ },
+ "leechLife": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Leech Life",
+  "type": "Bug",
+  "power": 20,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "drain"
+  },
+  "desc": "Drains half the damage.",
+  "id": "leechLife"
+ },
+ "signalBeam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Signal Beam",
+  "type": "Bug",
+  "power": 75,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "confuse"
+  },
+  "chance": 10,
+  "desc": "May confuse.",
+  "id": "signalBeam"
+ },
+ "silverWind": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Silver Wind",
+  "type": "Bug",
+  "power": 60,
+  "acc": 100,
+  "pp": 5,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "atk": 1,
+    "def": 1,
+    "spa": 1,
+    "spd": 1,
+    "spe": 1
+   }
+  },
+  "chance": 10,
+  "desc": "May raise all stats.",
+  "id": "silverWind"
+ },
+ "slash": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Slash",
+  "type": "Normal",
+  "power": 70,
+  "acc": 100,
+  "pp": 20,
+  "highCrit": true,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "High critical-hit ratio.",
+  "id": "slash"
+ },
+ "strength": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Strength",
+  "type": "Normal",
+  "power": 80,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "A powerful punch.",
+  "id": "strength"
+ },
+ "slam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Slam",
+  "type": "Normal",
+  "power": 80,
+  "acc": 75,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Slams the foe.",
+  "id": "slam"
+ },
+ "hornAttack": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Horn Attack",
+  "type": "Normal",
+  "power": 65,
+  "acc": 100,
+  "pp": 25,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Jabs with a horn.",
+  "id": "hornAttack"
+ },
+ "megaKick": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Mega Kick",
+  "type": "Normal",
+  "power": 120,
+  "acc": 75,
+  "pp": 5,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "An extremely hard kick.",
+  "id": "megaKick"
+ },
+ "hyperFang": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Hyper Fang",
+  "type": "Normal",
+  "power": 80,
+  "acc": 90,
+  "pp": 15,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 10,
+  "desc": "May cause flinching.",
+  "id": "hyperFang"
+ },
+ "stomp": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Stomp",
+  "type": "Normal",
+  "power": 65,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 30,
+  "desc": "May cause flinching.",
+  "id": "stomp"
+ },
+ "swift": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Swift",
+  "type": "Normal",
+  "power": 60,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Never misses. Hits both foes.",
+  "id": "swift"
+ },
+ "extremeSpeed": {
+  "priority": 1,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Extreme Speed",
+  "type": "Normal",
+  "power": 80,
+  "acc": 100,
+  "pp": 5,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Always strikes first.",
+  "id": "extremeSpeed"
+ },
+ "hyperVoice": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Hyper Voice",
+  "type": "Normal",
+  "power": 90,
+  "acc": 100,
+  "pp": 10,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Hits both foes.",
+  "id": "hyperVoice"
+ },
+ "crushClaw": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Crush Claw",
+  "type": "Normal",
+  "power": 75,
+  "acc": 95,
+  "pp": 10,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "def": -1
+   }
+  },
+  "chance": 50,
+  "desc": "May lower Defense.",
+  "id": "crushClaw"
+ },
+ "furyAttack": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Fury Attack",
+  "type": "Normal",
+  "power": 15,
+  "acc": 85,
+  "pp": 20,
+  "effect": {
+   "kind": "multihit"
+  },
+  "desc": "Hits 2-5 times.",
+  "id": "furyAttack"
+ },
+ "screech": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Screech",
+  "type": "Normal",
+  "power": 0,
+  "acc": 85,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "def": -2
+   }
+  },
+  "desc": "Sharply lowers Defense.",
+  "id": "screech"
+ },
+ "sing": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Sing",
+  "type": "Normal",
+  "power": 0,
+  "acc": 55,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "slp"
+  },
+  "desc": "Puts the foe to sleep.",
+  "id": "sing"
+ },
+ "supersonic": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Supersonic",
+  "type": "Normal",
+  "power": 0,
+  "acc": 55,
+  "pp": 20,
+  "effect": {
+   "kind": "confuse"
+  },
+  "desc": "Confuses the foe.",
+  "id": "supersonic"
+ },
+ "smokescreen": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Smokescreen",
+  "type": "Normal",
+  "power": 0,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "acc": -1
+   }
+  },
+  "desc": "Lowers accuracy.",
+  "id": "smokescreen"
+ },
+ "minimize": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Minimize",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "eva": 1
+   }
+  },
+  "desc": "Raises evasiveness.",
+  "id": "minimize"
+ },
+ "recover": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Recover",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "heal",
+   "weatherScaled": false
+  },
+  "desc": "Restores half max HP.",
+  "id": "recover"
+ },
+ "softBoiled": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Soft-Boiled",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 10,
+  "effect": {
+   "kind": "heal",
+   "weatherScaled": false
+  },
+  "desc": "Restores half max HP.",
+  "id": "softBoiled"
+ },
+ "firePunch": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Fire Punch",
+  "type": "Fire",
+  "power": 75,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "chance": 10,
+  "desc": "May burn.",
+  "id": "firePunch"
+ },
+ "heatWave": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Heat Wave",
+  "type": "Fire",
+  "power": 100,
+  "acc": 90,
+  "pp": 10,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "chance": 10,
+  "desc": "Hits both foes. May burn.",
+  "id": "heatWave"
+ },
+ "blazeKick": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Blaze Kick",
+  "type": "Fire",
+  "power": 85,
+  "acc": 90,
+  "pp": 10,
+  "highCrit": true,
+  "effect": {
+   "kind": "status",
+   "status": "brn"
+  },
+  "chance": 10,
+  "desc": "High crit ratio. May burn.",
+  "id": "blazeKick"
+ },
+ "overheat": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Overheat",
+  "type": "Fire",
+  "power": 140,
+  "acc": 90,
+  "pp": 5,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "spa": -2
+   }
+  },
+  "chance": 100,
+  "desc": "Sharply lowers user's Sp. Atk.",
+  "id": "overheat"
+ },
+ "morningSun": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Morning Sun",
+  "type": "Normal",
+  "power": 0,
+  "acc": 0,
+  "pp": 5,
+  "effect": {
+   "kind": "heal",
+   "weatherScaled": true
+  },
+  "desc": "Restores HP; more in sun.",
+  "id": "morningSun"
+ },
+ "waterPulse": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Water Pulse",
+  "type": "Water",
+  "power": 60,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "confuse"
+  },
+  "chance": 20,
+  "desc": "May confuse.",
+  "id": "waterPulse"
+ },
+ "crabhammer": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Crabhammer",
+  "type": "Water",
+  "power": 90,
+  "acc": 85,
+  "pp": 10,
+  "highCrit": true,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "High critical-hit ratio.",
+  "id": "crabhammer"
+ },
+ "muddyWater": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Muddy Water",
+  "type": "Water",
+  "power": 95,
+  "acc": 85,
+  "pp": 10,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "acc": -1
+   }
+  },
+  "chance": 30,
+  "desc": "May lower accuracy.",
+  "id": "muddyWater"
+ },
+ "waterfall": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Waterfall",
+  "type": "Water",
+  "power": 80,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Charges up a waterfall.",
+  "id": "waterfall"
+ },
+ "octazooka": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Octazooka",
+  "type": "Water",
+  "power": 65,
+  "acc": 85,
+  "pp": 10,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "acc": -1
+   }
+  },
+  "chance": 50,
+  "desc": "May lower accuracy.",
+  "id": "octazooka"
+ },
+ "thunderPunch": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Thunder Punch",
+  "type": "Electric",
+  "power": 75,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 10,
+  "desc": "May paralyze.",
+  "id": "thunderPunch"
+ },
+ "shockWave": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Shock Wave",
+  "type": "Electric",
+  "power": 60,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Never misses.",
+  "id": "shockWave"
+ },
+ "magicalLeaf": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Magical Leaf",
+  "type": "Grass",
+  "power": 60,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Never misses.",
+  "id": "magicalLeaf"
+ },
+ "leafBlade": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Leaf Blade",
+  "type": "Grass",
+  "power": 90,
+  "acc": 100,
+  "pp": 15,
+  "highCrit": true,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "High critical-hit ratio.",
+  "id": "leafBlade"
+ },
+ "bulletSeed": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Bullet Seed",
+  "type": "Grass",
+  "power": 10,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "multihit"
+  },
+  "desc": "Hits 2-5 times.",
+  "id": "bulletSeed"
+ },
+ "spore": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Spore",
+  "type": "Grass",
+  "power": 0,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "slp"
+  },
+  "desc": "Puts the foe to sleep.",
+  "id": "spore"
+ },
+ "cottonSpore": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Cotton Spore",
+  "type": "Grass",
+  "power": 0,
+  "acc": 85,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spe": -2
+   }
+  },
+  "desc": "Sharply lowers Speed.",
+  "id": "cottonSpore"
+ },
+ "needleArm": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Needle Arm",
+  "type": "Grass",
+  "power": 60,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 30,
+  "desc": "May cause flinching.",
+  "id": "needleArm"
+ },
+ "icePunch": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Ice Punch",
+  "type": "Ice",
+  "power": 75,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "frz"
+  },
+  "chance": 10,
+  "desc": "May freeze.",
+  "id": "icePunch"
+ },
+ "auroraBeam": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Aurora Beam",
+  "type": "Ice",
+  "power": 65,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "atk": -1
+   }
+  },
+  "chance": 10,
+  "desc": "May lower Attack.",
+  "id": "auroraBeam"
+ },
+ "blizzard": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Blizzard",
+  "type": "Ice",
+  "power": 120,
+  "acc": 70,
+  "pp": 5,
+  "effect": {
+   "kind": "status",
+   "status": "frz"
+  },
+  "chance": 10,
+  "desc": "Hits both foes. May freeze.",
+  "id": "blizzard"
+ },
+ "icicleSpear": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Icicle Spear",
+  "type": "Ice",
+  "power": 10,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "multihit"
+  },
+  "desc": "Hits 2-5 times.",
+  "id": "icicleSpear"
+ },
+ "skyUppercut": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Sky Uppercut",
+  "type": "Fighting",
+  "power": 85,
+  "acc": 90,
+  "pp": 15,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "An uppercut.",
+  "id": "skyUppercut"
+ },
+ "crossChop": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Cross Chop",
+  "type": "Fighting",
+  "power": 100,
+  "acc": 80,
+  "pp": 5,
+  "highCrit": true,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "High critical-hit ratio.",
+  "id": "crossChop"
+ },
+ "dynamicPunch": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Dynamic Punch",
+  "type": "Fighting",
+  "power": 100,
+  "acc": 50,
+  "pp": 5,
+  "effect": {
+   "kind": "confuse"
+  },
+  "chance": 100,
+  "desc": "Confuses if it hits.",
+  "id": "dynamicPunch"
+ },
+ "bulkUp": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Bulk Up",
+  "type": "Fighting",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "atk": 1,
+    "def": 1
+   }
+  },
+  "desc": "Raises Attack and Defense.",
+  "id": "bulkUp"
+ },
+ "armThrust": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Arm Thrust",
+  "type": "Fighting",
+  "power": 15,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "multihit"
+  },
+  "desc": "Hits 2-5 times.",
+  "id": "armThrust"
+ },
+ "rockSmash": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Rock Smash",
+  "type": "Fighting",
+  "power": 20,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "def": -1
+   }
+  },
+  "chance": 50,
+  "desc": "May lower Defense.",
+  "id": "rockSmash"
+ },
+ "submission": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Submission",
+  "type": "Fighting",
+  "power": 80,
+  "acc": 80,
+  "pp": 25,
+  "effect": {
+   "kind": "recoil",
+   "div": 4
+  },
+  "desc": "Hurts the user too.",
+  "id": "submission"
+ },
+ "machPunch": {
+  "priority": 1,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Mach Punch",
+  "type": "Fighting",
+  "power": 40,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Always strikes first.",
+  "id": "machPunch"
+ },
+ "poisonFang": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Poison Fang",
+  "type": "Poison",
+  "power": 50,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "status",
+   "status": "tox"
+  },
+  "chance": 30,
+  "desc": "May badly poison.",
+  "id": "poisonFang"
+ },
+ "acid": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Acid",
+  "type": "Poison",
+  "power": 40,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "def": -1
+   }
+  },
+  "chance": 10,
+  "desc": "May lower Defense.",
+  "id": "acid"
+ },
+ "poisonTail": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Poison Tail",
+  "type": "Poison",
+  "power": 50,
+  "acc": 100,
+  "pp": 25,
+  "highCrit": true,
+  "effect": {
+   "kind": "status",
+   "status": "psn"
+  },
+  "chance": 10,
+  "desc": "High crit ratio. May poison.",
+  "id": "poisonTail"
+ },
+ "smog": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Smog",
+  "type": "Poison",
+  "power": 20,
+  "acc": 70,
+  "pp": 20,
+  "effect": {
+   "kind": "status",
+   "status": "psn"
+  },
+  "chance": 40,
+  "desc": "May poison.",
+  "id": "smog"
+ },
+ "acidArmor": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Acid Armor",
+  "type": "Poison",
+  "power": 0,
+  "acc": 0,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "def": 2
+   }
+  },
+  "desc": "Sharply raises Defense.",
+  "id": "acidArmor"
+ },
+ "boneClub": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Bone Club",
+  "type": "Ground",
+  "power": 65,
+  "acc": 85,
+  "pp": 20,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 10,
+  "desc": "May cause flinching.",
+  "id": "boneClub"
+ },
+ "sandstorm": {
+  "priority": 0,
+  "target": "field",
+  "contact": false,
+  "protectable": false,
+  "name": "Sandstorm",
+  "type": "Rock",
+  "power": 0,
+  "acc": 0,
+  "pp": 10,
+  "effect": {
+   "kind": "weather",
+   "weather": "sand"
+  },
+  "desc": "Sandstorm for 5 turns.",
+  "id": "sandstorm"
+ },
+ "drillPeck": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Drill Peck",
+  "type": "Flying",
+  "power": 80,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "A spinning peck.",
+  "id": "drillPeck"
+ },
+ "airCutter": {
+  "priority": 0,
+  "target": "both",
+  "contact": false,
+  "protectable": true,
+  "name": "Air Cutter",
+  "type": "Flying",
+  "power": 55,
+  "acc": 95,
+  "pp": 25,
+  "highCrit": true,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "High crit ratio. Hits both foes.",
+  "id": "airCutter"
+ },
+ "featherDance": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Feather Dance",
+  "type": "Flying",
+  "power": 0,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "atk": -2
+   }
+  },
+  "desc": "Sharply lowers Attack.",
+  "id": "featherDance"
+ },
+ "extrasensory": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Extrasensory",
+  "type": "Psychic",
+  "power": 80,
+  "acc": 100,
+  "pp": 30,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 10,
+  "desc": "May cause flinching.",
+  "id": "extrasensory"
+ },
+ "amnesia": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Amnesia",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "spd": 2
+   }
+  },
+  "desc": "Sharply raises Sp. Def.",
+  "id": "amnesia"
+ },
+ "barrier": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Barrier",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 0,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "def": 2
+   }
+  },
+  "desc": "Sharply raises Defense.",
+  "id": "barrier"
+ },
+ "agility": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Agility",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 0,
+  "pp": 30,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "spe": 2
+   }
+  },
+  "desc": "Sharply raises Speed.",
+  "id": "agility"
+ },
+ "kinesis": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Kinesis",
+  "type": "Psychic",
+  "power": 0,
+  "acc": 80,
+  "pp": 15,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "acc": -1
+   }
+  },
+  "desc": "Lowers accuracy.",
+  "id": "kinesis"
+ },
+ "lusterPurge": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Luster Purge",
+  "type": "Psychic",
+  "power": 70,
+  "acc": 100,
+  "pp": 5,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spd": -1
+   }
+  },
+  "chance": 50,
+  "desc": "May lower Sp. Def.",
+  "id": "lusterPurge"
+ },
+ "mistBall": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Mist Ball",
+  "type": "Psychic",
+  "power": 70,
+  "acc": 100,
+  "pp": 5,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spa": -1
+   }
+  },
+  "chance": 50,
+  "desc": "May lower Sp. Atk.",
+  "id": "mistBall"
+ },
+ "pinMissile": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Pin Missile",
+  "type": "Bug",
+  "power": 14,
+  "acc": 85,
+  "pp": 20,
+  "effect": {
+   "kind": "multihit"
+  },
+  "desc": "Hits 2-5 times.",
+  "id": "pinMissile"
+ },
+ "megahorn": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Megahorn",
+  "type": "Bug",
+  "power": 120,
+  "acc": 85,
+  "pp": 10,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "A brutal horn ram.",
+  "id": "megahorn"
+ },
+ "tailGlow": {
+  "priority": 0,
+  "target": "self",
+  "contact": false,
+  "protectable": false,
+  "name": "Tail Glow",
+  "type": "Bug",
+  "power": 0,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "spa": 2
+   }
+  },
+  "desc": "Sharply raises Sp. Atk.",
+  "id": "tailGlow"
+ },
+ "ancientPower": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Ancient Power",
+  "type": "Rock",
+  "power": 60,
+  "acc": 100,
+  "pp": 5,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "atk": 1,
+    "def": 1,
+    "spa": 1,
+    "spd": 1,
+    "spe": 1
+   }
+  },
+  "chance": 10,
+  "desc": "May raise all stats.",
+  "id": "ancientPower"
+ },
+ "rockBlast": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Rock Blast",
+  "type": "Rock",
+  "power": 25,
+  "acc": 80,
+  "pp": 10,
+  "effect": {
+   "kind": "multihit"
+  },
+  "desc": "Hits 2-5 times.",
+  "id": "rockBlast"
+ },
+ "astonish": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Astonish",
+  "type": "Ghost",
+  "power": 30,
+  "acc": 100,
+  "pp": 15,
+  "effect": {
+   "kind": "flinch"
+  },
+  "chance": 30,
+  "desc": "May cause flinching.",
+  "id": "astonish"
+ },
+ "shadowPunch": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Shadow Punch",
+  "type": "Ghost",
+  "power": 60,
+  "acc": 0,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Never misses.",
+  "id": "shadowPunch"
+ },
+ "dragonBreath": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Dragon Breath",
+  "type": "Dragon",
+  "power": 60,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "status",
+   "status": "par"
+  },
+  "chance": 30,
+  "desc": "May paralyze.",
+  "id": "dragonBreath"
+ },
+ "knockOff": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Knock Off",
+  "type": "Dark",
+  "power": 20,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "hit"
+  },
+  "desc": "Swats the foe.",
+  "id": "knockOff"
+ },
+ "fakeTears": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Fake Tears",
+  "type": "Dark",
+  "power": 0,
+  "acc": 100,
+  "pp": 20,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spd": -2
+   }
+  },
+  "desc": "Sharply lowers Sp. Def.",
+  "id": "fakeTears"
+ },
+ "meteorMash": {
+  "priority": 0,
+  "target": "normal",
+  "contact": true,
+  "protectable": true,
+  "name": "Meteor Mash",
+  "type": "Steel",
+  "power": 100,
+  "acc": 85,
+  "pp": 10,
+  "effect": {
+   "kind": "stat",
+   "who": "self",
+   "stages": {
+    "atk": 1
+   }
+  },
+  "chance": 20,
+  "desc": "May raise Attack.",
+  "id": "meteorMash"
+ },
+ "metalSound": {
+  "priority": 0,
+  "target": "normal",
+  "contact": false,
+  "protectable": true,
+  "name": "Metal Sound",
+  "type": "Steel",
+  "power": 0,
+  "acc": 85,
+  "pp": 40,
+  "effect": {
+   "kind": "stat",
+   "who": "target",
+   "stages": {
+    "spd": -2
+   }
+  },
+  "desc": "Sharply lowers Sp. Def.",
+  "id": "metalSound"
+ }
+}

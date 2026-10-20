@@ -1,0 +1,808 @@
+{
+ "starters": [
+  "sproutle",
+  "cindercub",
+  "ripplet"
+ ],
+ "natureNames": [
+  "Hardy",
+  "Lonely",
+  "Brave",
+  "Adamant",
+  "Naughty",
+  "Bold",
+  "Docile",
+  "Relaxed",
+  "Impish",
+  "Lax",
+  "Timid",
+  "Hasty",
+  "Serious",
+  "Jolly",
+  "Naive",
+  "Modest",
+  "Mild",
+  "Quiet",
+  "Bashful",
+  "Rash",
+  "Calm",
+  "Gentle",
+  "Sassy",
+  "Careful",
+  "Quirky"
+ ],
+ "natureStats": [
+  "atk",
+  "def",
+  "spe",
+  "spa",
+  "spd"
+ ],
+ "typeColors": {
+  "Normal": "#a8a878",
+  "Fire": "#f08030",
+  "Water": "#6890f0",
+  "Electric": "#f8d030",
+  "Grass": "#78c850",
+  "Ice": "#98d8d8",
+  "Fighting": "#c03028",
+  "Poison": "#a040a0",
+  "Ground": "#e0c068",
+  "Flying": "#a890f0",
+  "Psychic": "#f85888",
+  "Bug": "#a8b820",
+  "Rock": "#b8a038",
+  "Ghost": "#705898",
+  "Dragon": "#7038f8",
+  "Dark": "#705848",
+  "Steel": "#b8b8d0",
+  "Mystery": "#68a090"
+ },
+ "specialTypes": [
+  "Fire",
+  "Water",
+  "Grass",
+  "Electric",
+  "Psychic",
+  "Ice",
+  "Dragon",
+  "Dark"
+ ],
+ "typeChart": {
+  "Normal": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 5,
+   "Ghost": 0,
+   "Dragon": 10,
+   "Dark": 10,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Fire": {
+   "Normal": 10,
+   "Fire": 5,
+   "Water": 5,
+   "Electric": 10,
+   "Grass": 20,
+   "Ice": 20,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 20,
+   "Rock": 5,
+   "Ghost": 10,
+   "Dragon": 5,
+   "Dark": 10,
+   "Steel": 20,
+   "Mystery": 10
+  },
+  "Water": {
+   "Normal": 10,
+   "Fire": 20,
+   "Water": 5,
+   "Electric": 10,
+   "Grass": 5,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 20,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 20,
+   "Ghost": 10,
+   "Dragon": 5,
+   "Dark": 10,
+   "Steel": 10,
+   "Mystery": 10
+  },
+  "Electric": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 20,
+   "Electric": 5,
+   "Grass": 5,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 0,
+   "Flying": 20,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 10,
+   "Dragon": 5,
+   "Dark": 10,
+   "Steel": 10,
+   "Mystery": 10
+  },
+  "Grass": {
+   "Normal": 10,
+   "Fire": 5,
+   "Water": 20,
+   "Electric": 10,
+   "Grass": 5,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 5,
+   "Ground": 20,
+   "Flying": 5,
+   "Psychic": 10,
+   "Bug": 5,
+   "Rock": 20,
+   "Ghost": 10,
+   "Dragon": 5,
+   "Dark": 10,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Ice": {
+   "Normal": 10,
+   "Fire": 5,
+   "Water": 5,
+   "Electric": 10,
+   "Grass": 20,
+   "Ice": 5,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 20,
+   "Flying": 20,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 10,
+   "Dragon": 20,
+   "Dark": 10,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Fighting": {
+   "Normal": 20,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 20,
+   "Fighting": 10,
+   "Poison": 5,
+   "Ground": 10,
+   "Flying": 5,
+   "Psychic": 5,
+   "Bug": 5,
+   "Rock": 20,
+   "Ghost": 0,
+   "Dragon": 10,
+   "Dark": 20,
+   "Steel": 20,
+   "Mystery": 10
+  },
+  "Poison": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 20,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 5,
+   "Ground": 5,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 5,
+   "Ghost": 5,
+   "Dragon": 10,
+   "Dark": 10,
+   "Steel": 0,
+   "Mystery": 10
+  },
+  "Ground": {
+   "Normal": 10,
+   "Fire": 20,
+   "Water": 10,
+   "Electric": 20,
+   "Grass": 5,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 20,
+   "Ground": 10,
+   "Flying": 0,
+   "Psychic": 10,
+   "Bug": 5,
+   "Rock": 20,
+   "Ghost": 10,
+   "Dragon": 10,
+   "Dark": 10,
+   "Steel": 20,
+   "Mystery": 10
+  },
+  "Flying": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 5,
+   "Grass": 20,
+   "Ice": 10,
+   "Fighting": 20,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 20,
+   "Rock": 5,
+   "Ghost": 10,
+   "Dragon": 10,
+   "Dark": 10,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Psychic": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 10,
+   "Fighting": 20,
+   "Poison": 20,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 5,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 10,
+   "Dragon": 10,
+   "Dark": 0,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Bug": {
+   "Normal": 10,
+   "Fire": 5,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 20,
+   "Ice": 10,
+   "Fighting": 5,
+   "Poison": 5,
+   "Ground": 10,
+   "Flying": 5,
+   "Psychic": 20,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 5,
+   "Dragon": 10,
+   "Dark": 20,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Rock": {
+   "Normal": 10,
+   "Fire": 20,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 20,
+   "Fighting": 5,
+   "Poison": 10,
+   "Ground": 5,
+   "Flying": 20,
+   "Psychic": 10,
+   "Bug": 20,
+   "Rock": 10,
+   "Ghost": 10,
+   "Dragon": 10,
+   "Dark": 10,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Ghost": {
+   "Normal": 0,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 20,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 20,
+   "Dragon": 10,
+   "Dark": 5,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Dragon": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 10,
+   "Dragon": 20,
+   "Dark": 10,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Dark": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 10,
+   "Fighting": 5,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 20,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 20,
+   "Dragon": 10,
+   "Dark": 5,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Steel": {
+   "Normal": 10,
+   "Fire": 5,
+   "Water": 5,
+   "Electric": 5,
+   "Grass": 10,
+   "Ice": 20,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 20,
+   "Ghost": 10,
+   "Dragon": 10,
+   "Dark": 10,
+   "Steel": 5,
+   "Mystery": 10
+  },
+  "Mystery": {
+   "Normal": 10,
+   "Fire": 10,
+   "Water": 10,
+   "Electric": 10,
+   "Grass": 10,
+   "Ice": 10,
+   "Fighting": 10,
+   "Poison": 10,
+   "Ground": 10,
+   "Flying": 10,
+   "Psychic": 10,
+   "Bug": 10,
+   "Rock": 10,
+   "Ghost": 10,
+   "Dragon": 10,
+   "Dark": 10,
+   "Steel": 10,
+   "Mystery": 10
+  }
+ },
+ "gyms": [
+  {
+   "badge": 1,
+   "town": "stonecrest",
+   "type": "Rock",
+   "leader": "Leader Garna",
+   "badgeName": "Boulder Crest",
+   "palette": "gymRock",
+   "levels": [
+    12,
+    12,
+    14
+   ],
+   "intro": "I'm Garna! My Rock creatures are as stubborn as I am. Try to crack us!",
+   "defeat": "Hah! You chipped right through. Take the Boulder Crest!"
+  },
+  {
+   "badge": 2,
+   "town": "duskmere",
+   "type": "Fighting",
+   "leader": "Leader Torvin",
+   "badgeName": "Iron Fist",
+   "palette": "gymFighting",
+   "levels": [
+    16,
+    17,
+    18
+   ],
+   "intro": "Torvin's the name. Every battle is training. Show me your strength!",
+   "defeat": "What a workout! The Iron Fist badge is yours."
+  },
+  {
+   "badge": 3,
+   "town": "voltara",
+   "type": "Electric",
+   "leader": "Leader Wynn",
+   "badgeName": "Spark Coil",
+   "palette": "gymElectric",
+   "levels": [
+    20,
+    21,
+    22,
+    23
+   ],
+   "intro": "Wynn here! I power this whole town. Let's see if you can handle the voltage!",
+   "defeat": "Shorted out! You earned the Spark Coil."
+  },
+  {
+   "badge": 4,
+   "town": "cindercity",
+   "type": "Fire",
+   "leader": "Leader Sola",
+   "badgeName": "Ember Seal",
+   "palette": "gymFire",
+   "levels": [
+    24,
+    25,
+    26,
+    27
+   ],
+   "intro": "I'm Sola. The volcano taught me patience, and then it taught me to burn bright!",
+   "defeat": "You kept your cool. The Ember Seal is yours."
+  },
+  {
+   "badge": 5,
+   "town": "bramblegate",
+   "type": "Normal",
+   "leader": "Leader Hollis",
+   "badgeName": "Hearth Badge",
+   "palette": "gymNormal",
+   "levels": [
+    28,
+    29,
+    30,
+    31
+   ],
+   "intro": "I'm Hollis. Plain creatures, perfect fundamentals. Nothing fancy can save you here.",
+   "defeat": "Fundamentals beaten by fundamentals. Take the Hearth Badge."
+  },
+  {
+   "badge": 6,
+   "town": "skyreach",
+   "type": "Flying",
+   "leader": "Leader Aeryn",
+   "badgeName": "Gale Feather",
+   "palette": "gymFlying",
+   "levels": [
+    31,
+    32,
+    33,
+    34
+   ],
+   "intro": "Aeryn of the high winds! Up here, only the swift survive.",
+   "defeat": "You rode the storm. The Gale Feather is yours."
+  },
+  {
+   "badge": 7,
+   "town": "lumenvale",
+   "type": "Psychic",
+   "leader": "Leaders Ilsa & Oren",
+   "badgeName": "Mind Prism",
+   "palette": "gymPsychic",
+   "levels": [
+    39,
+    40,
+    41,
+    42
+   ],
+   "double": true,
+   "intro": "We are Ilsa and Oren. We think as one, so we fight as one. Two on two!",
+   "defeat": "Our minds were open... and you walked right in. The Mind Prism is yours."
+  },
+  {
+   "badge": 8,
+   "town": "coralhaven",
+   "type": "Water",
+   "leader": "Leader Marisol",
+   "badgeName": "Tide Pearl",
+   "palette": "gymWater",
+   "levels": [
+    42,
+    43,
+    44,
+    45,
+    46
+   ],
+   "intro": "I'm Marisol. The sea gives and the sea takes. Today it takes your win!",
+   "defeat": "Swept away by the tide... The Tide Pearl, the eighth badge, is yours."
+  }
+ ],
+ "routeLevels": [
+  [
+   0,
+   0
+  ],
+  [
+   2,
+   5
+  ],
+  [
+   5,
+   9
+  ],
+  [
+   9,
+   13
+  ],
+  [
+   13,
+   17
+  ],
+  [
+   17,
+   21
+  ],
+  [
+   21,
+   25
+  ],
+  [
+   24,
+   28
+  ],
+  [
+   27,
+   31
+  ],
+  [
+   30,
+   34
+  ],
+  [
+   34,
+   38
+  ],
+  [
+   38,
+   42
+  ],
+  [
+   42,
+   46
+  ]
+ ],
+ "palettes": {
+  "p1": {
+   "hat": "#e04848",
+   "shirt": "#e04848",
+   "pants": "#384070",
+   "hair": "#5a3a28",
+   "skin": "#f8d0a8"
+  },
+  "p2": {
+   "hat": "#3878e0",
+   "shirt": "#38a0e0",
+   "pants": "#404040",
+   "hair": "#e8c060",
+   "skin": "#f0c098"
+  },
+  "mom": {
+   "hat": "#c86048",
+   "shirt": "#f0a0b0",
+   "pants": "#7068a0",
+   "hair": "#c86048",
+   "skin": "#f8d0a8"
+  },
+  "old": {
+   "hat": "#c0c0c0",
+   "shirt": "#80a060",
+   "pants": "#605040",
+   "hair": "#d8d8d8",
+   "skin": "#f0c8a0"
+  },
+  "girl": {
+   "hat": "#f0c040",
+   "shirt": "#f080a0",
+   "pants": "#5080c0",
+   "hair": "#f0c040",
+   "skin": "#f8d8b8"
+  },
+  "boy": {
+   "hat": "#40a040",
+   "shirt": "#60c060",
+   "pants": "#305080",
+   "hair": "#403020",
+   "skin": "#e8c098"
+  },
+  "hiker": {
+   "hat": "#a07040",
+   "shirt": "#c08040",
+   "pants": "#605030",
+   "hair": "#403020",
+   "skin": "#d8a878"
+  },
+  "psychic": {
+   "hat": "#8050c0",
+   "shirt": "#9060d0",
+   "pants": "#402860",
+   "hair": "#302040",
+   "skin": "#f0d0c0"
+  },
+  "rival": {
+   "hat": "#303040",
+   "shirt": "#40c0a0",
+   "pants": "#303040",
+   "hair": "#303040",
+   "skin": "#f0c8a0"
+  },
+  "clerk": {
+   "hat": "#3870c8",
+   "shirt": "#3870c8",
+   "pants": "#303860",
+   "hair": "#503020",
+   "skin": "#f8d0a8"
+  },
+  "nurse": {
+   "hat": "#f8f8f8",
+   "shirt": "#f8b8c8",
+   "pants": "#f8f8f8",
+   "hair": "#e87890",
+   "skin": "#f8d8c0"
+  },
+  "bird": {
+   "hat": "#58a8e0",
+   "shirt": "#f0f0f0",
+   "pants": "#4868a8",
+   "hair": "#704828",
+   "skin": "#f0c8a0"
+  },
+  "blackbelt": {
+   "hat": "#f8f8f8",
+   "shirt": "#f0f0f0",
+   "pants": "#f0f0f0",
+   "hair": "#202020",
+   "skin": "#d8a070"
+  },
+  "battlegirl": {
+   "hat": "#e85050",
+   "shirt": "#303848",
+   "pants": "#303848",
+   "hair": "#603020",
+   "skin": "#f0c098"
+  },
+  "hex": {
+   "hat": "#583878",
+   "shirt": "#402850",
+   "pants": "#281838",
+   "hair": "#a070c0",
+   "skin": "#e8d8e0"
+  },
+  "gentleman": {
+   "hat": "#303030",
+   "shirt": "#584838",
+   "pants": "#303030",
+   "hair": "#c0c0c0",
+   "skin": "#f0c8a0"
+  },
+  "beauty": {
+   "hat": "#f0a0c0",
+   "shirt": "#e05080",
+   "pants": "#f0f0f0",
+   "hair": "#f0d070",
+   "skin": "#f8d8c0"
+  },
+  "ace": {
+   "hat": "#2850a0",
+   "shirt": "#2850a0",
+   "pants": "#e8e8e8",
+   "hair": "#402818",
+   "skin": "#f0c8a0"
+  },
+  "swimmer": {
+   "hat": "#f0d040",
+   "shirt": "#4090d0",
+   "pants": "#305080",
+   "hair": "#503010",
+   "skin": "#e0b080"
+  },
+  "gymRock": {
+   "hat": "#a08868",
+   "shirt": "#b8a078",
+   "pants": "#605040",
+   "hair": "#503828",
+   "skin": "#d8a878"
+  },
+  "gymFighting": {
+   "hat": "#c03028",
+   "shirt": "#f0f0f0",
+   "pants": "#202020",
+   "hair": "#202020",
+   "skin": "#c88858"
+  },
+  "gymElectric": {
+   "hat": "#f8d030",
+   "shirt": "#383838",
+   "pants": "#f8d030",
+   "hair": "#f0f0f0",
+   "skin": "#f0c8a0"
+  },
+  "gymFire": {
+   "hat": "#f05820",
+   "shirt": "#f08030",
+   "pants": "#602818",
+   "hair": "#c02818",
+   "skin": "#e8b080"
+  },
+  "gymNormal": {
+   "hat": "#a8a878",
+   "shirt": "#c8c0a0",
+   "pants": "#585040",
+   "hair": "#6a4a30",
+   "skin": "#f0c8a0"
+  },
+  "gymFlying": {
+   "hat": "#a890f0",
+   "shirt": "#e0e8f8",
+   "pants": "#5868a8",
+   "hair": "#88a8e0",
+   "skin": "#f8d8c0"
+  },
+  "gymPsychic": {
+   "hat": "#f85888",
+   "shirt": "#c060c0",
+   "pants": "#502858",
+   "hair": "#202040",
+   "skin": "#f0d0c0"
+  },
+  "gymWater": {
+   "hat": "#3878d8",
+   "shirt": "#6890f0",
+   "pants": "#f0f0f0",
+   "hair": "#283878",
+   "skin": "#d8a070"
+  }
+ }
+}

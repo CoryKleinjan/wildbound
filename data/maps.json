@@ -1,0 +1,5802 @@
+{
+ "fernhollow": {
+  "id": "fernhollow",
+  "name": "Fernhollow",
+  "tiles": [
+   "##########==############",
+   "#F........==..........F#",
+   "#.rrrr....==....pppppp.#",
+   "#.rrrr....==....pppppp.#",
+   "#.wwhw....==....wwwlww.#",
+   "#...=.....==.......=...#",
+   "#.S.=.....==.......=S..#",
+   "#...==================.#",
+   "#.........==...........#",
+   "#..FF.....==....bbbb...#",
+   "#..FF.....==....bbbb...#",
+   "#.rrrr....==....wmww...#",
+   "#.rrrr....==.....=.....#",
+   "#.wwhw....=======......#",
+   "#...=.....==...........#",
+   "#~~~~~....==.....FF....#",
+   "#~~~~~...........FF....#",
+   "########################"
+  ],
+  "connections": {
+   "up": {
+    "map": "route1",
+    "offset": 0
+   }
+  },
+  "signs": {
+   "2,6": [
+    "FERNHOLLOW",
+    "A quiet town where new journeys sprout."
+   ],
+   "20,6": [
+    "REST LODGE",
+    "Heal your creatures and use storage."
+   ]
+  },
+  "doors": {
+   "4,4": {
+    "kind": "house",
+    "text": [
+     "MOM: Off on an adventure? Be safe out there!",
+     "Come home whenever you need a rest."
+    ]
+   },
+   "19,4": {
+    "kind": "lodge"
+   },
+   "17,11": {
+    "kind": "mart"
+   },
+   "4,13": {
+    "kind": "house",
+    "text": [
+     "PROF. ALDER: Creatures have Natures that raise one stat and lower another.",
+     "Hidden potential differs between each one too. No two are quite alike!"
+    ]
+   }
+  },
+  "npcs": [
+   {
+    "x": 8,
+    "y": 15,
+    "dir": "left",
+    "palette": "old",
+    "text": [
+     "Tall grass hides wild creatures.",
+     "Weaken them first, then throw a Capture Orb. A sleeping one is twice as easy to catch!"
+    ]
+   },
+   {
+    "x": 14,
+    "y": 9,
+    "dir": "down",
+    "palette": "girl",
+    "text": [
+     "Fire beats Grass, Grass beats Water, Water beats Fire.",
+     "And a creature gets a 1.5x boost when it uses a move of its own type!"
+    ]
+   },
+   {
+    "x": 21,
+    "y": 13,
+    "dir": "left",
+    "palette": "boy",
+    "text": [
+     "Playing with a friend? Each of you brings 3 creatures and you fight side by side.",
+     "Moves like Surf and Rock Slide hit both foes in a double battle!"
+    ]
+   }
+  ]
+ },
+ "route1": {
+  "id": "route1",
+  "name": "Route 1",
+  "tiles": [
+   "##########==############",
+   "#,,,,,,...==....,,,,,,,#",
+   "#,,,,,,...==....,,,,,,,#",
+   "#,,,,,,...==....,,,,,,,#",
+   "#.........==...........#",
+   "#..###....=====........#",
+   "#..###........==..###..#",
+   "#.............==..###..#",
+   "#vvvvvvvvvv...==vvvvvvv#",
+   "#,,,,.........==.......#",
+   "#,,,,,,.......==...,,,,#",
+   "#,,,,,,....====....,,,,#",
+   "#,,,,,,....==......,,,,#",
+   "#.........==.......,,,,#",
+   "#...F.....==...........#",
+   "#..###....==....###....#",
+   "#..###....==....###....#",
+   "#.........==...........#",
+   "#,,,,,,,,,==,,,,,,,,,,,#",
+   "#,,,,,,,,,==,,,,,,,,,,,#",
+   "#,,,,,,,,,==,,,,,,,,,,,#",
+   "#.........==...........#",
+   "#.S.......==....F......#",
+   "#vvvvvvv..==..vvvvvvvvv#",
+   "#.........==...........#",
+   "#..,,,,,,.==.,,,,,,....#",
+   "#..,,,,,,.==.,,,,,,....#",
+   "#..,,,,,,.==.,,,,,,..###",
+   "#.........==.........###",
+   "#.###.....==.....###...#",
+   "#.###.....==.....###...#",
+   "#.........==...........#",
+   "#.........==...........#",
+   "##########==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "fernhollow",
+    "offset": 0
+   },
+   "up": {
+    "map": "route2",
+    "offset": 0
+   }
+  },
+  "encounterRate": 20,
+  "encounters": [
+   {
+    "species": "nibbit",
+    "min": 2,
+    "max": 5,
+    "weight": 30
+   },
+   {
+    "species": "chirpling",
+    "min": 2,
+    "max": 5,
+    "weight": 30
+   },
+   {
+    "species": "wrigglet",
+    "min": 2,
+    "max": 5,
+    "weight": 30
+   },
+   {
+    "species": "voltick",
+    "min": 2,
+    "max": 5,
+    "weight": 14
+   },
+   {
+    "species": "mossling",
+    "min": 2,
+    "max": 5,
+    "weight": 5
+   },
+   {
+    "species": "shadepup",
+    "min": 2,
+    "max": 5,
+    "weight": 14
+   },
+   {
+    "species": "crawlet",
+    "min": 2,
+    "max": 5,
+    "weight": 30
+   },
+   {
+    "species": "burrbun",
+    "min": 2,
+    "max": 5,
+    "weight": 30
+   },
+   {
+    "species": "cobblet",
+    "min": 2,
+    "max": 5,
+    "weight": 14
+   },
+   {
+    "species": "brookit",
+    "min": 2,
+    "max": 5,
+    "weight": 14
+   },
+   {
+    "species": "finchet",
+    "min": 2,
+    "max": 5,
+    "weight": 30
+   }
+  ],
+  "signs": {
+   "2,22": [
+    "ROUTE 1",
+    "North: Mistwood Path   South: Fernhollow"
+   ]
+  },
+  "trainers": [
+   {
+    "id": "r1_pell",
+    "name": "Youngster Pell",
+    "palette": "boy",
+    "x": 6,
+    "y": 13,
+    "dir": "right",
+    "sight": 4,
+    "pay": 16,
+    "party": [
+     [
+      "nibbit",
+      4
+     ],
+     [
+      "chirpling",
+      5
+     ]
+    ],
+    "intro": "Hey! Our eyes met! That means we battle!",
+    "defeat": "Aww, my Nibbit!",
+    "after": "I should train in the tall grass more."
+   },
+   {
+    "id": "r1_tess",
+    "name": "Lass Tess",
+    "palette": "girl",
+    "x": 17,
+    "y": 22,
+    "dir": "left",
+    "sight": 6,
+    "pay": 16,
+    "party": [
+     [
+      "wrigglet",
+      5
+     ],
+     [
+      "mossling",
+      6
+     ]
+    ],
+    "intro": "My creatures are cute AND tough. Let me show you!",
+    "defeat": "Not cute enough, I guess...",
+    "after": "Mossling's spores can paralyze you if you touch it!"
+   },
+   {
+    "id": "r1_milo",
+    "name": "Bug Catcher Milo",
+    "palette": "boy",
+    "x": 20,
+    "y": 9,
+    "dir": "down",
+    "sight": 3,
+    "pay": 12,
+    "party": [
+     [
+      "wrigglet",
+      6
+     ],
+     [
+      "cocoonix",
+      7
+     ]
+    ],
+    "intro": "Bugs are the best! Want to see?",
+    "defeat": "My bugs!",
+    "after": "Wrigglet turns into Cocoonix at level 7, then Lumoth at 10!"
+   }
+  ],
+  "route": 1
+ },
+ "route2": {
+  "id": "route2",
+  "name": "Mistwood Path",
+  "tiles": [
+   "##########==############",
+   "#######...==S..#########",
+   "#######........#########",
+   "#,,,,,,........,,,,,,,,#",
+   "#,,,,,,...==...,,,,,,,,#",
+   "#,,,,,,...==...,,,,,,,,#",
+   "#.........==...........#",
+   "#..~~~~~..==..###..###.#",
+   "#.,~~~~~,.==..###..###.#",
+   "#.,~~~~~,.==...........#",
+   "#.,,,,,,,.==....,,,,,,.#",
+   "#.........==....,,,,,,.#",
+   "#.###.....==....,,,,,,.#",
+   "#.###.....======.......#",
+   "#.............==.......#",
+   "#,,,,,,,,.....==..###..#",
+   "#,,,,,,,,.....==..###..#",
+   "#,,,,,,,,..====........#",
+   "#..........==..........#",
+   "#vvvvvvvv..==..vvvvvvvv#",
+   "#..........==..........#",
+   "#.F........==.....,,,,.#",
+   "#..........==.....,,,,.#",
+   "#,,,,,.....==.....,,,,.#",
+   "#,,,,,.....==..........#",
+   "#,,,,,.....==....F.....#",
+   "#..........==..........#",
+   "#..###.....==...###....#",
+   "#..###.....==...###....#",
+   "##########==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "route1",
+    "offset": 0
+   },
+   "up": {
+    "map": "stonecrest",
+    "offset": 2
+   }
+  },
+  "encounterRate": 22,
+  "encounters": [
+   {
+    "species": "nibbit",
+    "min": 5,
+    "max": 7,
+    "weight": 6
+   },
+   {
+    "species": "chirpling",
+    "min": 5,
+    "max": 7,
+    "weight": 6
+   },
+   {
+    "species": "wrigglet",
+    "min": 5,
+    "max": 7,
+    "weight": 6
+   },
+   {
+    "species": "pebblin",
+    "min": 5,
+    "max": 9,
+    "weight": 30
+   },
+   {
+    "species": "duskwisp",
+    "min": 5,
+    "max": 9,
+    "weight": 14
+   },
+   {
+    "species": "frostkit",
+    "min": 5,
+    "max": 9,
+    "weight": 5
+   },
+   {
+    "species": "psyowl",
+    "min": 5,
+    "max": 9,
+    "weight": 5
+   },
+   {
+    "species": "ironmite",
+    "min": 5,
+    "max": 9,
+    "weight": 5
+   },
+   {
+    "species": "glimmerfin",
+    "min": 5,
+    "max": 9,
+    "weight": 14
+   },
+   {
+    "species": "drakelet",
+    "min": 5,
+    "max": 9,
+    "weight": 5
+   },
+   {
+    "species": "acornip",
+    "min": 5,
+    "max": 9,
+    "weight": 14
+   },
+   {
+    "species": "crawlet",
+    "min": 5,
+    "max": 7,
+    "weight": 6
+   },
+   {
+    "species": "burrbun",
+    "min": 5,
+    "max": 7,
+    "weight": 6
+   },
+   {
+    "species": "dewsprig",
+    "min": 5,
+    "max": 9,
+    "weight": 30
+   },
+   {
+    "species": "antlit",
+    "min": 5,
+    "max": 9,
+    "weight": 30
+   },
+   {
+    "species": "finchet",
+    "min": 5,
+    "max": 7,
+    "weight": 6
+   },
+   {
+    "species": "cairnlet",
+    "min": 5,
+    "max": 9,
+    "weight": 14
+   },
+   {
+    "species": "aerolith",
+    "min": 5,
+    "max": 9,
+    "weight": 5
+   }
+  ],
+  "signs": {
+   "12,1": [
+    "MISTWOOD PATH",
+    "North: Stonecrest   South: Route 1"
+   ]
+  },
+  "trainers": [
+   {
+    "id": "r2_brom",
+    "name": "Hiker Brom",
+    "palette": "hiker",
+    "x": 5,
+    "y": 11,
+    "dir": "down",
+    "sight": 3,
+    "pay": 40,
+    "party": [
+     [
+      "pebblin",
+      9
+     ],
+     [
+      "pebblin",
+      10
+     ]
+    ],
+    "intro": "Ho! Rock solid creatures, rock solid hiker!",
+    "defeat": "Crumbled like gravel!",
+    "after": "Water and Grass moves wear down rocks fast."
+   },
+   {
+    "id": "r2_twins",
+    "name": "Twins Ada & Ida",
+    "palette": "girl",
+    "x": 16,
+    "y": 14,
+    "dir": "left",
+    "sight": 2,
+    "pay": 20,
+    "double": true,
+    "party": [
+     [
+      "voltick",
+      9
+     ],
+     [
+      "mossling",
+      9
+     ]
+    ],
+    "intro": "We always battle together! Two on two!",
+    "defeat": "We lost together...",
+    "after": "Teamwork is everything in a double battle!"
+   },
+   {
+    "id": "r2_nora",
+    "name": "Psychic Nora",
+    "palette": "psychic",
+    "x": 17,
+    "y": 18,
+    "dir": "left",
+    "sight": 5,
+    "pay": 32,
+    "party": [
+     [
+      "duskwisp",
+      10
+     ],
+     [
+      "psyowl",
+      11
+     ]
+    ],
+    "intro": "I foresaw your arrival... and your defeat.",
+    "defeat": "My vision was clouded!",
+    "after": "Dark types laugh off Psychic moves."
+   },
+   {
+    "id": "r2_kai",
+    "name": "Rival Kai",
+    "palette": "rival",
+    "x": 11,
+    "y": 3,
+    "dir": "down",
+    "sight": 2,
+    "pay": 60,
+    "party": [
+     [
+      "shadepup",
+      8
+     ],
+     [
+      "voltick",
+      9
+     ],
+     [
+      "frostkit",
+      10
+     ]
+    ],
+    "intro": "Finally caught up with you! Let's see how much you've grown!",
+    "defeat": "Hah... you're really good.",
+    "after": "The bridge to Cinder City is out. Guess our adventure continues later!"
+   }
+  ],
+  "route": 2
+ },
+ "stonecrest": {
+  "id": "stonecrest",
+  "name": "Stonecrest",
+  "tiles": [
+   "##########################",
+   "#...........==...........#",
+   "#........#..==..bbbbb....#",
+   "#....ppppp.S==..bbbbb.F..#",
+   "#....ppppp..==..wwmww....#",
+   "#...Fwwlww..==....=......#",
+   "#......=....==....=......#",
+   "#......=..F.==....=......#",
+   "#......=....==....=......#",
+   "#......=....==....=......#",
+   "#=========================",
+   "#=========================",
+   "#...........==...........#",
+   "#.rrrr...F..==...kkkkkkk.#",
+   "#.rrrr......==...kkkkkkk.#",
+   "#.wwhw......==...kkkkkkk.#",
+   "#...==========...wwwjwww.#",
+   "#...........=========...S#",
+   "#...........==..........F#",
+   "#...........==...........#",
+   "#...........==...........#",
+   "############==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "route2",
+    "offset": -2
+   },
+   "right": {
+    "map": "route3",
+    "offset": -1
+   }
+  },
+  "doors": {
+   "7,5": {
+    "kind": "lodge"
+   },
+   "18,4": {
+    "kind": "mart"
+   },
+   "4,15": {
+    "kind": "house",
+    "text": [
+     "My grandpa says creatures caught at a low level grow up loyal."
+    ]
+   }
+  },
+  "warps": {
+   "20,16": {
+    "map": "gym1",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "24,17": [
+    "STONECREST GYM",
+    "Leader: Garna. Specialty: Rock type."
+   ],
+   "11,3": [
+    "STONECREST",
+    "Carved from the mountainside."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 14,
+    "y": 19,
+    "dir": "left",
+    "palette": "girl",
+    "text": [
+     "Water douses Fire. Rock and Ground hit it hard too."
+    ]
+   },
+   {
+    "x": 8,
+    "y": 15,
+    "dir": "left",
+    "palette": "boy",
+    "text": [
+     "Normal types are weak only to Fighting. Ghosts are immune to them!"
+    ]
+   },
+   {
+    "x": 10,
+    "y": 17,
+    "dir": "right",
+    "palette": "girl",
+    "text": [
+     "Electric, Ice and Rock moves bring Flying types down."
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "right",
+   "flag": "badge1",
+   "text": [
+    "The road ahead is closed to trainers without the Boulder Crest.",
+    "Beat the Stonecrest Gym first!"
+   ]
+  }
+ },
+ "duskmere": {
+  "id": "duskmere",
+  "name": "Duskmere",
+  "tiles": [
+   "############==############",
+   "#...........==...........#",
+   "#...........==..ppppp.#..#",
+   "#.kkkkkkk...==..ppppp....#",
+   "#.kkkkkkk...==..wwlww....#",
+   "#.kkkkkkk...==....=......#",
+   "#.wwwjwww#..==....=......#",
+   "#S...=..#...==....=......#",
+   "#....=......==....=.....##",
+   "#...S=......==....=......#",
+   "=========================#",
+   "=========================#",
+   "#...........==...........#",
+   "#....rrrr...==..bbbbb....#",
+   "#....rrrr...==..bbbbb.F..#",
+   "#.F..wwhw...==..wwmww....#",
+   "#......============......#",
+   "#...........==...~~~~~...#",
+   "#...........==...~~~~~...#",
+   "#...........==...........#",
+   "#...F.......==...........#",
+   "##########################"
+  ],
+  "connections": {
+   "left": {
+    "map": "route3",
+    "offset": -1
+   },
+   "up": {
+    "map": "route4",
+    "offset": -2
+   }
+  },
+  "doors": {
+   "18,4": {
+    "kind": "lodge"
+   },
+   "7,15": {
+    "kind": "house",
+    "text": [
+     "Make yourself at home! Your creatures look tired. Rest a while."
+    ]
+   },
+   "18,15": {
+    "kind": "mart"
+   }
+  },
+  "warps": {
+   "5,6": {
+    "map": "gym2",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "1,7": [
+    "DUSKMERE GYM",
+    "Leader: Torvin. Specialty: Fighting type."
+   ],
+   "4,9": [
+    "DUSKMERE",
+    "Where the mist settles each evening."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 19,
+    "y": 8,
+    "dir": "right",
+    "palette": "old",
+    "text": [
+     "Psychic types fear Bug, Ghost and Dark moves."
+    ]
+   },
+   {
+    "x": 14,
+    "y": 7,
+    "dir": "right",
+    "palette": "girl",
+    "text": [
+     "Grass and Electric moves are your best bet against Water types."
+    ]
+   },
+   {
+    "x": 16,
+    "y": 17,
+    "dir": "up",
+    "palette": "girl",
+    "text": [
+     "With eight badges, the League at Summit Crown will open its doors."
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "up",
+   "flag": "badge2",
+   "text": [
+    "The road ahead is closed to trainers without the Iron Fist.",
+    "Beat the Duskmere Gym first!"
+   ]
+  }
+ },
+ "voltara": {
+  "id": "voltara",
+  "name": "Voltara",
+  "tiles": [
+   "##########################",
+   "#...........==.F.........#",
+   "#...F......S==...ppppp...#",
+   "#....rrrr#..==...ppppp...#",
+   "#....rrrr...==...wwlww...#",
+   "#....wwhw...==.F...=.....#",
+   "#......=....==.....=.....#",
+   "#......=..F.==.F...=.....#",
+   "#....F.=....==.....=.....#",
+   "#......=....==.....=.....#",
+   "#=========================",
+   "#=========================",
+   "#...........==...........#",
+   "#...Fbbbbb..==...kkkkkkk.#",
+   "#....bbbbb..==...kkkkkkk.#",
+   "#....wwmww..==...kkkkkkk.#",
+   "#......=======...wwwjwww.#",
+   "#...........=========...S#",
+   "#.......F...==...........#",
+   "#...........==...........#",
+   "#....F......==...........#",
+   "############==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "route4",
+    "offset": -2
+   },
+   "right": {
+    "map": "route5",
+    "offset": -1
+   }
+  },
+  "doors": {
+   "7,5": {
+    "kind": "house",
+    "text": [
+     "Sleep is the best medicine. For people and creatures alike!"
+    ]
+   },
+   "19,4": {
+    "kind": "lodge"
+   },
+   "7,15": {
+    "kind": "mart"
+   }
+  },
+  "warps": {
+   "20,16": {
+    "map": "gym3",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "24,17": [
+    "VOLTARA GYM",
+    "Leader: Wynn. Specialty: Electric type."
+   ],
+   "11,2": [
+    "VOLTARA",
+    "The town that never loses power."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 15,
+    "y": 18,
+    "dir": "right",
+    "palette": "girl",
+    "text": [
+     "Playing co-op? Coordinate! One of you can lower stats while the other attacks."
+    ]
+   },
+   {
+    "x": 6,
+    "y": 16,
+    "dir": "right",
+    "palette": "hiker",
+    "text": [
+     "Paralysis cuts Speed to a quarter. Very handy against fast foes."
+    ]
+   },
+   {
+    "x": 21,
+    "y": 17,
+    "dir": "down",
+    "palette": "boy",
+    "text": [
+     "Sandstorm and hail chip away at everyone without the right types."
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "right",
+   "flag": "badge3",
+   "text": [
+    "The road ahead is closed to trainers without the Spark Coil.",
+    "Beat the Voltara Gym first!"
+   ]
+  }
+ },
+ "cindercity": {
+  "id": "cindercity",
+  "name": "Cinder City",
+  "tiles": [
+   "##########################",
+   "#..F........==.F.........#",
+   "#...........==...........#",
+   "#...bbbbb...==.....ppppp.#",
+   "#...bbbbb...==..#..ppppp.#",
+   "#...wwmww...==.....wwlww.#",
+   "#.....=.....==.......=...#",
+   "#.....=.....==.......=...#",
+   "#F#...=.....==.......=...#",
+   "#.....=.....==......S=...#",
+   "=========================#",
+   "=========================#",
+   "#...........==...........#",
+   "#.kkkkkkk...==...F.rrrr..#",
+   "#.kkkkkkk...==.....rrrr..#",
+   "#.kkkkkkk...==.....wwhw..#",
+   "#.wwwjwww...==========...#",
+   "#S...=========...........#",
+   "#...........==..F........#",
+   "#F..........==...........#",
+   "#........#..==...........#",
+   "############==############"
+  ],
+  "connections": {
+   "left": {
+    "map": "route5",
+    "offset": -1
+   },
+   "down": {
+    "map": "route6",
+    "offset": -2
+   }
+  },
+  "doors": {
+   "6,5": {
+    "kind": "mart"
+   },
+   "21,5": {
+    "kind": "lodge"
+   },
+   "21,15": {
+    "kind": "house",
+    "text": [
+     "Make yourself at home! Your creatures look tired. Rest a while."
+    ]
+   }
+  },
+  "warps": {
+   "5,16": {
+    "map": "gym4",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "1,17": [
+    "CINDER CITY GYM",
+    "Leader: Sola. Specialty: Fire type."
+   ],
+   "20,9": [
+    "CINDER CITY",
+    "Built in the shadow of the volcano."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 11,
+    "y": 8,
+    "dir": "left",
+    "palette": "old",
+    "text": [
+     "Rock types shrug off Normal and Flying moves. Water, Grass and Fighting crush them!"
+    ]
+   },
+   {
+    "x": 4,
+    "y": 17,
+    "dir": "right",
+    "palette": "boy",
+    "text": [
+     "Fighting moves smash Normal, Rock, Ice, Steel and Dark types."
+    ]
+   },
+   {
+    "x": 6,
+    "y": 12,
+    "dir": "right",
+    "palette": "girl",
+    "text": [
+     "Ground types are immune to Electric moves. Remember that at the Voltara Gym!"
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "down",
+   "flag": "badge4",
+   "text": [
+    "The road ahead is closed to trainers without the Ember Seal.",
+    "Beat the Cinder City Gym first!"
+   ]
+  }
+ },
+ "harrowfield": {
+  "id": "harrowfield",
+  "name": "Harrowfield",
+  "tiles": [
+   "############==############",
+   "#......#....==...........#",
+   "#....rrrr...==..........F#",
+   "#....rrrr...==...#.rrrr..#",
+   "#....wwhw...==.....rrrr..#",
+   "#......=...S==.....wwhw..#",
+   "#......=....==.......=...#",
+   "#......=....==.......=...#",
+   "#......=....==.......=...#",
+   "#......=....==.......=...#",
+   "#=========================",
+   "#=========================",
+   "#...........==...........#",
+   "#.ppppp.....==..bbbbb....#",
+   "#.ppppp.....==..bbbbbF...#",
+   "#.wwlww.....==..wwmww....#",
+   "#...===============......#",
+   "#F.~~~~~....==...........#",
+   "#.F~~~~~....==...........#",
+   "#...........==...#.......#",
+   "#...........==...........#",
+   "##########################"
+  ],
+  "connections": {
+   "up": {
+    "map": "route6",
+    "offset": -2
+   },
+   "right": {
+    "map": "route7",
+    "offset": -1
+   }
+  },
+  "doors": {
+   "7,4": {
+    "kind": "house",
+    "text": [
+     "Make yourself at home! Your creatures look tired. Rest a while."
+    ]
+   },
+   "21,5": {
+    "kind": "house",
+    "text": [
+     "I trade stories with travelers. You've got a good one going!"
+    ]
+   },
+   "4,15": {
+    "kind": "lodge"
+   },
+   "18,15": {
+    "kind": "mart"
+   }
+  },
+  "warps": {},
+  "signs": {
+   "11,5": [
+    "HARROWFIELD",
+    "Golden fields as far as you can see."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 5,
+    "y": 12,
+    "dir": "left",
+    "palette": "hiker",
+    "text": [
+     "Water douses Fire. Rock and Ground hit it hard too."
+    ]
+   },
+   {
+    "x": 14,
+    "y": 18,
+    "dir": "down",
+    "palette": "boy",
+    "text": [
+     "Normal types are weak only to Fighting. Ghosts are immune to them!"
+    ]
+   },
+   {
+    "x": 18,
+    "y": 12,
+    "dir": "down",
+    "palette": "mom",
+    "text": [
+     "Electric, Ice and Rock moves bring Flying types down."
+    ]
+   }
+  ],
+  "town": true
+ },
+ "bramblegate": {
+  "id": "bramblegate",
+  "name": "Bramblegate",
+  "tiles": [
+   "############==############",
+   "#...........==...........#",
+   "#.kkkkkkk...==...rrrr....#",
+   "#.kkkkkkk...==...rrrr....#",
+   "#.kkkkkkk..S==...wwhw.#..#",
+   "#.wwwjwww...==.....=.....#",
+   "#S.F.=......==.....=.....#",
+   "#....=......==.....=.....#",
+   "#.#..=......==.....=.....#",
+   "#....=......==.....=.....#",
+   "=========================#",
+   "=========================#",
+   "#...........==...........#",
+   "#.ppppp.....==...bbbbb...#",
+   "#.ppppp.....==...bbbbb...#",
+   "#.wwlww.....==...wwmww..F#",
+   "#...================.....#",
+   "#...........==...........#",
+   "#...........==...........#",
+   "#....#......==...........#",
+   "#...........==......F....#",
+   "##########################"
+  ],
+  "connections": {
+   "left": {
+    "map": "route7",
+    "offset": -1
+   },
+   "up": {
+    "map": "route8",
+    "offset": -2
+   }
+  },
+  "doors": {
+   "19,4": {
+    "kind": "house",
+    "text": [
+     "I trade stories with travelers. You've got a good one going!"
+    ]
+   },
+   "4,15": {
+    "kind": "lodge"
+   },
+   "19,15": {
+    "kind": "mart"
+   }
+  },
+  "warps": {
+   "5,5": {
+    "map": "gym5",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "1,6": [
+    "BRAMBLEGATE GYM",
+    "Leader: Hollis. Specialty: Normal type."
+   ],
+   "11,4": [
+    "BRAMBLEGATE",
+    "A gate town wrapped in brambles."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 15,
+    "y": 15,
+    "dir": "left",
+    "palette": "girl",
+    "text": [
+     "Psychic types fear Bug, Ghost and Dark moves."
+    ]
+   },
+   {
+    "x": 7,
+    "y": 9,
+    "dir": "up",
+    "palette": "girl",
+    "text": [
+     "Grass and Electric moves are your best bet against Water types."
+    ]
+   },
+   {
+    "x": 20,
+    "y": 9,
+    "dir": "up",
+    "palette": "mom",
+    "text": [
+     "With eight badges, the League at Summit Crown will open its doors."
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "up",
+   "flag": "badge5",
+   "text": [
+    "The road ahead is closed to trainers without the Hearth Badge.",
+    "Beat the Bramblegate Gym first!"
+   ]
+  }
+ },
+ "skyreach": {
+  "id": "skyreach",
+  "name": "Skyreach",
+  "tiles": [
+   "##########################",
+   "#...........==...........#",
+   "#...bbbbb...==...........#",
+   "#...bbbbb...==.#..ppppp..#",
+   "#...wwmww...==....ppppp..#",
+   "#.....=.....==....wwlww..#",
+   "#.....=.....==......=....#",
+   "#.....=.....==......=....#",
+   "#.....=.....==......=....#",
+   "#....S=.....==......=....#",
+   "#=========================",
+   "#=========================",
+   "#...........==...........#",
+   "#...rrrr....==..kkkkkkk..#",
+   "#...rrrrF...==..kkkkkkk..#",
+   "#...wwhw....==..kkkkkkk..#",
+   "#.....========..wwwjwww..#",
+   "#...........========...S.#",
+   "#...........==.......FF..#",
+   "#...F.......==..#.F......#",
+   "#...........==..F........#",
+   "############==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "route8",
+    "offset": -2
+   },
+   "right": {
+    "map": "route9",
+    "offset": -1
+   }
+  },
+  "doors": {
+   "6,4": {
+    "kind": "mart"
+   },
+   "20,5": {
+    "kind": "lodge"
+   },
+   "6,15": {
+    "kind": "house",
+    "text": [
+     "Make yourself at home! Your creatures look tired. Rest a while."
+    ]
+   }
+  },
+  "warps": {
+   "19,16": {
+    "map": "gym6",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "23,17": [
+    "SKYREACH GYM",
+    "Leader: Aeryn. Specialty: Flying type."
+   ],
+   "5,9": [
+    "SKYREACH",
+    "Close to the clouds."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 15,
+    "y": 16,
+    "dir": "down",
+    "palette": "hiker",
+    "text": [
+     "Playing co-op? Coordinate! One of you can lower stats while the other attacks."
+    ]
+   },
+   {
+    "x": 10,
+    "y": 17,
+    "dir": "up",
+    "palette": "girl",
+    "text": [
+     "Paralysis cuts Speed to a quarter. Very handy against fast foes."
+    ]
+   },
+   {
+    "x": 21,
+    "y": 6,
+    "dir": "down",
+    "palette": "girl",
+    "text": [
+     "Sandstorm and hail chip away at everyone without the right types."
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "right",
+   "flag": "badge6",
+   "text": [
+    "The road ahead is closed to trainers without the Gale Feather.",
+    "Beat the Skyreach Gym first!"
+   ]
+  }
+ },
+ "saltmarsh": {
+  "id": "saltmarsh",
+  "name": "Saltmarsh",
+  "tiles": [
+   "############==############",
+   "#...........==...........#",
+   "#..ppppp..#.==..rrrr.....#",
+   "#..ppppp..F.==..rrrr.....#",
+   "#..wwlww....==..wwhw.....#",
+   "#....=......==....=......#",
+   "#....=......==....=......#",
+   "#.F~~=~~..#.==....=...F..#",
+   "#..~~=~~....==....=......#",
+   "#....=......==....=......#",
+   "=========================#",
+   "=========================#",
+   "#...........==...........#",
+   "#F....rrrr..==..bbbbb....#",
+   "#.....rrrr..==.Fbbbbb....#",
+   "#.....wwhw..==..wwmww....#",
+   "#.......===========....F.#",
+   "#...........==......#....#",
+   "#...........==...#.......#",
+   "#..........S==...........#",
+   "#..#........==..F........#",
+   "##########################"
+  ],
+  "connections": {
+   "left": {
+    "map": "route9",
+    "offset": -1
+   },
+   "up": {
+    "map": "route10",
+    "offset": -2
+   }
+  },
+  "doors": {
+   "5,4": {
+    "kind": "lodge"
+   },
+   "18,4": {
+    "kind": "house",
+    "text": [
+     "My grandpa says creatures caught at a low level grow up loyal."
+    ]
+   },
+   "8,15": {
+    "kind": "house",
+    "text": [
+     "Make yourself at home! Your creatures look tired. Rest a while."
+    ]
+   },
+   "18,15": {
+    "kind": "mart"
+   }
+  },
+  "warps": {},
+  "signs": {
+   "11,19": [
+    "SALTMARSH",
+    "Where river meets sea."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 10,
+    "y": 12,
+    "dir": "right",
+    "palette": "mom",
+    "text": [
+     "Rock types shrug off Normal and Flying moves. Water, Grass and Fighting crush them!"
+    ]
+   },
+   {
+    "x": 2,
+    "y": 9,
+    "dir": "right",
+    "palette": "girl",
+    "text": [
+     "Fighting moves smash Normal, Rock, Ice, Steel and Dark types."
+    ]
+   },
+   {
+    "x": 6,
+    "y": 12,
+    "dir": "left",
+    "palette": "mom",
+    "text": [
+     "Ground types are immune to Electric moves. Remember that at the Voltara Gym!"
+    ]
+   }
+  ],
+  "town": true
+ },
+ "lumenvale": {
+  "id": "lumenvale",
+  "name": "Lumenvale",
+  "tiles": [
+   "##########################",
+   "#..........S==...........#",
+   "#.F...rrrr..==....bbbbb.##",
+   "#.....rrrrF.==....bbbbb..#",
+   "#.....wwhw..==....wwmww..#",
+   "#.......=...==......=....#",
+   "#...F...=...==......=..F.#",
+   "#.......=...==......=....#",
+   "#.......=...==..F...=....#",
+   "#.......=...==......=....#",
+   "#=========================",
+   "#=========================",
+   "#...........==...........#",
+   "#.ppppp#....==.F.kkkkkkk.#",
+   "#.ppppp.....==...kkkkkkk.#",
+   "#.wwlww.....==...kkkkkkk.#",
+   "#...==========...wwwjwww.#",
+   "##..........=========...S#",
+   "#...........==...........#",
+   "#...........==...........#",
+   "#...........==...........#",
+   "############==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "route10",
+    "offset": -2
+   },
+   "right": {
+    "map": "route11",
+    "offset": -1
+   }
+  },
+  "doors": {
+   "8,4": {
+    "kind": "house",
+    "text": [
+     "Make yourself at home! Your creatures look tired. Rest a while."
+    ]
+   },
+   "20,4": {
+    "kind": "mart"
+   },
+   "4,15": {
+    "kind": "lodge"
+   }
+  },
+  "warps": {
+   "20,16": {
+    "map": "gym7",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "24,17": [
+    "LUMENVALE GYM",
+    "Leader: Ilsa & Oren. Specialty: Psychic type."
+   ],
+   "11,1": [
+    "LUMENVALE",
+    "Lights dance over the valley at night."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 21,
+    "y": 12,
+    "dir": "down",
+    "palette": "old",
+    "text": [
+     "Water douses Fire. Rock and Ground hit it hard too."
+    ]
+   },
+   {
+    "x": 8,
+    "y": 17,
+    "dir": "right",
+    "palette": "mom",
+    "text": [
+     "Normal types are weak only to Fighting. Ghosts are immune to them!"
+    ]
+   },
+   {
+    "x": 7,
+    "y": 9,
+    "dir": "down",
+    "palette": "boy",
+    "text": [
+     "Electric, Ice and Rock moves bring Flying types down."
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "right",
+   "flag": "badge7",
+   "text": [
+    "The road ahead is closed to trainers without the Mind Prism.",
+    "Beat the Lumenvale Gym first!"
+   ]
+  }
+ },
+ "coralhaven": {
+  "id": "coralhaven",
+  "name": "Coralhaven",
+  "tiles": [
+   "############==############",
+   "#...........==.........F.#",
+   "#...bbbbb...==.....rrrr..#",
+   "#...bbbbb...==.....rrrr..#",
+   "#...wwmww...==.....wwhw.F#",
+   "#.....=.....==.......=...#",
+   "#.....=.....==....F..=...#",
+   "#.....=.....==.......=...#",
+   "#.....=...F.==....F..=...#",
+   "#.....=.....==.......=...#",
+   "=========================#",
+   "=========================#",
+   "#...........==...........#",
+   "#..kkkkkkk.S==..ppppp...F#",
+   "#..kkkkkkk..==..ppppp.F..#",
+   "##.kkkkkkk..==..wwlww....#",
+   "#..wwwjwww..=======......#",
+   "#.S...========...~~~~~...#",
+   "#...........==...~~~~~...#",
+   "#.........#.==...........#",
+   "#...........==.........#.#",
+   "##########################"
+  ],
+  "connections": {
+   "left": {
+    "map": "route11",
+    "offset": -1
+   },
+   "up": {
+    "map": "route12",
+    "offset": -2
+   }
+  },
+  "doors": {
+   "6,4": {
+    "kind": "mart"
+   },
+   "21,4": {
+    "kind": "house",
+    "text": [
+     "Make yourself at home! Your creatures look tired. Rest a while."
+    ]
+   },
+   "18,15": {
+    "kind": "lodge"
+   }
+  },
+  "warps": {
+   "6,16": {
+    "map": "gym8",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "2,17": [
+    "CORALHAVEN GYM",
+    "Leader: Marisol. Specialty: Water type."
+   ],
+   "11,13": [
+    "CORALHAVEN",
+    "Jewel of the southern coast."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 16,
+    "y": 12,
+    "dir": "left",
+    "palette": "girl",
+    "text": [
+     "Psychic types fear Bug, Ghost and Dark moves."
+    ]
+   },
+   {
+    "x": 5,
+    "y": 12,
+    "dir": "up",
+    "palette": "girl",
+    "text": [
+     "Grass and Electric moves are your best bet against Water types."
+    ]
+   },
+   {
+    "x": 11,
+    "y": 16,
+    "dir": "up",
+    "palette": "old",
+    "text": [
+     "With eight badges, the League at Summit Crown will open its doors."
+    ]
+   }
+  ],
+  "town": true,
+  "exitGate": {
+   "side": "up",
+   "flag": "badge8",
+   "text": [
+    "The road ahead is closed to trainers without the Tide Pearl.",
+    "Beat the Coralhaven Gym first!"
+   ]
+  }
+ },
+ "summitcrown": {
+  "id": "summitcrown",
+  "name": "Summit Crown",
+  "tiles": [
+   "##########################",
+   "#...........==.......F...#",
+   "#...........==...........#",
+   "#....rrrr...==.....ppppp.#",
+   "#....rrrr...==..#..ppppp.#",
+   "#....wwhw...==..FF.wwlww.#",
+   "#.F....=....==.......=...#",
+   "#....#.=....==.......=...#",
+   "#......=....==.......=...#",
+   "#......=....==.......=...#",
+   "#========================#",
+   "#========================#",
+   "#...........==...........#",
+   "#.nnnnnnn...==...bbbbb...#",
+   "#.nnnnnnn...==...bbbbb...#",
+   "#.nnnnnnn...==...wwmww...#",
+   "#.wwwuwww...========.....#",
+   "#....=========...........#",
+   "#...........==.....#.F...#",
+   "#...........==...........#",
+   "#..........S==...........#",
+   "############==############"
+  ],
+  "connections": {
+   "down": {
+    "map": "route12",
+    "offset": -2
+   }
+  },
+  "doors": {
+   "7,5": {
+    "kind": "house",
+    "text": [
+     "Sleep is the best medicine. For people and creatures alike!"
+    ]
+   },
+   "21,5": {
+    "kind": "lodge"
+   },
+   "19,15": {
+    "kind": "mart"
+   }
+  },
+  "warps": {
+   "5,16": {
+    "map": "league",
+    "x": 7,
+    "y": 14,
+    "dir": "up"
+   }
+  },
+  "signs": {
+   "11,20": [
+    "SUMMIT CROWN",
+    "The peak of every trainer's journey."
+   ]
+  },
+  "npcs": [
+   {
+    "x": 11,
+    "y": 15,
+    "dir": "left",
+    "palette": "boy",
+    "text": [
+     "Playing co-op? Coordinate! One of you can lower stats while the other attacks."
+    ]
+   },
+   {
+    "x": 22,
+    "y": 6,
+    "dir": "down",
+    "palette": "mom",
+    "text": [
+     "Paralysis cuts Speed to a quarter. Very handy against fast foes."
+    ]
+   },
+   {
+    "x": 11,
+    "y": 18,
+    "dir": "up",
+    "palette": "mom",
+    "text": [
+     "Sandstorm and hail chip away at everyone without the right types."
+    ]
+   }
+  ],
+  "town": true,
+  "leagueGate": {
+   "flag": "badge8",
+   "text": [
+    "LEAGUE GUARD: Only trainers with all eight badges may enter the League."
+   ]
+  }
+ },
+ "route3": {
+  "id": "route3",
+  "name": "Route 3",
+  "tiles": [
+   "########################################",
+   "#........F.........##.....~~...........#",
+   "#..................##.....~~...........#",
+   "#.........................~~...........#",
+   "#.F.....####..........F................#",
+   "#..,,,,.####...............=========...#",
+   "#..,,,,.####.....F.....F...=========...#",
+   "#..,,,,..F.................==..,,,==...#",
+   "#.,,,,,,...................==..,,,==...#",
+   "==,,,,,,===,.F.............==..,,,======",
+   "==,,,,,,===,..,,,,,........==..,,,======",
+   "#.,,,,,,,==,..,,,,===========..,,,,,...#",
+   "#.,,,,,,,==,..,,,,===========.....F....#",
+   "#....,,,,==,..,,,,==...................#",
+   "#......,,==...,,,,==...................#",
+   "#......,,===========...................#",
+   "#......,,===========...................#",
+   "#......,,,,........S...................#",
+   "#......................................#",
+   "########################################"
+  ],
+  "connections": {
+   "left": {
+    "map": "stonecrest",
+    "offset": 1
+   },
+   "right": {
+    "map": "duskmere",
+    "offset": 1
+   }
+  },
+  "trainers": [
+   {
+    "id": "r3_t0",
+    "name": "Psychic Vera",
+    "palette": "psychic",
+    "x": 29,
+    "y": 11,
+    "dir": "left",
+    "sight": 4,
+    "pay": 20,
+    "party": [
+     [
+      "fizzlit",
+      13
+     ],
+     [
+      "eddykin",
+      11
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see what you've got!",
+    "defeat": "That was a great battle!",
+    "after": "Each creature's nature boosts one stat and lowers another."
+   },
+   {
+    "id": "r3_t1",
+    "name": "Twins Amy & Liv",
+    "palette": "girl",
+    "x": 24,
+    "y": 10,
+    "dir": "down",
+    "sight": 4,
+    "pay": 20,
+    "party": [
+     [
+      "pebblin",
+      12
+     ],
+     [
+      "cuffling",
+      10
+     ]
+    ],
+    "double": true,
+    "intro": "A challenger! Perfect timing.",
+    "defeat": "That was a great battle!",
+    "after": "Type matchups really matter. Super effective hits do double damage!"
+   },
+   {
+    "id": "r3_t2",
+    "name": "Black Belt Koji",
+    "palette": "blackbelt",
+    "x": 20,
+    "y": 14,
+    "dir": "left",
+    "sight": 4,
+    "pay": 20,
+    "party": [
+     [
+      "bruisant",
+      14
+     ],
+     [
+      "larkling",
+      14
+     ]
+    ],
+    "double": false,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "That was a great battle!",
+    "after": "Each creature's nature boosts one stat and lowers another."
+   }
+  ],
+  "signs": {
+   "19,17": [
+    "ROUTE 3",
+    "Stonecrest <-> Duskmere"
+   ]
+  },
+  "encounterRate": 23,
+  "route": 3,
+  "encounters": [
+   {
+    "species": "pebblin",
+    "min": 9,
+    "max": 11,
+    "weight": 6
+   },
+   {
+    "species": "cuffling",
+    "min": 9,
+    "max": 13,
+    "weight": 14
+   },
+   {
+    "species": "fizzlit",
+    "min": 9,
+    "max": 13,
+    "weight": 5
+   },
+   {
+    "species": "dewsprig",
+    "min": 9,
+    "max": 11,
+    "weight": 6
+   },
+   {
+    "species": "antlit",
+    "min": 9,
+    "max": 11,
+    "weight": 6
+   },
+   {
+    "species": "eddykin",
+    "min": 9,
+    "max": 13,
+    "weight": 30
+   },
+   {
+    "species": "delvole",
+    "min": 9,
+    "max": 13,
+    "weight": 30
+   },
+   {
+    "species": "bruisant",
+    "min": 9,
+    "max": 13,
+    "weight": 5
+   },
+   {
+    "species": "kindlet",
+    "min": 9,
+    "max": 13,
+    "weight": 14
+   },
+   {
+    "species": "hoglet",
+    "min": 9,
+    "max": 13,
+    "weight": 30
+   },
+   {
+    "species": "hushgrub",
+    "min": 9,
+    "max": 13,
+    "weight": 30
+   },
+   {
+    "species": "larkling",
+    "min": 9,
+    "max": 13,
+    "weight": 30
+   }
+  ]
+ },
+ "route4": {
+  "id": "route4",
+  "name": "Route 4",
+  "tiles": [
+   "##########==##########",
+   "#.........==.........#",
+   "#.........==.........#",
+   "#,,,,,,,,,==.........#",
+   "#,,,,,,,,,=========..#",
+   "#,,,,,,,,,=========..#",
+   "#,,,,,,,,,.......==..#",
+   "#,,,,,,,,,.......==..#",
+   "#......============..#",
+   "#......============..#",
+   "#......==............#",
+   "#.F....==............#",
+   "#......==............#",
+   "#vvvvv,==,,,,vvvvvvvv#",
+   "#.....,==,,,,........#",
+   "#.....,==,,,,........#",
+   "#.....,=====,........#",
+   "#.....,=====,........#",
+   "#.....,,,,==,........#",
+   "#.........==.........#",
+   "#.........==.......F.#",
+   "#.........==S........#",
+   "#.........==.........#",
+   "#.........==.........#",
+   "#..,,,,,..========...#",
+   "#..,,,,,..========...#",
+   "#vv,,,,,,,,,,vvv==vvv#",
+   "#..,,,,,,,,,,,,,==,,.#",
+   "#..,,,,,,,,,,,,,==,,.#",
+   "#..,,,,,,,,,,,,,==,,.#",
+   "#....,,,,,,,,,,,==...#",
+   "#........,,,,,,,==...#",
+   "#........,========,,.#",
+   "#.........========,,.#",
+   "#F........==,,,,,,,,.#",
+   "#.........==,,,,,,,,.#",
+   "#.........==,,,,,,,,.#",
+   "#.........==.........#",
+   "#.........==.........#",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "duskmere",
+    "offset": 2
+   },
+   "up": {
+    "map": "voltara",
+    "offset": 2
+   }
+  },
+  "trainers": [
+   {
+    "id": "r4_t0",
+    "name": "Psychic Simon",
+    "palette": "psychic",
+    "x": 18,
+    "y": 30,
+    "dir": "left",
+    "sight": 4,
+    "pay": 24,
+    "party": [
+     [
+      "hogburr",
+      19
+     ],
+     [
+      "hushgrub",
+      14
+     ],
+     [
+      "lumoth",
+      15
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see what you've got!",
+    "defeat": "That was a great battle!",
+    "after": "Type matchups really matter. Super effective hits do double damage!"
+   },
+   {
+    "id": "r4_t1",
+    "name": "Gentleman Edmund",
+    "palette": "gentleman",
+    "x": 13,
+    "y": 7,
+    "dir": "down",
+    "sight": 4,
+    "pay": 24,
+    "party": [
+     [
+      "delvole",
+      16
+     ],
+     [
+      "blightcap",
+      13
+     ],
+     [
+      "jellip",
+      17
+     ]
+    ],
+    "double": false,
+    "intro": "I've been training all day. Here goes!",
+    "defeat": "You're strong!",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   },
+   {
+    "id": "r4_t2",
+    "name": "Youngster Ben",
+    "palette": "boy",
+    "x": 9,
+    "y": 20,
+    "dir": "right",
+    "sight": 4,
+    "pay": 24,
+    "party": [
+     [
+      "arclure",
+      14
+     ],
+     [
+      "delvole",
+      15
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "Aww, I lost!",
+    "after": "In a double battle, some moves hit both foes at once."
+   },
+   {
+    "id": "r4_t3",
+    "name": "Camper Ethan",
+    "palette": "boy",
+    "x": 9,
+    "y": 11,
+    "dir": "left",
+    "sight": 4,
+    "pay": 24,
+    "party": [
+     [
+      "delvole",
+      16
+     ],
+     [
+      "lumoth",
+      13
+     ],
+     [
+      "flintail",
+      17
+     ]
+    ],
+    "double": false,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "That was a great battle!",
+    "after": "In a double battle, some moves hit both foes at once."
+   }
+  ],
+  "signs": {
+   "12,21": [
+    "ROUTE 4",
+    "Duskmere <-> Voltara"
+   ]
+  },
+  "encounterRate": 24,
+  "route": 4,
+  "encounters": [
+   {
+    "species": "lumoth",
+    "min": 13,
+    "max": 17,
+    "weight": 4
+   },
+   {
+    "species": "encasa",
+    "min": 16,
+    "max": 17,
+    "weight": 4
+   },
+   {
+    "species": "fenspawn",
+    "min": 13,
+    "max": 17,
+    "weight": 14
+   },
+   {
+    "species": "flintail",
+    "min": 13,
+    "max": 17,
+    "weight": 5
+   },
+   {
+    "species": "eddykin",
+    "min": 13,
+    "max": 15,
+    "weight": 6
+   },
+   {
+    "species": "buzzlet",
+    "min": 13,
+    "max": 17,
+    "weight": 30
+   },
+   {
+    "species": "delvole",
+    "min": 13,
+    "max": 15,
+    "weight": 6
+   },
+   {
+    "species": "blightcap",
+    "min": 13,
+    "max": 17,
+    "weight": 30
+   },
+   {
+    "species": "arclure",
+    "min": 13,
+    "max": 17,
+    "weight": 5
+   },
+   {
+    "species": "joltpup",
+    "min": 13,
+    "max": 17,
+    "weight": 14
+   },
+   {
+    "species": "jabcrab",
+    "min": 13,
+    "max": 17,
+    "weight": 30
+   },
+   {
+    "species": "hoglet",
+    "min": 13,
+    "max": 15,
+    "weight": 6
+   },
+   {
+    "species": "hushgrub",
+    "min": 13,
+    "max": 15,
+    "weight": 6
+   },
+   {
+    "species": "gorsling",
+    "min": 13,
+    "max": 17,
+    "weight": 30
+   },
+   {
+    "species": "larkling",
+    "min": 13,
+    "max": 15,
+    "weight": 6
+   },
+   {
+    "species": "jellip",
+    "min": 13,
+    "max": 17,
+    "weight": 14
+   }
+  ]
+ },
+ "route5": {
+  "id": "route5",
+  "name": "Route 5",
+  "tiles": [
+   "########################################",
+   "#......................................#",
+   "#..........,,,,,.....F............F....#",
+   "#..F.......,,,,,.S===========..........#",
+   "#......F...,,,,,..========,,,,,,,,,....#",
+   "#.....,,,==,,,,,====......,,,,,,,,,....#",
+   "#F....,,,==,,,,,====......,,,,,,,,,....#",
+   "#.....,,,==,,,,,..........,,,,,,,,,....#",
+   "#.....,,,==,,,,,,,,.......,,,,,,,,,....#",
+   "===========,,,,,,,,.......,,,,,,,,,=====",
+   "===========,,,,,,,,.F......==.....======",
+   "#.......,,,,,,,,,,,........=========...#",
+   "#.......,,,,,,.............=========...#",
+   "#.......,,,,,,.........................#",
+   "#.......,,,,,,.........................#",
+   "#.......,,,,,,...####..................#",
+   "#.......,,,,,,...####............~~....#",
+   "#................####...F........~~....#",
+   "#......................................#",
+   "########################################"
+  ],
+  "connections": {
+   "left": {
+    "map": "voltara",
+    "offset": 1
+   },
+   "right": {
+    "map": "cindercity",
+    "offset": 1
+   }
+  },
+  "trainers": [
+   {
+    "id": "r5_t0",
+    "name": "Hex Maniac Mabel",
+    "palette": "hex",
+    "x": 33,
+    "y": 13,
+    "dir": "up",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "icefin",
+      19
+     ]
+    ],
+    "double": false,
+    "intro": "A challenger! Perfect timing.",
+    "defeat": "You're strong!",
+    "after": "Keep going, the next town isn't far."
+   },
+   {
+    "id": "r5_t1",
+    "name": "Twins Kit & Kat",
+    "palette": "girl",
+    "x": 37,
+    "y": 11,
+    "dir": "up",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "icefin",
+      18
+     ],
+     [
+      "kittuft",
+      17
+     ]
+    ],
+    "double": true,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "That was a great battle!",
+    "after": "In a double battle, some moves hit both foes at once."
+   },
+   {
+    "id": "r5_t2",
+    "name": "Picnicker Nell",
+    "palette": "girl",
+    "x": 16,
+    "y": 4,
+    "dir": "down",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "dynamoth",
+      23
+     ]
+    ],
+    "double": false,
+    "intro": "A challenger! Perfect timing.",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   },
+   {
+    "id": "r5_t3",
+    "name": "Battle Girl Laura",
+    "palette": "battlegirl",
+    "x": 30,
+    "y": 10,
+    "dir": "down",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "glowgnat",
+      17
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like a trainer. Let's battle!",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "Each creature's nature boosts one stat and lowers another."
+   },
+   {
+    "id": "r5_t4",
+    "name": "Picnicker Cora",
+    "palette": "girl",
+    "x": 27,
+    "y": 13,
+    "dir": "up",
+    "sight": 4,
+    "pay": 28,
+    "party": [
+     [
+      "kittuft",
+      21
+     ],
+     [
+      "galvanfly",
+      23
+     ]
+    ],
+    "double": false,
+    "intro": "I've been training all day. Here goes!",
+    "defeat": "That was a great battle!",
+    "after": "Rest Lodges heal your creatures for free."
+   }
+  ],
+  "signs": {
+   "17,3": [
+    "ROUTE 5",
+    "Voltara <-> Cinder City"
+   ]
+  },
+  "encounterRate": 25,
+  "route": 5,
+  "encounters": [
+   {
+    "species": "dartwing",
+    "min": 17,
+    "max": 21,
+    "weight": 4
+   },
+   {
+    "species": "buzzlet",
+    "min": 17,
+    "max": 19,
+    "weight": 6
+   },
+   {
+    "species": "blightcap",
+    "min": 17,
+    "max": 19,
+    "weight": 6
+   },
+   {
+    "species": "icefin",
+    "min": 17,
+    "max": 21,
+    "weight": 30
+   },
+   {
+    "species": "jabcrab",
+    "min": 17,
+    "max": 19,
+    "weight": 6
+   },
+   {
+    "species": "kittuft",
+    "min": 17,
+    "max": 21,
+    "weight": 14
+   },
+   {
+    "species": "gorsling",
+    "min": 17,
+    "max": 19,
+    "weight": 6
+   },
+   {
+    "species": "glowgnat",
+    "min": 17,
+    "max": 21,
+    "weight": 14
+   },
+   {
+    "species": "hexapede",
+    "min": 17,
+    "max": 21,
+    "weight": 14
+   }
+  ]
+ },
+ "route6": {
+  "id": "route6",
+  "name": "Route 6",
+  "tiles": [
+   "##########==##########",
+   "#.....F...==.........#",
+   "#.........,,,,,......#",
+   "#.........,,,,,....F.#",
+   "#.........,,,,,====..#",
+   "#......F..=========..#",
+   "#...........,,,,,==..#",
+   "#...........,,,,,==..#",
+   "#......============..#",
+   "#......============..#",
+   "#......==...,,,,,,S..#",
+   "#......==......,,,,,.#",
+   "#......==..F...,,,,,.#",
+   "#vvvvvv==vvvvvv,,,,,v#",
+   "#...,,,,,,,,,,,,,,,,.#",
+   "#...,,,,,,,,,,,,,,,,.#",
+   "#.==,,,,,,,,,,,,,....#",
+   "#.==,,,,,,,,,,,,,....#",
+   "#.==,,,,,,,,.........#",
+   "#.==,,,,,,,,.####....#",
+   "#.==......F..####....#",
+   "#.==.........####....#",
+   "#,==,,,,,,...........#",
+   "#,==,,,,,,...........#",
+   "#,===========........#",
+   "#,===========........#",
+   "#vvvvvvvvvv==vvvvvvvv#",
+   "#.......F..==........#",
+   "#..........==........#",
+   "#..........==.,,,,,,,#",
+   "#..........==.,,,,,,,#",
+   "#..........==.,,,,,,,#",
+   "#.........===.,,,,,,,#",
+   "#.........===.,,,,,,,#",
+   "#.........==.........#",
+   "#.........==....F....#",
+   "#.........==.........#",
+   "#.........==..F......#",
+   "#F........==.........#",
+   "##########==##########"
+  ],
+  "connections": {
+   "up": {
+    "map": "cindercity",
+    "offset": 2
+   },
+   "down": {
+    "map": "harrowfield",
+    "offset": 2
+   }
+  },
+  "trainers": [
+   {
+    "id": "r6_t0",
+    "name": "Camper Kirk",
+    "palette": "boy",
+    "x": 9,
+    "y": 33,
+    "dir": "right",
+    "sight": 4,
+    "pay": 32,
+    "party": [
+     [
+      "ozlug",
+      22
+     ],
+     [
+      "lavalug",
+      24
+     ],
+     [
+      "pulsecarab",
+      24
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "That was a great battle!",
+    "after": "Rest Lodges heal your creatures for free."
+   },
+   {
+    "id": "r6_t1",
+    "name": "Youngster Calvin",
+    "palette": "boy",
+    "x": 6,
+    "y": 9,
+    "dir": "right",
+    "sight": 4,
+    "pay": 32,
+    "party": [
+     [
+      "cragmaw",
+      25
+     ],
+     [
+      "fungloom",
+      26
+     ],
+     [
+      "fungloom",
+      22
+     ]
+    ],
+    "double": false,
+    "intro": "A challenger! Perfect timing.",
+    "defeat": "That was a great battle!",
+    "after": "Type matchups really matter. Super effective hits do double damage!"
+   },
+   {
+    "id": "r6_t2",
+    "name": "Psychic Simon",
+    "palette": "psychic",
+    "x": 19,
+    "y": 4,
+    "dir": "left",
+    "sight": 4,
+    "pay": 32,
+    "party": [
+     [
+      "joltfang",
+      23
+     ],
+     [
+      "barkhide",
+      23
+     ],
+     [
+      "bouldron",
+      24
+     ]
+    ],
+    "double": false,
+    "intro": "A challenger! Perfect timing.",
+    "defeat": "You're strong!",
+    "after": "Rest Lodges heal your creatures for free."
+   }
+  ],
+  "signs": {
+   "18,10": [
+    "ROUTE 6",
+    "Cinder City <-> Harrowfield"
+   ]
+  },
+  "encounterRate": 26,
+  "route": 6,
+  "encounters": [
+   {
+    "species": "bouldron",
+    "min": 25,
+    "max": 25,
+    "weight": 4
+   },
+   {
+    "species": "fungloom",
+    "min": 22,
+    "max": 25,
+    "weight": 4
+   },
+   {
+    "species": "barkhide",
+    "min": 21,
+    "max": 25,
+    "weight": 4
+   },
+   {
+    "species": "cragmaw",
+    "min": 25,
+    "max": 25,
+    "weight": 4
+   },
+   {
+    "species": "joltfang",
+    "min": 21,
+    "max": 25,
+    "weight": 4
+   },
+   {
+    "species": "lavalug",
+    "min": 21,
+    "max": 25,
+    "weight": 14
+   },
+   {
+    "species": "icefin",
+    "min": 21,
+    "max": 23,
+    "weight": 6
+   },
+   {
+    "species": "lurkit",
+    "min": 21,
+    "max": 25,
+    "weight": 14
+   },
+   {
+    "species": "loamole",
+    "min": 21,
+    "max": 25,
+    "weight": 30
+   },
+   {
+    "species": "leaplet",
+    "min": 21,
+    "max": 25,
+    "weight": 30
+   },
+   {
+    "species": "plumlet",
+    "min": 21,
+    "max": 25,
+    "weight": 30
+   },
+   {
+    "species": "ohmite",
+    "min": 21,
+    "max": 25,
+    "weight": 30
+   },
+   {
+    "species": "pilfur",
+    "min": 21,
+    "max": 25,
+    "weight": 30
+   },
+   {
+    "species": "ozlug",
+    "min": 21,
+    "max": 25,
+    "weight": 14
+   },
+   {
+    "species": "nipshell",
+    "min": 21,
+    "max": 25,
+    "weight": 14
+   }
+  ]
+ },
+ "route7": {
+  "id": "route7",
+  "name": "Route 7",
+  "tiles": [
+   "########################################",
+   "#...........................F..........#",
+   "#.......F...............F...........F..#",
+   "#.........###..............##..........#",
+   "#.........###..............##..........#",
+   "#.,,,,.................................#",
+   "#.,,,,...............####..............#",
+   "#.,,,,...===========.####..............#",
+   "#.....,,,===========...................#",
+   "===========,,,,,,,==..............======",
+   "===========,,,,,,,,,,,,,=====.....======",
+   "#S....,,,,,,,,,,,,,,,,,,=====,,,,.==...#",
+   "#.....,,,,,,,,,,,,,,,,,,...=========F..#",
+   "#..............,,,,,,,,,...=========...#",
+   "#...........................,,,,,,,,...#",
+   "#..F........................,,,,,,,,...#",
+   "#.........................F.,,,,,,,,...#",
+   "#........F........F....................#",
+   "#......................F...............#",
+   "########################################"
+  ],
+  "connections": {
+   "left": {
+    "map": "harrowfield",
+    "offset": 1
+   },
+   "right": {
+    "map": "bramblegate",
+    "offset": 1
+   }
+  },
+  "trainers": [
+   {
+    "id": "rival_r7",
+    "name": "Rival Kai",
+    "palette": "rival",
+    "x": 9,
+    "y": 6,
+    "dir": "down",
+    "sight": 4,
+    "pay": 60,
+    "party": [
+     [
+      "duskhound",
+      27
+     ],
+     [
+      "amperix",
+      28
+     ],
+     [
+      "frostkit",
+      27
+     ],
+     [
+      "bouldron",
+      29
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! Thought I'd find you here. Let's see who's grown stronger!",
+    "defeat": "Argh! You're still ahead of me...",
+    "after": "I'll catch up. Just you wait!"
+   },
+   {
+    "id": "r7_t1",
+    "name": "Twins Kit & Kat",
+    "palette": "girl",
+    "x": 27,
+    "y": 9,
+    "dir": "down",
+    "sight": 4,
+    "pay": 36,
+    "party": [
+     [
+      "antlegion",
+      25
+     ],
+     [
+      "lobsmash",
+      27
+     ]
+    ],
+    "double": true,
+    "intro": "Let's see what you've got!",
+    "defeat": "You're strong!",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   },
+   {
+    "id": "r7_t2",
+    "name": "Hiker Nils",
+    "palette": "hiker",
+    "x": 4,
+    "y": 8,
+    "dir": "down",
+    "sight": 4,
+    "pay": 36,
+    "party": [
+     [
+      "lullamoth",
+      28
+     ]
+    ],
+    "double": false,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "You're strong!",
+    "after": "Keep going, the next town isn't far."
+   },
+   {
+    "id": "r7_t3",
+    "name": "Hex Maniac Mabel",
+    "palette": "hex",
+    "x": 33,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 36,
+    "party": [
+     [
+      "lullamoth",
+      27
+     ],
+     [
+      "mantrill",
+      28
+     ],
+     [
+      "excavore",
+      27
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see what you've got!",
+    "defeat": "Aww, I lost!",
+    "after": "Type matchups really matter. Super effective hits do double damage!"
+   }
+  ],
+  "signs": {
+   "1,11": [
+    "ROUTE 7",
+    "Harrowfield <-> Bramblegate"
+   ]
+  },
+  "encounterRate": 26,
+  "route": 7,
+  "encounters": [
+   {
+    "species": "gnawlord",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "gustrel",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "amperix",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "duskhound",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "bounder",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "antlegion",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "driftail",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "dynamoth",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "excavore",
+    "min": 26,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "lobsmash",
+    "min": 28,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "hogburr",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "grimlet",
+    "min": 24,
+    "max": 28,
+    "weight": 5
+   },
+   {
+    "species": "lullamoth",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "gorsebrier",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "loamole",
+    "min": 24,
+    "max": 26,
+    "weight": 6
+   },
+   {
+    "species": "lithwyrm",
+    "min": 24,
+    "max": 28,
+    "weight": 5
+   },
+   {
+    "species": "larkspire",
+    "min": 24,
+    "max": 28,
+    "weight": 4
+   },
+   {
+    "species": "kragshell",
+    "min": 24,
+    "max": 28,
+    "weight": 14
+   },
+   {
+    "species": "kobblet",
+    "min": 24,
+    "max": 28,
+    "weight": 30
+   },
+   {
+    "species": "leaplet",
+    "min": 24,
+    "max": 26,
+    "weight": 6
+   },
+   {
+    "species": "plumlet",
+    "min": 24,
+    "max": 26,
+    "weight": 6
+   },
+   {
+    "species": "mirrakoi",
+    "min": 24,
+    "max": 28,
+    "weight": 30
+   },
+   {
+    "species": "musklet",
+    "min": 24,
+    "max": 28,
+    "weight": 30
+   },
+   {
+    "species": "monkit",
+    "min": 24,
+    "max": 28,
+    "weight": 14
+   },
+   {
+    "species": "ohmite",
+    "min": 24,
+    "max": 26,
+    "weight": 6
+   },
+   {
+    "species": "raylet",
+    "min": 24,
+    "max": 28,
+    "weight": 14
+   },
+   {
+    "species": "pilfur",
+    "min": 24,
+    "max": 26,
+    "weight": 6
+   },
+   {
+    "species": "rambrawl",
+    "min": 24,
+    "max": 28,
+    "weight": 5
+   }
+  ]
+ },
+ "route8": {
+  "id": "route8",
+  "name": "Route 8",
+  "tiles": [
+   "##########==##########",
+   "#.........==.........#",
+   "#.........==....###..#",
+   "#.,,,,,,,,,=....###..#",
+   "#.,,,,,,,,,=.........#",
+   "#.,,,,,,,,,=.........#",
+   "#.....==.............#",
+   "#.....==.......F.....#",
+   "#....===.............#",
+   "#....===......F......#",
+   "#....==....F.........#",
+   "#....==..,,,,,,......#",
+   "#....==..,,,,,,......#",
+   "#vvvv==vv,,,,,,vvvvvv#",
+   "#....==..,,,,,,......#",
+   "#....==.F,,,,,,......#",
+   "#....=========.......#",
+   "#....=========.......#",
+   "#...........==.....###",
+   "#...........==.....###",
+   "#...........==.......#",
+   "#.....,,,,,,==,......#",
+   "#.....,,,,,,==,......#",
+   "#.....,,,,,,==,......#",
+   "#....=========,,,,,..#",
+   "#F...=========,,,,,..#",
+   "#vvvv==,,,,,,,,,,,,vv#",
+   "#....,,,,,,,,,,,,,,..#",
+   "#....,,,,,,,,........#",
+   "#....,,,,,,,,........#",
+   "#....,,,,,,,,........#",
+   "#....,,,,,,,,....###.#",
+   "#....,,,,,,,,....###.#",
+   "#....=======S....###.#",
+   "#.........==.........#",
+   "#.........==.........#",
+   "#..##.....==.##......#",
+   "#..##.....==.##......#",
+   "#.........==.##......#",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "bramblegate",
+    "offset": 2
+   },
+   "up": {
+    "map": "skyreach",
+    "offset": 2
+   }
+  },
+  "trainers": [
+   {
+    "id": "r8_t0",
+    "name": "Ruin Maniac Foster",
+    "palette": "hiker",
+    "x": 7,
+    "y": 15,
+    "dir": "left",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "bounder",
+      29
+     ]
+    ],
+    "double": false,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   },
+   {
+    "id": "r8_t1",
+    "name": "Youngster Ricky",
+    "palette": "boy",
+    "x": 12,
+    "y": 35,
+    "dir": "left",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "kobbrute",
+      30
+     ],
+     [
+      "dynamoth",
+      29
+     ]
+    ],
+    "double": false,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "Aww, I lost!",
+    "after": "Type matchups really matter. Super effective hits do double damage!"
+   },
+   {
+    "id": "r8_t2",
+    "name": "Battle Girl Laura",
+    "palette": "battlegirl",
+    "x": 5,
+    "y": 7,
+    "dir": "right",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "hogburr",
+      32
+     ],
+     [
+      "stagbloom",
+      32
+     ],
+     [
+      "barkhide",
+      27
+     ]
+    ],
+    "double": false,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "I need more training...",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   },
+   {
+    "id": "r8_t3",
+    "name": "Beauty Odette",
+    "palette": "beauty",
+    "x": 4,
+    "y": 12,
+    "dir": "right",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "ransackle",
+      27
+     ],
+     [
+      "kobbrute",
+      33
+     ],
+     [
+      "brightwing",
+      30
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "Aww, I lost!",
+    "after": "In a double battle, some moves hit both foes at once."
+   },
+   {
+    "id": "r8_t4",
+    "name": "Black Belt Ryder",
+    "palette": "blackbelt",
+    "x": 14,
+    "y": 17,
+    "dir": "left",
+    "sight": 4,
+    "pay": 40,
+    "party": [
+     [
+      "barkhide",
+      27
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "You're strong!",
+    "after": "Type matchups really matter. Super effective hits do double damage!"
+   }
+  ],
+  "signs": {
+   "12,33": [
+    "ROUTE 8",
+    "Bramblegate <-> Skyreach"
+   ]
+  },
+  "encounterRate": 26,
+  "route": 8,
+  "encounters": [
+   {
+    "species": "amperix",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "bouldron",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "barkhide",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "brightwing",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "bounder",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "cragmaw",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "fernhart",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "dynamoth",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "excavore",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "hearthawk",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "hogburr",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "kingmane",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "galvanfly",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "kobblet",
+    "min": 27,
+    "max": 29,
+    "weight": 6
+   },
+   {
+    "species": "hopvault",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "mirrakoi",
+    "min": 27,
+    "max": 29,
+    "weight": 6
+   },
+   {
+    "species": "nuggit",
+    "min": 27,
+    "max": 31,
+    "weight": 30
+   },
+   {
+    "species": "musklet",
+    "min": 27,
+    "max": 29,
+    "weight": 6
+   },
+   {
+    "species": "ransackle",
+    "min": 27,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "rivetant",
+    "min": 27,
+    "max": 31,
+    "weight": 30
+   },
+   {
+    "species": "nudibrant",
+    "min": 30,
+    "max": 31,
+    "weight": 4
+   },
+   {
+    "species": "pyrefinch",
+    "min": 27,
+    "max": 31,
+    "weight": 14
+   },
+   {
+    "species": "twirlfin",
+    "min": 27,
+    "max": 31,
+    "weight": 30
+   },
+   {
+    "species": "somnulet",
+    "min": 27,
+    "max": 31,
+    "weight": 14
+   },
+   {
+    "species": "sapfawn",
+    "min": 27,
+    "max": 31,
+    "weight": 30
+   },
+   {
+    "species": "stingrub",
+    "min": 27,
+    "max": 31,
+    "weight": 30
+   }
+  ]
+ },
+ "route9": {
+  "id": "route9",
+  "name": "Route 9",
+  "tiles": [
+   "########################################",
+   "#......................................#",
+   "#............................,,,,,.....#",
+   "#............................,,,,,.....#",
+   "#F.................,,,,,,,,,,,,,,,.....#",
+   "#..................,,,,,,,,,,..........#",
+   "#...####...........,,,,,,,,,,..........#",
+   "#...####..........===========..........#",
+   "#...............F.==================...#",
+   "=========,,,,.....==...,,,,=============",
+   "=========,,,,.....==......,,,,,,,,======",
+   "#F.......,,,,.....==......,,,,,,,,,....#",
+   "#........==.......==......,,,,,,,,,...F#",
+   "#........==.....F.==.......,,,,,,,,....#",
+   "#........===========.......,,,,,,,,.##.#",
+   "#........===========..........F.....##.#",
+   "#.................S....................#",
+   "#..................~~~~................#",
+   "#..................~~~~................#",
+   "########################################"
+  ],
+  "connections": {
+   "left": {
+    "map": "skyreach",
+    "offset": 1
+   },
+   "right": {
+    "map": "saltmarsh",
+    "offset": 1
+   }
+  },
+  "trainers": [
+   {
+    "id": "r9_t0",
+    "name": "Youngster Joey",
+    "palette": "boy",
+    "x": 3,
+    "y": 11,
+    "dir": "up",
+    "sight": 4,
+    "pay": 44,
+    "party": [
+     [
+      "willowhart",
+      34
+     ],
+     [
+      "gnawlord",
+      34
+     ]
+    ],
+    "double": false,
+    "intro": "A challenger! Perfect timing.",
+    "defeat": "Aww, I lost!",
+    "after": "Each creature's nature boosts one stat and lowers another."
+   },
+   {
+    "id": "r9_t1",
+    "name": "Twins Amy & Liv",
+    "palette": "girl",
+    "x": 32,
+    "y": 7,
+    "dir": "down",
+    "sight": 4,
+    "pay": 44,
+    "party": [
+     [
+      "willowhart",
+      35
+     ],
+     [
+      "cascadon",
+      30
+     ]
+    ],
+    "double": true,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "In a double battle, some moves hit both foes at once."
+   },
+   {
+    "id": "r9_t2",
+    "name": "Ruin Maniac Lyle",
+    "palette": "hiker",
+    "x": 17,
+    "y": 11,
+    "dir": "right",
+    "sight": 4,
+    "pay": 44,
+    "party": [
+     [
+      "fungloom",
+      34
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "That was a great battle!",
+    "after": "In a double battle, some moves hit both foes at once."
+   }
+  ],
+  "signs": {
+   "18,16": [
+    "ROUTE 9",
+    "Skyreach <-> Saltmarsh"
+   ]
+  },
+  "encounterRate": 26,
+  "route": 9,
+  "encounters": [
+   {
+    "species": "gnawlord",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "gustrel",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "fungloom",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "duskhound",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "cascadon",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "anvilfist",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "bogmonarch",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "antlegion",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "falcrest",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "dreadspore",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "glacifin",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "lobsmash",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "hogrumble",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "larcenox",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "gorsebrier",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "jellicrown",
+    "min": 32,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "polarpup",
+    "min": 30,
+    "max": 34,
+    "weight": 30
+   },
+   {
+    "species": "nuggit",
+    "min": 30,
+    "max": 32,
+    "weight": 6
+   },
+   {
+    "species": "pallwick",
+    "min": 30,
+    "max": 34,
+    "weight": 5
+   },
+   {
+    "species": "mantrill",
+    "min": 30,
+    "max": 34,
+    "weight": 4
+   },
+   {
+    "species": "rimeshade",
+    "min": 30,
+    "max": 34,
+    "weight": 5
+   },
+   {
+    "species": "rivetant",
+    "min": 30,
+    "max": 32,
+    "weight": 6
+   },
+   {
+    "species": "nimbolt",
+    "min": 30,
+    "max": 34,
+    "weight": 5
+   },
+   {
+    "species": "omenkin",
+    "min": 30,
+    "max": 34,
+    "weight": 14
+   },
+   {
+    "species": "tuskling",
+    "min": 30,
+    "max": 34,
+    "weight": 14
+   },
+   {
+    "species": "twirlfin",
+    "min": 30,
+    "max": 32,
+    "weight": 6
+   },
+   {
+    "species": "tinmole",
+    "min": 30,
+    "max": 34,
+    "weight": 30
+   },
+   {
+    "species": "umbrat",
+    "min": 30,
+    "max": 34,
+    "weight": 14
+   },
+   {
+    "species": "sapfawn",
+    "min": 30,
+    "max": 32,
+    "weight": 6
+   },
+   {
+    "species": "stingrub",
+    "min": 30,
+    "max": 32,
+    "weight": 6
+   },
+   {
+    "species": "seepling",
+    "min": 30,
+    "max": 34,
+    "weight": 30
+   }
+  ]
+ },
+ "route10": {
+  "id": "route10",
+  "name": "Route 10",
+  "tiles": [
+   "##########==##########",
+   "#.........==.........#",
+   "#.........==.........#",
+   "#.F.......==.........#",
+   "#........===.........#",
+   "#........===.........#",
+   "#........==..........#",
+   "#........,,,,,,,,....#",
+   "#......==,,,,,,,,....#",
+   "#......==,,,,,,,,,,,,#",
+   "#......==.......,,,,,#",
+   "#......==.......,,,,,#",
+   "#......==.......,,,,,#",
+   "#v~~~vv==vvvvvvv,,,,,#",
+   "#.~~~..==......,,,,..#",
+   "#......==......,,,,..#",
+   "#F.....========,,,,..#",
+   "#......========,,,,..#",
+   "#......,,,,,,==,,,,..#",
+   "#......,,,,,,==......#",
+   "#......,,,,,,==......#",
+   "#......,,,,..==......#",
+   "#.....,,,,,..==......#",
+   "#.....,,,,,.S==......#",
+   "#.....,,,,...====....#",
+   "#.....,,,,...====....#",
+   "#vvvvv,,,,v,,,,==vvvv#",
+   "#..........,,,,==....#",
+   "#.......F..,,,,==....#",
+   "#..........,,,,==....#",
+   "#..........,,,,==....#",
+   "#..........,,,,==....#",
+   "#####.....=======....#",
+   "#####.....=======....#",
+   "#.........==.........#",
+   "#.###.....==.........#",
+   "#.###.....==.........#",
+   "#.........==.........#",
+   "#.........==.........#",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "saltmarsh",
+    "offset": 2
+   },
+   "up": {
+    "map": "lumenvale",
+    "offset": 2
+   }
+  },
+  "trainers": [
+   {
+    "id": "r10_t0",
+    "name": "Picnicker Cora",
+    "palette": "girl",
+    "x": 12,
+    "y": 3,
+    "dir": "left",
+    "sight": 4,
+    "pay": 48,
+    "party": [
+     [
+      "fulgorax",
+      38
+     ],
+     [
+      "wyrmscale",
+      35
+     ]
+    ],
+    "double": false,
+    "intro": "A challenger! Perfect timing.",
+    "defeat": "You're strong!",
+    "after": "Keep going, the next town isn't far."
+   },
+   {
+    "id": "r10_t1",
+    "name": "Beauty Celeste",
+    "palette": "beauty",
+    "x": 15,
+    "y": 22,
+    "dir": "left",
+    "sight": 4,
+    "pay": 48,
+    "party": [
+     [
+      "hopvault",
+      38
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "That was a great battle!",
+    "after": "Keep going, the next town isn't far."
+   },
+   {
+    "id": "r10_t2",
+    "name": "Ace Trainer Marcus",
+    "palette": "ace",
+    "x": 11,
+    "y": 15,
+    "dir": "down",
+    "sight": 4,
+    "pay": 78,
+    "party": [
+     [
+      "hopvault",
+      34
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like a trainer. Let's battle!",
+    "defeat": "I need more training...",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   },
+   {
+    "id": "r10_t3",
+    "name": "Hiker Nils",
+    "palette": "hiker",
+    "x": 10,
+    "y": 31,
+    "dir": "down",
+    "sight": 4,
+    "pay": 48,
+    "party": [
+     [
+      "morsicle",
+      36
+     ],
+     [
+      "spadeclaw",
+      34
+     ],
+     [
+      "gustrel",
+      39
+     ],
+     [
+      "jellicrown",
+      39
+     ]
+    ],
+    "double": false,
+    "intro": "Let's see what you've got!",
+    "defeat": "You're strong!",
+    "after": "Rest Lodges heal your creatures for free."
+   }
+  ],
+  "signs": {
+   "12,23": [
+    "ROUTE 10",
+    "Saltmarsh <-> Lumenvale"
+   ]
+  },
+  "encounterRate": 26,
+  "route": 10,
+  "encounters": [
+   {
+    "species": "gustrel",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "lumoth",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "elderoak",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "fernhart",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "antlegion",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "fulgorax",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "lobsmash",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "galvanfly",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "jellicrown",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "hopvault",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "polarpup",
+    "min": 34,
+    "max": 36,
+    "weight": 6
+   },
+   {
+    "species": "puffwyrm",
+    "min": 34,
+    "max": 38,
+    "weight": 5
+   },
+   {
+    "species": "mahasage",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "pulsecarab",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "ramparant",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "rocklobber",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "rimewing",
+    "min": 34,
+    "max": 38,
+    "weight": 14
+   },
+   {
+    "species": "orrerion",
+    "min": 34,
+    "max": 38,
+    "weight": 1
+   },
+   {
+    "species": "scalekin",
+    "min": 34,
+    "max": 38,
+    "weight": 5
+   },
+   {
+    "species": "velvedream",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "tinmole",
+    "min": 34,
+    "max": 36,
+    "weight": 6
+   },
+   {
+    "species": "sparquill",
+    "min": 34,
+    "max": 38,
+    "weight": 14
+   },
+   {
+    "species": "sootling",
+    "min": 34,
+    "max": 38,
+    "weight": 30
+   },
+   {
+    "species": "venomwing",
+    "min": 34,
+    "max": 38,
+    "weight": 4
+   },
+   {
+    "species": "tussler",
+    "min": 34,
+    "max": 38,
+    "weight": 14
+   },
+   {
+    "species": "seepling",
+    "min": 34,
+    "max": 36,
+    "weight": 6
+   }
+  ]
+ },
+ "route11": {
+  "id": "route11",
+  "name": "Route 11",
+  "tiles": [
+   "########################################",
+   "#......................................#",
+   "#..................,,,,................#",
+   "#..................,,,,.......,,,,,,,,.#",
+   "#............F.....,,,,...S...,,,,,,,,.#",
+   "#..............,,,===========.,,,,,,,,.#",
+   "#..............,,,===========.,,,,,,,,.#",
+   "#..............,,,==.......==.,,,,,,,,.#",
+   "#....,,,,.......,,==.......==..........#",
+   "=====,,,,==.....,,==.......==.....======",
+   "=====,,,,===========.......==.....======",
+   "#........=,,,,======.......=========...#",
+   "#.........,,,,.............=========...#",
+   "#.......F.,,,,.........................#",
+   "#...................###................#",
+   "#...........~~~~....###.....F..........#",
+   "#...........~~~~.......................#",
+   "#...........~~~~................F......#",
+   "#......................................#",
+   "########################################"
+  ],
+  "connections": {
+   "left": {
+    "map": "lumenvale",
+    "offset": 1
+   },
+   "right": {
+    "map": "coralhaven",
+    "offset": 1
+   }
+  },
+  "trainers": [
+   {
+    "id": "r11_t0",
+    "name": "Hex Maniac Mabel",
+    "palette": "hex",
+    "x": 18,
+    "y": 12,
+    "dir": "up",
+    "sight": 4,
+    "pay": 52,
+    "party": [
+     [
+      "nudibrant",
+      44
+     ],
+     [
+      "gnawlord",
+      44
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   },
+   {
+    "id": "r11_t1",
+    "name": "Twins Jo & Zoe",
+    "palette": "girl",
+    "x": 34,
+    "y": 13,
+    "dir": "up",
+    "sight": 4,
+    "pay": 52,
+    "party": [
+     [
+      "terrasolis",
+      39
+     ],
+     [
+      "mystrakoi",
+      40
+     ]
+    ],
+    "double": true,
+    "intro": "I've been training all day. Here goes!",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "Keep going, the next town isn't far."
+   },
+   {
+    "id": "r11_t2",
+    "name": "Gentleman Rupert",
+    "palette": "gentleman",
+    "x": 29,
+    "y": 5,
+    "dir": "left",
+    "sight": 4,
+    "pay": 52,
+    "party": [
+     [
+      "dreadspore",
+      39
+     ],
+     [
+      "cascadon",
+      42
+     ],
+     [
+      "excavore",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "I've been training all day. Here goes!",
+    "defeat": "You're strong!",
+    "after": "Keep going, the next town isn't far."
+   },
+   {
+    "id": "r11_t3",
+    "name": "Picnicker Alma",
+    "palette": "girl",
+    "x": 20,
+    "y": 8,
+    "dir": "left",
+    "sight": 4,
+    "pay": 52,
+    "party": [
+     [
+      "mystrakoi",
+      42
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "That was a great battle!",
+    "after": "In a double battle, some moves hit both foes at once."
+   },
+   {
+    "id": "r11_t4",
+    "name": "Lass Haley",
+    "palette": "girl",
+    "x": 27,
+    "y": 13,
+    "dir": "up",
+    "sight": 4,
+    "pay": 52,
+    "party": [
+     [
+      "mystrakoi",
+      41
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   }
+  ],
+  "signs": {
+   "26,4": [
+    "ROUTE 11",
+    "Lumenvale <-> Coralhaven"
+   ]
+  },
+  "encounterRate": 26,
+  "route": 11,
+  "encounters": [
+   {
+    "species": "gnawlord",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "bouldron",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "fungloom",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "duskhound",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "cascadon",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "floodfang",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "cairnox",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "excavore",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "dreadspore",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "kiloclaw",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "lavalith",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "hogrumble",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "loamdrill",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "larkspire",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "mystrakoi",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "ransackle",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "nudibrant",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "omenwraith",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "rubythrush",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "sootling",
+    "min": 38,
+    "max": 40,
+    "weight": 6
+   },
+   {
+    "species": "willowhart",
+    "min": 38,
+    "max": 42,
+    "weight": 4
+   },
+   {
+    "species": "shalekid",
+    "min": 38,
+    "max": 42,
+    "weight": 30
+   },
+   {
+    "species": "yawnbruin",
+    "min": 38,
+    "max": 42,
+    "weight": 5
+   },
+   {
+    "species": "xenolith",
+    "min": 38,
+    "max": 42,
+    "weight": 14
+   },
+   {
+    "species": "thalassor",
+    "min": 38,
+    "max": 42,
+    "weight": 1
+   },
+   {
+    "species": "terrasolis",
+    "min": 38,
+    "max": 42,
+    "weight": 1
+   },
+   {
+    "species": "zenithar",
+    "min": 38,
+    "max": 42,
+    "weight": 1
+   },
+   {
+    "species": "solvara",
+    "min": 38,
+    "max": 42,
+    "weight": 1
+   },
+   {
+    "species": "velunox",
+    "min": 38,
+    "max": 42,
+    "weight": 1
+   },
+   {
+    "species": "starchime",
+    "min": 38,
+    "max": 42,
+    "weight": 1
+   }
+  ]
+ },
+ "route12": {
+  "id": "route12",
+  "name": "Victory Road",
+  "tiles": [
+   "##########==##########",
+   "#..###....==.........#",
+   "#..###....==..F......#",
+   "#.........==.........#",
+   "#.......====.........#",
+   "#.......====.........#",
+   "#.......==...........#",
+   "#F......==...........#",
+   "#.......===========..#",
+   "#.......======,,,,,..#",
+   "#.............,,,,,..#",
+   "#.............,,,,,..#",
+   "#................==..#",
+   "#vvvvvvvvvv,,,,,,==vv#",
+   "#,,,,,.....,,,,,,==..#",
+   "#,,,,,.....,,,,,,==..#",
+   "#,,,,,....,,,,=====..#",
+   "#,,,,,....,,,,=====,,#",
+   "#.........,,,,==,,,,,#",
+   "#.............==,,,,,#",
+   "###...........==,,,,,#",
+   "###...........==.....#",
+   "###...........==.....#",
+   "#.##..........==.....#",
+   "#.##.....=======..F.F#",
+   "#.##.....=======.....#",
+   "#.......F==..........#",
+   "#........==....###...#",
+   "#........==....###...#",
+   "#,,,,,,..==.....~~~~.#",
+   "#,,,,,,..==.....~~~~.#",
+   "#,,,,,,..==S....~~~~.#",
+   "#,,,,,,..===.........#",
+   "#,,,,,,..===,........#",
+   "#,,,,,,..,==,........#",
+   "#........,==,........#",
+   "#.........==.........#",
+   "#.........==..F......#",
+   "#.........==.........#",
+   "##########==##########"
+  ],
+  "connections": {
+   "down": {
+    "map": "coralhaven",
+    "offset": 2
+   },
+   "up": {
+    "map": "summitcrown",
+    "offset": 2
+   }
+  },
+  "trainers": [
+   {
+    "id": "rival_r12",
+    "name": "Rival Kai",
+    "palette": "rival",
+    "x": 13,
+    "y": 26,
+    "dir": "up",
+    "sight": 4,
+    "pay": 60,
+    "party": [
+     [
+      "duskhound",
+      46
+     ],
+     [
+      "amperix",
+      47
+     ],
+     [
+      "frostkit",
+      46
+     ],
+     [
+      "bouldron",
+      48
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! Thought I'd find you here. Let's see who's grown stronger!",
+    "defeat": "Argh! You're still ahead of me...",
+    "after": "I'll catch up. Just you wait!"
+   },
+   {
+    "id": "r12_t1",
+    "name": "Ace Trainer Jordan",
+    "palette": "ace",
+    "x": 16,
+    "y": 21,
+    "dir": "left",
+    "sight": 4,
+    "pay": 86,
+    "party": [
+     [
+      "cairnox",
+      43
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like a trainer. Let's battle!",
+    "defeat": "Aww, I lost!",
+    "after": "Type matchups really matter. Super effective hits do double damage!"
+   },
+   {
+    "id": "r12_t2",
+    "name": "Ace Trainer Sasha",
+    "palette": "ace",
+    "x": 12,
+    "y": 4,
+    "dir": "left",
+    "sight": 4,
+    "pay": 86,
+    "party": [
+     [
+      "vulcandra",
+      46
+     ],
+     [
+      "thalassor",
+      46
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like a trainer. Let's battle!",
+    "defeat": "Wow, I didn't see that coming.",
+    "after": "Rest Lodges heal your creatures for free."
+   },
+   {
+    "id": "r12_t3",
+    "name": "Ace Trainer Jordan",
+    "palette": "ace",
+    "x": 7,
+    "y": 5,
+    "dir": "right",
+    "sight": 4,
+    "pay": 86,
+    "party": [
+     [
+      "xenolith",
+      48
+     ]
+    ],
+    "double": false,
+    "intro": "Hey! You look like a trainer. Let's battle!",
+    "defeat": "You're strong!",
+    "after": "Each creature's nature boosts one stat and lowers another."
+   },
+   {
+    "id": "r12_t4",
+    "name": "Ace Trainer Kelsey",
+    "palette": "ace",
+    "x": 19,
+    "y": 16,
+    "dir": "left",
+    "sight": 4,
+    "pay": 86,
+    "party": [
+     [
+      "solvara",
+      45
+     ],
+     [
+      "lullamoth",
+      47
+     ],
+     [
+      "loamdrill",
+      42
+     ],
+     [
+      "lullamoth",
+      45
+     ]
+    ],
+    "double": false,
+    "intro": "You can't walk past without battling me!",
+    "defeat": "That was a great battle!",
+    "after": "Rest Lodges heal your creatures for free."
+   },
+   {
+    "id": "r12_t5",
+    "name": "Ace Trainer Sasha",
+    "palette": "ace",
+    "x": 11,
+    "y": 30,
+    "dir": "left",
+    "sight": 4,
+    "pay": 86,
+    "party": [
+     [
+      "yawnbruin",
+      44
+     ],
+     [
+      "kingmane",
+      46
+     ]
+    ],
+    "double": false,
+    "intro": "My creatures are itching for a fight!",
+    "defeat": "Aww, I lost!",
+    "after": "Status conditions like sleep and paralysis make catching easier."
+   }
+  ],
+  "signs": {
+   "11,31": [
+    "VICTORY ROAD",
+    "Coralhaven <-> Summit Crown"
+   ]
+  },
+  "encounterRate": 26,
+  "route": 12,
+  "encounters": [
+   {
+    "species": "gnawlord",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "fungloom",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "duskhound",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "bounder",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "cascadon",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "cairnox",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "excavore",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "kiloclaw",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "hoarwhal",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "kingmane",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "lullamoth",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "gorsebrier",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "loamdrill",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "mystrakoi",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "quarrox",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "requiember",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "ransackle",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "rubythrush",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "vaultusk",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "sootling",
+    "min": 42,
+    "max": 44,
+    "weight": 6
+   },
+   {
+    "species": "willowhart",
+    "min": 42,
+    "max": 46,
+    "weight": 4
+   },
+   {
+    "species": "shalekid",
+    "min": 42,
+    "max": 46,
+    "weight": 30
+   },
+   {
+    "species": "yawnbruin",
+    "min": 42,
+    "max": 46,
+    "weight": 5
+   },
+   {
+    "species": "xenolith",
+    "min": 42,
+    "max": 46,
+    "weight": 14
+   },
+   {
+    "species": "orrerion",
+    "min": 50,
+    "max": 50,
+    "weight": 1
+   },
+   {
+    "species": "thalassor",
+    "min": 50,
+    "max": 50,
+    "weight": 1
+   },
+   {
+    "species": "terrasolis",
+    "min": 50,
+    "max": 50,
+    "weight": 1
+   },
+   {
+    "species": "zenithar",
+    "min": 50,
+    "max": 50,
+    "weight": 1
+   },
+   {
+    "species": "solvara",
+    "min": 50,
+    "max": 50,
+    "weight": 1
+   },
+   {
+    "species": "velunox",
+    "min": 50,
+    "max": 50,
+    "weight": 1
+   },
+   {
+    "species": "starchime",
+    "min": 50,
+    "max": 50,
+    "weight": 1
+   }
+  ]
+ },
+ "gym1": {
+  "id": "gym1",
+  "name": "Stonecrest Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "stonecrest",
+    "x": 20,
+    "y": 17,
+    "dir": "down"
+   }
+  },
+  "theme": "#c8b088",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym1_a",
+    "name": "Gym Trainer Ash",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "cobblet",
+      9
+     ],
+     [
+      "pebblin",
+      10
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Rock types. Plan around that!"
+   },
+   {
+    "id": "gym1_b",
+    "name": "Gym Trainer Ivo",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "nuggit",
+      10
+     ],
+     [
+      "kragshell",
+      11
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym1_leader",
+    "name": "Leader Garna",
+    "palette": "gymRock",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "kobblet",
+      12
+     ],
+     [
+      "nuggit",
+      12
+     ],
+     [
+      "lavalug",
+      14
+     ]
+    ],
+    "intro": "I'm Garna! My Rock creatures are as stubborn as I am. Try to crack us!",
+    "defeat": "Hah! You chipped right through. Take the Boulder Crest!",
+    "after": "The Boulder Crest shows you've mastered my gym. Keep climbing!",
+    "badge": 1
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Rock-type creatures.",
+     "Water, Grass, Fighting, Ground and Steel moves break rocks apart!"
+    ]
+   }
+  ]
+ },
+ "gym2": {
+  "id": "gym2",
+  "name": "Duskmere Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "duskmere",
+    "x": 5,
+    "y": 7,
+    "dir": "down"
+   }
+  },
+  "theme": "#d89878",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym2_a",
+    "name": "Gym Trainer Bryn",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "monkit",
+      13
+     ],
+     [
+      "rambrawl",
+      14
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Fighting types. Plan around that!"
+   },
+   {
+    "id": "gym2_b",
+    "name": "Gym Trainer Jade",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "tussler",
+      14
+     ],
+     [
+      "rambrawl",
+      15
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym2_leader",
+    "name": "Leader Torvin",
+    "palette": "gymFighting",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "bruisant",
+      16
+     ],
+     [
+      "jabcrab",
+      17
+     ],
+     [
+      "cuffling",
+      18
+     ]
+    ],
+    "intro": "Torvin's the name. Every battle is training. Show me your strength!",
+    "defeat": "What a workout! The Iron Fist badge is yours.",
+    "after": "The Iron Fist shows you've mastered my gym. Keep climbing!",
+    "badge": 2
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Fighting-type creatures.",
+     "Flying and Psychic moves hit Fighting types hard."
+    ]
+   }
+  ]
+ },
+ "gym3": {
+  "id": "gym3",
+  "name": "Voltara Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "voltara",
+    "x": 20,
+    "y": 17,
+    "dir": "down"
+   }
+  },
+  "theme": "#e8d880",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym3_a",
+    "name": "Gym Trainer Cole",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "arclure",
+      17
+     ],
+     [
+      "ohmite",
+      18
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Electric types. Plan around that!"
+   },
+   {
+    "id": "gym3_b",
+    "name": "Gym Trainer Kip",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "joltfang",
+      18
+     ],
+     [
+      "voltick",
+      19
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym3_leader",
+    "name": "Leader Wynn",
+    "palette": "gymElectric",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "raylet",
+      20
+     ],
+     [
+      "glowgnat",
+      21
+     ],
+     [
+      "voltick",
+      22
+     ],
+     [
+      "nimbolt",
+      23
+     ]
+    ],
+    "intro": "Wynn here! I power this whole town. Let's see if you can handle the voltage!",
+    "defeat": "Shorted out! You earned the Spark Coil.",
+    "after": "The Spark Coil shows you've mastered my gym. Keep climbing!",
+    "badge": 3
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Electric-type creatures.",
+     "Ground types can't be touched by Electric moves!"
+    ]
+   }
+  ]
+ },
+ "gym4": {
+  "id": "gym4",
+  "name": "Cinder City Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "cindercity",
+    "x": 5,
+    "y": 17,
+    "dir": "down"
+   }
+  },
+  "theme": "#e8a070",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym4_a",
+    "name": "Gym Trainer Dina",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "pallwick",
+      21
+     ],
+     [
+      "scorchnewt",
+      22
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Fire types. Plan around that!"
+   },
+   {
+    "id": "gym4_b",
+    "name": "Gym Trainer Lark",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "pallwick",
+      22
+     ],
+     [
+      "hearthawk",
+      23
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym4_leader",
+    "name": "Leader Sola",
+    "palette": "gymFire",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "scorchnewt",
+      24
+     ],
+     [
+      "mournflare",
+      25
+     ],
+     [
+      "hearthawk",
+      26
+     ],
+     [
+      "lavalug",
+      27
+     ]
+    ],
+    "intro": "I'm Sola. The volcano taught me patience, and then it taught me to burn bright!",
+    "defeat": "You kept your cool. The Ember Seal is yours.",
+    "after": "The Ember Seal shows you've mastered my gym. Keep climbing!",
+    "badge": 4
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Fire-type creatures.",
+     "Water, Rock and Ground moves put out the flames."
+    ]
+   }
+  ]
+ },
+ "gym5": {
+  "id": "gym5",
+  "name": "Bramblegate Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "bramblegate",
+    "x": 5,
+    "y": 6,
+    "dir": "down"
+   }
+  },
+  "theme": "#d8d0c0",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym5_a",
+    "name": "Gym Trainer Eli",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "yawnbruin",
+      25
+     ],
+     [
+      "kingmane",
+      26
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Normal types. Plan around that!"
+   },
+   {
+    "id": "gym5_b",
+    "name": "Gym Trainer Moss",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "kingmane",
+      26
+     ],
+     [
+      "hogburr",
+      27
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym5_leader",
+    "name": "Leader Hollis",
+    "palette": "gymNormal",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "kingmane",
+      28
+     ],
+     [
+      "gnawlord",
+      29
+     ],
+     [
+      "ransackle",
+      30
+     ],
+     [
+      "hogburr",
+      31
+     ]
+    ],
+    "intro": "I'm Hollis. Plain creatures, perfect fundamentals. Nothing fancy can save you here.",
+    "defeat": "Fundamentals beaten by fundamentals. Take the Hearth Badge.",
+    "after": "The Hearth Badge shows you've mastered my gym. Keep climbing!",
+    "badge": 5
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Normal-type creatures.",
+     "Fighting moves are the only super-effective option. Ghosts are immune to Normal moves!"
+    ]
+   }
+  ]
+ },
+ "gym6": {
+  "id": "gym6",
+  "name": "Skyreach Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "skyreach",
+    "x": 19,
+    "y": 17,
+    "dir": "down"
+   }
+  },
+  "theme": "#b8c8f0",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym6_a",
+    "name": "Gym Trainer Faye",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "nimbolt",
+      28
+     ],
+     [
+      "plumehawk",
+      29
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Flying types. Plan around that!"
+   },
+   {
+    "id": "gym6_b",
+    "name": "Gym Trainer Nia",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "brightwing",
+      29
+     ],
+     [
+      "nimbusnake",
+      30
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym6_leader",
+    "name": "Leader Aeryn",
+    "palette": "gymFlying",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "plumehawk",
+      31
+     ],
+     [
+      "nimbusnake",
+      32
+     ],
+     [
+      "lumoth",
+      33
+     ],
+     [
+      "larkspire",
+      34
+     ]
+    ],
+    "intro": "Aeryn of the high winds! Up here, only the swift survive.",
+    "defeat": "You rode the storm. The Gale Feather is yours.",
+    "after": "The Gale Feather shows you've mastered my gym. Keep climbing!",
+    "badge": 6
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Flying-type creatures.",
+     "Electric, Ice and Rock moves ground these flyers."
+    ]
+   }
+  ]
+ },
+ "gym7": {
+  "id": "gym7",
+  "name": "Lumenvale Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "lumenvale",
+    "x": 20,
+    "y": 17,
+    "dir": "down"
+   }
+  },
+  "theme": "#e0b0d8",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym7_a",
+    "name": "Gym Trainer Gray",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "mystrakoi",
+      36
+     ],
+     [
+      "cairnox",
+      37
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Psychic types. Plan around that!"
+   },
+   {
+    "id": "gym7_b",
+    "name": "Gym Trainer Oak",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "mystrakoi",
+      37
+     ],
+     [
+      "mahasage",
+      38
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym7_leader",
+    "name": "Leaders Ilsa & Oren",
+    "palette": "gymPsychic",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "mystrakoi",
+      39
+     ],
+     [
+      "psyowl",
+      40
+     ],
+     [
+      "velvedream",
+      41
+     ],
+     [
+      "vortisage",
+      42
+     ]
+    ],
+    "intro": "We are Ilsa and Oren. We think as one, so we fight as one. Two on two!",
+    "defeat": "Our minds were open... and you walked right in. The Mind Prism is yours.",
+    "after": "The Mind Prism shows you've mastered my gym. Keep climbing!",
+    "badge": 7,
+    "double": true
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Psychic-type creatures.",
+     "Bug, Ghost and Dark moves. And it's a double battle, so bring two strong partners!"
+    ]
+   }
+  ]
+ },
+ "gym8": {
+  "id": "gym8",
+  "name": "Coralhaven Gym",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "coralhaven",
+    "x": 6,
+    "y": 17,
+    "dir": "down"
+   }
+  },
+  "theme": "#90c0e8",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "gym8_a",
+    "name": "Gym Trainer Hana",
+    "palette": "ace",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "pulsaray",
+      39
+     ],
+     [
+      "glimmerfin",
+      40
+     ]
+    ],
+    "intro": "You want to face our leader? Get past me first!",
+    "defeat": "You're the real deal.",
+    "after": "Our leader loves Water types. Plan around that!"
+   },
+   {
+    "id": "gym8_b",
+    "name": "Gym Trainer Pim",
+    "palette": "ace",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 30,
+    "party": [
+     [
+      "morsicle",
+      40
+     ],
+     [
+      "glimmerfin",
+      41
+     ]
+    ],
+    "intro": "Halt! Only the worthy may pass.",
+    "defeat": "Go on then. The leader awaits.",
+    "after": "Good luck. You'll need it."
+   },
+   {
+    "id": "gym8_leader",
+    "name": "Leader Marisol",
+    "palette": "gymWater",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 100,
+    "party": [
+     [
+      "cascadon",
+      42
+     ],
+     [
+      "tundrusk",
+      43
+     ],
+     [
+      "floodfang",
+      44
+     ],
+     [
+      "rimetusk",
+      45
+     ],
+     [
+      "bogmonarch",
+      46
+     ]
+    ],
+    "intro": "I'm Marisol. The sea gives and the sea takes. Today it takes your win!",
+    "defeat": "Swept away by the tide... The Tide Pearl, the eighth badge, is yours.",
+    "after": "The Tide Pearl shows you've mastered my gym. Keep climbing!",
+    "badge": 8
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 13,
+    "dir": "left",
+    "palette": "clerk",
+    "text": [
+     "Hey, challenger! This gym uses Water-type creatures.",
+     "Grass and Electric moves turn the tide."
+    ]
+   }
+  ]
+ },
+ "league": {
+  "id": "league",
+  "name": "Wildbound League",
+  "tiles": [
+   "|||||||||||||||",
+   "|_____o_o_____|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|oo_________oo|",
+   "|_____________|",
+   "|_____________|",
+   "|_____________|",
+   "|||||||e|||||||"
+  ],
+  "connections": {},
+  "warps": {
+   "7,15": {
+    "map": "summitcrown",
+    "x": 5,
+    "y": 17,
+    "dir": "down"
+   }
+  },
+  "theme": "#c8b8e8",
+  "indoor": true,
+  "trainers": [
+   {
+    "id": "elite_vesna",
+    "name": "Elite Vesna",
+    "palette": "hex",
+    "x": 4,
+    "y": 10,
+    "dir": "right",
+    "sight": 4,
+    "pay": 150,
+    "party": [
+     [
+      "rimeshade",
+      46
+     ],
+     [
+      "omenwraith",
+      47
+     ],
+     [
+      "duskwisp",
+      48
+     ],
+     [
+      "vespermaw",
+      48
+     ],
+     [
+      "ransackle",
+      49
+     ]
+    ],
+    "intro": "Welcome to the League. I am Vesna. The shadows will test you first.",
+    "defeat": "The darkness lifts... Go on.",
+    "after": "The Champion waits above."
+   },
+   {
+    "id": "elite_brannoc",
+    "name": "Elite Brannoc",
+    "palette": "blackbelt",
+    "x": 10,
+    "y": 6,
+    "dir": "left",
+    "sight": 4,
+    "pay": 150,
+    "party": [
+     [
+      "zarathorn",
+      48
+     ],
+     [
+      "kragshell",
+      49
+     ],
+     [
+      "drakelet",
+      50
+     ],
+     [
+      "ramparant",
+      49
+     ],
+     [
+      "kiloclaw",
+      50
+     ]
+    ],
+    "intro": "Brannoc of the League. Dragons and steel, the strongest of all!",
+    "defeat": "Unbelievable strength...",
+    "after": "Only the Champion remains."
+   },
+   {
+    "id": "champion",
+    "name": "Champion Rowan",
+    "palette": "rival",
+    "x": 7,
+    "y": 2,
+    "dir": "down",
+    "sight": 0,
+    "pay": 200,
+    "party": [
+     [
+      "rubythrush",
+      50
+     ],
+     [
+      "galvanfly",
+      51
+     ],
+     [
+      "larcenox",
+      52
+     ],
+     [
+      "anvilfist",
+      53
+     ],
+     [
+      "abyssaur",
+      54
+     ],
+     [
+      "fernhart",
+      55
+     ]
+    ],
+    "intro": "So you're the one with eight badges. I'm Rowan, the Champion. Let's make this a battle worth remembering!",
+    "defeat": "Incredible. You are the new Champion of Wildbound!",
+    "after": "Champion! The whole region knows your name now.",
+    "champion": true
+   }
+  ]
+ }
+}

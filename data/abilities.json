@@ -1,0 +1,138 @@
+{
+ "overgrow": {
+  "name": "Overgrow",
+  "desc": "Ups Grass moves 1.5x at 1/3 HP or less."
+ },
+ "blaze": {
+  "name": "Blaze",
+  "desc": "Ups Fire moves 1.5x at 1/3 HP or less."
+ },
+ "torrent": {
+  "name": "Torrent",
+  "desc": "Ups Water moves 1.5x at 1/3 HP or less."
+ },
+ "swarm": {
+  "name": "Swarm",
+  "desc": "Ups Bug moves 1.5x at 1/3 HP or less."
+ },
+ "intimidate": {
+  "name": "Intimidate",
+  "desc": "Lowers foes' Attack on entry."
+ },
+ "static": {
+  "name": "Static",
+  "desc": "Contact may paralyze the attacker (1/3)."
+ },
+ "levitate": {
+  "name": "Levitate",
+  "desc": "Immune to Ground moves."
+ },
+ "sturdy": {
+  "name": "Sturdy",
+  "desc": "Immune to one-hit KO moves."
+ },
+ "rockHead": {
+  "name": "Rock Head",
+  "desc": "No recoil damage."
+ },
+ "keenEye": {
+  "name": "Keen Eye",
+  "desc": "Accuracy can't be lowered."
+ },
+ "guts": {
+  "name": "Guts",
+  "desc": "Attack 1.5x when statused; ignores burn."
+ },
+ "runAway": {
+  "name": "Run Away",
+  "desc": "Always escapes wild battles."
+ },
+ "shieldDust": {
+  "name": "Shield Dust",
+  "desc": "Blocks added effects of moves."
+ },
+ "shedSkin": {
+  "name": "Shed Skin",
+  "desc": "1/3 chance to cure status each turn."
+ },
+ "compoundEyes": {
+  "name": "Compound Eyes",
+  "desc": "Accuracy 1.3x."
+ },
+ "effectSpore": {
+  "name": "Effect Spore",
+  "desc": "Contact may poison, paralyze or sleep (10%)."
+ },
+ "poisonPoint": {
+  "name": "Poison Point",
+  "desc": "Contact may poison the attacker (1/3)."
+ },
+ "insomnia": {
+  "name": "Insomnia",
+  "desc": "Can't fall asleep."
+ },
+ "synchronize": {
+  "name": "Synchronize",
+  "desc": "Passes burn, poison or paralysis back."
+ },
+ "innerFocus": {
+  "name": "Inner Focus",
+  "desc": "Never flinches."
+ },
+ "thickFat": {
+  "name": "Thick Fat",
+  "desc": "Halves Fire and Ice damage."
+ },
+ "battleArmor": {
+  "name": "Battle Armor",
+  "desc": "Blocks critical hits."
+ },
+ "clearBody": {
+  "name": "Clear Body",
+  "desc": "Stats can't be lowered by foes."
+ },
+ "swiftSwim": {
+  "name": "Swift Swim",
+  "desc": "Speed doubles in rain."
+ },
+ "chlorophyll": {
+  "name": "Chlorophyll",
+  "desc": "Speed doubles in sun."
+ },
+ "flashFire": {
+  "name": "Flash Fire",
+  "desc": "Absorbs Fire moves to power up Fire moves."
+ },
+ "waterAbsorb": {
+  "name": "Water Absorb",
+  "desc": "Water moves heal 1/4 HP."
+ },
+ "voltAbsorb": {
+  "name": "Volt Absorb",
+  "desc": "Electric moves heal 1/4 HP."
+ },
+ "hustle": {
+  "name": "Hustle",
+  "desc": "Attack 1.5x, physical accuracy 0.8x."
+ },
+ "pressure": {
+  "name": "Pressure",
+  "desc": "Foes use 2 PP per move."
+ },
+ "earlyBird": {
+  "name": "Early Bird",
+  "desc": "Wakes up twice as fast."
+ },
+ "naturalCure": {
+  "name": "Natural Cure",
+  "desc": "Cures status when switched out."
+ },
+ "limber": {
+  "name": "Limber",
+  "desc": "Can't be paralyzed."
+ },
+ "ownTempo": {
+  "name": "Own Tempo",
+  "desc": "Can't be confused."
+ }
+}

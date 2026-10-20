@@ -1,0 +1,137 @@
+{
+ "potion": {
+  "id": "potion",
+  "name": "Potion",
+  "price": 300,
+  "effect": {
+   "kind": "heal",
+   "amount": 20
+  },
+  "desc": "Restores 20 HP."
+ },
+ "superPotion": {
+  "id": "superPotion",
+  "name": "Super Potion",
+  "price": 700,
+  "effect": {
+   "kind": "heal",
+   "amount": 50
+  },
+  "desc": "Restores 50 HP."
+ },
+ "hyperPotion": {
+  "id": "hyperPotion",
+  "name": "Hyper Potion",
+  "price": 1200,
+  "effect": {
+   "kind": "heal",
+   "amount": 200
+  },
+  "desc": "Restores 200 HP."
+ },
+ "revive": {
+  "id": "revive",
+  "name": "Revive",
+  "price": 1500,
+  "effect": {
+   "kind": "revive"
+  },
+  "desc": "Revives a fainted creature with half HP."
+ },
+ "antidote": {
+  "id": "antidote",
+  "name": "Antidote",
+  "price": 100,
+  "effect": {
+   "kind": "cure",
+   "statuses": [
+    "psn",
+    "tox"
+   ]
+  },
+  "desc": "Cures poison."
+ },
+ "parlyzHeal": {
+  "id": "parlyzHeal",
+  "name": "Parlyz Heal",
+  "price": 200,
+  "effect": {
+   "kind": "cure",
+   "statuses": [
+    "par"
+   ]
+  },
+  "desc": "Cures paralysis."
+ },
+ "awakening": {
+  "id": "awakening",
+  "name": "Awakening",
+  "price": 250,
+  "effect": {
+   "kind": "cure",
+   "statuses": [
+    "slp"
+   ]
+  },
+  "desc": "Wakes a sleeper."
+ },
+ "burnHeal": {
+  "id": "burnHeal",
+  "name": "Burn Heal",
+  "price": 250,
+  "effect": {
+   "kind": "cure",
+   "statuses": [
+    "brn"
+   ]
+  },
+  "desc": "Heals a burn."
+ },
+ "fullHeal": {
+  "id": "fullHeal",
+  "name": "Full Heal",
+  "price": 600,
+  "effect": {
+   "kind": "cure",
+   "statuses": [
+    "brn",
+    "par",
+    "psn",
+    "tox",
+    "slp",
+    "frz"
+   ]
+  },
+  "desc": "Cures any status."
+ },
+ "orb": {
+  "id": "orb",
+  "name": "Capture Orb",
+  "price": 200,
+  "effect": {
+   "kind": "ball",
+   "mult10": 10
+  },
+  "desc": "Catches wild creatures."
+ },
+ "greatOrb": {
+  "id": "greatOrb",
+  "name": "Great Orb",
+  "price": 600,
+  "effect": {
+   "kind": "ball",
+   "mult10": 15
+  },
+  "desc": "Better catch rate (1.5x)."
+ },
+ "ultraOrb": {
+  "id": "ultraOrb",
+  "name": "Ultra Orb",
+  "price": 1200,
+  "effect": {
+   "kind": "ball",
+   "mult10": 20
+  },
+  "desc": "High catch rate (2x)."
+ }
+}
