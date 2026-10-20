@@ -1816,6 +1816,142 @@ for mid, before in PAINTED_GRIDS.items():
 OUT['emerald'] = EM
 
 
+# ---------- item balls: Emerald-like density, on ground the painting shows as open ----------
+# The paintings (assets/maps) don't always match the grid: a tile the grid calls grass can be painted as the edge
+# of a tree clump, and obstacle pockets are painted as solid forest. So every item is checked against the
+# painting (a cell full of dark outlines and shadow is a tree, tall grass or cliff) and against the grid as the
+# game builds it (with data/map_fit.json on top), and moved to the nearest open, reachable spot when it fails.
+VISIBLE_PER_ROUTE = {1: 2, 2: 2}  # routes 3-12 keep 4; Emerald routes have a handful of item balls each
+HIDDEN_PER_ROUTE = 2
+MAP_FIT = load('map_fit') if os.path.exists(os.path.join(ROOT, 'data', 'map_fit.json')) else {}
+ITEM_RNG = random.Random(11)
+
+
+def item_rank(item_id):
+    kind = ALL_ITEMS[item_id].get('effect', {}).get('kind')
+    order = ['tm', 'evoStone', 'held', 'rareCandy', 'ppUp', 'vitamin', 'revive', 'fullRestore', 'pp']
+    return order.index(kind) if kind in order else len(order)
+
+
+def game_grid(mid):
+    """The grid as the game uses it: map_fit applies to tiles that are still as painted."""
+    g = any_grid(mid)
+    painted = PAINTED_GRIDS.get(mid)
+    for k, ch in MAP_FIT.get(mid, {}).items():
+        x, y = map(int, k.split(','))
+        if y < len(g) and x < len(g[y]) and painted and y < len(painted) and x < len(painted[y]) \
+                and painted[y][x] == g[y][x]:
+            g[y][x] = ch
+    return g
+
+
+def arrivals(mid):
+    """Where the player can arrive on a map: edges with connections, and the far end of every warp into it."""
+    g = game_grid(mid)
+    out = set(entries(mid, g))
+    srcs = list(MAPS.items()) + list(OUT['maps'].items()) + list(INTERIORS.items())
+    warp_lists = [m.get('warps', {}) for _, m in srcs] + [p.get('warps', {}) for p in OUT['mapPatches'].values()]
+    warp_lists += list(load('interiors')['warps'].values())
+    for ws in warp_lists:
+        for w in ws.values():
+            if w.get('map') == mid:
+                out.add((w['x'], w['y']))
+    return out
+
+
+def open_cells(mid, g):
+    """Cells the painting shows as open ground (few dark pixels), or None when the map isn't painted."""
+    path = os.path.join(ROOT, 'assets', 'maps', mid + '.png')
+    if not os.path.exists(path):
+        return None
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    im = Image.open(path).convert('L')
+    h, w = len(g), len(g[0])
+    if im.size != (w * 16, h * 16):
+        return None
+    px = im.load()
+
+    def cell(x, y):
+        return [px[x * 16 + i, y * 16 + j] for j in range(16) for i in range(16)]
+    floor = sorted(sorted(cell(x, y))[128] for y in range(h) for x in range(w) if g[y][x] in '.g_')
+    if not floor:
+        return None
+    ref = floor[len(floor) // 2]
+    return {(x, y) for y in range(h) for x in range(w) if sum(v < 0.72 * ref for v in cell(x, y)) < 16}
+
+
+def site_items(mid):
+    p = OUT['mapPatches'].get(mid, {})
+    items = p.get('items', [])
+    if not items:
+        return
+    g = game_grid(mid)
+    h, w = len(g), len(g[0])
+    open_ = open_cells(mid, g)
+    r = reach(g, arrivals(mid), passable=WALKABLE | FIELD)
+    # Thin routes out: the best items stay visible, the next best become hidden, the rest are dropped.
+    rn = route_no(mid)
+    if 1 <= rn <= 12:
+        vis = sorted([it for it in items if not it['hidden']], key=lambda it: item_rank(it['item']))
+        keep = vis[:VISIBLE_PER_ROUTE.get(rn, 4)]
+        spill = [it for it in vis[len(keep):] if item_rank(it['item']) < 4]
+        hid = spill + sorted([it for it in items if it['hidden']], key=lambda it: item_rank(it['item']))
+        hid = hid[:HIDDEN_PER_ROUTE]
+        for it in hid:
+            it['hidden'] = True
+        items = keep + hid
+    taken = occupied(mid) - {(it['x'], it['y']) for it in p.get('items', [])}
+    # Ledges and grass-edge rows aren't good spots; nor is anything right next to a warp or a trainer.
+    placed = []
+
+    def good(x, y, hidden):
+        if not (0 < x < w - 1 and 0 < y < h - 1) or g[y][x] not in ('.F' if hidden else '.F=ag_'):
+            return False
+        if (x, y) not in r or (x, y) in taken or (x, y) in placed:
+            return False
+        if open_ is not None and (x, y) not in open_:
+            return False
+        # Reachable from at least one open side, without standing on another item.
+        return any(tile(g, x + dx, y + dy) in WALKABLE and (x + dx, y + dy) in r and (x + dx, y + dy) not in placed
+                   and (open_ is None or (x + dx, y + dy) in open_) for dx, dy in DX)
+
+    def spaced(x, y):
+        return all(abs(x - a) + abs(y - b) >= 4 for a, b in placed)
+
+    for it in items:
+        x, y = it['x'], it['y']
+        if not (good(x, y, it['hidden']) and spaced(x, y)):
+            opts = [(abs(xx - x) + abs(yy - y), ITEM_RNG.random(), xx, yy) for yy in range(h) for xx in range(w)
+                    if good(xx, yy, it['hidden']) and spaced(xx, yy)
+                    and all(abs(xx - a) + abs(yy - b) >= 2 for a, b in taken)]
+            if not opts:
+                print('warning: no open spot for', it['id'], 'on', mid, file=sys.stderr)
+                continue
+            _, _, x, y = min(opts)
+            it['x'], it['y'] = x, y
+        placed.append((x, y))
+    p['items'] = [it for it in items if (it['x'], it['y']) in placed]
+
+
+for _mid in sorted(OUT['mapPatches']):
+    site_items(_mid)
+
+
+# Cave entrances on outdoor maps: the paintings show them as just another tree clump (or nothing at all, on the
+# sea), so the game draws a rocky entrance over the painting there (overworld.gd), and a warp is never an
+# invisible spot in a forest. Inside caves the mouths and ladders are painted.
+for _mid in sorted(set(MAPS) | set(OUT['maps'])):
+    _m = OUT['maps'].get(_mid) or MAPS[_mid]
+    if _m.get('indoor') or _m.get('cave') or not os.path.exists(os.path.join(ROOT, 'assets', 'maps', _mid + '.png')):
+        continue
+    _mouths = ['%d,%d' % (x, y) for y, row in enumerate(game_grid(_mid)) for x, ch in enumerate(row) if ch == 'y']
+    if _mouths:
+        (OUT['maps'][_mid] if _mid in OUT['maps'] else patch(_mid))['mouths'] = _mouths
+
+
 # ---------- validation ----------
 def all_maps():
     out = {}

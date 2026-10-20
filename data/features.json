@@ -27440,7 +27440,10 @@
    },
    "berries": {
     "25,4": "liechiBerry"
-   }
+   },
+   "mouths": [
+    "16,12"
+   ]
   },
   "seafloor": {
    "id": "seafloor",
@@ -30483,30 +30486,6 @@
    },
    "items": [
     {
-     "id": "route3_i13",
-     "x": 21,
-     "y": 1,
-     "item": "superPotion",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route3_i14",
-     "x": 15,
-     "y": 6,
-     "item": "escapeRope",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route3_i15",
-     "x": 4,
-     "y": 1,
-     "item": "xAttack",
-     "count": 1,
-     "hidden": false
-    },
-    {
      "id": "route3_i16",
      "x": 17,
      "y": 2,
@@ -30517,15 +30496,31 @@
     {
      "id": "route3_i17",
      "x": 9,
-     "y": 3,
+     "y": 2,
      "item": "tm41",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route3_i20",
+     "x": 12,
+     "y": 7,
+     "item": "tm45",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route3_i21",
+     "x": 7,
+     "y": 7,
+     "item": "quickClaw",
      "count": 1,
      "hidden": false
     },
     {
      "id": "route3_i18",
      "x": 12,
-     "y": 17,
+     "y": 14,
      "item": "nugget",
      "count": 1,
      "hidden": true
@@ -30537,22 +30532,6 @@
      "item": "bigPearl",
      "count": 1,
      "hidden": true
-    },
-    {
-     "id": "route3_i20",
-     "x": 12,
-     "y": 5,
-     "item": "tm45",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route3_i21",
-     "x": 7,
-     "y": 5,
-     "item": "quickClaw",
-     "count": 1,
-     "hidden": false
     }
    ],
    "soil": [
@@ -30664,6 +30643,9 @@
      "max": 13,
      "weight": 10
     }
+   ],
+   "mouths": [
+    "9,6"
    ]
   },
   "route5": {
@@ -30699,30 +30681,6 @@
    },
    "items": [
     {
-     "id": "route5_i31",
-     "x": 27,
-     "y": 18,
-     "item": "thunderStone",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route5_i32",
-     "x": 6,
-     "y": 17,
-     "item": "nestOrb",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route5_i33",
-     "x": 4,
-     "y": 3,
-     "item": "rareCandy",
-     "count": 1,
-     "hidden": false
-    },
-    {
      "id": "route5_i34",
      "x": 15,
      "y": 16,
@@ -30732,43 +30690,43 @@
     },
     {
      "id": "route5_i35",
-     "x": 17,
+     "x": 16,
      "y": 13,
      "item": "tm19",
      "count": 1,
      "hidden": false
     },
     {
-     "id": "route5_i36",
-     "x": 23,
-     "y": 7,
-     "item": "starPiece",
-     "count": 1,
-     "hidden": true
-    },
-    {
-     "id": "route5_i37",
-     "x": 36,
-     "y": 16,
-     "item": "heartScale",
-     "count": 1,
-     "hidden": true
-    },
-    {
      "id": "route5_i38",
      "x": 19,
-     "y": 14,
+     "y": 11,
      "item": "tm28",
      "count": 1,
      "hidden": false
     },
     {
+     "id": "route5_i31",
+     "x": 27,
+     "y": 17,
+     "item": "thunderStone",
+     "count": 1,
+     "hidden": false
+    },
+    {
      "id": "route5_i39",
-     "x": 21,
+     "x": 24,
      "y": 16,
      "item": "kingsRock",
      "count": 1,
-     "hidden": false
+     "hidden": true
+    },
+    {
+     "id": "route5_i33",
+     "x": 4,
+     "y": 3,
+     "item": "rareCandy",
+     "count": 1,
+     "hidden": true
     }
    ],
    "fishing": {
@@ -30865,6 +30823,9 @@
      ],
      "service": "fossilPick"
     }
+   ],
+   "mouths": [
+    "19,17"
    ]
   },
   "league": {
@@ -31029,8 +30990,24 @@
    ],
    "items": [
     {
-     "id": "route12_i90",
+     "id": "route12_i95",
      "x": 6,
+     "y": 22,
+     "item": "amuletCoin",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route12_i92",
+     "x": 4,
+     "y": 19,
+     "item": "rareCandy",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route12_i90",
+     "x": 7,
      "y": 25,
      "item": "fullRestore",
      "count": 1,
@@ -31038,17 +31015,9 @@
     },
     {
      "id": "route12_i91",
-     "x": 5,
-     "y": 19,
-     "item": "maxElixir",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route12_i92",
-     "x": 3,
+     "x": 7,
      "y": 18,
-     "item": "rareCandy",
+     "item": "maxElixir",
      "count": 1,
      "hidden": false
     },
@@ -31067,14 +31036,6 @@
      "item": "starPiece",
      "count": 1,
      "hidden": true
-    },
-    {
-     "id": "route12_i95",
-     "x": 3,
-     "y": 22,
-     "item": "amuletCoin",
-     "count": 1,
-     "hidden": false
     }
    ],
    "tiles": [
@@ -31206,34 +31167,18 @@
   "route1": {
    "items": [
     {
-     "id": "route1_i1",
-     "x": 12,
-     "y": 2,
-     "item": "potion",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route1_i2",
-     "x": 8,
-     "y": 15,
-     "item": "orb",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route1_i3",
-     "x": 6,
-     "y": 24,
-     "item": "antidote",
-     "count": 1,
-     "hidden": false
-    },
-    {
      "id": "route1_i4",
      "x": 13,
      "y": 23,
      "item": "tm05",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route1_i1",
+     "x": 12,
+     "y": 2,
+     "item": "potion",
      "count": 1,
      "hidden": false
     },
@@ -31302,30 +31247,6 @@
   "route2": {
    "items": [
     {
-     "id": "route2_i7",
-     "x": 3,
-     "y": 6,
-     "item": "potion",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route2_i8",
-     "x": 6,
-     "y": 23,
-     "item": "repel",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route2_i9",
-     "x": 7,
-     "y": 21,
-     "item": "oranBerry",
-     "count": 1,
-     "hidden": false
-    },
-    {
      "id": "route2_i10",
      "x": 14,
      "y": 18,
@@ -31334,16 +31255,24 @@
      "hidden": false
     },
     {
+     "id": "route2_i7",
+     "x": 3,
+     "y": 6,
+     "item": "potion",
+     "count": 1,
+     "hidden": false
+    },
+    {
      "id": "route2_i11",
      "x": 21,
-     "y": 28,
+     "y": 27,
      "item": "stardust",
      "count": 1,
      "hidden": true
     },
     {
      "id": "route2_i12",
-     "x": 22,
+     "x": 21,
      "y": 9,
      "item": "nugget",
      "count": 1,
@@ -31476,32 +31405,8 @@
   "route4": {
    "items": [
     {
-     "id": "route4_i22",
-     "x": 5,
-     "y": 20,
-     "item": "greatOrb",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route4_i23",
-     "x": 3,
-     "y": 2,
-     "item": "ether",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route4_i24",
-     "x": 15,
-     "y": 21,
-     "item": "fireStone",
-     "count": 1,
-     "hidden": false
-    },
-    {
      "id": "route4_i25",
-     "x": 1,
+     "x": 2,
      "y": 30,
      "item": "tm49",
      "count": 1,
@@ -31516,36 +31421,36 @@
      "hidden": false
     },
     {
-     "id": "route4_i27",
-     "x": 14,
-     "y": 14,
-     "item": "bigPearl",
-     "count": 1,
-     "hidden": true
-    },
-    {
-     "id": "route4_i28",
-     "x": 20,
-     "y": 15,
-     "item": "starPiece",
-     "count": 1,
-     "hidden": true
-    },
-    {
      "id": "route4_i29",
-     "x": 16,
+     "x": 17,
      "y": 6,
      "item": "tm09",
      "count": 1,
      "hidden": false
     },
     {
-     "id": "route4_i30",
-     "x": 17,
-     "y": 14,
-     "item": "expShare",
+     "id": "route4_i24",
+     "x": 15,
+     "y": 21,
+     "item": "fireStone",
      "count": 1,
      "hidden": false
+    },
+    {
+     "id": "route4_i30",
+     "x": 17,
+     "y": 16,
+     "item": "expShare",
+     "count": 1,
+     "hidden": true
+    },
+    {
+     "id": "route4_i27",
+     "x": 14,
+     "y": 15,
+     "item": "bigPearl",
+     "count": 1,
+     "hidden": true
     }
    ],
    "tiles": [
@@ -31633,23 +31538,34 @@
      "y": 9,
      "dir": "up"
     }
-   }
+   },
+   "mouths": [
+    "18,15"
+   ]
   },
   "route6": {
    "items": [
     {
-     "id": "route6_i40",
-     "x": 13,
-     "y": 29,
-     "item": "hyperPotion",
+     "id": "route6_i43",
+     "x": 3,
+     "y": 15,
+     "item": "tm47",
      "count": 1,
      "hidden": false
     },
     {
-     "id": "route6_i41",
-     "x": 13,
-     "y": 11,
-     "item": "netOrb",
+     "id": "route6_i44",
+     "x": 2,
+     "y": 12,
+     "item": "tm31",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route6_i47",
+     "x": 10,
+     "y": 22,
+     "item": "tm02",
      "count": 1,
      "hidden": false
     },
@@ -31662,26 +31578,10 @@
      "hidden": false
     },
     {
-     "id": "route6_i43",
-     "x": 3,
-     "y": 15,
-     "item": "tm47",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route6_i44",
-     "x": 1,
-     "y": 12,
-     "item": "tm31",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route6_i45",
-     "x": 8,
-     "y": 36,
-     "item": "heartScale",
+     "id": "route6_i48",
+     "x": 13,
+     "y": 24,
+     "item": "scopeLens",
      "count": 1,
      "hidden": true
     },
@@ -31692,22 +31592,6 @@
      "item": "rareCandy",
      "count": 1,
      "hidden": true
-    },
-    {
-     "id": "route6_i47",
-     "x": 12,
-     "y": 20,
-     "item": "tm02",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route6_i48",
-     "x": 13,
-     "y": 22,
-     "item": "scopeLens",
-     "count": 1,
-     "hidden": false
     }
    ],
    "tiles": [
@@ -31773,30 +31657,6 @@
   "route7": {
    "items": [
     {
-     "id": "route7_i49",
-     "x": 25,
-     "y": 6,
-     "item": "waterStone",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route7_i50",
-     "x": 32,
-     "y": 5,
-     "item": "ppUp",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route7_i51",
-     "x": 19,
-     "y": 1,
-     "item": "fullHeal",
-     "count": 1,
-     "hidden": false
-    },
-    {
      "id": "route7_i52",
      "x": 2,
      "y": 2,
@@ -31813,36 +31673,36 @@
      "hidden": false
     },
     {
-     "id": "route7_i54",
-     "x": 38,
-     "y": 5,
-     "item": "rareCandy",
-     "count": 1,
-     "hidden": true
-    },
-    {
-     "id": "route7_i55",
-     "x": 6,
-     "y": 3,
-     "item": "heartScale",
-     "count": 1,
-     "hidden": true
-    },
-    {
      "id": "route7_i56",
-     "x": 22,
+     "x": 19,
      "y": 5,
      "item": "tm36",
      "count": 1,
      "hidden": false
     },
     {
-     "id": "route7_i57",
-     "x": 22,
-     "y": 8,
-     "item": "focusBand",
+     "id": "route7_i49",
+     "x": 26,
+     "y": 6,
+     "item": "waterStone",
      "count": 1,
      "hidden": false
+    },
+    {
+     "id": "route7_i57",
+     "x": 24,
+     "y": 9,
+     "item": "focusBand",
+     "count": 1,
+     "hidden": true
+    },
+    {
+     "id": "route7_i54",
+     "x": 37,
+     "y": 5,
+     "item": "rareCandy",
+     "count": 1,
+     "hidden": true
     }
    ],
    "tiles": [
@@ -31883,34 +31743,13 @@
      "y": 9,
      "dir": "up"
     }
-   }
+   },
+   "mouths": [
+    "28,4"
+   ]
   },
   "route8": {
    "items": [
-    {
-     "id": "route8_i58",
-     "x": 18,
-     "y": 22,
-     "item": "moonStone",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route8_i59",
-     "x": 16,
-     "y": 31,
-     "item": "maxEther",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route8_i60",
-     "x": 20,
-     "y": 11,
-     "item": "timerOrb",
-     "count": 1,
-     "hidden": false
-    },
     {
      "id": "route8_i61",
      "x": 18,
@@ -31928,36 +31767,36 @@
      "hidden": false
     },
     {
-     "id": "route8_i63",
-     "x": 20,
-     "y": 31,
-     "item": "heartScale",
-     "count": 1,
-     "hidden": true
-    },
-    {
-     "id": "route8_i64",
-     "x": 14,
-     "y": 1,
-     "item": "pearl",
-     "count": 1,
-     "hidden": true
-    },
-    {
      "id": "route8_i65",
      "x": 17,
-     "y": 4,
+     "y": 6,
      "item": "tm35",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route8_i58",
+     "x": 17,
+     "y": 22,
+     "item": "moonStone",
      "count": 1,
      "hidden": false
     },
     {
      "id": "route8_i66",
      "x": 15,
-     "y": 37,
+     "y": 34,
      "item": "leftovers",
      "count": 1,
-     "hidden": false
+     "hidden": true
+    },
+    {
+     "id": "route8_i63",
+     "x": 19,
+     "y": 29,
+     "item": "heartScale",
+     "count": 1,
+     "hidden": true
     }
    ],
    "tiles": [
@@ -32023,34 +31862,13 @@
      "y": 9,
      "dir": "up"
     }
-   }
+   },
+   "mouths": [
+    "4,37"
+   ]
   },
   "route9": {
    "items": [
-    {
-     "id": "route9_i67",
-     "x": 22,
-     "y": 14,
-     "item": "sunStone",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route9_i68",
-     "x": 21,
-     "y": 16,
-     "item": "rareCandy",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route9_i69",
-     "x": 33,
-     "y": 16,
-     "item": "revive",
-     "count": 1,
-     "hidden": false
-    },
     {
      "id": "route9_i70",
      "x": 19,
@@ -32062,42 +31880,42 @@
     {
      "id": "route9_i71",
      "x": 27,
-     "y": 1,
+     "y": 2,
      "item": "tm14",
      "count": 1,
      "hidden": false
     },
     {
-     "id": "route9_i72",
-     "x": 22,
-     "y": 1,
-     "item": "pearl",
-     "count": 1,
-     "hidden": true
-    },
-    {
-     "id": "route9_i73",
-     "x": 37,
-     "y": 7,
-     "item": "stardust",
-     "count": 1,
-     "hidden": true
-    },
-    {
      "id": "route9_i74",
      "x": 5,
-     "y": 8,
+     "y": 9,
      "item": "tm22",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route9_i67",
+     "x": 22,
+     "y": 14,
+     "item": "sunStone",
      "count": 1,
      "hidden": false
     },
     {
      "id": "route9_i75",
      "x": 6,
-     "y": 5,
+     "y": 2,
      "item": "shellBell",
      "count": 1,
-     "hidden": false
+     "hidden": true
+    },
+    {
+     "id": "route9_i68",
+     "x": 20,
+     "y": 16,
+     "item": "rareCandy",
+     "count": 1,
+     "hidden": true
     }
    ],
    "tiles": [
@@ -32209,18 +32027,18 @@
   "route10": {
    "items": [
     {
-     "id": "route10_i76",
-     "x": 19,
-     "y": 15,
-     "item": "ultraOrb",
+     "id": "route10_i79",
+     "x": 3,
+     "y": 30,
+     "item": "tm25",
      "count": 1,
      "hidden": false
     },
     {
-     "id": "route10_i77",
-     "x": 14,
-     "y": 1,
-     "item": "elixir",
+     "id": "route10_i80",
+     "x": 8,
+     "y": 37,
+     "item": "tm38",
      "count": 1,
      "hidden": false
     },
@@ -32233,18 +32051,10 @@
      "hidden": false
     },
     {
-     "id": "route10_i79",
-     "x": 3,
-     "y": 30,
-     "item": "tm25",
-     "count": 1,
-     "hidden": false
-    },
-    {
-     "id": "route10_i80",
-     "x": 8,
-     "y": 38,
-     "item": "tm38",
+     "id": "route10_i83",
+     "x": 6,
+     "y": 34,
+     "item": "choiceBand",
      "count": 1,
      "hidden": false
     },
@@ -32263,14 +32073,6 @@
      "item": "nugget",
      "count": 1,
      "hidden": true
-    },
-    {
-     "id": "route10_i83",
-     "x": 3,
-     "y": 34,
-     "item": "choiceBand",
-     "count": 1,
-     "hidden": false
     }
    ],
    "tiles": [
@@ -32412,10 +32214,10 @@
   "route11": {
    "items": [
     {
-     "id": "route11_i84",
-     "x": 5,
-     "y": 2,
-     "item": "maxPotion",
+     "id": "route11_i89",
+     "x": 24,
+     "y": 13,
+     "item": "brightPowder",
      "count": 1,
      "hidden": false
     },
@@ -32424,6 +32226,14 @@
      "x": 13,
      "y": 14,
      "item": "ppUp",
+     "count": 1,
+     "hidden": false
+    },
+    {
+     "id": "route11_i84",
+     "x": 5,
+     "y": 2,
+     "item": "maxPotion",
      "count": 1,
      "hidden": false
     },
@@ -32446,18 +32256,10 @@
     {
      "id": "route11_i88",
      "x": 2,
-     "y": 1,
+     "y": 3,
      "item": "bigPearl",
      "count": 1,
      "hidden": true
-    },
-    {
-     "id": "route11_i89",
-     "x": 21,
-     "y": 13,
-     "item": "brightPowder",
-     "count": 1,
-     "hidden": false
     }
    ],
    "tiles": [
@@ -32648,8 +32450,8 @@
     },
     {
      "id": "route13_i102",
-     "x": 6,
-     "y": 5,
+     "x": 5,
+     "y": 7,
      "item": "diveOrb",
      "count": 1,
      "hidden": false
@@ -32668,7 +32470,7 @@
    "items": [
     {
      "id": "seafloor_i104",
-     "x": 28,
+     "x": 29,
      "y": 15,
      "item": "heartScale",
      "count": 1,
@@ -32676,16 +32478,16 @@
     },
     {
      "id": "seafloor_i105",
-     "x": 25,
-     "y": 16,
+     "x": 18,
+     "y": 15,
      "item": "diveOrb",
      "count": 1,
      "hidden": false
     },
     {
      "id": "seafloor_i106",
-     "x": 27,
-     "y": 12,
+     "x": 18,
+     "y": 11,
      "item": "pearl",
      "count": 1,
      "hidden": false
@@ -32705,7 +32507,7 @@
     {
      "id": "safarizone_i108",
      "x": 31,
-     "y": 16,
+     "y": 17,
      "item": "iron",
      "count": 1,
      "hidden": false
@@ -32720,7 +32522,7 @@
     },
     {
      "id": "safarizone_i110",
-     "x": 7,
+     "x": 9,
      "y": 16,
      "item": "carbos",
      "count": 1,
