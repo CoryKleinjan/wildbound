@@ -233,8 +233,7 @@ class ContestScene extends Scene:
 			_msg = "%s placed %s. Keep raising its condition with Treat Blocks!" % [_rows[0].name, ["", "1st", "2nd", "3rd", "4th"][place]]
 
 	func draw() -> void:
-		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#f8e8d0")
-		Gfx.rect(0, 0, Gfx.W, 16, "#c05878")
+		Gfx.screen("contest", "#f8e8d0", "#c05878")
 		Gfx.text("%s CONTEST  %s RANK   Appeal %d/5" % [CAT_NAMES[_cat], RANKS[_rank].to_upper(), _turn], 6, 5, {"color": "#ffffff", "size": 5})
 		for i in _rows.size():
 			var row: Dictionary = _rows[i]

@@ -18,29 +18,49 @@ from PIL import Image, ImageDraw, ImageFont
 
 from common import RAW, ROOT, ask_vision
 
-MODEL = "gemini-3.1-pro-preview"
+MODEL = "gemini-3.1-pro-preview"  # whole-map comparison
+CELL_MODEL = "gemini-3.5-flash"  # one-cell close-ups: easy, and there are many
 FIT = ROOT / "data" / "map_fit.json"
 BUILDING = "rpbknw"
 DOORS = "hlmju"
-LEGEND = {
+OUTDOOR = {
 	".": "short grass or plain ground (walkable)",
 	",": "tall grass, the leafy tufts where wild creatures hide (walkable)",
 	"=": "dirt or sand path (walkable)",
 	"F": "flowers on grass (walkable)",
+	"a": "sand (walkable)",
 	"#": "tree, bush or forest (blocked)",
 	"~": "water (blocked)",
 	"v": "one-way ledge: a low cliff lip you hop down",
 	"w": "any part of a building, roof or wall (blocked)",
-	"_": "indoor floor (walkable)",
-	"|": "indoor wall (blocked)",
-	"o": "statue or decoration (blocked)",
 }
-# Tiles the fit may write. A building cell is written as plain wall.
+CAVE = {
+	"g": "cave or ruins floor (walkable)",
+	"a": "sand (walkable)",
+	"x": "rock wall, cliff or boulder pile (blocked)",
+	"~": "water (blocked)",
+}
+INDOOR = {
+	"_": "floor, rug or mat (walkable)",
+	"|": "wall (blocked)",
+	"o": "furniture, counter, shelf, plant, statue or any obstacle (blocked)",
+}
+# Cells the fit may rewrite, per kind of map; every other tile (doors, signs, ladders, soil, furniture with a use) stays.
+EDITABLE = {"out": set(".,=Fa#~vw") | set(BUILDING), "cave": set("gax~#"), "in": set("_o|")}
+# A building cell is written as plain wall.
 GROUP = {c: "w" for c in BUILDING}
 
 
-def legend() -> str:
-	return "\n".join(f"{k} {v}" for k, v in LEGEND.items())
+def kind(m: dict) -> str:
+	return "cave" if m.get("cave") else ("in" if m.get("indoor") else "out")
+
+
+def legend_for(m: dict) -> dict:
+	return {"cave": CAVE, "in": INDOOR, "out": OUTDOOR}[kind(m)]
+
+
+def legend(m: dict) -> str:
+	return "\n".join(f"{k} {v}" for k, v in legend_for(m).items())
 
 
 def grid_image(mid: str, W: int, H: int) -> "Path":
@@ -61,13 +81,14 @@ def grid_image(mid: str, W: int, H: int) -> "Path":
 	return p
 
 
-def proposals(mid: str, rows: list[str]) -> set[tuple[int, int]]:
+def proposals(mid: str, m: dict) -> set[tuple[int, int]]:
+	rows = m["tiles"]
 	H, W = len(rows), len(rows[0])
 	p = grid_image(mid, W, H)
 	q = (f"This is a painted top-down game map with a white grid of {W}x{H} cells; each cell is labeled 'x,y'.\n"
 		"Below is the current collision grid for it, one character per cell, row y=0 first:\n"
 		+ "\n".join(f"{y:2d} {r}" for y, r in enumerate(rows))
-		+ f"\nLegend:\n{legend()}\nBuilding letters r,p,b,k,n are all 'w'. Doors are h,l,m,j,u. S is a signpost.\n"
+		+ f"\nLegend:\n{legend(m)}\nBuilding letters r,p,b,k,n are all 'w'. Other letters are special objects (doors, signs, ladders, furniture) and are right.\n"
 		"Find every cell where the grid does NOT match what is painted (for example tall grass painted where the grid says "
 		"short grass, a building shifted by a cell, water painted as sand, a path where the grid has grass). "
 		"A cell counts as tree/building/water if that covers most of the cell.\n"
@@ -101,24 +122,28 @@ def closeup(mid: str, x: int, y: int) -> "Path":
 	return p
 
 
-def check(mid: str, x: int, y: int) -> str | None:
+def check(mid: str, m: dict, x: int, y: int) -> str | None:
 	q = ("This is a close-up of a top-down game map. What does the cell inside the red square show? "
 		"Judge only what covers most of that one square, using the surrounding cells as context.\n"
-		f"Options:\n{legend()}\n"
+		f"Options:\n{legend(m)}\n"
 		'Return JSON: {"tile": "<one option character>"}')
 	try:
-		t = json.loads(ask_vision(closeup(mid, x, y), q, MODEL)).get("tile")
+		t = json.loads(ask_vision(closeup(mid, x, y), q, CELL_MODEL)).get("tile")
 	except Exception as e:
 		print("WARN", mid, x, y, e)
 		return None
-	return t if t in LEGEND else None
+	return t if t in legend_for(m) else None
 
 
 def fit(mid: str, m: dict) -> dict:
 	rows = m["tiles"]
-	keep = set(m.get("doors", {})) | set(m.get("signs", {})) | {f"{n['x']},{n['y']}" for n in m.get("npcs", [])}
-	cand = [(x, y) for x, y in sorted(proposals(mid, rows))
-		if f"{x},{y}" not in keep and rows[y][x] not in DOORS + "S"]
+	keep = set(m.get("doors", {})) | set(m.get("signs", {})) | set(m.get("warps", {})) | set(m.get("berries", {}))
+	keep |= set(m.get("soil", [])) | set(m.get("secretSpots", []) if isinstance(m.get("secretSpots"), list) else m.get("secretSpots", {}))
+	for key in ("npcs", "trainers", "items", "statics"):
+		keep |= {f"{n['x']},{n['y']}" for n in m.get(key, []) if "x" in n}
+	editable = EDITABLE[kind(m)]
+	ok = lambda x, y: f"{x},{y}" not in keep and rows[y][x] in editable
+	cand = [(x, y) for x, y in sorted(proposals(mid, m)) if ok(x, y)]
 	H, W = len(rows), len(rows[0])
 	out: dict[str, str] = {}
 	done: set[tuple[int, int]] = set()
@@ -127,7 +152,7 @@ def fit(mid: str, m: dict) -> dict:
 	while cand:
 		done |= set(cand)
 		with ThreadPoolExecutor(8) as ex:
-			seen = list(ex.map(lambda c: check(mid, *c), cand))
+			seen = list(ex.map(lambda c: check(mid, m, *c), cand))
 		nxt = set()
 		for (x, y), t in zip(cand, seen):
 			cur = rows[y][x]
@@ -137,7 +162,7 @@ def fit(mid: str, m: dict) -> dict:
 				out[f"{x},{y}"] = t
 				nxt |= {(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))}
 		cand = [(x, y) for x, y in sorted(nxt - done) if 0 <= x < W and 0 <= y < H
-			and f"{x},{y}" not in keep and rows[y][x] not in DOORS + "S"]
+			and ok(x, y)]
 	return out
 
 
@@ -153,11 +178,14 @@ def preview(mid: str, changes: dict) -> None:
 
 
 if __name__ == "__main__":
-	maps = json.loads((ROOT / "data" / "maps.json").read_text())
-	ids = sys.argv[1:] or sorted(p.stem for p in (ROOT / "assets" / "maps").glob("*.png"))
+	maps = json.loads((RAW / "dump" / "maps.json").read_text())  # see mapart.py
 	data = json.loads(FIT.read_text()) if FIT.exists() else {}
-	for mid in ids:
+	ids = sys.argv[1:] or sorted(p.stem for p in (ROOT / "assets" / "maps").glob("*.png") if p.stem not in data)
+	def one(mid: str) -> None:
 		data[mid] = fit(mid, maps[mid])
 		preview(mid, data[mid])
 		print(mid, len(data[mid]), "cells changed", flush=True)
 		FIT.write_text(json.dumps(data, indent="\t", sort_keys=True) + "\n")
+
+	with ThreadPoolExecutor(10) as ex:
+		list(ex.map(one, ids))

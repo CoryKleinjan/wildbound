@@ -20,6 +20,10 @@ static func draw_mini(m: Dictionary, x: float, y: float, size: float = 24, bob: 
 
 ## An Egg: cream with green spots.
 static func draw_egg(cx: float, cy: float, k: float = 1.0) -> void:
+	var tex := ArtAssets.texture("icons/egg")
+	if tex != null:
+		Gfx.image(tex, cx - 12 * k, cy - 12 * k, {"scale": k})
+		return
 	Gfx.rect(cx - 6 * k, cy - 7 * k, 12 * k, 15 * k, "#506040")
 	Gfx.rect(cx - 5 * k, cy - 8 * k, 10 * k, 17 * k, "#506040")
 	Gfx.rect(cx - 5 * k, cy - 6 * k, 10 * k, 13 * k, "#f8f0d0")
@@ -27,6 +31,22 @@ static func draw_egg(cx: float, cy: float, k: float = 1.0) -> void:
 	Gfx.rect(cx - 3 * k, cy - 3 * k, 3 * k, 3 * k, "#78b850")
 	Gfx.rect(cx + 1 * k, cy + 2 * k, 3 * k, 3 * k, "#78b850")
 	Gfx.rect(cx - 2 * k, cy - 6 * k, 2 * k, 2 * k, "#ffffff")
+
+## Draws an item's 24x24 icon (assets/icons/<id>.png) at (x, y); TMs and HMs share one disc tinted with the move's type.
+## Draws nothing when there is no icon.
+static func draw_item_icon(id: String, x: float, y: float) -> void:
+	var it: Dictionary = DB.item(id)
+	if it.get("effect", {}).get("kind", "") == "tm":
+		var tex := ArtAssets.texture("icons/tm")
+		if tex == null:
+			return
+		var mv: Dictionary = DB.MOVES.get(it.effect.get("move", ""), {})
+		var tint: Color = Gfx.col(DB.TYPE_COLORS.get(mv.get("type", ""), "#ffffff")).lightened(0.25)
+		Gfx.image(tex, x, y, {"modulate": tint})
+		return
+	var icon := ArtAssets.texture("icons/" + id)
+	if icon != null:
+		Gfx.image(icon, x, y)
 
 # ---------- overworld party flow ----------
 ## Field moves usable from the party menu, in the order they're listed.
@@ -177,15 +197,18 @@ static func open_bag(o: Dictionary) -> void:
 			if gs.bag.get(id, 0) > 0 and pocket_of(id) == pocket and DB.ITEMS[id].effect.kind != "deco":
 				out.append(id)
 		return out
+	var ref := {}
 	var bg := FnScene.new(func() -> void:
-		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#e8c878")
-		Gfx.rect(0, 0, Gfx.W, 16, "#a87838")
+		Gfx.screen("bag", "#e8c878", "#a87838")
 		Gfx.text("◀ %s ▶" % POCKET_NAMES[POCKETS[st.pocket]], 8, 5, {"color": "#ffffff", "size": 6})
 		Gfx.text("$%d" % gs.money, Gfx.W - 8, 5, {"color": "#ffffff", "size": 6, "align": "right"})
 		for k in POCKETS.size():
 			Gfx.rect(10 + k * 9, 24, 6, 6, "#f8f0d0" if k == st.pocket else "#b89050")
+		# The selected item's icon, in a little frame on the left like the handheld bag.
+		if ref.has("menu") and st.has("ids") and ref.menu.sel < st.ids.size():
+			Gfx.panel(14, 122, 32, 32)
+			draw_item_icon(st.ids[ref.menu.sel], 18, 126)
 		Game.player_tag(o.player, 100, 4))
-	var ref := {}
 	# Takes the bag's own scenes (list, pocket switcher, background) off the stack.
 	var pop_bag := func() -> void:
 		if ref.has("menu"):
@@ -199,6 +222,7 @@ static func open_bag(o: Dictionary) -> void:
 		on_close.call()
 	var build := func(self_ref: Callable) -> void:
 		var ids: Array = ids_in.call(POCKETS[st.pocket])
+		st.ids = ids
 		var items: Array = []
 		for id in ids:
 			var it: Dictionary = DB.item(id)

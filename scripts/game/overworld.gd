@@ -675,6 +675,17 @@ static func badge_count(g: Dictionary) -> int:
 	return n
 
 # ---------- drawing ----------
+## The player's sprite sheet name while riding the Bicycle or Surfing (or diving), when that art exists.
+func _ride_look(look: String) -> String:
+	var ride := ""
+	if Field.surfing(self) or map.get("underwater", false):
+		ride = "surf"
+	elif Game.gs.get("bike", false) and not map.get("indoor", false):
+		ride = "bike"
+	if ride != "" and ArtAssets.texture("trainers/%s_%s_walk" % [look, ride]) != null:
+		return "%s_%s" % [look, ride]
+	return look
+
 ## Field objects that can be cleared or pushed, so a painted map leaves them out and they are drawn on top.
 const DYNAMIC := "TRO"
 
@@ -764,7 +775,12 @@ func draw() -> void:
 			step = (a.step_count % 2) + 1
 		var sx: float = ap.x - cam_x
 		var sy: float = ap.y - cam_y - 4 - ap.hop
-		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy), a.palette if DB.PALETTES.has(a.palette) else "boy")
+		var look: String = a.palette if DB.PALETTES.has(a.palette) else "boy"
+		if a == player:
+			look = _ride_look(look)
+			if look.ends_with("_surf"):
+				step = floori(Game.time * 3) % 3  # the surf ride paddles even when still
+		TrainerArt.draw_char(sx, sy, a.dir, step, DB.PALETTES.get(a.palette, DB.PALETTES.boy), look)
 		# Tall grass covers the feet.
 		if a.move == null and Maps.tile_at(map, a.x, a.y) == "," and painted != null:
 			Gfx.ci.draw_texture_rect_region(painted, Rect2(ap.x - cam_x, ap.y - cam_y + 9, 16, 7), Rect2(a.x * 16, a.y * 16 + 9, 16, 7))

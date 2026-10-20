@@ -78,8 +78,7 @@ func _draw_col(title: String, list: Array, x: float, active: bool) -> void:
 		Gfx.text("(empty)", x + 10, 40, {"size": 5, "color": "#909090"})
 
 func draw() -> void:
-	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#90b0d8")
-	Gfx.rect(0, 0, Gfx.W, 16, "#486088")
+	Gfx.screen("storage", "#90b0d8", "#486088")
 	Gfx.text("CREATURE STORAGE", 8, 5, {"color": "#ffffff", "size": 6})
 	Game.player_tag(_player, 140, 4)
 	_draw_col("PARTY %d/%d" % [party.size(), GameState.party_cap(Game.gs)], party, 4, col == 0)

@@ -45,7 +45,7 @@ def cell_origin(i: int) -> tuple[int, int]:
 
 
 def template() -> "Path":
-	p = RAW / "walk" / "_template.png"
+	p = RAW / "walk" / f"_template{FW}x{FH}.png"
 	im = np.zeros((CH * S, CW * S, 3), np.uint8)
 	im[:] = (255, 0, 255)
 	for i in range(9):
@@ -59,15 +59,15 @@ def template() -> "Path":
 	return p
 
 
-def generate(name: str, pal: dict) -> None:
-	ref = OUT / f"{name}.png"
+def generate(name: str, pal: dict, design: str = "") -> None:
+	ref = OUT / f"{design or name}.png"
 	refs = [template()] + ([ref] if ref.exists() else [])
 	generate_image(prompt(name, pal) + (
-		" The first image is the exact canvas to draw on: nine boxes, each exactly 16 pixels wide and 24 pixels tall, where every small grid square is ONE sprite pixel. "
-		"Draw one sprite inside each box, filling each grid square with a single flat color, the character about 14 squares wide and 22 squares tall standing at the bottom of its box. "
+		f" The first image is the exact canvas to draw on: nine boxes, each exactly {FW} pixels wide and {FH} pixels tall, where every small grid square is ONE sprite pixel. "
+		f"Draw one sprite inside each box, filling each grid square with a single flat color, the character about {FW - 2} squares wide at most and {FH - 2} squares tall standing at the bottom of its box. "
 		"Keep the boxes in the same places; outside the character, every square is plain magenta #FF00FF. Remove the grid lines in the final image."
 		+ (" The second image shows the character's design: match it." if len(refs) > 1 else "")),
-		RAW / "walk" / f"{name}.png", refs, "3:4", MODEL)
+		RAW / "walk" / f"{name}.png", refs, "3:4" if CH > CW else "1:1", MODEL)
 
 
 def _runs(flags) -> list[tuple[int, int]]:
@@ -105,7 +105,7 @@ def frames_grid(name: str) -> Image.Image | None:
 				blk = rgb[(y0 + y) * S + 3:(y0 + y + 1) * S - 3, (x0 + x) * S + 3:(x0 + x + 1) * S - 3].reshape(-1, 3)
 				c = np.median(blk, axis=0)
 				r, g, b = c
-				if r > 150 and b > 150 and g < 0.75 * min(r, b):  # magenta (any shade) = empty
+				if r > 110 and b > 110 and g < 0.7 * min(r, b):  # magenta (any shade, incl. fringe) = empty
 					continue
 				sheet[(i // 3) * FH + y, (i % 3) * FW + x] = (*c.astype(np.uint8), 255)
 	return Image.fromarray(sheet, "RGBA")
@@ -143,6 +143,27 @@ def frames(name: str) -> Image.Image | None:
 	return sheet
 
 
+def problems(name: str) -> list[str]:
+	"""Why a generated sheet can't be used: the model ignored the template (background not magenta), or
+	sprites spill out of their boxes (clipped at the edges), or a frame is empty."""
+	src = RAW / "walk" / f"{name}.png"
+	rgb = np.array(Image.open(src).convert("RGB").resize((CW * S, CH * S), Image.Resampling.NEAREST)).astype(int)
+	gap = np.concatenate([rgb[:GAP * S - S].reshape(-1, 3), rgb[:, :GAP * S - S].reshape(-1, 3)])
+	mag = (gap[:, 0] > 110) & (gap[:, 2] > 110) & (gap[:, 1] < 0.7 * np.minimum(gap[:, 0], gap[:, 2]))
+	out = []
+	if mag.mean() < 0.9:
+		out.append("background")
+	sheet = np.array(frames_grid(name))
+	for i in range(9):
+		a = sheet[(i // 3) * FH:(i // 3 + 1) * FH, (i % 3) * FW:(i % 3 + 1) * FW, 3] > 0
+		ring = np.concatenate([a[0], a[:, 0], a[:, -1]])
+		if a.mean() < 0.15:
+			out.append(f"frame {i} empty")
+		elif ring.mean() > 0.25:
+			out.append(f"frame {i} clipped")
+	return out
+
+
 def process(name: str) -> None:
 	s = frames_grid(name)
 	if s:
@@ -153,8 +174,21 @@ if __name__ == "__main__":
 	pals = misc()["palettes"]
 	cmd, names = sys.argv[1], sys.argv[2:] or list(pals)
 	if cmd == "generate":
+		def gen(n: str) -> None:
+			for attempt in range(4):
+				generate(n, pals[n])
+				bad = problems(n)
+				if not bad:
+					break
+				print("retry", n, bad, flush=True)
+				(RAW / "walk" / f"{n}.png").rename(RAW / "walk" / f"{n}_bad{attempt}.png")
+			print("got", n, flush=True)
 		with ThreadPoolExecutor(6) as ex:
-			list(ex.map(lambda n: (generate(n, pals[n]), print("got", n, flush=True)), names))
+			list(ex.map(gen, names))
+	elif cmd == "check":
+		for n in names:
+			print(n, problems(n))
+		sys.exit()
 	for n in names:
 		process(n)
 		print("done", n, flush=True)
