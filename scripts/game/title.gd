@@ -24,8 +24,10 @@ func _open_menu() -> void:
 		items.append("CONTINUE")
 	items.append_array(["NEW GAME", "JOIN A GAME", "OPTIONS", "CONTROLS"])
 	var ref: Array = []
+	# Anchor the menu to the bottom of the screen so every entry fits however many there are.
+	var h := items.size() * 14 + 10
 	var menu := ListMenu.new({
-		"x": 40, "y": 92, "w": 160, "items": items,
+		"x": 60, "y": Gfx.H - h - 4, "w": 120, "items": items,
 		"on_cancel": func() -> void:
 			Game.pop(ref[0])
 			_menu_open = false,
