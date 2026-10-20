@@ -69,13 +69,20 @@ func draw() -> void:
 		# The player's portrait.
 		Gfx.rect(160, 36, 56, 64, Gfx.shade(color, 1.15))
 		var pal: Dictionary = DB.PALETTES.get("p1" if _player == 0 else "p2", DB.PALETTES.get("boy", {}))
-		TrainerArt.draw_char(180, 56, "down", 0, pal, "p1" if _player == 0 else "p2")
+		var portrait := ArtAssets.texture("trainers/" + ("p1" if _player == 0 else "p2"))
+		if portrait != null:
+			Gfx.image(portrait, 160, 36, {"scale": 56.0 / portrait.get_width()})
+		else:
+			TrainerArt.draw_char(180, 56, "down", 0, pal, "p1" if _player == 0 else "p2")
 		# Badges.
 		Gfx.text("BADGES", 20, 106, {"size": 6})
 		for i in 8:
 			var bx := 22 + i * 26
 			var gym: Dictionary = DB.GYMS[i] if i < DB.GYMS.size() else {}
-			if gs.flags.get("badge%d" % (i + 1), false):
+			var badge := ArtAssets.texture("icons/badge%d" % (i + 1))
+			if gs.flags.get("badge%d" % (i + 1), false) and badge != null:
+				Gfx.image(badge, bx - 2, 114, {"scale": 20.0 / badge.get_width()})
+			elif gs.flags.get("badge%d" % (i + 1), false):
 				var c: Color = Gfx.col(DB.TYPE_COLORS.get(gym.get("type", "Normal"), "#c0c0c0"))
 				Gfx.ellipse(bx + 8, 124, 8, 8, Gfx.shade(c, 0.6))
 				Gfx.ellipse(bx + 8, 124, 6, 6, c)

@@ -77,7 +77,35 @@ static func wrap(str: String, max_w: float, size: int = 7) -> Array[String]:
 	return out
 
 ## GBA-style rounded window. style: "light" | "dark" | "battle".
+## A menu screen's backdrop: the generated assets/screens/<name>.png, or a flat color with a header band.
+static func screen(name: String, fill: Variant, header: Variant, header_h: float = 16) -> void:
+	var tex := ArtAssets.texture("screens/" + name)
+	if tex != null:
+		image(tex, 0, 0)
+		return
+	rect(0, 0, W, H, fill)
+	rect(0, 0, W, header_h, header)
+
+static var _frames: Dictionary = {}
+
+## A generated nine-slice window frame (assets/ui/panel_<style>.png, 24x24 with 8 px corners), or null.
+static func _frame(style: String) -> StyleBoxTexture:
+	if not _frames.has(style):
+		var tex := ArtAssets.texture("ui/panel_" + style)
+		var sb: StyleBoxTexture = null
+		if tex != null:
+			sb = StyleBoxTexture.new()
+			sb.texture = tex
+			for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+				sb.set_texture_margin(side, 8)
+		_frames[style] = sb
+	return _frames[style]
+
 static func panel(x: float, y: float, w: float, h: float, style: String = "light") -> void:
+	var sb := _frame(style)
+	if sb != null and w >= 16 and h >= 16:
+		sb.draw(ci.get_canvas_item(), Rect2(x, y, w, h))
+		return
 	var border := "#283048" if style == "dark" else "#48506a"
 	var fill := "#384060" if style == "dark" else ("#f8f8f0" if style == "battle" else "#f8f8f8")
 	rect(x + 1, y, w - 2, h, border)

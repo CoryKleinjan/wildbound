@@ -93,13 +93,21 @@ func _move(d: String) -> void:
 
 func draw() -> void:
 	var gs: Dictionary = Game.gs
-	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#3870b8")
-	for i in 40:
-		Gfx.rect(fposmod(i * 47.3 + _t * 3, Gfx.W), fposmod(i * 29.1, Gfx.H), 3, 1, Color(1, 1, 1, 0.15))
+	# The painted region map (assets/screens/townmap.png, from tools/artgen/townmap.py) has the land and routes;
+	# the Battle Frontier isn't on it, since it only appears after the League.
+	var painted := ArtAssets.texture("screens/townmap")
+	if painted != null:
+		Gfx.image(painted, 0, 0)
+	else:
+		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#3870b8")
+		for i in 40:
+			Gfx.rect(fposmod(i * 47.3 + _t * 3, Gfx.W), fposmod(i * 29.1, Gfx.H), 3, 1, Color(1, 1, 1, 0.15))
 	# Land under every route and town, then the routes and towns on top.
 	for id in DB.REGION_MAP:
 		var r: Dictionary = DB.REGION_MAP[id]
 		if id == "battlefrontier" and not gs.flags.get("champion", false):
+			continue
+		if painted != null and id != "battlefrontier":
 			continue
 		var x: float = _ox + r.x * _scale
 		var y: float = _oy + r.y * _scale
@@ -108,6 +116,8 @@ func draw() -> void:
 	for id in DB.REGION_MAP:
 		var r: Dictionary = DB.REGION_MAP[id]
 		if id == "battlefrontier" and not gs.flags.get("champion", false):
+			continue
+		if painted != null and id != "battlefrontier":
 			continue
 		var c := _center(id)
 		if r.town:

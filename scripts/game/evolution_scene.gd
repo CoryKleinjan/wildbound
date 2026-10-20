@@ -67,7 +67,11 @@ func _finish() -> void:
 	_on_done.call()
 
 func draw() -> void:
-	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#202838")
+	var bg := ArtAssets.texture("screens/evolution")
+	if bg != null:
+		Gfx.image(bg, 0, 0)
+	else:
+		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#202838")
 	for i in 16:
 		var a := Game.time * 0.8 + i
 		Gfx.rect(120 + cos(a) * (40 + i * 4), 60 + sin(a) * (30 + i * 2), 2, 2, "#8098c8")

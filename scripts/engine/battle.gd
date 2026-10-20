@@ -898,7 +898,7 @@ func _try_catch(b: Battler, ball_mult10: int, player: int, ball_id: String = "or
 		while shakes < 4 and rng.random16() < b2:
 			shakes += 1
 		is_caught = shakes == 4
-	_emit({"t": "ball", "side": b.side, "slot": b.slot, "shakes": 3 if is_caught else mini(shakes, 3), "caught": is_caught})
+	_emit({"t": "ball", "side": b.side, "slot": b.slot, "shakes": 3 if is_caught else mini(shakes, 3), "caught": is_caught, "item": ball_id})
 	if is_caught:
 		_msg("Gotcha! %s was caught!" % Creatures.display_name(mon))
 		mon.owner = player

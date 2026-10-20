@@ -64,6 +64,23 @@ func _init() -> void:
 	_apply_story(_fix_ints(_load("story")))
 	_apply_styles(_load("town_styles"))
 	_apply_features(_fix_ints(_load("features")))
+	if FileAccess.file_exists("res://data/map_fit.json") and OS.get_environment("MAP_FIT") != "off":
+		_apply_map_fit(_load("map_fit"))
+
+## Applies data/map_fit.json ({map_id: {"x,y": tile}}, from tools/artgen/mapfit.py): the walkable grid fitted to
+## each map's painting, so it only applies while that painting (assets/maps/<id>.png) is there.
+func _apply_map_fit(fit: Dictionary) -> void:
+	for map_id in fit:
+		if not MAPS.has(map_id) or not ResourceLoader.exists("res://assets/maps/%s.png" % map_id):
+			continue
+		var rows: Array = MAPS[map_id].tiles.duplicate()
+		for k in fit[map_id]:
+			var xy: PackedStringArray = k.split(",")
+			var x := int(xy[0])
+			var y := int(xy[1])
+			if y < rows.size() and x < rows[y].length():
+				rows[y] = rows[y].substr(0, x) + fit[map_id][k] + rows[y].substr(x + 1)
+		MAPS[map_id].tiles = rows
 
 ## Attaches each town's look (data/town_styles.json, see TownStyle) to the town and the rooms inside it.
 func _apply_styles(styles: Dictionary) -> void:

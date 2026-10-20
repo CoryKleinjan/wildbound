@@ -19,6 +19,7 @@ class Slot:
 	var lunge := 0.0
 	var tint: Variant = null # {color, t}
 	var hidden := false # up in the sky, underground or underwater (Fly, Dig, Dive)
+	var fx: Variant = null # {tex, t, dur}: a move's hit effect or a stat/status/heal effect over the creature
 
 var battle: Battle
 ## uids of creatures that levelled up (they get an evolution check afterwards).
@@ -222,15 +223,17 @@ func _next_event() -> void:
 				return
 			if e.kind == "hit":
 				Audio.sfx(_hit_sfx())
+				_set_fx(sl, "fx_" + str(e.get("type", "normal")).to_lower(), 0.45)
 				_anim = {"kind": "flash", "t": 0.0, "dur": 0.45, "data": sl}
 				return
 			Audio.sfx({"stat-up": "stat_up", "stat-down": "stat_down", "heal": "recover"}.get(e.kind, "status"))
 			var color := "#f08040" if e.kind == "stat-up" else ("#4080f0" if e.kind == "stat-down" else ("#60e070" if e.kind == "heal" else "#c060e0"))
 			sl.tint = {"color": color, "t": 0.0}
+			_set_fx(sl, "fx_" + str(e.kind).replace("-", "_"), 0.4)
 			_anim = {"kind": "tint", "t": 0.0, "dur": 0.4, "data": sl, "done": func() -> void: sl.tint = null}
 			return
 		"ball":
-			_ball = {"side": e.side, "slot": e.slot, "shakes": e.shakes, "caught": e.caught, "t": 0.0, "sounds": 0}
+			_ball = {"side": e.side, "slot": e.slot, "shakes": e.shakes, "caught": e.caught, "item": e.get("item", "orb"), "t": 0.0, "sounds": 0}
 			Audio.sfx("orb_throw")
 			_anim = {"kind": "ball", "t": 0.0, "dur": 0.6 + e.shakes * 0.5 + 0.4, "done": func() -> void:
 				if e.caught:
@@ -837,6 +840,9 @@ func draw() -> void:
 			_draw_sprite(slots[slot], side, slot, intro)
 	if _ball != null:
 		_draw_ball()
+	for side in [1, 0]:
+		for slot in _slots[side].size():
+			_draw_fx(_slots[side][slot], side, slot)
 
 	# Target highlight.
 	if _mode == "choose" and _menu == "target":
@@ -898,6 +904,27 @@ func _draw_sprite(s: Slot, side: int, slot: int, intro: float) -> void:
 		var alpha := 0.5 * sin(s.tint.t * PI)
 		_tex(CreatureArt.silhouette(spr, s.tint.color), x, y, size, size, Color(1, 1, 1, alpha))
 
+## Shows a generated effect sprite (assets/fx/<name>.png) over a creature for dur seconds; Normal's for unknown types.
+func _set_fx(sl: Slot, name: String, dur: float) -> void:
+	var tex := ArtAssets.texture("fx/" + name)
+	if tex == null and name.begins_with("fx_") and not name.begins_with("fx_stat") and name not in ["fx_heal", "fx_status"]:
+		tex = ArtAssets.texture("fx/fx_normal")
+	var rise := -10.0 if name in ["fx_stat_up", "fx_heal"] else (10.0 if name == "fx_stat_down" else 0.0)
+	sl.fx = {"tex": tex, "t": 0.0, "dur": dur, "rise": rise} if tex != null else null
+
+func _draw_fx(s: Slot, side: int, slot: int) -> void:
+	if s.fx == null:
+		return
+	s.fx.t += 1.0 / 60
+	var k: float = s.fx.t / s.fx.dur
+	if k >= 1.0 or not s.visible:
+		s.fx = null
+		return
+	var p := _pos(side, slot)
+	var size: float = 48.0 * p.scale * (0.8 + 0.4 * k)
+	var rise: float = s.fx.rise * k
+	_tex(s.fx.tex, p.x - size / 2, p.y - 30 * p.scale - size / 2 + rise, size, size, Color(1, 1, 1, clampf(2.0 - 2.0 * k, 0, 1)))
+
 func _gender_mark(g: Variant, x: float, y: float) -> void:
 	if g != null:
 		Gfx.text("♂" if g == "M" else "♀", x, y, {"size": 6, "color": "#3870e0" if g == "M" else "#e04870", "shadow": null})
@@ -955,6 +982,15 @@ func _draw_ball() -> void:
 		var shaking: bool = shake_t > 0 and shake_t < b.shakes * 0.5
 		bx += sin(shake_t * PI * 4) * 3 if shaking else 0.0
 		by = p.y - 8
+	var orb := ArtAssets.texture("icons/" + str(b.get("item", "orb")))
+	if orb == null:
+		orb = ArtAssets.texture("icons/orb")
+	if orb != null:
+		Gfx.image(orb, bx - 8, by - 8, {"scale": 16.0 / orb.get_width()})
+		if b.caught and t > 0.6 + b.shakes * 0.5:
+			for i in 3:
+				Gfx.rect(bx - 10 + i * 9, by - 12 - fmod(t * 10, 4), 2, 2, "#f8e040")
+		return
 	# Capture Orb: a round teal orb with a gold band.
 	Gfx.rect(bx - 3, by - 5, 6, 10, "#205860")
 	Gfx.rect(bx - 5, by - 3, 10, 6, "#205860")

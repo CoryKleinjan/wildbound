@@ -980,7 +980,7 @@ static func draw_ground(o: OverworldScene, cam_x: int, cam_y: int) -> void:
 		for d in gs.secretBase.decor:
 			var dd: Dictionary = DB.DECORATIONS[d.id]
 			Gfx.image(FieldTiles.decoration(d.id, dd.color), d.x * 16 - cam_x, d.y * 16 - cam_y)
-	if surfing(o):
+	if surfing(o) and not o._ride_look(o.player.palette).ends_with("_surf"):
 		var ap := OverworldScene.actor_pixel(o.player)
 		var bob := sin(Game.time * 4) * 1.0
 		Gfx.rect(ap.x - cam_x + 1, ap.y - cam_y + 8 + bob, 14, 7, "#305890")

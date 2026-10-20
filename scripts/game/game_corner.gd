@@ -201,7 +201,11 @@ class SlotsScene extends Scene:
 
 	func draw() -> void:
 		var gs: Dictionary = Game.gs
-		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#601830")
+		var bg := ArtAssets.texture("screens/gamecorner")
+		if bg != null:
+			Gfx.image(bg, 0, 0)
+		else:
+			Gfx.rect(0, 0, Gfx.W, Gfx.H, "#601830")
 		Gfx.rect(20, 10, 200, 114, "#c89030")
 		Gfx.rect(24, 14, 192, 106, "#f0c848")
 		Gfx.text("SLOTS", Gfx.W / 2.0, 18, {"size": 7, "align": "center", "color": "#a02020"})
