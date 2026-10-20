@@ -5194,6 +5194,172 @@
    },
    "desc": "Mail with an ocean print. Give it to a creature to write a letter.",
    "pocket": "items"
+  },
+  "sootSack": {
+   "id": "sootSack",
+   "name": "Soot Sack",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "ash"
+   },
+   "desc": "Collects volcanic ash as you walk through ashy grass.",
+   "pocket": "key"
+  },
+  "blueFlute": {
+   "id": "blueFlute",
+   "name": "Blue Flute",
+   "price": 100,
+   "effect": {
+    "kind": "cure",
+    "statuses": [
+     "slp"
+    ]
+   },
+   "desc": "A glass flute that wakes a sleeping creature.",
+   "pocket": "items"
+  },
+  "whiteFlute": {
+   "id": "whiteFlute",
+   "name": "White Flute",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "flute",
+    "mode": "more"
+   },
+   "desc": "Play it to draw wild creatures out. Play again to stop.",
+   "pocket": "key"
+  },
+  "blackFlute": {
+   "id": "blackFlute",
+   "name": "Black Flute",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "flute",
+    "mode": "fewer"
+   },
+   "desc": "Play it to keep wild creatures away. Play again to stop.",
+   "pocket": "key"
+  },
+  "rootFossil": {
+   "id": "rootFossil",
+   "name": "Root Fossil",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "none",
+    "fossil": "orecrag"
+   },
+   "desc": "A fossil of an ancient creature that lived among roots.",
+   "pocket": "key"
+  },
+  "clawFossil": {
+   "id": "clawFossil",
+   "name": "Claw Fossil",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "none",
+    "fossil": "kobbrute"
+   },
+   "desc": "A fossil of an ancient creature with mighty claws.",
+   "pocket": "key"
+  },
+  "shoalSalt": {
+   "id": "shoalSalt",
+   "name": "Shoal Salt",
+   "price": 20,
+   "effect": {
+    "kind": "valuable"
+   },
+   "desc": "Salt from Shoal Cave. Someone there may want it.",
+   "pocket": "items"
+  },
+  "shoalShell": {
+   "id": "shoalShell",
+   "name": "Shoal Shell",
+   "price": 20,
+   "effect": {
+    "kind": "valuable"
+   },
+   "desc": "A shell from Shoal Cave. Someone there may want it.",
+   "pocket": "items"
+  },
+  "decoGlassChair": {
+   "id": "decoGlassChair",
+   "name": "Glass Chair",
+   "price": 0,
+   "effect": {
+    "kind": "deco"
+   },
+   "desc": "A decoration for your Secret Base.",
+   "pocket": "key"
+  },
+  "decoGlassDesk": {
+   "id": "decoGlassDesk",
+   "name": "Glass Desk",
+   "price": 0,
+   "effect": {
+    "kind": "deco"
+   },
+   "desc": "A decoration for your Secret Base.",
+   "pocket": "key"
+  },
+  "decoOrnament": {
+   "id": "decoOrnament",
+   "name": "Glass Ornament",
+   "price": 0,
+   "effect": {
+    "kind": "deco"
+   },
+   "desc": "A decoration for your Secret Base.",
+   "pocket": "key"
+  },
+  "eonTicket": {
+   "id": "eonTicket",
+   "name": "Eon Ticket",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "none"
+   },
+   "desc": "A ferry ticket to Southern Island.",
+   "pocket": "key"
+  },
+  "oldSeaMap": {
+   "id": "oldSeaMap",
+   "name": "Old Sea Map",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "none"
+   },
+   "desc": "A faded map that shows the way to a faraway island.",
+   "pocket": "key"
+  },
+  "auroraTicket": {
+   "id": "auroraTicket",
+   "name": "Aurora Ticket",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "none"
+   },
+   "desc": "A ferry ticket to Birth Island.",
+   "pocket": "key"
+  },
+  "mysticTicket": {
+   "id": "mysticTicket",
+   "name": "Mystic Ticket",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "none"
+   },
+   "desc": "A ferry ticket to Navel Rock.",
+   "pocket": "key"
   }
  },
  "species": {
@@ -26064,6 +26230,707 @@
     "meditate",
     "ironHead"
    ]
+  },
+  "cragolem": {
+   "id": "cragolem",
+   "dex": 201,
+   "name": "Cragolem",
+   "types": [
+    "Rock"
+   ],
+   "base": {
+    "hp": 80,
+    "atk": 100,
+    "def": 200,
+    "spa": 50,
+    "spd": 100,
+    "spe": 50
+   },
+   "abilities": [
+    "clearBody"
+   ],
+   "catchRate": 3,
+   "baseExp": 260,
+   "evYield": {
+    "def": 3
+   },
+   "growth": "slow",
+   "genderRatio": -1,
+   "sprite": {
+    "body": "rock",
+    "main": "#b07848",
+    "accent": "#f0a030",
+    "belly": "#d8b088",
+    "features": [
+     "spikes",
+     "crest"
+    ],
+    "size": 1,
+    "eyes": "round"
+   },
+   "dexText": "Its body is made of ancient stone. It was sealed away for fear of its strength.",
+   "area": 11,
+   "rarity": "legendary",
+   "learnset": [
+    [
+     1,
+     "explosion"
+    ],
+    [
+     9,
+     "rockThrow"
+    ],
+    [
+     17,
+     "curse"
+    ],
+    [
+     25,
+     "superpower"
+    ],
+    [
+     33,
+     "ancientPower"
+    ],
+    [
+     41,
+     "ironDefense"
+    ],
+    [
+     49,
+     "zapCannon"
+    ],
+    [
+     57,
+     "lockOn"
+    ],
+    [
+     65,
+     "hyperBeam"
+    ]
+   ],
+   "evolves": null,
+   "eggGroups": [
+    "Undiscovered"
+   ],
+   "tms": [
+    "hm01",
+    "hm04",
+    "hm06",
+    "tm02",
+    "tm06",
+    "tm08",
+    "tm10",
+    "tm11",
+    "tm15",
+    "tm17",
+    "tm18",
+    "tm21",
+    "tm23",
+    "tm26",
+    "tm27",
+    "tm28",
+    "tm31",
+    "tm32",
+    "tm33",
+    "tm37",
+    "tm39",
+    "tm42",
+    "tm43",
+    "tm44",
+    "tm49"
+   ],
+   "tutor": [
+    "doubleEdge",
+    "rockSlide",
+    "explosion",
+    "substitute"
+   ],
+   "eggMoves": []
+  },
+  "glaciolem": {
+   "id": "glaciolem",
+   "dex": 202,
+   "name": "Glaciolem",
+   "types": [
+    "Ice"
+   ],
+   "base": {
+    "hp": 80,
+    "atk": 50,
+    "def": 100,
+    "spa": 100,
+    "spd": 200,
+    "spe": 50
+   },
+   "abilities": [
+    "clearBody"
+   ],
+   "catchRate": 3,
+   "baseExp": 260,
+   "evYield": {
+    "spd": 3
+   },
+   "growth": "slow",
+   "genderRatio": -1,
+   "sprite": {
+    "body": "rock",
+    "main": "#a8d8f0",
+    "accent": "#f0a030",
+    "belly": "#e8f8ff",
+    "features": [
+     "spikes",
+     "crest"
+    ],
+    "size": 1,
+    "eyes": "round"
+   },
+   "dexText": "Made of ice from the ice age. It chills the air to minus 200 degrees.",
+   "area": 11,
+   "rarity": "legendary",
+   "learnset": [
+    [
+     1,
+     "explosion"
+    ],
+    [
+     9,
+     "icyWind"
+    ],
+    [
+     17,
+     "curse"
+    ],
+    [
+     25,
+     "superpower"
+    ],
+    [
+     33,
+     "ancientPower"
+    ],
+    [
+     41,
+     "amnesia"
+    ],
+    [
+     49,
+     "zapCannon"
+    ],
+    [
+     57,
+     "lockOn"
+    ],
+    [
+     65,
+     "hyperBeam"
+    ]
+   ],
+   "evolves": null,
+   "eggGroups": [
+    "Undiscovered"
+   ],
+   "tms": [
+    "hm01",
+    "tm03",
+    "tm06",
+    "tm07",
+    "tm10",
+    "tm11",
+    "tm13",
+    "tm14",
+    "tm15",
+    "tm17",
+    "tm18",
+    "tm21",
+    "tm27",
+    "tm32",
+    "tm42",
+    "tm43",
+    "tm44",
+    "tm49"
+   ],
+   "tutor": [
+    "doubleEdge",
+    "rockSlide",
+    "explosion",
+    "substitute"
+   ],
+   "eggMoves": []
+  },
+  "ferrolem": {
+   "id": "ferrolem",
+   "dex": 203,
+   "name": "Ferrolem",
+   "types": [
+    "Steel"
+   ],
+   "base": {
+    "hp": 80,
+    "atk": 75,
+    "def": 150,
+    "spa": 75,
+    "spd": 150,
+    "spe": 50
+   },
+   "abilities": [
+    "clearBody"
+   ],
+   "catchRate": 3,
+   "baseExp": 260,
+   "evYield": {
+    "def": 2,
+    "spd": 1
+   },
+   "growth": "slow",
+   "genderRatio": -1,
+   "sprite": {
+    "body": "rock",
+    "main": "#8890a0",
+    "accent": "#f0a030",
+    "belly": "#c8d0d8",
+    "features": [
+     "spikes",
+     "crest"
+    ],
+    "size": 1,
+    "eyes": "round"
+   },
+   "dexText": "Its body is harder than any known metal, tempered by pressure deep underground.",
+   "area": 11,
+   "rarity": "legendary",
+   "learnset": [
+    [
+     1,
+     "explosion"
+    ],
+    [
+     9,
+     "metalClaw"
+    ],
+    [
+     17,
+     "curse"
+    ],
+    [
+     25,
+     "superpower"
+    ],
+    [
+     33,
+     "ancientPower"
+    ],
+    [
+     41,
+     "ironDefense"
+    ],
+    [
+     41,
+     "amnesia"
+    ],
+    [
+     49,
+     "zapCannon"
+    ],
+    [
+     57,
+     "lockOn"
+    ],
+    [
+     65,
+     "hyperBeam"
+    ]
+   ],
+   "evolves": null,
+   "eggGroups": [
+    "Undiscovered"
+   ],
+   "tms": [
+    "hm01",
+    "hm04",
+    "hm06",
+    "tm06",
+    "tm10",
+    "tm11",
+    "tm15",
+    "tm17",
+    "tm18",
+    "tm21",
+    "tm23",
+    "tm26",
+    "tm27",
+    "tm31",
+    "tm32",
+    "tm33",
+    "tm37",
+    "tm39",
+    "tm40",
+    "tm42",
+    "tm43",
+    "tm44",
+    "tm47",
+    "tm49"
+   ],
+   "tutor": [
+    "doubleEdge",
+    "rockSlide",
+    "explosion",
+    "substitute"
+   ],
+   "eggMoves": []
+  },
+  "mythrin": {
+   "id": "mythrin",
+   "dex": 204,
+   "name": "Mythrin",
+   "types": [
+    "Psychic"
+   ],
+   "base": {
+    "hp": 100,
+    "atk": 100,
+    "def": 100,
+    "spa": 100,
+    "spd": 100,
+    "spe": 100
+   },
+   "abilities": [
+    "synchronize"
+   ],
+   "catchRate": 3,
+   "baseExp": 260,
+   "evYield": {
+    "hp": 3
+   },
+   "growth": "slow",
+   "genderRatio": -1,
+   "sprite": {
+    "body": "ghost",
+    "main": "#f0b0d0",
+    "accent": "#80c0f0",
+    "belly": "#fff0f8",
+    "features": [
+     "tail",
+     "ears"
+    ],
+    "size": 0.5,
+    "eyes": "round"
+   },
+   "dexText": "Said to hold the code of every creature. It shows itself only to the pure of heart.",
+   "area": 11,
+   "rarity": "legendary",
+   "learnset": [
+    [
+     1,
+     "pound"
+    ],
+    [
+     10,
+     "megaPunch"
+    ],
+    [
+     20,
+     "metronome"
+    ],
+    [
+     30,
+     "psychic"
+    ],
+    [
+     40,
+     "ancientPower"
+    ],
+    [
+     50,
+     "recover"
+    ]
+   ],
+   "evolves": null,
+   "eggGroups": [
+    "Undiscovered"
+   ],
+   "tms": [
+    "hm05",
+    "tm04",
+    "tm06",
+    "tm10",
+    "tm11",
+    "tm12",
+    "tm15",
+    "tm16",
+    "tm17",
+    "tm18",
+    "tm20",
+    "tm21",
+    "tm27",
+    "tm29",
+    "tm30",
+    "tm32",
+    "tm33",
+    "tm42",
+    "tm43",
+    "tm44",
+    "tm46",
+    "tm48",
+    "tm49"
+   ],
+   "tutor": [
+    "thunderWave",
+    "substitute",
+    "dreamEater"
+   ],
+   "eggMoves": []
+  },
+  "astraxis": {
+   "id": "astraxis",
+   "dex": 205,
+   "name": "Astraxis",
+   "types": [
+    "Psychic"
+   ],
+   "base": {
+    "hp": 50,
+    "atk": 150,
+    "def": 50,
+    "spa": 150,
+    "spd": 50,
+    "spe": 150
+   },
+   "abilities": [
+    "pressure"
+   ],
+   "catchRate": 3,
+   "baseExp": 260,
+   "evYield": {
+    "atk": 1,
+    "spa": 1,
+    "spe": 1
+   },
+   "growth": "slow",
+   "genderRatio": -1,
+   "sprite": {
+    "body": "biped",
+    "main": "#e06840",
+    "accent": "#40b0c0",
+    "belly": "#f0d8c0",
+    "features": [
+     "antenna",
+     "tail"
+    ],
+    "size": 0.9,
+    "eyes": "fierce"
+   },
+   "dexText": "It fell to the ground riding a meteor. A crystal in its chest fires lasers.",
+   "area": 11,
+   "rarity": "legendary",
+   "learnset": [
+    [
+     1,
+     "leer"
+    ],
+    [
+     1,
+     "wrap"
+    ],
+    [
+     5,
+     "nightShade"
+    ],
+    [
+     10,
+     "teleport"
+    ],
+    [
+     15,
+     "knockOff"
+    ],
+    [
+     20,
+     "swift"
+    ],
+    [
+     30,
+     "extrasensory"
+    ],
+    [
+     40,
+     "cosmicPower"
+    ],
+    [
+     50,
+     "recover"
+    ],
+    [
+     55,
+     "psychoBoost"
+    ],
+    [
+     65,
+     "hyperBeam"
+    ]
+   ],
+   "evolves": null,
+   "eggGroups": [
+    "Undiscovered"
+   ],
+   "tms": [
+    "hm04",
+    "hm05",
+    "hm06",
+    "tm01",
+    "tm04",
+    "tm06",
+    "tm10",
+    "tm11",
+    "tm12",
+    "tm15",
+    "tm16",
+    "tm17",
+    "tm18",
+    "tm20",
+    "tm21",
+    "tm27",
+    "tm29",
+    "tm30",
+    "tm32",
+    "tm33",
+    "tm42",
+    "tm43",
+    "tm44",
+    "tm46",
+    "tm48",
+    "tm49"
+   ],
+   "tutor": [
+    "megaPunch",
+    "thunderWave",
+    "substitute",
+    "swordsDance",
+    "bodySlam",
+    "counter",
+    "seismicToss",
+    "metronome",
+    "dreamEater"
+   ],
+   "eggMoves": []
+  },
+  "auroquil": {
+   "id": "auroquil",
+   "dex": 206,
+   "name": "Auroquil",
+   "types": [
+    "Fire",
+    "Flying"
+   ],
+   "base": {
+    "hp": 106,
+    "atk": 130,
+    "def": 90,
+    "spa": 110,
+    "spd": 154,
+    "spe": 90
+   },
+   "abilities": [
+    "pressure"
+   ],
+   "catchRate": 3,
+   "baseExp": 260,
+   "evYield": {
+    "spd": 3
+   },
+   "growth": "slow",
+   "genderRatio": -1,
+   "sprite": {
+    "body": "bird",
+    "main": "#e8a030",
+    "accent": "#e04838",
+    "belly": "#f8e8a0",
+    "features": [
+     "wings",
+     "crest",
+     "tailFlame"
+    ],
+    "size": 1,
+    "eyes": "fierce"
+   },
+   "dexText": "Its feathers glow in seven colors. A rainbow follows wherever it flies.",
+   "area": 11,
+   "rarity": "legendary",
+   "learnset": [
+    [
+     1,
+     "gust"
+    ],
+    [
+     11,
+     "recover"
+    ],
+    [
+     22,
+     "fireBlast"
+    ],
+    [
+     33,
+     "sunnyDay"
+    ],
+    [
+     44,
+     "swift"
+    ],
+    [
+     55,
+     "safeguard"
+    ],
+    [
+     66,
+     "sacredFire"
+    ],
+    [
+     77,
+     "calmMind"
+    ],
+    [
+     88,
+     "skyAttack"
+    ],
+    [
+     99,
+     "hyperBeam"
+    ]
+   ],
+   "evolves": null,
+   "eggGroups": [
+    "Undiscovered"
+   ],
+   "tms": [
+    "hm02",
+    "hm05",
+    "tm05",
+    "tm06",
+    "tm10",
+    "tm11",
+    "tm15",
+    "tm17",
+    "tm18",
+    "tm21",
+    "tm22",
+    "tm27",
+    "tm32",
+    "tm35",
+    "tm38",
+    "tm40",
+    "tm42",
+    "tm43",
+    "tm44",
+    "tm46",
+    "tm47",
+    "tm49",
+    "tm50"
+   ],
+   "tutor": [
+    "substitute"
+   ],
+   "eggMoves": []
   }
  },
  "maps": {
@@ -26184,6 +27051,16 @@
       "Moves score more appeal in a contest of their own category.",
       "Using the same move twice in a row bores the judge."
      ]
+    },
+    {
+     "x": 3,
+     "y": 9,
+     "dir": "down",
+     "palette": "beauty",
+     "text": [
+      "I'm the Quiz Lady! Answer my question correctly and win a prize!"
+     ],
+     "service": "quiz"
     }
    ]
   },
@@ -26378,7 +27255,7 @@
     "#aaaaaaa~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
     "==aaaaaa~~~~~~~~~~~~~DD~~~~~~~~~~~~~~~~#",
     "==aaaaaa~~~~~~~~~~~~~DD~~~~~~~~~~~~~~~~#",
-    "#aaaaaa~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+    "#aaaaaa~~~~~~~~~y~~~~~~~~~~~~~~~~~~~~~~#",
     "#aaaaa~~~~~~~~~~..~~~~~~~~~~~~~~~~~~~~~#",
     "#aaaa~~~~~~~~~~~..~~~~~~~~~~~~~DD~~~~~~#",
     "#aaa~~~~~~~~~~~~~~~~~~~~~~~~~~~DD~~~~~~#",
@@ -26399,6 +27276,12 @@
      "map": "skyspire",
      "x": 7,
      "y": 14,
+     "dir": "up"
+    },
+    "16,12": {
+     "map": "shoalcave",
+     "x": 10,
+     "y": 8,
      "dir": "up"
     }
    },
@@ -26478,7 +27361,7 @@
     ],
     "good": [
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 21,
       "max": 28,
       "weight": 60
@@ -26498,13 +27381,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "brookit",
       "min": 31,
       "max": 41,
       "weight": 40
      },
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 41,
       "weight": 40
@@ -26564,7 +27447,7 @@
    "name": "Seafloor",
    "tiles": [
     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "xxxxxxxxxxxxxyxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "xxxxxxxxxxxxgggggxxxxxxxxxxxxxxxxxxxxxxx",
     "xxxxxxxxxxxxggDDgxxxxxxxxxxxxxxxxxxxxxxx",
     "xxxxxxxxxxxxggDDgxxxxxxxxxxxxxxxxxxxxxxx",
@@ -26590,6 +27473,12 @@
    "warps": {
     "23,17": {
      "map": "seacavern",
+     "x": 7,
+     "y": 9,
+     "dir": "up"
+    },
+    "13,1": {
+     "map": "sealedchamber",
      "x": 7,
      "y": 9,
      "dir": "up"
@@ -26657,13 +27546,13 @@
       "weight": 60
      },
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 15,
       "max": 22,
       "weight": 20
      },
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 15,
       "max": 22,
       "weight": 20
@@ -26671,7 +27560,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 25,
       "max": 35,
       "weight": 40
@@ -26689,7 +27578,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 25,
       "max": 35,
       "weight": 5
@@ -26704,7 +27593,7 @@
      "weight": 60
     },
     {
-     "species": "brookit",
+     "species": "twirlfin",
      "min": 22,
      "max": 30,
      "weight": 30
@@ -26772,7 +27661,7 @@
     ],
     "good": [
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 21,
       "max": 28,
       "weight": 60
@@ -26792,13 +27681,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "brookit",
       "min": 31,
       "max": 41,
       "weight": 40
      },
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 41,
       "weight": 40
@@ -27259,13 +28148,13 @@
       "weight": 60
      },
      {
-      "species": "eddykin",
+      "species": "jabcrab",
       "min": 13,
       "max": 20,
       "weight": 20
      },
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 13,
       "max": 20,
       "weight": 20
@@ -27273,7 +28162,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 23,
       "max": 33,
       "weight": 40
@@ -27291,7 +28180,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 23,
       "max": 33,
       "weight": 5
@@ -27300,7 +28189,7 @@
    },
    "waterEncounters": [
     {
-     "species": "twirlfin",
+     "species": "mirrakoi",
      "min": 20,
      "max": 28,
      "weight": 60
@@ -28021,6 +28910,18 @@
      "text": [
       "Each facility pays Battle Points for every set of seven wins."
      ]
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "old",
+     "text": [
+      "Clear a set of seven anywhere in the Frontier and I'll give you something old I found."
+     ],
+     "service": "ticket",
+     "ticket": "oldSeaMap",
+     "need": "frontier"
     }
    ],
    "music": "town"
@@ -28137,6 +29038,907 @@
      ]
     }
    ]
+  },
+  "glassworkshop": {
+   "id": "glassworkshop",
+   "name": "Glass Workshop",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#e8d8c8",
+   "warps": {
+    "7,11": {
+     "map": "route6",
+     "x": 9,
+     "y": 30,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "I'm a glassworker. I make flutes out of volcanic ash."
+     ],
+     "service": "glass"
+    },
+    {
+     "x": 3,
+     "y": 7,
+     "dir": "down",
+     "palette": "boy",
+     "text": [
+      "Walk through the ashy grass with the Soot Sack and it fills up on its own."
+     ]
+    }
+   ]
+  },
+  "fanclub": {
+   "id": "fanclub",
+   "name": "Creature Fan Club",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#f0d8e0",
+   "warps": {
+    "7,11": {
+     "map": "skyreach",
+     "x": 7,
+     "y": 20,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 3,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "I'm the Fan Club Chairman. Our members follow the strongest Trainers!"
+     ],
+     "service": "fanClub"
+    },
+    {
+     "x": 3,
+     "y": 6,
+     "dir": "down",
+     "palette": "girl",
+     "text": [
+      "Are you famous yet?"
+     ],
+     "service": "fan",
+     "fan": 0
+    },
+    {
+     "x": 11,
+     "y": 6,
+     "dir": "down",
+     "palette": "boy",
+     "text": [
+      "I only cheer for the very best."
+     ],
+     "service": "fan",
+     "fan": 1
+    },
+    {
+     "x": 7,
+     "y": 8,
+     "dir": "down",
+     "palette": "beauty",
+     "text": [
+      "Champions are so dreamy..."
+     ],
+     "service": "fan",
+     "fan": 2
+    },
+    {
+     "x": 12,
+     "y": 9,
+     "dir": "down",
+     "palette": "old",
+     "text": [
+      "A creature trained to its limits earns my Effort Ribbon."
+     ],
+     "service": "effortRibbon"
+    }
+   ]
+  },
+  "museum": {
+   "id": "museum",
+   "name": "Lumenvale Art Museum",
+   "tiles": [
+    "|||||||||||||||",
+    "|_G_G_G_G_G___|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#e8e0d0",
+   "warps": {
+    "7,11": {
+     "map": "lumenvale",
+     "x": 16,
+     "y": 10,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Welcome to the art museum! We paint the creatures that win Master Rank contests."
+     ],
+     "service": "museum"
+    },
+    {
+     "x": 12,
+     "y": 7,
+     "dir": "down",
+     "palette": "girl",
+     "text": [
+      "Each frame holds a different contest category."
+     ]
+    }
+   ]
+  },
+  "fossillab": {
+   "id": "fossillab",
+   "name": "Fossil Lab",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d8e0e8",
+   "warps": {
+    "7,11": {
+     "map": "stonecrest",
+     "x": 5,
+     "y": 20,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "psychic",
+     "text": [
+      "We study ancient creatures. Bring me a fossil and I can bring it back to life!"
+     ],
+     "service": "fossilLab"
+    },
+    {
+     "x": 3,
+     "y": 7,
+     "dir": "down",
+     "palette": "boy",
+     "text": [
+      "The machine takes a while. Go for a walk and come back."
+     ]
+    }
+   ]
+  },
+  "tent_saltmarsh": {
+   "id": "tent_saltmarsh",
+   "name": "Saltmarsh Battle Tent",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#e8e0c0",
+   "warps": {
+    "7,11": {
+     "map": "saltmarsh",
+     "x": 23,
+     "y": 18,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Saltmarsh Battle Tent!",
+      "Rent three creatures and win three battles in a row!"
+     ],
+     "service": "tent",
+     "facility": "factory"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "ace",
+     "text": [
+      "Everyone fights at level 30 in a Battle Tent."
+     ]
+    }
+   ]
+  },
+  "tent_harrowfield": {
+   "id": "tent_harrowfield",
+   "name": "Harrowfield Battle Tent",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#e8e0c0",
+   "warps": {
+    "7,11": {
+     "map": "harrowfield",
+     "x": 23,
+     "y": 17,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Harrowfield Battle Tent!",
+      "Your creatures fight on their own here, as their nature tells them."
+     ],
+     "service": "tent",
+     "facility": "palace"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "ace",
+     "text": [
+      "Everyone fights at level 30 in a Battle Tent."
+     ]
+    }
+   ]
+  },
+  "tent_bramblegate": {
+   "id": "tent_bramblegate",
+   "name": "Bramblegate Battle Tent",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#e8e0c0",
+   "warps": {
+    "7,11": {
+     "map": "bramblegate",
+     "x": 10,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Bramblegate Battle Tent!",
+      "Three-turn match-ups judged on Mind, Skill and Body!"
+     ],
+     "service": "tent",
+     "facility": "arena"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "ace",
+     "text": [
+      "Everyone fights at level 30 in a Battle Tent."
+     ]
+    }
+   ]
+  },
+  "shoalcave": {
+   "id": "shoalcave",
+   "name": "Shoal Cave",
+   "cave": true,
+   "connections": {},
+   "tiles": [
+    "xxxxxxxxxxxxxxxxxxxx",
+    "xggggxxxxxxxxxggggxx",
+    "xgJJgggggggggggJJgxx",
+    "xgJJgxxxxxxxxxgJJgxx",
+    "xggggxxggggggxggggxx",
+    "xxxgxxxgJJJJgxxxgxxx",
+    "xxxgggggJJJJgggggxxx",
+    "xxxxxxxgggggggxxxxxx",
+    "xxxxxxxxxxgxxxxxxxxx",
+    "xxxxxxxxxxyxxxxxxxxx",
+    "xxxxxxxxxxxxxxxxxxxx"
+   ],
+   "tide": true,
+   "warps": {
+    "10,9": {
+     "map": "route13",
+     "x": 16,
+     "y": 13,
+     "dir": "down"
+    }
+   },
+   "encounterRate": 8,
+   "encounters": [
+    {
+     "species": "glacifin",
+     "min": 26,
+     "max": 32,
+     "weight": 40
+    },
+    {
+     "species": "slushtusk",
+     "min": 26,
+     "max": 32,
+     "weight": 30
+    },
+    {
+     "species": "arclure",
+     "min": 26,
+     "max": 32,
+     "weight": 20
+    },
+    {
+     "species": "nudibrant",
+     "min": 26,
+     "max": 32,
+     "weight": 10
+    }
+   ],
+   "npcs": [
+    {
+     "x": 12,
+     "y": 4,
+     "dir": "down",
+     "palette": "old",
+     "text": [
+      "Bring me four Shoal Salt and four Shoal Shells and I'll make you a Shell Bell."
+     ],
+     "service": "shellBell"
+    }
+   ],
+   "shoal": [
+    [
+     2,
+     1,
+     "shoalSalt"
+    ],
+    [
+     17,
+     1,
+     "shoalSalt"
+    ],
+    [
+     3,
+     4,
+     "shoalShell"
+    ],
+    [
+     16,
+     4,
+     "shoalShell"
+    ],
+    [
+     9,
+     6,
+     "shoalShell"
+    ],
+    [
+     10,
+     5,
+     "shoalSalt"
+    ],
+    [
+     13,
+     6,
+     "shoalShell"
+    ],
+    [
+     5,
+     6,
+     "shoalSalt"
+    ]
+   ]
+  },
+  "sealedchamber": {
+   "id": "sealedchamber",
+   "name": "Sealed Chamber",
+   "cave": true,
+   "connections": {},
+   "tiles": [
+    "xxxxxxxxxxxxxxx",
+    "xxZxxxxZxxxxZxx",
+    "xxgxxxxgxxxxgxx",
+    "xxgggggggggggxx",
+    "xxgggggggggggxx",
+    "xxgggggggggggxx",
+    "xxgggggggggggxx",
+    "xxxxggggggxxxxx",
+    "xxxxxxgggxxxxxx",
+    "xxxxxxxgxxxxxxx",
+    "xxxxxxxyxxxxxxx"
+   ],
+   "warps": {
+    "7,10": {
+     "map": "seafloor",
+     "x": 13,
+     "y": 2,
+     "dir": "down"
+    }
+   },
+   "braille": {
+    "2,1": "IN THIS CAVE WE HAVE LIVED. WE OWE ALL TO THE CREATURES.",
+    "12,1": "BUT WE SEALED THE CREATURES AWAY. WE FEARED THEM.",
+    "7,1": "FIRST COMES A CREATURE OF THE SEA. LAST COMES A CREATURE OF STONE. THEN DIG."
+   },
+   "chamber": "7,1"
+  },
+  "tomb_rock": {
+   "id": "tomb_rock",
+   "name": "Desert Tomb",
+   "cave": true,
+   "connections": {},
+   "tiles": [
+    "xxxxxxxxxxxxxxx",
+    "xxxxxxxZxxxxxxx",
+    "xxxxxgggggxxxxx",
+    "xxxxgggggggxxxx",
+    "xxxgggggggggxxx",
+    "xxxgggggggggxxx",
+    "xxxgggggggggxxx",
+    "xxxxgggggggxxxx",
+    "xxxxxgggggxxxxx",
+    "xxxxxxxgxxxxxxx",
+    "xxxxxxxyxxxxxxx"
+   ],
+   "warps": {
+    "7,10": {
+     "map": "route4",
+     "x": 18,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "braille": {
+    "7,1": "THOSE WITH STRENGTH, MOVE THE STONE."
+   },
+   "tomb": {
+    "wall": "7,1",
+    "move": "strength",
+    "flag": "tomb_rock_open"
+   },
+   "statics": [
+    {
+     "id": "leg_cragolem",
+     "species": "cragolem",
+     "level": 40,
+     "x": 7,
+     "y": 5,
+     "requires": "tomb_rock_open",
+     "text": "The golem's eyes light up..."
+    }
+   ]
+  },
+  "tomb_ice": {
+   "id": "tomb_ice",
+   "name": "Frost Tomb",
+   "cave": true,
+   "connections": {},
+   "tiles": [
+    "xxxxxxxxxxxxxxx",
+    "xxxxxxxZxxxxxxx",
+    "xxxxxgggggxxxxx",
+    "xxxxgggggggxxxx",
+    "xxxgggggggggxxx",
+    "xxxgggggggggxxx",
+    "xxxgggggggggxxx",
+    "xxxxgggggggxxxx",
+    "xxxxxgggggxxxxx",
+    "xxxxxxxgxxxxxxx",
+    "xxxxxxxyxxxxxxx"
+   ],
+   "warps": {
+    "7,10": {
+     "map": "route8",
+     "x": 4,
+     "y": 38,
+     "dir": "down"
+    }
+   },
+   "braille": {
+    "7,1": "STAND STILL IN THE COLD. WAIT FOR TWO MINUTES."
+   },
+   "tomb": {
+    "wall": "7,1",
+    "move": "wait",
+    "flag": "tomb_ice_open"
+   },
+   "statics": [
+    {
+     "id": "leg_glaciolem",
+     "species": "glaciolem",
+     "level": 40,
+     "x": 7,
+     "y": 5,
+     "requires": "tomb_ice_open",
+     "text": "The golem's eyes light up..."
+    }
+   ]
+  },
+  "tomb_steel": {
+   "id": "tomb_steel",
+   "name": "Iron Tomb",
+   "cave": true,
+   "connections": {},
+   "tiles": [
+    "xxxxxxxxxxxxxxx",
+    "xxxxxxxZxxxxxxx",
+    "xxxxxgggggxxxxx",
+    "xxxxgggggggxxxx",
+    "xxxgggggggggxxx",
+    "xxxgggggggggxxx",
+    "xxxgggggggggxxx",
+    "xxxxgggggggxxxx",
+    "xxxxxgggggxxxxx",
+    "xxxxxxxgxxxxxxx",
+    "xxxxxxxyxxxxxxx"
+   ],
+   "warps": {
+    "7,10": {
+     "map": "route7",
+     "x": 28,
+     "y": 5,
+     "dir": "down"
+    }
+   },
+   "braille": {
+    "7,1": "SHOW THE SKY TO THE WALL. USE FLY."
+   },
+   "tomb": {
+    "wall": "7,1",
+    "move": "fly",
+    "flag": "tomb_steel_open"
+   },
+   "statics": [
+    {
+     "id": "leg_ferrolem",
+     "species": "ferrolem",
+     "level": 40,
+     "x": 7,
+     "y": 5,
+     "requires": "tomb_steel_open",
+     "text": "The golem's eyes light up..."
+    }
+   ]
+  },
+  "southernisland": {
+   "id": "southernisland",
+   "name": "Southern Island",
+   "tiles": [
+    "~~~~~~~~~~~~~~~~~~~~",
+    "~~~~~aaaaaaaaaa~~~~~",
+    "~~~aaa########aaa~~~",
+    "~~aaa##......##aaa~~",
+    "~~aa##........##aa~~",
+    "~~aa#....FF....#aa~~",
+    "~~aa#...F..F...#aa~~",
+    "~~aa#....FF....#aa~~",
+    "~~aa##........##aa~~",
+    "~~aaa###....###aaa~~",
+    "~~~aaaaa....aaaaa~~~",
+    "~~~~aaaaaaaaaaaa~~~~",
+    "~~~~~~~aaaaaa~~~~~~~",
+    "~~~~~~~~~~~~~~~~~~~~"
+   ],
+   "connections": {},
+   "theme": "#d8d0c0",
+   "music": "town",
+   "outside": "~",
+   "npcs": [
+    {
+     "x": 8,
+     "y": 12,
+     "dir": "down",
+     "palette": "swimmer",
+     "text": [
+      "The ferry goes back to Saltmarsh whenever you're ready."
+     ],
+     "service": "ferry",
+     "to": "saltmarsh"
+    }
+   ],
+   "statics": [
+    {
+     "id": "leg_eon_solvara",
+     "species": "solvara",
+     "level": 50,
+     "x": 9,
+     "y": 6,
+     "eon": true,
+     "text": "A creature with a dream-like glow is resting here..."
+    },
+    {
+     "id": "leg_eon_velunox",
+     "species": "velunox",
+     "level": 50,
+     "x": 10,
+     "y": 6,
+     "eon": true,
+     "text": "A creature with a dream-like glow is resting here..."
+    }
+   ]
+  },
+  "farawayisland": {
+   "id": "farawayisland",
+   "name": "Faraway Island",
+   "tiles": [
+    "~~~~~~~~~~~~~~~~~~~~",
+    "~~~aaaaaaaaaaaaaa~~~",
+    "~~aa,,,,,,,,,,,,aa~~",
+    "~aa,,,,,,,,,,,,,,aa~",
+    "~a,,,,,#,,,,#,,,,,a~",
+    "~a,,,,,,,,,,,,,,,,a~",
+    "~a,,,#,,,,,,,,#,,,a~",
+    "~a,,,,,,,,,,,,,,,,a~",
+    "~aa,,,,,,,,,,,,,,aa~",
+    "~~aa,,,,....,,,,aa~~",
+    "~~~aaaaa....aaaaa~~~",
+    "~~~~~~~aaaaaa~~~~~~~",
+    "~~~~~~~~~~~~~~~~~~~~"
+   ],
+   "connections": {},
+   "theme": "#d8d0c0",
+   "music": "town",
+   "outside": "~",
+   "npcs": [
+    {
+     "x": 8,
+     "y": 11,
+     "dir": "down",
+     "palette": "swimmer",
+     "text": [
+      "The ferry goes back to Saltmarsh whenever you're ready."
+     ],
+     "service": "ferry",
+     "to": "saltmarsh"
+    }
+   ],
+   "encounterRate": 0,
+   "statics": [
+    {
+     "id": "leg_mythrin",
+     "species": "mythrin",
+     "level": 30,
+     "x": 9,
+     "y": 4,
+     "text": "A tiny pink creature peeks out of the tall grass!"
+    }
+   ]
+  },
+  "birthisland": {
+   "id": "birthisland",
+   "name": "Birth Island",
+   "tiles": [
+    "~~~~~~~~~~~~~~~~~~~~",
+    "~~~~~aaaaaaaaaa~~~~~",
+    "~~~aaaaaaaaaaaaaa~~~",
+    "~~aaaaaaaaaaaaaaaa~~",
+    "~~aaaaaaaaaaaaaaaa~~",
+    "~~aaaaaaaaaaaaaaaa~~",
+    "~~aaaaaaaaaaaaaaaa~~",
+    "~~aaaaaaaaaaaaaaaa~~",
+    "~~~aaaaaaaaaaaaaa~~~",
+    "~~~~aaaaaaaaaaaa~~~~",
+    "~~~~~~~aaaaaa~~~~~~~",
+    "~~~~~~~~~~~~~~~~~~~~"
+   ],
+   "connections": {},
+   "theme": "#d8d0c0",
+   "music": "town",
+   "outside": "~",
+   "npcs": [
+    {
+     "x": 8,
+     "y": 10,
+     "dir": "down",
+     "palette": "swimmer",
+     "text": [
+      "The ferry goes back to Saltmarsh whenever you're ready."
+     ],
+     "service": "ferry",
+     "to": "saltmarsh"
+    }
+   ],
+   "triangle": [
+    [
+     9,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     14,
+     3
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     15,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     12,
+     6
+    ]
+   ],
+   "statics": [
+    {
+     "id": "leg_astraxis",
+     "species": "astraxis",
+     "level": 30,
+     "x": 9,
+     "y": 4,
+     "requires": "birth_puzzle",
+     "text": "The triangle split open, and something came out of it!"
+    }
+   ]
+  },
+  "navelrock": {
+   "id": "navelrock",
+   "name": "Navel Rock",
+   "tiles": [
+    "~~~~xxxxxxxxxxx~~~~~",
+    "~~~xxxxxgggxxxxx~~~~",
+    "~~xxxxxgggggxxxxx~~~",
+    "~~xxxxxxgggxxxxxx~~~",
+    "~~xxxxxxxgxxxxxxx~~~",
+    "~~xxxggggggxxxxxx~~~",
+    "~~xxxgxxxxgggggxx~~~",
+    "~~xxxgxxxxxxxxgxx~~~",
+    "~~xxxggggggggggxx~~~",
+    "~~xxxxxxxxgxxxxxx~~~",
+    "~~~aaaaaaagaaaaa~~~~",
+    "~~~~aaaaaaaaaaa~~~~~",
+    "~~~~~~~~~~~~~~~~~~~~"
+   ],
+   "connections": {},
+   "theme": "#d8d0c0",
+   "music": "town",
+   "outside": "~",
+   "npcs": [
+    {
+     "x": 8,
+     "y": 11,
+     "dir": "down",
+     "palette": "swimmer",
+     "text": [
+      "The ferry goes back to Saltmarsh whenever you're ready."
+     ],
+     "service": "ferry",
+     "to": "saltmarsh"
+    }
+   ],
+   "cave": false,
+   "statics": [
+    {
+     "id": "leg_auroquil",
+     "species": "auroquil",
+     "level": 70,
+     "x": 9,
+     "y": 1,
+     "text": "A rainbow-colored bird spreads its wings at the summit!"
+    }
+   ]
   }
  },
  "mapPatches": {
@@ -28156,9 +29958,9 @@
     "#=========================",
     "#...........==...........#",
     "#.ppppp.iiii==..bbbbb....#",
-    "#.ppppp.iiii==..bbbbbF...#",
-    "#.wwlww.wwdw==..wwmww....#",
-    "#...===============......#",
+    "#.ppppp.iiii==..bbbbbiiii#",
+    "#.wwlww.wwdw==..wwmwwiiii#",
+    "#...===============..wwdw#",
     "#F.~~~~~....==...........#",
     "#.F~~~~~....==...........#",
     "#...........==...#.......#",
@@ -28168,6 +29970,12 @@
    "warps": {
     "10,15": {
      "map": "daycare",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "23,16": {
+     "map": "tent_harrowfield",
      "x": 7,
      "y": 10,
      "dir": "up"
@@ -28235,7 +30043,7 @@
       "weight": 60
      },
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 16,
       "max": 23,
       "weight": 20
@@ -28255,7 +30063,7 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 26,
       "max": 36,
       "weight": 40
@@ -28288,7 +30096,7 @@
      "weight": 30
     },
     {
-     "species": "jabcrab",
+     "species": "eddykin",
      "min": 23,
      "max": 31,
      "weight": 10
@@ -28304,9 +30112,9 @@
     "#.....wwhw..==....wwmww..#",
     "#.#.....=...==..#...=....#",
     "#...F...=...==......=..F.#",
-    "#...#...=.#.==....#.=.#..#",
-    "#.......=...==..F...=....#",
-    "#.......=...==......=....#",
+    "#...#...=.#.==iiii#.=.#..#",
+    "#.......=...==iiii..=....#",
+    "#.......=...==wwdw..=....#",
     "#=========================",
     "#=========================",
     "#...........==...........#",
@@ -28329,6 +30137,12 @@
     },
     "5,19": {
      "map": "deptstore",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "16,9": {
+     "map": "museum",
      "x": 7,
      "y": 10,
      "dir": "up"
@@ -28439,6 +30253,18 @@
      "service": "tutor",
      "move": "dreamEater",
      "flag": "tutor_dreamEater"
+    },
+    {
+     "x": 15,
+     "y": 9,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Enter the Hall of Fame twice and I'll give you a Mystic Ticket."
+     ],
+     "service": "ticket",
+     "ticket": "mysticTicket",
+     "need": "hof"
     }
    ]
   },
@@ -28459,9 +30285,9 @@
     "#...........==...........#",
     "#F....rrrr..==..bbbbb....#",
     "#.#...rrrr..==.Fbbbbb.#..#",
-    "#iiii.wwhw..==..wwmww....#",
-    "#iiii...===========....F.#",
-    "#wwdw.......==......#....#",
+    "#iiii.wwhw..==..wwmwwiiii#",
+    "#iiii...===========..iiii#",
+    "#wwdw.......==......#wwdw#",
     "#...........==...#.......#",
     "#..........S==...........#",
     "#..#........==..F........#",
@@ -28474,6 +30300,12 @@
      "y": 19,
      "dir": "up",
      "script": "safari"
+    },
+    "23,17": {
+     "map": "tent_saltmarsh",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
     }
    },
    "connections": {
@@ -28514,7 +30346,25 @@
       "This ferry runs to the Battle Frontier. Only Champions may board."
      ],
      "service": "ferry",
-     "to": "battlefrontier"
+     "to": "battlefrontier",
+     "islands": [
+      "southernisland",
+      "farawayisland",
+      "birthisland",
+      "navelrock"
+     ]
+    },
+    {
+     "x": 17,
+     "y": 17,
+     "dir": "up",
+     "palette": "old",
+     "text": [
+      "I sailed to an island of dreams once... You need an Eon Ticket to go there."
+     ],
+     "service": "ticket",
+     "ticket": "eonTicket",
+     "need": "eon"
     }
    ],
    "fishing": {
@@ -28540,7 +30390,7 @@
       "weight": 60
      },
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 16,
       "max": 23,
       "weight": 20
@@ -28560,7 +30410,7 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 26,
       "max": 36,
       "weight": 40
@@ -28593,7 +30443,7 @@
      "weight": 30
     },
     {
-     "species": "jabcrab",
+     "species": "eddykin",
      "min": 23,
      "max": 31,
      "weight": 10
@@ -28750,7 +30600,7 @@
     ],
     "good": [
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 10,
       "max": 15,
       "weight": 60
@@ -28770,7 +30620,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -28788,7 +30638,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -28797,7 +30647,7 @@
    },
    "waterEncounters": [
     {
-     "species": "eddykin",
+     "species": "jabcrab",
      "min": 5,
      "max": 13,
      "weight": 60
@@ -28938,7 +30788,7 @@
     ],
     "good": [
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 10,
       "max": 15,
       "weight": 60
@@ -28958,7 +30808,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 20,
       "max": 26,
       "weight": 40
@@ -28976,7 +30826,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 20,
       "max": 26,
       "weight": 5
@@ -29003,7 +30853,19 @@
      "weight": 10
     }
    ],
-   "weather": "sand"
+   "weather": "sand",
+   "npcs": [
+    {
+     "x": 19,
+     "y": 2,
+     "dir": "down",
+     "palette": "hiker",
+     "text": [
+      "I dig fossils out of the desert! I found two, but you can have one."
+     ],
+     "service": "fossilPick"
+    }
+   ]
   },
   "league": {
    "statics": [
@@ -29274,13 +31136,13 @@
     ],
     "good": [
      {
-      "species": "mirrakoi",
+      "species": "brookit",
       "min": 31,
       "max": 38,
       "weight": 60
      },
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 38,
       "weight": 20
@@ -29294,7 +31156,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 41,
       "max": 51,
       "weight": 40
@@ -29306,7 +31168,7 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 41,
       "max": 51,
       "weight": 15
@@ -29321,7 +31183,7 @@
    },
    "waterEncounters": [
     {
-     "species": "jabcrab",
+     "species": "eddykin",
      "min": 38,
      "max": 46,
      "weight": 60
@@ -29545,7 +31407,7 @@
     ],
     "good": [
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 10,
       "max": 15,
       "weight": 60
@@ -29565,7 +31427,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -29583,7 +31445,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -29702,7 +31564,7 @@
     "#......==............#",
     "#vvvvv,==,,,,vvvvvvvv#",
     "#.....,==,,,,...#.#..#",
-    "#.....,==,,,,...#T#..#",
+    "#.....,==,,,,...#Ty..#",
     "#.....,=====,........#",
     "#.....,=====,........#",
     "#.....,,,,==,........#",
@@ -29763,7 +31625,15 @@
       "Water soil with the Watering Can for a bigger harvest."
      ]
     }
-   ]
+   ],
+   "warps": {
+    "18,15": {
+     "map": "tomb_rock",
+     "x": 7,
+     "y": 9,
+     "dir": "up"
+    }
+   }
   },
   "route6": {
    "items": [
@@ -29868,9 +31738,9 @@
     "#,===========........#",
     "#,===========........#",
     "#vvvvvvvvvv==vvvvvvvv#",
-    "#.......F..==........#",
-    "#..........==........#",
-    "#..........==.,,,,,,,#",
+    "#......iiii==........#",
+    "#......iiii==........#",
+    "#......wwdw==.,,,,,,,#",
     "#..........==.,,,,,,,#",
     "#..........==.,,,,,,,#",
     "#.........===.,,,,,,,#",
@@ -29890,7 +31760,15 @@
     "15,3": "sitrusBerry",
     "16,3": "persimBerry"
    },
-   "weather": "ash"
+   "weather": "ash",
+   "warps": {
+    "9,29": {
+     "map": "glassworkshop",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
+   }
   },
   "route7": {
    "items": [
@@ -29972,7 +31850,7 @@
     "#...........................F..........#",
     "#.......F...............F...........F..#",
     "#.........###..............##..........#",
-    "#.........#z#........#T#...##..........#",
+    "#.........#z#........#T#...#y..........#",
     "#.,,,,...............#.#...............#",
     "#.,,,,...............####..............#",
     "#.,,,,...===========.####..............#",
@@ -29997,6 +31875,12 @@
      "map": "trickhouse",
      "x": 7,
      "y": 10,
+     "dir": "up"
+    },
+    "28,4": {
+     "map": "tomb_steel",
+     "x": 7,
+     "y": 9,
      "dir": "up"
     }
    }
@@ -30114,7 +31998,7 @@
     "#.........==.........#",
     "#.........==.........#",
     "#..##.....==.##R#....#",
-    "#..##.....==.##.#....#",
+    "#..#y.....==.##.#....#",
     "#.........==.####....#",
     "##########==##########"
    ],
@@ -30131,6 +32015,12 @@
      "map": "berrymaster",
      "x": 7,
      "y": 10,
+     "dir": "up"
+    },
+    "4,37": {
+     "map": "tomb_ice",
+     "x": 7,
+     "y": 9,
      "dir": "up"
     }
    }
@@ -30269,7 +32159,7 @@
     ],
     "super": [
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 29,
       "max": 39,
       "weight": 40
@@ -30287,7 +32177,7 @@
       "weight": 15
      },
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 29,
       "max": 39,
       "weight": 5
@@ -30296,13 +32186,13 @@
    },
    "waterEncounters": [
     {
-     "species": "jabcrab",
+     "species": "eddykin",
      "min": 26,
      "max": 34,
      "weight": 60
     },
     {
-     "species": "twirlfin",
+     "species": "mirrakoi",
      "min": 26,
      "max": 34,
      "weight": 30
@@ -30464,7 +32354,7 @@
       "weight": 20
      },
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 23,
       "max": 30,
       "weight": 20
@@ -30511,7 +32401,7 @@
      "weight": 30
     },
     {
-     "species": "brookit",
+     "species": "twirlfin",
      "min": 30,
      "max": 38,
      "weight": 10
@@ -30632,7 +32522,7 @@
       "weight": 20
      },
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 27,
       "max": 34,
       "weight": 20
@@ -30646,13 +32536,13 @@
       "weight": 40
      },
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 37,
       "max": 47,
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 37,
       "max": 47,
       "weight": 15
@@ -30673,7 +32563,7 @@
      "weight": 60
     },
     {
-     "species": "mirrakoi",
+     "species": "brookit",
      "min": 34,
      "max": 42,
      "weight": 30
@@ -30683,6 +32573,18 @@
      "min": 34,
      "max": 42,
      "weight": 10
+    }
+   ],
+   "npcs": [
+    {
+     "x": 23,
+     "y": 4,
+     "dir": "down",
+     "palette": "old",
+     "text": [
+      "Fishermen say a rare creature bites only at a few spots on this water.",
+      "Folks say the spots change whenever people start saying something new."
+     ]
     }
    ]
   },
@@ -30903,8 +32805,50 @@
      "after": [
       "Use the Itemfinder from your BAG. It points toward hidden items nearby."
      ]
+    },
+    {
+     "x": 21,
+     "y": 12,
+     "dir": "up",
+     "palette": "girl",
+     "text": [
+      "What's trendy these days? Tell me what everyone should be saying!"
+     ],
+     "service": "trendy"
     }
-   ]
+   ],
+   "tiles": [
+    "##########################",
+    "#...........==...........#",
+    "#.#......#..==..bbbbb.#..#",
+    "#....ppppp.S==..bbbbb.F..#",
+    "#....ppppp..==..wwmww....#",
+    "#..#Fwwlww..==....=....#.#",
+    "#......=....==....=......#",
+    "#......=..F.==.#..=.#....#",
+    "#......=....==....=......#",
+    "#......=....==....=......#",
+    "#=========================",
+    "#=========================",
+    "#...........==...........#",
+    "#.rrrr...F..==...kkkkkkk.#",
+    "#.rrrr......==.#.kkkkkkk.#",
+    "#.wwhw......==...kkkkkkk.#",
+    "#...==========...wwwjwww.#",
+    "#..iiii.....=========...S#",
+    "#.#iiii.....==..........F#",
+    "#..wwdw.....==...........#",
+    "#...........==...........#",
+    "############==############"
+   ],
+   "warps": {
+    "5,19": {
+     "map": "fossillab",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
+   }
   },
   "duskmere": {
    "npcs": [
@@ -30978,7 +32922,7 @@
     ],
     "good": [
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 10,
       "max": 15,
       "weight": 60
@@ -30998,7 +32942,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -31016,7 +32960,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -31031,7 +32975,7 @@
      "weight": 60
     },
     {
-     "species": "eddykin",
+     "species": "jabcrab",
      "min": 9,
      "max": 17,
      "weight": 30
@@ -31157,7 +33101,7 @@
       "weight": 60
      },
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 16,
       "max": 23,
       "weight": 20
@@ -31177,7 +33121,7 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 26,
       "max": 36,
       "weight": 40
@@ -31210,7 +33154,7 @@
      "weight": 30
     },
     {
-     "species": "jabcrab",
+     "species": "eddykin",
      "min": 23,
      "max": 31,
      "weight": 10
@@ -31296,7 +33240,39 @@
      ],
      "service": "relearner"
     }
-   ]
+   ],
+   "tiles": [
+    "############==############",
+    "#...........==...........#",
+    "#.kkkkkkk...==.#.rrrr.#..#",
+    "#.kkkkkkk...==...rrrr....#",
+    "#.kkkkkkk..S==...wwhw.#..#",
+    "#.wwwjwww...==.....=...#.#",
+    "#S.F.=......==.#...=.....#",
+    "#....=....#.==.....=.....#",
+    "#.#..=......==.....=.....#",
+    "#....=......==.....=.....#",
+    "=========================#",
+    "=========================#",
+    "#...........==...........#",
+    "#.ppppp.iiii==...bbbbb...#",
+    "#.ppppp.iiii==...bbbbb.#.#",
+    "#.wwlww.wwdw==...wwmww..F#",
+    "#...================.....#",
+    "#...........==...........#",
+    "#.#.........==.......#...#",
+    "#....#......==...........#",
+    "#...........==......F....#",
+    "##########################"
+   ],
+   "warps": {
+    "10,15": {
+     "map": "tent_bramblegate",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
+   }
   },
   "skyreach": {
    "npcs": [
@@ -31337,7 +33313,39 @@
      ],
      "service": "nameRater"
     }
-   ]
+   ],
+   "tiles": [
+    "##########################",
+    "#...........==...........#",
+    "#.#.bbbbb.#.==.#.........#",
+    "#...bbbbb...==.#..ppppp..#",
+    "#...wwmww...==....ppppp..#",
+    "#.....=.....==..#.wwlww..#",
+    "#.#...=...#.==......=....#",
+    "#.....=.....==......=....#",
+    "#.....=.....==......=....#",
+    "#....S=.....==......=....#",
+    "#=========================",
+    "#=========================",
+    "#...........==...........#",
+    "#...rrrr....==..kkkkkkk..#",
+    "#.#.rrrrF...==..kkkkkkk..#",
+    "#...wwhw....==..kkkkkkk..#",
+    "#.....========..wwwjwww..#",
+    "#....iiii...========...S.#",
+    "#.#..iiii...==.......FF..#",
+    "#...Fwwdw...==..#.F......#",
+    "#...........==..F........#",
+    "############==############"
+   ],
+   "warps": {
+    "7,19": {
+     "map": "fanclub",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
+   }
   },
   "coralhaven": {
    "npcs": [
@@ -31415,13 +33423,13 @@
     ],
     "good": [
      {
-      "species": "mirrakoi",
+      "species": "brookit",
       "min": 31,
       "max": 38,
       "weight": 60
      },
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 38,
       "weight": 20
@@ -31435,7 +33443,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 41,
       "max": 51,
       "weight": 40
@@ -31447,7 +33455,7 @@
       "weight": 40
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 41,
       "max": 51,
       "weight": 15
@@ -31462,7 +33470,7 @@
    },
    "waterEncounters": [
     {
-     "species": "jabcrab",
+     "species": "eddykin",
      "min": 38,
      "max": 46,
      "weight": 60
@@ -31529,7 +33537,7 @@
     ],
     "good": [
      {
-      "species": "jabcrab",
+      "species": "eddykin",
       "min": 10,
       "max": 15,
       "weight": 60
@@ -31549,7 +33557,7 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -31567,7 +33575,7 @@
       "weight": 15
      },
      {
-      "species": "brookit",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 5
@@ -31592,6 +33600,265 @@
      "min": 5,
      "max": 8,
      "weight": 10
+    }
+   ]
+  },
+  "lumenvale_house1": {
+   "npcs": [
+    {
+     "x": 7,
+     "y": 7,
+     "dir": "down",
+     "palette": "old",
+     "text": [
+      "I'm the Move Deleter. I can make a creature forget a move. Even an HM!"
+     ],
+     "service": "moveDeleter"
+    }
+   ],
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "fernhollow_home": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "stonecrest_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "duskmere_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "voltara_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "cindercity_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "cindercity_house2": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "cindercity_house3": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "cindercity_house4": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "harrowfield_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "harrowfield_house2": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "bramblegate_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "skyreach_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "saltmarsh_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "saltmarsh_house2": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "coralhaven_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "summitcrown_house1": {
+   "tiles": [
+    "|||||||||||",
+    "|||||||||||",
+    "|KK_N___B_|",
+    "|_______B_|",
+    "|___tt____|",
+    "|___tt____|",
+    "|P_______P|",
+    "|_________|",
+    "|||||e|||||"
+   ]
+  },
+  "fernhollow_lab": {
+   "npcs": [
+    {
+     "x": 3,
+     "y": 3,
+     "dir": "down",
+     "palette": "prof",
+     "text": [
+      "PROF. ALDER: Your dex only covers the creatures of Wildbound."
+     ],
+     "service": "nationalDex"
+    },
+    {
+     "x": 7,
+     "y": 7,
+     "dir": "down",
+     "palette": "boy",
+     "text": [
+      "Catch 120 kinds of creatures and the professor's aide has a ticket for you!"
+     ],
+     "service": "ticket",
+     "ticket": "auroraTicket",
+     "need": "dex"
     }
    ]
   }
@@ -31808,6 +34075,24 @@
    "name": "Glow Lamp",
    "price": 5000,
    "color": "#f8e070",
+   "solid": true
+  },
+  "decoGlassChair": {
+   "name": "Glass Chair",
+   "price": 0,
+   "color": "#a8e0f0",
+   "solid": true
+  },
+  "decoGlassDesk": {
+   "name": "Glass Desk",
+   "price": 0,
+   "color": "#88d0e8",
+   "solid": true
+  },
+  "decoOrnament": {
+   "name": "Glass Ornament",
+   "price": 0,
+   "color": "#e0f0ff",
    "solid": true
   }
  },
@@ -32900,6 +35185,123 @@
    "saltmarsh": null
   }
  },
+ "emerald": {
+  "glass": [
+   [
+    "blueFlute",
+    250
+   ],
+   [
+    "whiteFlute",
+    500
+   ],
+   [
+    "blackFlute",
+    500
+   ],
+   [
+    "decoGlassChair",
+    2000
+   ],
+   [
+    "decoGlassDesk",
+    3000
+   ]
+  ],
+  "rareFish": {
+   "map": "route11",
+   "species": "whirlsage",
+   "spots": 2,
+   "tiles": [
+    "12,15",
+    "13,15",
+    "14,15",
+    "15,15",
+    "12,16",
+    "13,16",
+    "14,16",
+    "15,16",
+    "12,17",
+    "13,17",
+    "14,17",
+    "15,17"
+   ],
+   "min": 20,
+   "max": 25
+  },
+  "outbreaks": [
+   "morsicle",
+   "plumehawk",
+   "mournflare",
+   "slumbrace",
+   "sablemaw",
+   "scorchnewt",
+   "stagbloom",
+   "nimbusnake",
+   "wyrmscale"
+  ],
+  "outbreakRoutes": [
+   "route1",
+   "route2",
+   "route3",
+   "route4",
+   "route5",
+   "route6",
+   "route7",
+   "route8",
+   "route9",
+   "route10",
+   "route11",
+   "route12"
+  ],
+  "quizPrizes": [
+   "ppUp",
+   "rareCandy",
+   "starPiece",
+   "nugget",
+   "heartScale",
+   "luckyEgg"
+  ],
+  "fanGifts": [
+   [
+    "ppUp",
+    "rareCandy",
+    "starPiece"
+   ],
+   [
+    "nugget",
+    "ppUp",
+    "luckyEgg"
+   ],
+   [
+    "masterOrb",
+    "nugget",
+    "rareCandy"
+   ]
+  ],
+  "fanNeeds": [
+   3,
+   6,
+   10
+  ],
+  "fossilLevel": 20,
+  "tentPrizes": [
+   "ppUp",
+   "rareCandy",
+   "leftovers",
+   "shellBell",
+   "quickClaw",
+   "kingsRock",
+   "scopeLens",
+   "brightPowder"
+  ],
+  "islands": {
+   "southernisland": "eonTicket",
+   "farawayisland": "oldSeaMap",
+   "birthisland": "auroraTicket",
+   "navelrock": "mysticTicket"
+  }
+ },
  "regionMap": {
   "fernhollow": {
    "x": 2,
@@ -33113,25 +35515,36 @@
  },
  "mapParent": {
   "gym1": "stonecrest",
+  "fossillab": "stonecrest",
   "gym2": "duskmere",
   "gym3": "voltara",
   "gym4": "cindercity",
   "gamecorner": "cindercity",
   "daycare": "harrowfield",
+  "tent_harrowfield": "harrowfield",
   "gym5": "bramblegate",
+  "tent_bramblegate": "bramblegate",
   "gym6": "skyreach",
+  "fanclub": "skyreach",
   "safarizone": "saltmarsh",
+  "tent_saltmarsh": "saltmarsh",
   "gym7": "lumenvale",
   "contesthall": "lumenvale",
   "deptstore": "lumenvale",
+  "museum": "lumenvale",
   "gym8": "coralhaven",
   "league": "summitcrown",
   "battletower": "summitcrown",
   "granitecave": "route3",
+  "tomb_rock": "route4",
   "desertruins": "route5",
+  "glassworkshop": "route6",
   "trickhouse": "route7",
+  "tomb_steel": "route7",
   "berrymaster": "route8",
+  "tomb_ice": "route8",
   "skyspire": "route13",
+  "shoalcave": "route13",
   "skyspire2": "route13",
   "granitecave_b1": "route3",
   "frontier_factory": "battlefrontier",

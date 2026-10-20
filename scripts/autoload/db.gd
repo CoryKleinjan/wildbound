@@ -35,6 +35,8 @@ var TRICK: Dictionary = {}
 var FRONTIER: Dictionary = {}
 var REGION_MAP: Dictionary = {}
 var MAP_PARENT: Dictionary = {}
+## The last of the Emerald extras: glass flutes, rare fishing, outbreaks, quiz and fan prizes, Battle Tents.
+var EMERALD: Dictionary = {}
 const STAT_KEYS := ["hp", "atk", "def", "spa", "spd", "spe"]
 
 func _init() -> void:
@@ -113,7 +115,10 @@ func _apply_features(f: Dictionary) -> void:
 		else:
 			ITEMS[id] = f.items[id]
 	for id in f.species:
-		SPECIES[id].merge(f.species[id], true)
+		if SPECIES.has(id):
+			SPECIES[id].merge(f.species[id], true)
+		else:
+			SPECIES[id] = f.species[id]
 	for id in f.maps:
 		MAPS[id] = f.maps[id]
 	for id in f.mapPatches:
@@ -142,6 +147,7 @@ func _apply_features(f: Dictionary) -> void:
 	FRONTIER = f.get("frontier", {})
 	REGION_MAP = f.get("regionMap", {})
 	MAP_PARENT = f.get("mapParent", {})
+	EMERALD = f.get("emerald", {})
 
 func _load(name: String) -> Variant:
 	var f := FileAccess.open("res://data/%s.json" % name, FileAccess.READ)

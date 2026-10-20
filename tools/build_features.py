@@ -1453,6 +1453,343 @@ OUT['frontier'] = {
 
 
 
+# ---------- the last of Emerald: Move Deleter, ash and glass flutes, rare fishing spots, TV and outbreaks, the
+# trendy phrase, Quiz Lady, Fan Club, art museum, national dex, fossils, Battle Tents, Shoal Cave ----------
+INTERIORS = load('interiors')['maps']
+EM = {}
+for it in [
+    FD.item('sootSack', 'Soot Sack', 0, {'kind': 'key', 'use': 'ash'}, 'Collects volcanic ash as you walk through ashy grass.', 'key'),
+    FD.item('blueFlute', 'Blue Flute', 100, {'kind': 'cure', 'statuses': ['slp']}, 'A glass flute that wakes a sleeping creature.'),
+    FD.item('whiteFlute', 'White Flute', 0, {'kind': 'key', 'use': 'flute', 'mode': 'more'}, 'Play it to draw wild creatures out. Play again to stop.', 'key'),
+    FD.item('blackFlute', 'Black Flute', 0, {'kind': 'key', 'use': 'flute', 'mode': 'fewer'}, 'Play it to keep wild creatures away. Play again to stop.', 'key'),
+    FD.item('rootFossil', 'Root Fossil', 0, {'kind': 'key', 'use': 'none', 'fossil': 'orecrag'}, 'A fossil of an ancient creature that lived among roots.', 'key'),
+    FD.item('clawFossil', 'Claw Fossil', 0, {'kind': 'key', 'use': 'none', 'fossil': 'kobbrute'}, 'A fossil of an ancient creature with mighty claws.', 'key'),
+    FD.item('shoalSalt', 'Shoal Salt', 20, {'kind': 'valuable'}, 'Salt from Shoal Cave. Someone there may want it.'),
+    FD.item('shoalShell', 'Shoal Shell', 20, {'kind': 'valuable'}, 'A shell from Shoal Cave. Someone there may want it.'),
+]:
+    OUT['items'][it['id']] = it
+for k, d in {'decoGlassChair': {'name': 'Glass Chair', 'price': 0, 'color': '#a8e0f0', 'solid': True},
+             'decoGlassDesk': {'name': 'Glass Desk', 'price': 0, 'color': '#88d0e8', 'solid': True},
+             'decoOrnament': {'name': 'Glass Ornament', 'price': 0, 'color': '#e0f0ff', 'solid': True}}.items():
+    OUT['decorations'][k] = d
+    OUT['items'][k] = {'id': k, 'name': d['name'], 'price': 0, 'effect': {'kind': 'deco'},
+                       'desc': 'A decoration for your Secret Base.', 'pocket': 'key'}
+ALL_ITEMS.update(OUT['items'])
+
+# Move Deleter (Lumenvale): makes a creature forget a move, even an HM.
+patch('lumenvale_house1').setdefault('npcs', []).append(
+    npc(7, 7, 'old', ["I'm the Move Deleter. I can make a creature forget a move. Even an HM!"], service='moveDeleter'))
+
+# Glass Workshop (Route 6, in the ash): a Soot Sack, then flutes and glass furniture for ash.
+building_i('route6', 'glassworkshop', 'Glass Workshop', [
+    npc(7, 4, 'gentleman', ["I'm a glassworker. I make flutes out of volcanic ash."], service='glass'),
+    npc(3, 7, 'boy', ['Walk through the ashy grass with the Soot Sack and it fills up on its own.']),
+], theme='#e8d8c8')
+EM['glass'] = [['blueFlute', 250], ['whiteFlute', 500], ['blackFlute', 500], ['decoGlassChair', 2000], ['decoGlassDesk', 3000]]
+
+# A rare creature that only bites at a few spots on Route 11's water; the spots move with the trendy phrase.
+water_spots = [(x, y) for y, row in enumerate(get_grid('route11')) for x, ch in enumerate(row) if ch == '~']
+EM['rareFish'] = {'map': 'route11', 'species': 'whirlsage', 'spots': 2, 'tiles': ['%d,%d' % p for p in water_spots],
+                  'min': 20, 'max': 25}
+add_npc('route11', 'old', ['Fishermen say a rare creature bites only at a few spots on this water.',
+                              'Folks say the spots change whenever people start saying something new.'])
+
+# Mass outbreaks: one route a day swarms with a creature from elsewhere (the TV news reports it).
+used = set(OUT['prizes']['creatures'][i][0] for i in range(3)) | {mirage_mon, 'orecrag', 'kobbrute', 'whirlsage'}
+EM['outbreaks'] = [k for k in unwild if SPECIES[k].get('evolves') and k not in used and k != 'cocoonix']
+EM['outbreakRoutes'] = sorted([k for k in list(MAPS) if MAPS[k].get('route') and MAPS[k].get('encounters')], key=route_no)
+
+# TVs in your house and every house.
+for mid, m in INTERIORS.items():
+    if mid.endswith('_home') or '_house' in mid:
+        g = [list(r) for r in m['tiles']]
+        if len(g) > 3 and g[2][4] == '_':
+            g[2][4] = 'N'
+            patch(mid)['tiles'] = [''.join(r) for r in g]
+
+# The trendy phrase (Stonecrest) and the Quiz Lady (Showcase Hall).
+add_npc('stonecrest', 'girl', ["What's trendy these days? Tell me what everyone should be saying!"], service='trendy')
+OUT['maps']['contesthall']['npcs'].append(
+    npc(3, 9, 'beauty', ["I'm the Quiz Lady! Answer my question correctly and win a prize!"], service='quiz'))
+EM['quizPrizes'] = ['ppUp', 'rareCandy', 'starPiece', 'nugget', 'heartScale', 'luckyEgg']
+
+# Fan Club (Skyreach): members become fans as you grow stronger; the chairwoman hands out the Effort Ribbon.
+building_i('skyreach', 'fanclub', 'Creature Fan Club', [
+    npc(7, 3, 'gentleman', ["I'm the Fan Club Chairman. Our members follow the strongest Trainers!"], service='fanClub'),
+    npc(3, 6, 'girl', ['Are you famous yet?'], service='fan', fan=0),
+    npc(11, 6, 'boy', ['I only cheer for the very best.'], service='fan', fan=1),
+    npc(7, 8, 'beauty', ['Champions are so dreamy...'], service='fan', fan=2),
+    npc(12, 9, 'old', ['A creature trained to its limits earns my Effort Ribbon.'], service='effortRibbon'),
+], theme='#f0d8e0')
+EM['fanGifts'] = [['ppUp', 'rareCandy', 'starPiece'], ['nugget', 'ppUp', 'luckyEgg'], ['masterOrb', 'nugget', 'rareCandy']]
+EM['fanNeeds'] = [3, 6, 10]
+
+# Art museum (Lumenvale): a painting of each Master Rank contest winner hangs in a frame (G).
+MUSEUM = ['|||||||||||||||',
+          '|_G_G_G_G_G___|',
+          '|_____________|',
+          '|_____________|',
+          '|_____________|',
+          '|_____________|',
+          '|_____________|',
+          '|_____________|',
+          '|_____________|',
+          '|_____________|',
+          '|_____________|',
+          '|||||||e|||||||']
+building_i('lumenvale', 'museum', 'Lumenvale Art Museum', [
+    npc(7, 4, 'gentleman', ["Welcome to the art museum! We paint the creatures that win Master Rank contests."], service='museum'),
+    npc(12, 7, 'girl', ['Each frame holds a different contest category.']),
+], rows=MUSEUM, theme='#e8e0d0')
+
+# National dex: Prof. Alder upgrades the dex once you're Champion.
+patch('fernhollow_lab').setdefault('npcs', []).append(
+    npc(3, 3, 'prof', ['PROF. ALDER: Your dex only covers the creatures of Wildbound.'], service='nationalDex'))
+
+# Fossils: the fossil maniac on Route 5 lets you pick one; the Fossil Lab in Stonecrest revives it.
+add_npc('route5', 'hiker', ["I dig fossils out of the desert! I found two, but you can have one."], service='fossilPick')
+building_i('stonecrest', 'fossillab', 'Fossil Lab', [
+    npc(7, 4, 'psychic', ['We study ancient creatures. Bring me a fossil and I can bring it back to life!'], service='fossilLab'),
+    npc(3, 7, 'boy', ['The machine takes a while. Go for a walk and come back.']),
+], theme='#d8e0e8')
+EM['fossilLevel'] = 20
+
+# Battle Tents: three small Frontier facilities at level 30, three battles a set, an item prize.
+for town, fid, name, desc in [
+        ('saltmarsh', 'factory', 'Saltmarsh Battle Tent', 'Rent three creatures and win three battles in a row!'),
+        ('harrowfield', 'palace', 'Harrowfield Battle Tent', 'Your creatures fight on their own here, as their nature tells them.'),
+        ('bramblegate', 'arena', 'Bramblegate Battle Tent', 'Three-turn match-ups judged on Mind, Skill and Body!')]:
+    building_i(town, 'tent_' + town, name, [
+        npc(7, 4, 'nurse', ['Welcome to the %s!' % name, desc], service='tent', facility=fid),
+        npc(11, 7, 'ace', ['Everyone fights at level 30 in a Battle Tent.'])], theme='#e8e0c0')
+EM['tentPrizes'] = ['ppUp', 'rareCandy', 'leftovers', 'shellBell', 'quickClaw', 'kingsRock', 'scopeLens', 'brightPowder']
+
+# Shoal Cave (an island on Route 13): the tide rises and falls every six hours (J tiles are water at high tide).
+SHOAL = ['xxxxxxxxxxxxxxxxxxxx',
+         'xggggxxxxxxxxxggggxx',
+         'xgJJgggggggggggJJgxx',
+         'xgJJgxxxxxxxxxgJJgxx',
+         'xggggxxggggggxggggxx',
+         'xxxgxxxgJJJJgxxxgxxx',
+         'xxxgggggJJJJgggggxxx',
+         'xxxxxxxgggggggxxxxxx',
+         'xxxxxxxxxgyxxxxxxxxx',
+         'xxxxxxxxxxxxxxxxxxxx']
+SHOAL[8] = 'xxxxxxxxxxgxxxxxxxxx'
+SHOAL.insert(9, 'xxxxxxxxxxyxxxxxxxxx')
+g = get_grid('route13') if 'route13' in OUT['mapPatches'] else grid(OUT['maps']['route13'])
+r13 = [list(r) for r in OUT['maps']['route13']['tiles']]
+r13[12][16] = 'y'
+OUT['maps']['route13']['tiles'] = [''.join(r) for r in r13]
+OUT['maps']['route13']['warps']['16,12'] = {'map': 'shoalcave', 'x': 10, 'y': 8, 'dir': 'up'}
+OUT['maps']['shoalcave'] = {
+    'id': 'shoalcave', 'name': 'Shoal Cave', 'cave': True, 'connections': {}, 'tiles': SHOAL, 'tide': True,
+    'warps': {'10,9': {'map': 'route13', 'x': 16, 'y': 13, 'dir': 'down'}}, 'encounterRate': 8,
+    'encounters': [{'species': s, 'min': 26, 'max': 32, 'weight': w} for s, w in zip(water_sp[-16:-12], [40, 30, 20, 10])],
+    'npcs': [npc(12, 4, 'old', ["Bring me four Shoal Salt and four Shoal Shells and I'll make you a Shell Bell."], service='shellBell')],
+    'shoal': [[2, 1, 'shoalSalt'], [17, 1, 'shoalSalt'], [3, 4, 'shoalShell'], [16, 4, 'shoalShell'],
+              [9, 6, 'shoalShell'], [10, 5, 'shoalSalt'], [13, 6, 'shoalShell'], [5, 6, 'shoalSalt']],
+}
+assert all(len(r) == 20 for r in SHOAL)
+
+# ---------- six more legendaries: the golem trio (Braille puzzle) and the event islands ----------
+def legend(id, dex, name, types, base, abilities, body, colors, feats, size, eyes, text, learnset, ev):
+    sp = {'id': id, 'dex': dex, 'name': name, 'types': types, 'base': dict(zip(['hp', 'atk', 'def', 'spa', 'spd', 'spe'], base)),
+          'abilities': abilities, 'catchRate': 3, 'baseExp': 260, 'evYield': ev, 'growth': 'slow', 'genderRatio': -1,
+          'sprite': {'body': body, 'main': colors[0], 'accent': colors[1], 'belly': colors[2], 'features': feats,
+                     'size': size, 'eyes': eyes},
+          'dexText': text, 'area': 11, 'rarity': 'legendary',
+          'learnset': [[lv, m] for lv, m in learnset if m in ALL_MOVES], 'evolves': None}
+    SPECIES[id] = sp
+    LEGENDARIES.append(id)
+    sp['eggGroups'] = ['Undiscovered']
+    sp['tms'] = sorted(TM_ID[mid] for mid in FD.TMS + FD.HMS if compatible(id, mid))
+    sp['tutor'] = [mid for mid in TUTOR_MOVES if TUTOR_RULE[mid](sp)]
+    sp['eggMoves'] = []
+    OUT['species'][id] = sp
+    return id
+
+
+GOLEMS = [
+    legend('cragolem', 201, 'Cragolem', ['Rock'], [80, 100, 200, 50, 100, 50], ['clearBody'], 'rock',
+           ['#b07848', '#f0a030', '#d8b088'], ['spikes', 'crest'], 1, 'round',
+           'Its body is made of ancient stone. It was sealed away for fear of its strength.',
+           [(1, 'explosion'), (9, 'rockThrow'), (17, 'curse'), (25, 'superpower'), (33, 'ancientPower'), (41, 'ironDefense'),
+            (49, 'zapCannon'), (57, 'lockOn'), (65, 'hyperBeam')], {'def': 3}),
+    legend('glaciolem', 202, 'Glaciolem', ['Ice'], [80, 50, 100, 100, 200, 50], ['clearBody'], 'rock',
+           ['#a8d8f0', '#f0a030', '#e8f8ff'], ['spikes', 'crest'], 1, 'round',
+           'Made of ice from the ice age. It chills the air to minus 200 degrees.',
+           [(1, 'explosion'), (9, 'icyWind'), (17, 'curse'), (25, 'superpower'), (33, 'ancientPower'), (41, 'amnesia'),
+            (49, 'zapCannon'), (57, 'lockOn'), (65, 'hyperBeam')], {'spd': 3}),
+    legend('ferrolem', 203, 'Ferrolem', ['Steel'], [80, 75, 150, 75, 150, 50], ['clearBody'], 'rock',
+           ['#8890a0', '#f0a030', '#c8d0d8'], ['spikes', 'crest'], 1, 'round',
+           'Its body is harder than any known metal, tempered by pressure deep underground.',
+           [(1, 'explosion'), (9, 'metalClaw'), (17, 'curse'), (25, 'superpower'), (33, 'ancientPower'), (41, 'ironDefense'),
+            (41, 'amnesia'), (49, 'zapCannon'), (57, 'lockOn'), (65, 'hyperBeam')], {'def': 2, 'spd': 1}),
+]
+MYTHRIN = legend('mythrin', 204, 'Mythrin', ['Psychic'], [100, 100, 100, 100, 100, 100], ['synchronize'], 'ghost',
+                 ['#f0b0d0', '#80c0f0', '#fff0f8'], ['tail', 'ears'], 0.5, 'round',
+                 'Said to hold the code of every creature. It shows itself only to the pure of heart.',
+                 [(1, 'pound'), (10, 'megaPunch'), (20, 'metronome'), (30, 'psychic'), (40, 'ancientPower'), (50, 'recover')], {'hp': 3})
+ASTRAXIS = legend('astraxis', 205, 'Astraxis', ['Psychic'], [50, 150, 50, 150, 50, 150], ['pressure'], 'biped',
+                  ['#e06840', '#40b0c0', '#f0d8c0'], ['antenna', 'tail'], 0.9, 'fierce',
+                  'It fell to the ground riding a meteor. A crystal in its chest fires lasers.',
+                  [(1, 'leer'), (1, 'wrap'), (5, 'nightShade'), (10, 'teleport'), (15, 'knockOff'), (20, 'swift'), (30, 'extrasensory'),
+                   (40, 'cosmicPower'), (50, 'recover'), (55, 'psychoBoost'), (65, 'hyperBeam')], {'atk': 1, 'spa': 1, 'spe': 1})
+AUROQUIL = legend('auroquil', 206, 'Auroquil', ['Fire', 'Flying'], [106, 130, 90, 110, 154, 90], ['pressure'], 'bird',
+                  ['#e8a030', '#e04838', '#f8e8a0'], ['wings', 'crest', 'tailFlame'], 1, 'fierce',
+                  'Its feathers glow in seven colors. A rainbow follows wherever it flies.',
+                  [(1, 'gust'), (11, 'recover'), (22, 'fireBlast'), (33, 'sunnyDay'), (44, 'swift'), (55, 'safeguard'),
+                   (66, 'sacredFire'), (77, 'calmMind'), (88, 'skyAttack'), (99, 'hyperBeam')], {'spd': 3})
+
+# The Sealed Chamber, under the sea: its Braille walls tell how to wake the golems.
+FLOOR = [list(r) for r in OUT['maps']['seafloor']['tiles']]
+FLOOR[1][13] = 'y'
+OUT['maps']['seafloor']['tiles'] = [''.join(r) for r in FLOOR]
+OUT['maps']['seafloor']['warps']['13,1'] = {'map': 'sealedchamber', 'x': 7, 'y': 9, 'dir': 'up'}
+CHAMBER = ['xxxxxxxxxxxxxxx',
+           'xxZxxxxZxxxxZxx',
+           'xxgxxxxgxxxxgxx',
+           'xxgggggggggggxx',
+           'xxgggggggggggxx',
+           'xxgggggggggggxx',
+           'xxgggggggggggxx',
+           'xxxxggggggxxxxx',
+           'xxxxxxgggxxxxxx',
+           'xxxxxxxgxxxxxxx',
+           'xxxxxxxyxxxxxxx']
+OUT['maps']['sealedchamber'] = {
+    'id': 'sealedchamber', 'name': 'Sealed Chamber', 'cave': True, 'connections': {}, 'tiles': CHAMBER,
+    'warps': {'7,10': {'map': 'seafloor', 'x': 13, 'y': 2, 'dir': 'down'}},
+    'braille': {'2,1': 'IN THIS CAVE WE HAVE LIVED. WE OWE ALL TO THE CREATURES.',
+                '12,1': 'BUT WE SEALED THE CREATURES AWAY. WE FEARED THEM.',
+                '7,1': 'FIRST COMES A CREATURE OF THE SEA. LAST COMES A CREATURE OF STONE. THEN DIG.'},
+    'chamber': '7,1',
+}
+# The three tombs: each Braille wall names a field move to use in front of it.
+TOMB = ['xxxxxxxxxxxxxxx',
+        'xxxxxxxZxxxxxxx',
+        'xxxxxgggggxxxxx',
+        'xxxxgggggggxxxx',
+        'xxxgggggggggxxx',
+        'xxxgggggggggxxx',
+        'xxxgggggggggxxx',
+        'xxxxgggggggxxxx',
+        'xxxxxgggggxxxxx',
+        'xxxxxxxgxxxxxxx',
+        'xxxxxxxyxxxxxxx']
+for golem, route, tid, name, move, text in [
+        (GOLEMS[0], 'route4', 'tomb_rock', 'Desert Tomb', 'strength', 'THOSE WITH STRENGTH, MOVE THE STONE.'),
+        (GOLEMS[1], 'route8', 'tomb_ice', 'Frost Tomb', 'wait', 'STAND STILL IN THE COLD. WAIT FOR TWO MINUTES.'),
+        (GOLEMS[2], 'route7', 'tomb_steel', 'Iron Tomb', 'fly', 'SHOW THE SKY TO THE WALL. USE FLY.')]:
+    tx, ty = cave_mouth(route, tid, (7, 9))
+    OUT['maps'][tid] = {
+        'id': tid, 'name': name, 'cave': True, 'connections': {}, 'tiles': TOMB,
+        'warps': {'7,10': {'map': route, 'x': tx, 'y': ty + 1, 'dir': 'down'}},
+        'braille': {'7,1': text}, 'tomb': {'wall': '7,1', 'move': move, 'flag': tid + '_open'},
+        'statics': [{'id': 'leg_' + golem, 'species': golem, 'level': 40, 'x': 7, 'y': 5, 'requires': tid + '_open',
+                     'text': 'The golem\'s eyes light up...'}],
+    }
+
+# Event islands, reached by ferry from Saltmarsh with a ticket.
+def island(id, name, rows, x, y, **extra):
+    m = {'id': id, 'name': name, 'tiles': rows, 'connections': {}, 'theme': '#d8d0c0', 'music': 'town', 'outside': '~',
+         'npcs': [npc(x, y, 'swimmer', ['The ferry goes back to Saltmarsh whenever you\'re ready.'], service='ferry', to='saltmarsh')]}
+    m.update(extra)
+    assert all(len(r) == len(rows[0]) for r in rows), id
+    OUT['maps'][id] = m
+    return m
+
+
+island('southernisland', 'Southern Island', [
+    '~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~aaaaaaaaaa~~~~~',
+    '~~~aaa########aaa~~~',
+    '~~aaa##......##aaa~~',
+    '~~aa##........##aa~~',
+    '~~aa#....FF....#aa~~',
+    '~~aa#...F..F...#aa~~',
+    '~~aa#....FF....#aa~~',
+    '~~aa##........##aa~~',
+    '~~aaa###....###aaa~~',
+    '~~~aaaaa....aaaaa~~~',
+    '~~~~aaaaaaaaaaaa~~~~',
+    '~~~~~~~aaaaaa~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~'], 8, 12,
+    statics=[{'id': 'leg_eon_' + sp, 'species': sp, 'level': 50, 'x': 9 + i, 'y': 6, 'eon': True,
+              'text': 'A creature with a dream-like glow is resting here...'} for i, sp in enumerate(OUT['roamers'])])
+island('farawayisland', 'Faraway Island', [
+    '~~~~~~~~~~~~~~~~~~~~',
+    '~~~aaaaaaaaaaaaaa~~~',
+    '~~aa,,,,,,,,,,,,aa~~',
+    '~aa,,,,,,,,,,,,,,aa~',
+    '~a,,,,,#,,,,#,,,,,a~',
+    '~a,,,,,,,,,,,,,,,,a~',
+    '~a,,,#,,,,,,,,#,,,a~',
+    '~a,,,,,,,,,,,,,,,,a~',
+    '~aa,,,,,,,,,,,,,,aa~',
+    '~~aa,,,,....,,,,aa~~',
+    '~~~aaaaa....aaaaa~~~',
+    '~~~~~~~aaaaaa~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~'], 8, 11, encounterRate=0,
+    statics=[{'id': 'leg_' + MYTHRIN, 'species': MYTHRIN, 'level': 30, 'x': 9, 'y': 4,
+              'text': 'A tiny pink creature peeks out of the tall grass!'}])
+island('birthisland', 'Birth Island', [
+    '~~~~~~~~~~~~~~~~~~~~',
+    '~~~~~aaaaaaaaaa~~~~~',
+    '~~~aaaaaaaaaaaaaa~~~',
+    '~~aaaaaaaaaaaaaaaa~~',
+    '~~aaaaaaaaaaaaaaaa~~',
+    '~~aaaaaaaaaaaaaaaa~~',
+    '~~aaaaaaaaaaaaaaaa~~',
+    '~~aaaaaaaaaaaaaaaa~~',
+    '~~~aaaaaaaaaaaaaa~~~',
+    '~~~~aaaaaaaaaaaa~~~~',
+    '~~~~~~~aaaaaa~~~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~'], 8, 10,
+    triangle=[[9, 5], [5, 3], [14, 3], [4, 7], [15, 7], [9, 8], [9, 3], [12, 6]],
+    statics=[{'id': 'leg_' + ASTRAXIS, 'species': ASTRAXIS, 'level': 30, 'x': 9, 'y': 4, 'requires': 'birth_puzzle',
+              'text': 'The triangle split open, and something came out of it!'}])
+island('navelrock', 'Navel Rock', [
+    '~~~~xxxxxxxxxxx~~~~~',
+    '~~~xxxxxgggxxxxx~~~~',
+    '~~xxxxxgggggxxxxx~~~',
+    '~~xxxxxxgggxxxxxx~~~',
+    '~~xxxxxxxgxxxxxxx~~~',
+    '~~xxxggggggxxxxxx~~~',
+    '~~xxxgxxxxgggggxx~~~',
+    '~~xxxgxxxxxxxxgxx~~~',
+    '~~xxxggggggggggxx~~~',
+    '~~xxxxxxxxgxxxxxx~~~',
+    '~~~aaaaaaagaaaaa~~~~',
+    '~~~~aaaaaaaaaaa~~~~~',
+    '~~~~~~~~~~~~~~~~~~~~'], 8, 11, cave=False,
+    statics=[{'id': 'leg_' + AUROQUIL, 'species': AUROQUIL, 'level': 70, 'x': 9, 'y': 1,
+              'text': 'A rainbow-colored bird spreads its wings at the summit!'}])
+EM['islands'] = {'southernisland': 'eonTicket', 'farawayisland': 'oldSeaMap', 'birthisland': 'auroraTicket',
+                 'navelrock': 'mysticTicket'}
+for it in [FD.item('eonTicket', 'Eon Ticket', 0, {'kind': 'key', 'use': 'none'}, 'A ferry ticket to Southern Island.', 'key'),
+           FD.item('oldSeaMap', 'Old Sea Map', 0, {'kind': 'key', 'use': 'none'}, 'A faded map that shows the way to a faraway island.', 'key'),
+           FD.item('auroraTicket', 'Aurora Ticket', 0, {'kind': 'key', 'use': 'none'}, 'A ferry ticket to Birth Island.', 'key'),
+           FD.item('mysticTicket', 'Mystic Ticket', 0, {'kind': 'key', 'use': 'none'}, 'A ferry ticket to Navel Rock.', 'key')]:
+    OUT['items'][it['id']] = it
+for n in OUT['mapPatches']['saltmarsh']['npcs']:
+    if n.get('service') == 'ferry':
+        n['islands'] = list(EM['islands'])
+# Who hands out the tickets.
+add_npc('saltmarsh', 'old', ['I sailed to an island of dreams once... You need an Eon Ticket to go there.'],
+        service='ticket', ticket='eonTicket', need='eon')
+OUT['maps']['frontier_exchange']['npcs'].append(
+    npc(11, 7, 'old', ['Clear a set of seven anywhere in the Frontier and I\'ll give you something old I found.'],
+        service='ticket', ticket='oldSeaMap', need='frontier'))
+patch('fernhollow_lab')['npcs'].append(
+    npc(7, 7, 'boy', ['Catch 120 kinds of creatures and the professor\'s aide has a ticket for you!'],
+        service='ticket', ticket='auroraTicket', need='dex'))
+add_npc('summitcrown', 'gentleman', ['Enter the Hall of Fame twice and I\'ll give you a Mystic Ticket.'],
+        service='ticket', ticket='mysticTicket', need='hof')
+OUT['emerald'] = EM
+
+
 # ---------- validation ----------
 def all_maps():
     out = {}
