@@ -11,6 +11,7 @@ of maps.json while the painting is present.
 python3 tools/artgen/mapfit.py [map_id ...]        # writes data/map_fit.json and raw/fit/<id>.png previews
 """
 import json
+import os
 import sys
 from concurrent.futures import ThreadPoolExecutor
 
@@ -20,6 +21,7 @@ from common import RAW, ROOT, ask_vision
 
 MODEL = "gemini-3.1-pro-preview"  # whole-map comparison
 CELL_MODEL = "gemini-3.5-flash"  # one-cell close-ups: easy, and there are many
+PASSES = int(os.environ.get("FIT_PASSES", "3"))  # whole-map proposal runs; 1 is about a third of the cost
 FIT = ROOT / "data" / "map_fit.json"
 BUILDING = "rpbknw"
 DOORS = "hlmju"
@@ -103,7 +105,7 @@ def proposals(mid: str, m: dict) -> set[tuple[int, int]]:
 			return []
 
 	with ThreadPoolExecutor(3) as ex:
-		for res in ex.map(run, range(3)):
+		for res in ex.map(run, range(PASSES)):
 			cells |= {(int(e["x"]), int(e["y"])) for e in res if 0 <= int(e["x"]) < W and 0 <= int(e["y"]) < H}
 	return cells
 
@@ -199,8 +201,16 @@ def protected(maps: dict) -> dict[str, set[tuple[int, int]]]:
 
 
 def clean(data: dict, maps: dict) -> dict:
+	"""Drops changes to protected cells, and changes to tall grass: the vision diff reads the paintings' dark tall grass as trees,
+	and fixgrass.py draws the tall grass tile over every ',' anyway."""
 	keep = protected(maps)
-	return {mid: {k: t for k, t in ch.items() if tuple(map(int, k.split(","))) not in keep.get(mid, set())} for mid, ch in data.items()}
+
+	def ok(mid: str, k: str) -> bool:
+		x, y = map(int, k.split(","))
+		tiles = maps.get(mid, {}).get("tiles", [])
+		return (x, y) not in keep.get(mid, set()) and not (y < len(tiles) and x < len(tiles[y]) and tiles[y][x] == ",")
+
+	return {mid: {k: t for k, t in ch.items() if ok(mid, k)} for mid, ch in data.items()}
 
 
 if __name__ == "__main__":

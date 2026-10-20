@@ -1802,7 +1802,11 @@ patch('fernhollow_lab')['npcs'].append(
         service='ticket', ticket='auroraTicket', need='dex'))
 add_npc('summitcrown', 'gentleman', ['Enter the Hall of Fame twice and I\'ll give you a Mystic Ticket.'],
         service='ticket', ticket='mysticTicket', need='hof')
+# Maps repainted from their current layout (tools/artgen/mapart.py) need no overpaint.
+REPAINTED = set(json.load(open(os.path.join(ROOT, 'data', 'repainted.json')))) if os.path.exists(os.path.join(ROOT, 'data', 'repainted.json')) else set()
 for mid, before in PAINTED_GRIDS.items():
+    if mid in REPAINTED:
+        continue
     after = any_grid(mid)
     changed = ['%d,%d' % (x, y) for y, row in enumerate(after) for x, ch in enumerate(row)
                if y >= len(before) or x >= len(before[y]) or before[y][x] != ch]

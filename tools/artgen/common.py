@@ -25,7 +25,10 @@ def key() -> str:
 
 
 def species() -> dict:
-	return json.loads((ROOT / "data" / "species.json").read_text())
+	"""All species, including those added by data/features.json (the Emerald legendaries)."""
+	out = json.loads((ROOT / "data" / "species.json").read_text())
+	out.update(json.loads((ROOT / "data" / "features.json").read_text()).get("species", {}))
+	return out
 
 
 def misc() -> dict:
@@ -44,6 +47,8 @@ PRICES = {
 	"gemini-2.5-flash-image": (0.3, 2.5, 0.04), "gemini-3.1-pro-preview": (2.5, 15.0, 0.0),
 	"gemini-3.5-flash": (0.5, 3.0, 0.0), "lyria": (0.0, 0.0, 0.08),
 }
+# Ledger estimates are multiplied by this, to stay under the real bill.
+SAFETY = 1.5
 # The most one call may cost, reserved before it is sent so parallel calls can't overshoot together.
 RESERVE = 0.2
 _lock = threading.Lock()
@@ -66,7 +71,10 @@ def _cost(model: str, resp: dict) -> float:
 	pin, pout, pimg = PRICES.get(model, PRICES["lyria"] if "lyria" in model else (2.5, 15.0, 0.14))
 	u = resp.get("usageMetadata", {})
 	images = sum(1 for c in resp.get("candidates", []) for p in c.get("content", {}).get("parts", []) if "inlineData" in p or "inline_data" in p)
-	return u.get("promptTokenCount", 0) * pin / 1e6 + u.get("candidatesTokenCount", 0) * pout / 1e6 + images * pimg
+	# thoughtsTokenCount is billed as output but not part of candidatesTokenCount; leaving it out made the ledger read
+	# under half of the real spend (2026-10-20: the key ran dry with the ledger at $13.9 of $30).
+	out = u.get("candidatesTokenCount", 0) + u.get("thoughtsTokenCount", 0)
+	return (u.get("promptTokenCount", 0) * pin / 1e6 + out * pout / 1e6 + images * pimg) * SAFETY
 
 
 def _reserve() -> None:
@@ -111,7 +119,7 @@ def _post_raw(url: str, body: dict, tries: int) -> dict:
 		if r.status_code == 200:
 			return r.json()
 		if r.status_code == 402:
-			raise BudgetExceeded("the API key is out of prepaid credits (402)")
+			raise BudgetExceeded("HTTP 402 (prepaid credits, or a billing hiccup): " + r.text[:300])
 		if r.status_code in (429, 500, 502, 503, 504) and i < tries - 1:
 			time.sleep(2 ** (i + 1))
 			continue
