@@ -28,6 +28,13 @@ var CONTEST: Dictionary = {}
 var TOWER: Dictionary = {}
 var ROAMERS: Array = []
 var GYM_TMS: Dictionary = {}
+## Game Corner prizes {items: [[id, coins]], creatures: [[species, level, coins]]}, Trick House {badges, prizes},
+## Battle Frontier data, the region map {map id: {x, y, w, h, town, name}} and indoor map -> outdoor map.
+var PRIZES: Dictionary = {}
+var TRICK: Dictionary = {}
+var FRONTIER: Dictionary = {}
+var REGION_MAP: Dictionary = {}
+var MAP_PARENT: Dictionary = {}
 const STAT_KEYS := ["hp", "atk", "def", "spa", "spd", "spe"]
 
 func _init() -> void:
@@ -130,6 +137,11 @@ func _apply_features(f: Dictionary) -> void:
 	TOWER = f.tower
 	ROAMERS = f.roamers
 	GYM_TMS = f.gymTms
+	PRIZES = f.get("prizes", {})
+	TRICK = f.get("trick", {})
+	FRONTIER = f.get("frontier", {})
+	REGION_MAP = f.get("regionMap", {})
+	MAP_PARENT = f.get("mapParent", {})
 
 func _load(name: String) -> Variant:
 	var f := FileAccess.open("res://data/%s.json" % name, FileAccess.READ)

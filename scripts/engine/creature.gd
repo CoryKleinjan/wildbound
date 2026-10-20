@@ -4,7 +4,8 @@ extends RefCounted
 ## uid, species, nickname (optional), level, exp, personality, otId, ivs, evs, moves: [{id, pp, maxPp}],
 ## hp, status (null or "brn"/"par"/"psn"/"tox"/"slp"/"frz"), sleepTurns, toxicCount, owner.
 ## Emerald additions: item (held item id or null), friendship (0-255), ball, metLevel, ppUps [per move slot],
-## egg (bool) + eggSteps, ribbons [], condition {cool, beauty, cute, smart, tough, sheen}, pokerus-free.
+## egg (bool) + eggSteps, ribbons [], condition {cool, beauty, cute, smart, tough, sheen},
+## pkrs (Pokérus: null or {strain, days}), mail (null or {item, text, from}).
 ## Older saves lack these; migrate() fills them in.
 
 const EV_STAT_CAP := 255

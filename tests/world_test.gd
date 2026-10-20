@@ -51,6 +51,9 @@ func _initialize() -> void:
 			for wp in other.get("warps", {}).values():
 				if wp.map == m.id and wp.get("script", "") != "baseExit":
 					starts.append([wp.x, wp.y, "warp"])
+		# Trick House puzzle rooms are entered at their bottom door, after finding the Trick Master.
+		if m.has("trickLevel"):
+			starts.append([7, 11, "trick master"])
 		if starts.is_empty():
 			if m.id != "fernhollow" and not m.get("secretBase", false) and not m.get("underwater", false):
 				errs.append("%s: unreachable (no entries)" % m.id)
@@ -155,6 +158,13 @@ func _initialize() -> void:
 			nexts.append(maps[id].diveTo)
 		if not maps[id].get("secretSpots", []).is_empty():
 			nexts.append("secretbase")
+		# The ferry, and the Trick Master's puzzle rooms.
+		for n in maps[id].get("npcs", []):
+			if n.get("service", "") == "ferry":
+				nexts.append(n.to)
+		if maps[id].get("trickHouse", false):
+			for i in range(1, 4):
+				nexts.append("trickpuzzle%d" % i)
 		for n in nexts:
 			if maps.has(n) and not reach.has(n):
 				reach[n] = true

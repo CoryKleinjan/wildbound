@@ -130,6 +130,7 @@ static func epilogue_lines(gs: Dictionary) -> Array:
 
 static func ending(ow: OverworldScene) -> void:
 	var gs: Dictionary = Game.gs
+	HallOfFameScene.record(gs)
 	Game.say(epilogue_lines(gs), func() -> void:
 		Game.transition(func() -> void:
 			Game.push(EndingScene.new(func() -> void:
