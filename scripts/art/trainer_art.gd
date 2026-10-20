@@ -84,6 +84,13 @@ static func draw_trainer_big(x: float, y: float, pal: Dictionary, back_view: boo
 ## Walking frames bob the body up a pixel and keep one foot planted.
 static func _draw_walk(tex: Texture2D, x: float, y: float, dir: String, step: int) -> void:
 	Gfx.ellipse(x + 8, y + 15, 6, 2, Color(0, 0, 0, 0.2))
+	if tex.get_height() == 72:
+		# 48x72 sheet of 16x24 frames: rows face down, up, left (right mirrors left); columns stand, step 1, step 2
+		var row: int = {"down": 0, "up": 1, "left": 2, "right": 2}.get(dir, 0)
+		var fl := dir == "right"
+		var dst := Rect2(x + (16 if fl else 0), y - 8 - (1 if step != 0 else 0), -16 if fl else 16, 24)
+		Gfx.ci.draw_texture_rect_region(tex, dst, Rect2(clampi(step, 0, 2) * 16, row * 24, 16, 24))
+		return
 	var col: int = {"down": 0, "up": 1, "left": 2, "right": 2}.get(dir, 0)
 	var flip := dir == "right"
 	var top := y - 4

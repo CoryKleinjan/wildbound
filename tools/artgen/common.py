@@ -63,12 +63,12 @@ def extract_image(resp: dict) -> bytes | None:
 	return None
 
 
-def generate_image(prompt: str, out: Path, ref_images: list[Path] | None = None, aspect: str = "1:1") -> Path:
+def generate_image(prompt: str, out: Path, ref_images: list[Path] | None = None, aspect: str = "1:1", model: str = IMAGE_MODEL) -> Path:
 	"""Synchronous call (used for samples and retries). Skips work if out already exists."""
 	if out.exists():
 		return out
 	for attempt in range(3):
-		resp = _post(f"{API}/models/{IMAGE_MODEL}:generateContent", image_request(prompt, ref_images, aspect))
+		resp = _post(f"{API}/models/{model}:generateContent", image_request(prompt, ref_images, aspect))
 		data = extract_image(resp)
 		if data:
 			out.parent.mkdir(parents=True, exist_ok=True)
