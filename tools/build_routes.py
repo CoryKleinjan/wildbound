@@ -691,6 +691,9 @@ def gen_forest(r, rng):
             gx, gy = x + d[0] * 3, y + d[1] * 3
             if not (3 <= gx < G.w - 3 and 3 <= gy < G.h - 3) or near(G, gx, gy, '.,', 2):
                 continue
+            # The player cuts the tree from the open side, so the glade runs away from it.
+            if G.get(x - d[0], y - d[1]) not in '.,=F':
+                continue
             G.set(x, y, 'T')
             for k in (1, 2):
                 G.set(x + d[0] * k, y + d[1] * k, '.')
