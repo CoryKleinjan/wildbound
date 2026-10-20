@@ -94,16 +94,28 @@ static func open_party_menu(player: int, on_close: Callable) -> void:
 		Game.push(menu)
 	Game.push(screen)
 
-## GIVE / TAKE a held item from the party menu.
+## GIVE / TAKE a held item from the party menu (READ and TAKE for a letter).
 static func _item_menu(m: Dictionary, player: int) -> void:
 	var gs: Dictionary = Game.gs
 	var held: Variant = m.get("item", null)
+	if Mail.is_mail(held):
+		Game.ask("%s is holding a letter." % Creatures.display_name(m), ["READ", "TAKE", "CANCEL"], func(c: int) -> void:
+			if c == 0:
+				var mail: Variant = m.get("mail", null)
+				Mail.read(mail if mail != null else {"item": held, "text": "", "from": "?"}, func() -> void: pass)
+			elif c == 1:
+				Mail.take(m, player), player)
+		return
 	Game.ask("%s is holding %s." % [Creatures.display_name(m), DB.item(held).name] if held != null else "%s isn't holding anything." % Creatures.display_name(m),
 		["GIVE", "TAKE", "CANCEL"], func(c: int) -> void:
 			if c == 0:
 				open_bag({"player": player, "in_battle": false, "can_throw": false, "on_close": func() -> void: pass,
 					"usable": func(id: String) -> bool: return can_hold(id),
 					"on_pick": func(id: String, done: Callable) -> void:
+						if Mail.is_mail(id):
+							done.call()
+							Mail.give(m, id, player, func() -> void: pass)
+							return
 						give_item(m, id, player)
 						done.call()})
 			elif c == 1:
