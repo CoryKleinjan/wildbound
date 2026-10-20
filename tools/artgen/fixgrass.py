@@ -46,7 +46,7 @@ if __name__ == "__main__":
 	maps = json.loads((RAW / "dump" / "maps.json").read_text())
 	fit = json.loads((ROOT / "data" / "map_fit.json").read_text())
 	for mid in args or sorted(p.stem for p in MAPS.glob("*.png")):
-		if mid in maps:
+		if mid in maps and not any(maps[mid].get(k) for k in ("underwater", "cave", "indoor", "interior")):  # ',' is seaweed underwater
 			n = fix(mid, tiles_of(mid, maps[mid], fit), dry)
 			if n:
 				print(mid, "tall grass cells", n, flush=True)

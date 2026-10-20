@@ -201,8 +201,16 @@ def protected(maps: dict) -> dict[str, set[tuple[int, int]]]:
 
 
 def clean(data: dict, maps: dict) -> dict:
+	"""Drops changes to protected cells, and changes to tall grass: the vision diff reads the paintings' dark tall grass as trees,
+	and fixgrass.py draws the tall grass tile over every ',' anyway."""
 	keep = protected(maps)
-	return {mid: {k: t for k, t in ch.items() if tuple(map(int, k.split(","))) not in keep.get(mid, set())} for mid, ch in data.items()}
+
+	def ok(mid: str, k: str) -> bool:
+		x, y = map(int, k.split(","))
+		tiles = maps.get(mid, {}).get("tiles", [])
+		return (x, y) not in keep.get(mid, set()) and not (y < len(tiles) and x < len(tiles[y]) and tiles[y][x] == ",")
+
+	return {mid: {k: t for k, t in ch.items() if ok(mid, k)} for mid, ch in data.items()}
 
 
 if __name__ == "__main__":
