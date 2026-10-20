@@ -55,7 +55,11 @@ func update(dt: float) -> void:
 		_on_done.call()
 
 func draw() -> void:
-	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#0c1028")
+	var bg := ArtAssets.texture("screens/ending")
+	if bg != null:
+		Gfx.image(bg, 0, 0)
+	else:
+		Gfx.rect(0, 0, Gfx.W, Gfx.H, "#0c1028")
 	# Drifting stars.
 	for i in 48:
 		var sx := fposmod(i * 53.7 + _t * (4 + i % 5), Gfx.W)

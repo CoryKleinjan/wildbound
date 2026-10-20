@@ -177,12 +177,44 @@ def preview(mid: str, changes: dict) -> None:
 	im.save(RAW / "fit" / f"{mid}.png")
 
 
+def protected(maps: dict) -> dict[str, set[tuple[int, int]]]:
+	"""Cells the fit must leave alone, per map: the map's edges (where connections arrive), every spot where a warp
+	lands, and everything next to a person, item, sign, door or warp, so they stay reachable and can be talked to."""
+	out: dict[str, set[tuple[int, int]]] = {k: set() for k in maps}
+	near = lambda x, y: {(x + dx, y + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)}
+	for mid, m in maps.items():
+		rows = m["tiles"]
+		H, W = len(rows), len(rows[0])
+		out[mid] |= {(x, y) for x in range(W) for y in (0, 1, H - 2, H - 1)} | {(x, y) for y in range(H) for x in (0, 1, W - 2, W - 1)}
+		spots = [tuple(map(int, k.split(","))) for key in ("doors", "signs", "warps", "berries") for k in m.get(key, {})]
+		spots += [tuple(map(int, k.split(","))) for k in m.get("soil", [])]
+		for key in ("npcs", "trainers", "items", "statics"):
+			spots += [(n["x"], n["y"]) for n in m.get(key, []) if "x" in n]
+		for x, y in spots:
+			out[mid] |= near(x, y)
+		for w in m.get("warps", {}).values():
+			if w.get("map") in out:
+				out[w["map"]] |= near(int(w["x"]), int(w["y"]))
+	return out
+
+
+def clean(data: dict, maps: dict) -> dict:
+	keep = protected(maps)
+	return {mid: {k: t for k, t in ch.items() if tuple(map(int, k.split(","))) not in keep.get(mid, set())} for mid, ch in data.items()}
+
+
 if __name__ == "__main__":
 	maps = json.loads((RAW / "dump" / "maps.json").read_text())  # see mapart.py
 	data = json.loads(FIT.read_text()) if FIT.exists() else {}
+	if sys.argv[1:] == ["clean"]:
+		before = sum(map(len, data.values()))
+		data = clean(data, maps)
+		FIT.write_text(json.dumps(data, indent="\t", sort_keys=True) + "\n")
+		print("kept", sum(map(len, data.values())), "of", before)
+		sys.exit()
 	ids = sys.argv[1:] or sorted(p.stem for p in (ROOT / "assets" / "maps").glob("*.png") if p.stem not in data)
 	def one(mid: str) -> None:
-		data[mid] = fit(mid, maps[mid])
+		data[mid] = clean({mid: fit(mid, maps[mid])}, maps)[mid]
 		preview(mid, data[mid])
 		print(mid, len(data[mid]), "cells changed", flush=True)
 		FIT.write_text(json.dumps(data, indent="\t", sort_keys=True) + "\n")

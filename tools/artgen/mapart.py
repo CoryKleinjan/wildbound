@@ -19,7 +19,8 @@ from common import RAW, ROOT, generate_image
 MODEL = "gemini-3-pro-image"  # Nano Banana Pro keeps the layout far better than 2.5 flash
 DUMP = RAW / "dump"
 OUT = ROOT / "assets" / "maps"
-SKIP = {"secretbase"}  # decorated by the player, so it stays tiles
+# The secret base is decorated by the player and the Trick House puzzles are mazes, so they stay tiles.
+SKIP = {"secretbase", "trickpuzzle1", "trickpuzzle2", "trickpuzzle3"}
 ASPECTS = {"1:1": 1, "4:3": 4 / 3, "3:4": 3 / 4, "3:2": 1.5, "2:3": 2 / 3, "16:9": 16 / 9, "9:16": 9 / 16, "5:4": 1.25, "4:5": 0.8, "21:9": 21 / 9}
 
 COMMON = (

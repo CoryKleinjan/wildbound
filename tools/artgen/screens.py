@@ -15,8 +15,9 @@ OUT = ROOT / "assets" / "screens"
 BASE = (
 	"A full-screen background for a menu screen in Pokemon Emerald (Game Boy Advance, 240x160 pixels), crisp GBA pixel art with "
 	"big square pixels. Only the backdrop: no windows, boxes, buttons, text, letters, numbers, creatures or characters. "
-	"Leave a plain darker header band across the top eighth of the screen. "
 )
+HEADER = "Leave a plain darker header band across the top eighth of the screen. "
+FULL = {"ending", "evolution", "halloffame", "gamecorner"}  # full scenes: no header band
 SCREENS = {
 	"party": "The party menu backdrop: a calm blue background with a subtle diagonal pattern of soft lighter-blue stripes and "
 		"small rounded tile shapes, like the Emerald party screen.",
@@ -29,12 +30,19 @@ SCREENS = {
 	"storage": "The creature storage PC box backdrop: a light blue background with a soft wallpaper of rounded box shapes and "
 		"little stars, like the Emerald PC box wallpaper.",
 	"naming": "The name entry screen backdrop: a soft beige background with a subtle diagonal pattern, like the Emerald naming screen.",
+	"halloffame": "The Hall of Fame room backdrop: a grand golden hall at night with marble pedestals in two rows, soft spotlights "
+		"and a starry dark blue ceiling, like the Emerald Hall of Fame.",
+	"gamecorner": "A game corner (casino arcade) backdrop: a dark red wall with rows of glowing slot machines and neon lights, "
+		"seen from the front; the center of the screen is a plain dark area where a big slot machine will be drawn.",
+	"ending": "An ending credits backdrop: a peaceful night sky full of stars over a grassy hill and a distant town with warm "
+		"lights; the top center has open sky.",
+	"evolution": "The evolution screen backdrop: a dark blue background with soft glowing rings and sparkles radiating from the center.",
 	"starter": "A professor's lab backdrop: wooden floor, bookshelves and a lab desk at the back, warm light, like Professor Birch's lab.",
 }
 
 
 def generate(name: str) -> None:
-	generate_image(BASE + SCREENS[name], RAW / "screens" / f"{name}.png", None, "3:2", MODEL)
+	generate_image(BASE + ("The picture fills the whole screen, with no header band or border. " if name in FULL else HEADER) + SCREENS[name], RAW / "screens" / f"{name}.png", None, "3:2", MODEL)
 
 
 def process(name: str) -> None:
