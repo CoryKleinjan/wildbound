@@ -153,6 +153,11 @@ var shift_style := false
 var _shift_offer: Array = []
 ## Safari Zone: catch and flee modifiers (x10).
 var safari := {"catch": 10, "flee": 10}
+## Battle Palace: the side-0 creatures pick their own moves by nature (their trainer's controller is "palace").
+var palace := false
+## Battle Arena: each match-up lasts at most three turns, then a judge decides it on Mind, Skill and Body.
+var arena := false
+var arena_turns := 0
 var _events: Array = []
 var _moved_this_turn: Array = []
 var _fainted: Array = []
@@ -171,6 +176,8 @@ func _init(init: Dictionary) -> void:
 	location = init.get("location", "land")
 	caught_species = init.get("caughtSpecies", [])
 	shift_style = init.get("shift", false)
+	palace = init.get("palace", false)
+	arena = init.get("arena", false)
 	var n := 2 if double else 1
 	for side in 2:
 		var ts: Array = []
@@ -304,6 +311,7 @@ func _check_end() -> bool:
 
 # ---------- switching ----------
 func _send_out(b: Battler, mon: Dictionary, announce: bool, pass_from: Variant = null) -> void:
+	arena_turns = 0
 	b.mon = mon
 	b.stats = Creatures.calc_stats(mon)
 	b.stages = _fresh_stages()
@@ -547,6 +555,8 @@ func submit(chosen: Dictionary) -> Array:
 			action = {"kind": "move", "moveIdx": b.vol.rampage.moveIdx, "target": b.vol.rampage.target}
 		elif b.trainer.controller == "human":
 			action = chosen.get("%d:%d" % [b.side, b.slot], null)
+		elif b.trainer.controller == "palace":
+			action = _palace_choice(b)
 		elif kind == "safari":
 			action = {"kind": "safariWatch"}
 		else:
@@ -576,6 +586,8 @@ func submit(chosen: Dictionary) -> Array:
 			break
 	if result == null:
 		_end_of_turn()
+	if result == null and arena:
+		_arena_judge()
 	if result == null:
 		_check_end()
 	if result == null:
@@ -583,13 +595,13 @@ func submit(chosen: Dictionary) -> Array:
 	return _take_events()
 
 func _after_turn_replacements() -> void:
-	# AI and wild sides replace automatically.
+	# AI and wild sides (and Battle Palace creatures) replace automatically.
 	var ins: Array = []
-	for t in trainers[1]:
-		if t.controller == "wild":
+	for t in trainers[1] + trainers[0]:
+		if t.controller == "wild" or t.controller == "human":
 			continue
 		for slot in t.slots:
-			var b: Battler = battlers[1][slot]
+			var b: Battler = battlers[t.side][slot]
 			if b.alive:
 				continue
 			var bench := bench_for(t)
@@ -690,6 +702,9 @@ func _execute(p: Dictionary) -> void:
 		"item":
 			_do_item(p, action)
 		"move":
+			if arena:
+				var mid: Variant = _move_id_of(b, action.moveIdx)
+				b.vol.arenaMind = int(b.vol.get("arenaMind", 0)) + (2 if mid != null and int(DB.move(mid).power) > 0 else 1)
 			_do_move(b, action.moveIdx, action.get("target", null))
 		"bait", "rock":
 			_safari_action(b, action.kind)
@@ -1701,6 +1716,8 @@ func _damaging_hit(user: Battler, target: Battler, mv: Dictionary, spread_half: 
 				_msg("%s hung on using its Focus Band!" % name(target))
 		var dealt := _apply_damage(target, dmg)
 		total_dealt += dealt
+		if arena:
+			user.vol.arenaSkill = float(user.vol.get("arenaSkill", 0.0)) + float(dealt) / maxf(1.0, float(target.stats.hp))
 		landed += 1
 		target.vol.hitBy = user.ref
 		if DB.is_physical_type(mtype) or mtype == "Mystery":
@@ -2316,10 +2333,12 @@ func _award_exp(fainted: Battler) -> void:
 		if m.get("item", null) == "luckyEgg":
 			gain = (gain * 150) / 100
 		var evs: Dictionary = sp.evYield
-		if m.get("item", null) == "machoBrace":
+		# Macho Brace and Pokérus each double the effort points.
+		var ev_mult: int = (2 if m.get("item", null) == "machoBrace" else 1) * (2 if m.get("pkrs", null) != null else 1)
+		if ev_mult > 1:
 			evs = evs.duplicate()
 			for k in evs:
-				evs[k] = int(evs[k]) * 2
+				evs[k] = int(evs[k]) * ev_mult
 		Creatures.add_evs(m, evs)
 		if m.level >= 100:
 			continue
@@ -2502,6 +2521,83 @@ func _end_of_turn() -> void:
 		b.vol.protectedThisTurn = false
 		if b.alive:
 			b.vol.turnsOut += 1
+
+# ---------- Battle Palace and Battle Arena ----------
+## Gen 3 Battle Palace: each nature leans toward attacking, defending (status and protection) or support moves,
+## and above half HP behaves differently from below it. [attack, defense] percentages; the rest is support.
+const _PALACE := [
+	[61, 7, 61, 7], [20, 25, 20, 25], [70, 15, 70, 15], [38, 31, 38, 31], [20, 70, 20, 70],
+	[30, 50, 30, 50], [56, 22, 56, 22], [25, 15, 25, 15], [69, 6, 69, 6], [35, 10, 35, 10],
+	[62, 10, 62, 10], [58, 37, 58, 37], [34, 11, 34, 11], [35, 5, 35, 5], [56, 22, 56, 22],
+	[35, 45, 35, 45], [44, 50, 44, 50], [56, 22, 56, 22], [30, 58, 30, 58], [30, 13, 30, 13],
+	[40, 50, 40, 50], [18, 70, 18, 70], [88, 6, 88, 6], [42, 50, 42, 50], [56, 22, 56, 22],
+]
+
+func _palace_choice(b: Battler) -> Dictionary:
+	var row: Array = _PALACE[Creatures.nature_of(b.mon) % 25]
+	var low: bool = int(b.mon.hp) * 2 < int(b.stats.hp)
+	var atk: int = row[2] if low else row[0]
+	var dfn: int = row[3] if low else row[1]
+	var roll := rng.int_below(100)
+	var want := "attack" if roll < atk else ("defense" if roll < atk + dfn else "support")
+	var groups := {"attack": [], "defense": [], "support": []}
+	for i in b.mon.moves.size():
+		if move_selectable(b, i) != "":
+			continue
+		var mv: Dictionary = DB.move(b.mon.moves[i].id)
+		var k: String = mv.effect.get("kind", "")
+		if int(mv.power) > 0:
+			groups.attack.append(i)
+		elif k in ["protect", "heal", "reflect", "lightScreen", "substitute", "safeguard", "mist", "rest", "ingrain", "wish"] \
+				or (k == "stat" and mv.effect.get("who", "") == "self"):
+			groups.defense.append(i)
+		else:
+			groups.support.append(i)
+	var pool: Array = groups[want]
+	if pool.is_empty():
+		pool = groups.attack + groups.defense + groups.support
+	if pool.is_empty():
+		return {"kind": "move", "moveIdx": -1}
+	var foes := foes_of(b)
+	var act := {"kind": "move", "moveIdx": pool[rng.int_below(pool.size())]}
+	if not foes.is_empty():
+		act.target = rng.pick(foes).ref
+	return act
+
+## After the third turn of a match-up in the Battle Arena, the judge picks a winner on Mind (how often it attacked),
+## Skill (damage dealt) and Body (HP left). The loser faints; a draw knocks both out.
+func _arena_judge() -> void:
+	var a: Battler = battlers[0][0]
+	var b: Battler = battlers[1][0]
+	if not a.alive or not b.alive:
+		return
+	arena_turns += 1
+	if arena_turns < 3:
+		return
+	arena_turns = 0
+	var pa := 0
+	var pb := 0
+	var cats := [
+		[float(a.vol.get("arenaMind", 0)), float(b.vol.get("arenaMind", 0))],
+		[float(a.vol.get("arenaSkill", 0.0)), float(b.vol.get("arenaSkill", 0.0))],
+		[float(a.mon.hp) / maxf(1.0, float(a.stats.hp)), float(b.mon.hp) / maxf(1.0, float(b.stats.hp))],
+	]
+	for c in cats:
+		if c[0] > c[1]:
+			pa += 2
+		elif c[1] > c[0]:
+			pb += 2
+		else:
+			pa += 1
+			pb += 1
+	_msg("Referee: That's it! We will now go to judging to determine the outcome!")
+	_msg("Mind, Skill and Body... %s: %d points, %s: %d points!" % [name(a), pa, name(b), pb])
+	if pa <= pb:
+		_apply_damage(a, int(a.mon.hp))
+		_check_faint(a)
+	if pb <= pa:
+		_apply_damage(b, int(b.mon.hp))
+		_check_faint(b)
 
 # ---------- AI ----------
 func _choose_ai(b: Battler) -> Dictionary:
