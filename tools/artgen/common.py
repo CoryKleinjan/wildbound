@@ -119,7 +119,7 @@ def _post_raw(url: str, body: dict, tries: int) -> dict:
 		if r.status_code == 200:
 			return r.json()
 		if r.status_code == 402:
-			raise BudgetExceeded("the API key is out of prepaid credits (402)")
+			raise BudgetExceeded("HTTP 402 (prepaid credits, or a billing hiccup): " + r.text[:300])
 		if r.status_code in (429, 500, 502, 503, 504) and i < tries - 1:
 			time.sleep(2 ** (i + 1))
 			continue
