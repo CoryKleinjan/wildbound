@@ -113,6 +113,7 @@ func sfx(sfx_name: String) -> void:
 	if _clock - float(_last_play.get(sfx_name, -1.0)) < 0.035:
 		return
 	_last_play[sfx_name] = _clock
+	Net.relay_sfx(sfx_name)
 	_log("sfx:" + sfx_name)
 	var idx := -1
 	# Short UI blips reuse their own player so they cut themselves off instead of piling up.
@@ -181,6 +182,7 @@ func play_music(track: String) -> void:
 		return
 	_current = track
 	_log("music:" + track)
+	Net.relay_music(track)
 	var stream := _load_music(track)
 	# Fade whatever is playing out.
 	_mtarget[_active] = 0.0
@@ -195,6 +197,8 @@ func play_music(track: String) -> void:
 	m.play()
 
 func stop_music() -> void:
+	if _current != "":
+		Net.relay_music("")
 	_current = ""
 	_mtarget[0] = 0.0
 	_mtarget[1] = 0.0

@@ -11,5 +11,8 @@ func _process(dt: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	Gfx.ci = self
+	Gfx.ci = Net.begin_frame(self)
 	Game.draw()
+	Net.draw_overlay()
+	Net.end_frame()
+	Gfx.ci = self

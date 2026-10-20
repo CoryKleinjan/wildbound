@@ -4,9 +4,9 @@ extends SceneTree
 ## Steps: key:<KEYNAME>[:frames]   press a key (physical, e.g. key:F, key:W:20 holds 20 frames)
 ##        wait:<frames>            let the game run
 ##        shot:<name>              save <out_dir>/<name>.png
-##        eval:<expr>              evaluate a GDScript expression with Game and DB in scope; result is printed
+##        eval:<expr>              evaluate a GDScript expression with Game, DB and Net in scope; result is printed
 ##        print:<expr>             same as eval
-##        gd:<statements>          run GDScript statements (separated by " ;; ") with Game and DB in scope
+##        gd:<statements>          run GDScript statements (separated by " ;; ") with Game, DB and Net in scope
 ##        until:<KEY>:<max>:<expr> press KEY (then wait 20 frames) up to max times until expr is true
 ##        top:<Name>               shorthand for until:Z:60:<top scene class is Name>
 ## Errors raised by the game show up on stderr as SCRIPT ERROR lines.
@@ -22,6 +22,7 @@ func _initialize() -> void:
 		await process_frame
 	var game = root.get_node("Game")
 	var db = root.get_node("DB")
+	var net = root.get_node("Net")
 	for step in args.slice(1):
 		var parts: PackedStringArray = step.split(":", true, 1)
 		var cmd := parts[0]
@@ -61,10 +62,10 @@ func _initialize() -> void:
 					tries = int(up[1])
 					expr = up[2]
 				var e := Expression.new()
-				e.parse(expr, ["Game", "DB"])
+				e.parse(expr, ["Game", "DB", "Net"])
 				var ok := false
 				for i in tries:
-					if e.execute([game, db], null, true):
+					if e.execute([game, db, net], null, true):
 						ok = true
 						break
 					var code := OS.find_keycode_from_string(key)
@@ -77,10 +78,10 @@ func _initialize() -> void:
 				print("UNTIL ", "ok" if ok else "TIMEOUT", ": ", expr)
 			"eval", "print":
 				var e := Expression.new()
-				if e.parse(rest, ["Game", "DB"]) != OK:
+				if e.parse(rest, ["Game", "DB", "Net"]) != OK:
 					print("PARSE ERROR: ", e.get_error_text(), " in ", rest)
 				else:
-					var r = e.execute([game, db], game, true)
+					var r = e.execute([game, db, net], game, true)
 					if e.has_execute_failed():
 						print("EXEC ERROR: ", e.get_error_text(), " in ", rest)
 					else:

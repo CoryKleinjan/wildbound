@@ -5,6 +5,9 @@ extends Scene
 var _t := 0.0
 var _menu_open := false
 
+func _init() -> void:
+	Net.stop()
+
 func update(dt: float) -> void:
 	_t += dt
 	Audio.play_music("title")
@@ -18,7 +21,7 @@ func _open_menu() -> void:
 	var items: Array = []
 	if GameState.has_save():
 		items.append("CONTINUE")
-	items.append_array(["NEW GAME - SOLO", "NEW GAME - CO-OP", "CONTROLS"])
+	items.append_array(["NEW GAME - SOLO", "NEW GAME - CO-OP", "JOIN CO-OP", "CONTROLS"])
 	var ref: Array = []
 	var menu := ListMenu.new({
 		"x": 40, "y": 92, "w": 160, "items": items,
@@ -37,14 +40,30 @@ func _on_pick(pick: String) -> void:
 			Game.say(["The save file could not be read."])
 			return
 		Game.gs = gs
-		Game.input.coop = gs.mode == "coop"
-		Game.transition(func() -> void: Game.replace(OverworldScene.new()))
+		if gs.mode == "coop":
+			# Wait for player 2 to join from their computer first.
+			var lobby := LanScenes.HostLobby.new("%s's game" % gs.players[0].name, _continue_game)
+			Game.transition(func() -> void: Game.replace(lobby))
+		else:
+			Game.input.coop = false
+			Game.transition(_continue_game)
+	elif pick == "JOIN CO-OP":
+		Game.input.coop = false
+		Game.transition(func() -> void: Game.replace(LanScenes.Join.new()))
 	elif pick == "CONTROLS":
 		Game.say(OverworldScene.controls_text(false) + OverworldScene.controls_text(true))
+	elif pick.contains("CO-OP"):
+		var lobby := LanScenes.HostLobby.new("New co-op game", _new_coop_game)
+		Game.transition(func() -> void: Game.replace(lobby))
 	else:
-		var coop := pick.contains("CO-OP")
-		Game.input.coop = coop
-		Game.transition(func() -> void: Game.replace(IntroScene.new(coop)))
+		Game.input.coop = false
+		Game.transition(func() -> void: Game.replace(IntroScene.new(false)))
+
+func _continue_game() -> void:
+	Game.replace(OverworldScene.new())
+
+func _new_coop_game() -> void:
+	Game.replace(IntroScene.new(true))
 
 func draw() -> void:
 	# Sky gradient.

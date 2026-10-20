@@ -4,8 +4,9 @@ class_name Gfx
 
 const W := 240
 const H := 160
-## Canvas item everything draws on (set by main.gd each frame).
-static var ci: CanvasItem
+## Canvas item everything draws on (set by main.gd each frame). While hosting LAN co-op it is a
+## DrawRecorder, which has the same draw methods.
+static var ci
 static var _font: FontFile
 
 static func font() -> FontFile:

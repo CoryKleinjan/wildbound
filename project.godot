@@ -13,6 +13,7 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 DB="*res://scripts/autoload/db.gd"
 Game="*res://scripts/autoload/game.gd"
 Audio="*res://scripts/autoload/audio.gd"
+Net="*res://scripts/autoload/net.gd"
 
 [display]
 
