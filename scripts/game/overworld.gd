@@ -766,6 +766,7 @@ func draw() -> void:
 	var painted := ArtAssets.texture("maps/" + str(map.get("id", "")))
 	var inside := func(tx: int, ty: int) -> bool: return tx >= 0 and ty >= 0 and tx < w and ty < h
 	var newer: Array = map.get("overpaint", [])
+	var tablets: Array[Vector2i] = []
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#000000")
 	if painted != null:
 		Gfx.image(painted, -cam_x, -cam_y)
@@ -776,7 +777,10 @@ func draw() -> void:
 			var raw := Maps.tile_at(map, tx, ty)
 			var ch := Field.tile(self, tx, ty)
 			# Inside a painted map only the things that can change (Cut trees, rocks, boulders) are drawn.
-			if painted != null and inside.call(tx, ty) and not DYNAMIC.contains(ch) and not newer.has("%d,%d" % [tx, ty]):
+			if painted != null and inside.call(tx, ty) and raw == "Z":
+				tablets.append(Vector2i(tx, ty))
+			# Shoal Cave's tide pools change with the tide, so they're drawn over the painting too.
+			if painted != null and inside.call(tx, ty) and not DYNAMIC.contains(ch) and raw != "J" and not newer.has("%d,%d" % [tx, ty]):
 				continue
 			if ch == "#" and cave:
 				ch = "x"
@@ -790,6 +794,9 @@ func draw() -> void:
 			else:
 				tex = TownStyle.apply(Tiles.tile_texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), Maps.tile_at(map, tx, ty + 1), theme), ch, style)
 			Gfx.image(tex, tx * 16 - cam_x, ty * 16 - cam_y)
+	# Braille walls are painted like doorways; a carved tablet over them shows they're walls to read.
+	for t in tablets:
+		Gfx.image(FieldTiles.braille_tablet(), t.x * 16 - 8 - cam_x, t.y * 16 - 16 - cam_y)
 	# Cave mouths the painting leaves out (data/features.json "mouths", on outdoor maps) get a rocky entrance drawn over them.
 	if painted != null:
 		for k in map.get("mouths", []):
