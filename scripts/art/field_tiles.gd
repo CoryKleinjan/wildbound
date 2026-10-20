@@ -3,8 +3,9 @@ class_name FieldTiles
 ## soft soil, caves, sand, the new buildings and Secret Base trees. Drawn into Tiles' texture cache.
 ##   T cut tree   R cracked rock   O boulder   W waterfall   D deep (dive) water   s soft soil
 ##   g cave floor   x cave wall   y cave mouth or ladder   a sand   i roof   d door   z secret-base tree   Q base PC
+##   Y slot machine (Game Corner)
 
-const CHARS := "TROWDsgxyaidzQ"
+const CHARS := "TROWDsgxyaidzQY"
 
 static func handles(ch: String) -> bool:
 	return ch.length() == 1 and CHARS.contains(ch)
@@ -13,16 +14,21 @@ static func texture(ch: String, x: int, y: int, frame: int, above: String, theme
 	var v := (x * 7 + y * 13) % 4
 	match ch:
 		"T":
-			return Tiles._make("fx_cut", func(p: Callable):
-				Tiles._grass(p, 2)
+			var inside := above == "_" or above == "|"
+			return Tiles._make("fx_cut_in" + theme if inside else "fx_cut", func(p: Callable):
+				if inside:
+					p.call(0, 0, 16, 16, theme)
+				else:
+					Tiles._grass(p, 2)
 				p.call(4, 2, 8, 9, "#2f7a3a")
 				p.call(3, 4, 10, 6, "#2f7a3a")
 				p.call(5, 3, 5, 4, "#4aa050")
 				p.call(6, 4, 2, 2, "#70c068")
 				p.call(7, 11, 2, 4, "#7a5a32"))
 		"R":
-			return Tiles._make("fx_rock", func(p: Callable):
-				p.call(0, 0, 16, 16, theme if above == "x" or above == "g" else Tiles.GRASS)
+			var bg: String = theme if above in ["x", "g", "_", "|"] else Tiles.GRASS
+			return Tiles._make("fx_rock" + bg, func(p: Callable):
+				p.call(0, 0, 16, 16, bg)
 				p.call(2, 4, 12, 10, "#706860")
 				p.call(3, 3, 10, 10, "#968e84")
 				p.call(4, 4, 4, 3, "#b8b0a4")
@@ -101,6 +107,17 @@ static func texture(ch: String, x: int, y: int, frame: int, above: String, theme
 				p.call(3, 2, 10, 12, "#606878")
 				p.call(4, 3, 8, 6, "#78c8f0")
 				p.call(5, 11, 6, 2, "#303840"))
+		"Y":
+			return Tiles._make("fx_slots%d" % (frame % 2), func(p: Callable):
+				p.call(0, 0, 16, 16, theme)
+				p.call(2, 1, 12, 15, "#802030")
+				p.call(3, 2, 10, 13, "#c03848")
+				p.call(4, 4, 8, 5, "#f8f8f0")
+				p.call(5, 5, 2, 3, "#e03030" if frame % 2 else "#303030")
+				p.call(9, 5, 2, 3, "#303030" if frame % 2 else "#e03030")
+				p.call(4, 11, 8, 2, "#f8d040")
+				p.call(13, 3, 2, 1, "#c0c0c0")
+				p.call(14, 2, 1, 4, "#c0c0c0"))
 	return Tiles.tile_texture(ch, x, y, frame, above, "", theme)
 
 ## A Capture Orb lying on the ground (an item to pick up).

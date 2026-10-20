@@ -475,3 +475,19 @@ HM_BADGES = {'cut': 1, 'flash': 2, 'rockSmash': 3, 'strength': 4, 'surf': 5, 'fl
 TUTORS = [('megaPunch', 'stonecrest'), ('doubleEdge', 'duskmere'), ('thunderWave', 'voltara'), ('rockSlide', 'cindercity'),
           ('explosion', 'harrowfield'), ('substitute', 'bramblegate'), ('swordsDance', 'skyreach'), ('bodySlam', 'saltmarsh'),
           ('counter', 'lumenvale'), ('seismicToss', 'coralhaven'), ('metronome', 'fernhollow'), ('dreamEater', 'summitcrown')]
+
+
+MAIL = [('orangeMail', 'Orange Mail', 'Mail with a cute Nibbit print.'), ('harborMail', 'Harbor Mail', 'Mail with a sailboat print.'),
+        ('glitterMail', 'Glitter Mail', 'Mail with a sparkly print.'), ('mechMail', 'Mech Mail', 'Mail with a gear print.'),
+        ('woodMail', 'Wood Mail', 'Mail with a woodgrain print.'), ('waveMail', 'Wave Mail', 'Mail with an ocean print.')]
+
+
+def extra_items():
+    out = [
+        item('itemfinder', 'Itemfinder', 0, {'kind': 'key', 'use': 'finder'}, 'Beeps toward items buried nearby.', 'key'),
+        item('coinCase', 'Coin Case', 0, {'kind': 'key', 'use': 'coins'}, 'Holds Game Corner coins.', 'key'),
+        item('ssTicket', 'S.S. Ticket', 0, {'kind': 'key', 'use': 'none'}, 'A ferry ticket to the Battle Frontier.', 'key'),
+    ]
+    for id, name, desc in MAIL:
+        out.append(item(id, name, 50, {'kind': 'mail'}, desc + ' Give it to a creature to write a letter.', 'items'))
+    return out

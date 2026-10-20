@@ -72,6 +72,8 @@ func run() -> void:
 	_item_tests()
 	_bag_close_tests()
 	_misc_tests()
+	_rest_of_emerald_tests()
+	_frontier_tests()
 
 func _evolution_tests() -> void:
 	Game.gs = GameState.new_game("solo")
@@ -349,3 +351,168 @@ func _misc_tests() -> void:
 	Options._put("text", "FAST")
 	check("options saved", Options.text_speed() > 200.0)
 	Options._put("text", "MID")
+
+func _rest_of_emerald_tests() -> void:
+	# Region map: every town has a spot, and buildings point at their town.
+	var towns_ok := true
+	for id in DB.FLY_POINTS:
+		if not DB.REGION_MAP.has(id):
+			towns_ok = false
+	check("region map has every town", towns_ok and DB.REGION_MAP.size() >= 26)
+	check("buildings map to their town", TownMapScene.region_id("gym1") == "stonecrest" and TownMapScene.region_id("frontier_dome") == "battlefrontier")
+	var ow := _new_world("route3", 12, 16, "down")
+	var gs: Dictionary = Game.gs
+	# Itemfinder: points toward the buried item, then digs it up underfoot.
+	gs.bag.itemfinder = 1
+	Field.itemfinder(ow)
+	var lines := _drain()
+	check("itemfinder points at an item", " ".join(lines).contains("response"), str(lines))
+	_place(ow, 12, 17, "down")
+	Field.itemfinder(ow)
+	_drain()
+	check("itemfinder digs it up", gs.bag.get("nugget", 0) == 1)
+	# PC item storage.
+	gs.pcItems = {"superPotion": 1}
+	Pc._withdraw(func() -> void: pass, false)
+	(Game.top as ListMenu)._o.on_select.call(0)
+	_drain(3)
+	check("withdraw from PC", gs.bag.get("superPotion", 0) == 1 and not gs.pcItems.has("superPotion"))
+	# Hall of Fame and the Trainer Card.
+	HallOfFameScene.record(gs)
+	check("hall of fame entry", gs.hallOfFame.size() == 1 and gs.hallOfFame[0].team.size() == 1)
+	gs.flags.champion = true
+	check("trainer card", TrainerCardScene.stars(gs).size() >= 1 and TrainerCardScene.id_no(gs).length() == 5)
+	# Mail: write a letter, then file it in the mailbox.
+	var m: Dictionary = gs.players[0].party[0]
+	gs.bag.orangeMail = 1
+	Mail.give(m, "orangeMail", 0, func() -> void: pass)
+	(Game.top as ListMenu)._o.on_select.call(0)
+	(Game.top as ListMenu)._o.on_select.call(Mail.WORDS.size() + 1)
+	_drain()
+	check("mail written", m.item == "orangeMail" and m.mail != null and m.mail.text == "HELLO", str(m.get("mail")))
+	Mail.take(m, 0)
+	_drain(0)
+	check("mail to mailbox", m.item == null and gs.mailbox.size() == 1 and gs.mailbox[0].text == "HELLO")
+	# Pokerus spreads in the party and wears off after a few days.
+	var m2 := _mon("nibbit", 20)
+	gs.players[0].party.append(m2)
+	Pokerus.infect(m, 2)
+	for i in 40:
+		Pokerus.after_battle(gs, gs.players[0].party, [])
+	check("pokerus spreads", Pokerus.infected(m2))
+	gs.lastDay = Options.today() - 9
+	Pokerus.on_step(gs)
+	check("pokerus wears off", not Pokerus.infected(m) and Pokerus.ever_had(m))
+	# Slot machine: three 7s pay 300 coins.
+	gs.coins = 10
+	gs.bag.coinCase = 1
+	var slots := GameCorner.SlotsScene.new(func() -> void: pass)
+	slots._pos = [0.0, 0.0, 0.0]
+	slots._payout()
+	check("slots jackpot", gs.coins == 310)
+	# Lottery: one draw a day.
+	Services._lottery()
+	_drain()
+	Services._lottery()
+	check("lottery once a day", " ".join(_drain()).contains("tomorrow"))
+	# Mirage Island: hidden water most days; land when one of your creatures matches today's number.
+	var target := absi(hash("mirage%d" % Options.today())) % 16
+	m.personality = (int(m.personality) & ~0xffff) | target
+	check("mirage visible", Field.mirage_visible(gs))
+	ow.load_map("route13", 5, 5, "down")
+	check("mirage island is land", Field.tile(ow, 24, 4) == "," and ow.map.encounters.size() == 1)
+	ow.field.mirage = false
+	check("mirage island hidden", Field.tile(ow, 24, 4) == "~")
+	# Trick House: prizes after each solved room; rooms have a way through.
+	gs.trick.level = 0
+	Trick.solved(1)
+	Trick.prize(["You solved it!"])
+	_drain()
+	check("trick house prize", gs.bag.get(DB.TRICK.prizes[0][0], 0) >= 1)
+	for i in range(1, 4):
+		var pm: Dictionary = DB.MAPS["trickpuzzle%d" % i]
+		check("trick puzzle %d exit" % i, pm.tiles[1].contains("X"))
+	# Match Call: registered trainers call when they want a rematch.
+	gs.bag.naviGear = 1
+	var reg := ""
+	for mid in DB.MAPS:
+		for t in DB.MAPS[mid].get("trainers", []):
+			if reg == "" and MatchCall.can_register(t) and absi(hash(t.id)) % 2 == 0:
+				reg = t.id
+				MatchCall.after_win(gs, t, [])
+				gs.flags[t.id] = true
+				gs.flags["ready_" + t.id] = true
+	MatchCall.queue_ready(gs, reg)
+	gs.steps = 15
+	var called := false
+	for i in 20:
+		gs.steps += 1
+		if MatchCall.on_step(gs):
+			called = " ".join(_drain()).contains("rematch")
+			break
+	check("match call", gs.matchCall.has(reg) and called)
+	check("game corner prizes", DB.PRIZES.creatures.size() == 3 and DB.PRIZES.items.size() > 5)
+
+func _frontier_tests() -> void:
+	var ow := _new_world("frontier_pyramid", 7, 9, "up")
+	var gs: Dictionary = Game.gs
+	gs.flags.champion = true
+	var real_party: Array = gs.players[0].party
+	gs.bag.potion = 3
+	# Pyramid floors: a ladder you can reach, trainers and items.
+	var f := Frontier.pyramid_floor(3, 1)
+	var start := Vector2i(f.start.x, f.start.y)
+	var seen := {start: true}
+	var q: Array = [start]
+	var ladder := false
+	while not q.is_empty():
+		var c: Vector2i = q.pop_front()
+		if Maps.tile_at(f, c.x, c.y) == "y":
+			ladder = true
+		for d in [Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0)]:
+			var n: Vector2i = c + d
+			if not seen.has(n) and Maps.tile_at(f, n.x, n.y) in ["g", "y"]:
+				seen[n] = true
+				q.append(n)
+	check("pyramid ladder reachable", ladder and f.trainers.size() >= 2 and f.items.size() >= 1)
+	# Entering swaps in the level-50 team and an empty bag; losing gives them back.
+	var team: Array = [Tower._copy(real_party[0])]
+	Frontier._pyramid_start(ow, team)
+	_drain()
+	_tick(1.0)
+	check("pyramid entered", gs.pyramid != null and ow.map.id == "pyramidfloor" and gs.players[0].party[0].level == 50 and gs.bag.is_empty())
+	Frontier.pyramid_lost(ow)
+	_drain()
+	check("pyramid lost restores", gs.pyramid == null and gs.players[0].party == real_party and gs.bag.potion == 3 and ow.map.id == "frontier_pyramid")
+	# A save made inside the Pyramid loads at the entrance with the real team.
+	gs.pyramid = {"floor": 2, "party": real_party, "bag": {"potion": 3}, "run": 9}
+	gs.players[0].party = team
+	Frontier.restore_after_load(gs)
+	check("pyramid save restored", gs.pyramid == null and gs.players[0].party == real_party and gs.map == "frontier_pyramid")
+	# Battle Palace: creatures pick their own moves, so no requests come back.
+	var p := Battle.new({"kind": "trainer", "double": false, "rng": Rng.new(5), "palace": true, "sides": [
+		[{"name": "P", "party": [Tower._copy(_mon("voltick", 30))], "controller": "palace", "slots": [0], "player": 0}],
+		[{"name": "F", "party": [Tower._copy(_mon("nibbit", 30))], "controller": "ai", "slots": [0]}]]})
+	p.start()
+	check("palace needs no input", p.requests().is_empty())
+	var turns := 0
+	while p.phase != "over" and turns < 60:
+		p.submit({})
+		turns += 1
+	check("palace battle finishes", p.phase == "over")
+	# Battle Arena: after three turns the judge decides the match-up.
+	var a := Battle.new({"kind": "trainer", "double": false, "rng": Rng.new(5), "arena": true, "sides": [
+		[{"name": "P", "party": [_mon("voltick", 30, ["growl"])], "controller": "human", "slots": [0], "player": 0}],
+		[{"name": "F", "party": [_mon("nibbit", 30, ["growl"])], "controller": "ai", "slots": [0]}]]})
+	a.start()
+	for i in 3:
+		a.submit({"0:0": {"kind": "move", "moveIdx": 0, "target": {"side": 1, "slot": 0}}})
+	check("arena judge decides", a.phase == "over")
+	# Factory rentals are level 50.
+	check("factory rental", Frontier._rental(DB.TOWER.pool[0]).level == 50)
+	# Records and Battle Points.
+	gs.bp = 0
+	Frontier._won(gs, "dome")
+	Frontier._award(gs, "dome", [])
+	_drain()
+	check("frontier record and BP", int(gs.frontier.dome.best) == 1 and gs.bp >= 5)

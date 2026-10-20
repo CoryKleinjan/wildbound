@@ -5101,6 +5101,99 @@
    },
    "desc": "A decoration for your Secret Base.",
    "pocket": "key"
+  },
+  "itemfinder": {
+   "id": "itemfinder",
+   "name": "Itemfinder",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "finder"
+   },
+   "desc": "Beeps toward items buried nearby.",
+   "pocket": "key"
+  },
+  "coinCase": {
+   "id": "coinCase",
+   "name": "Coin Case",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "coins"
+   },
+   "desc": "Holds Game Corner coins.",
+   "pocket": "key"
+  },
+  "ssTicket": {
+   "id": "ssTicket",
+   "name": "S.S. Ticket",
+   "price": 0,
+   "effect": {
+    "kind": "key",
+    "use": "none"
+   },
+   "desc": "A ferry ticket to the Battle Frontier.",
+   "pocket": "key"
+  },
+  "orangeMail": {
+   "id": "orangeMail",
+   "name": "Orange Mail",
+   "price": 50,
+   "effect": {
+    "kind": "mail"
+   },
+   "desc": "Mail with a cute Nibbit print. Give it to a creature to write a letter.",
+   "pocket": "items"
+  },
+  "harborMail": {
+   "id": "harborMail",
+   "name": "Harbor Mail",
+   "price": 50,
+   "effect": {
+    "kind": "mail"
+   },
+   "desc": "Mail with a sailboat print. Give it to a creature to write a letter.",
+   "pocket": "items"
+  },
+  "glitterMail": {
+   "id": "glitterMail",
+   "name": "Glitter Mail",
+   "price": 50,
+   "effect": {
+    "kind": "mail"
+   },
+   "desc": "Mail with a sparkly print. Give it to a creature to write a letter.",
+   "pocket": "items"
+  },
+  "mechMail": {
+   "id": "mechMail",
+   "name": "Mech Mail",
+   "price": 50,
+   "effect": {
+    "kind": "mail"
+   },
+   "desc": "Mail with a gear print. Give it to a creature to write a letter.",
+   "pocket": "items"
+  },
+  "woodMail": {
+   "id": "woodMail",
+   "name": "Wood Mail",
+   "price": 50,
+   "effect": {
+    "kind": "mail"
+   },
+   "desc": "Mail with a woodgrain print. Give it to a creature to write a letter.",
+   "pocket": "items"
+  },
+  "waveMail": {
+   "id": "waveMail",
+   "name": "Wave Mail",
+   "price": 50,
+   "effect": {
+    "kind": "mail"
+   },
+   "desc": "Mail with an ocean print. Give it to a creature to write a letter.",
+   "pocket": "items"
   }
  },
  "species": {
@@ -26164,6 +26257,16 @@
      "text": [
       "Vitamins raise base stats. X items only last for one battle."
      ]
+    },
+    {
+     "x": 11,
+     "y": 8,
+     "dir": "down",
+     "palette": "girl",
+     "text": [
+      "This is the Lottery Corner! We draw a number every day. If it matches the ID No. of one of your creatures, you win a prize!"
+     ],
+     "service": "lottery"
     }
    ]
   },
@@ -26299,7 +26402,14 @@
      "dir": "up"
     }
    },
-   "encounters": [],
+   "encounters": [
+    {
+     "species": "spadeclaw",
+     "min": 30,
+     "max": 35,
+     "weight": 100
+    }
+   ],
    "trainers": [
     {
      "id": "r13_t0",
@@ -26374,7 +26484,7 @@
       "weight": 60
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 21,
       "max": 28,
       "weight": 20
@@ -26388,13 +26498,13 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 41,
       "weight": 40
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 41,
       "weight": 40
@@ -26427,13 +26537,27 @@
      "weight": 30
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 28,
      "max": 36,
      "weight": 10
     }
    ],
-   "diveTo": "seafloor"
+   "diveTo": "seafloor",
+   "mirage": {
+    "x": 22,
+    "y": 2,
+    "tiles": [
+     "~aaaaa~",
+     "aa,,,aa",
+     "a,,,,,a",
+     "aa,,,aa",
+     "~aaaaa~"
+    ]
+   },
+   "berries": {
+    "25,4": "liechiBerry"
+   }
   },
   "seafloor": {
    "id": "seafloor",
@@ -26527,13 +26651,13 @@
     ],
     "good": [
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 15,
       "max": 22,
       "weight": 60
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 15,
       "max": 22,
       "weight": 20
@@ -26547,13 +26671,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 25,
       "max": 35,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 25,
       "max": 35,
       "weight": 40
@@ -26586,7 +26710,7 @@
      "weight": 30
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 22,
      "max": 30,
      "weight": 10
@@ -26654,7 +26778,7 @@
       "weight": 60
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 21,
       "max": 28,
       "weight": 20
@@ -26668,13 +26792,13 @@
     ],
     "super": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 41,
       "weight": 40
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 41,
       "weight": 40
@@ -26707,7 +26831,7 @@
      "weight": 30
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 28,
      "max": 36,
      "weight": 10
@@ -27129,7 +27253,7 @@
     ],
     "good": [
      {
-      "species": "raylet",
+      "species": "nipshell",
       "min": 13,
       "max": 20,
       "weight": 60
@@ -27149,13 +27273,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 23,
       "max": 33,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 23,
       "max": 33,
       "weight": 40
@@ -27176,7 +27300,7 @@
    },
    "waterEncounters": [
     {
-     "species": "mirrakoi",
+     "species": "twirlfin",
      "min": 20,
      "max": 28,
      "weight": 60
@@ -27192,6 +27316,825 @@
      "min": 20,
      "max": 28,
      "weight": 10
+    }
+   ]
+  },
+  "gamecorner": {
+   "id": "gamecorner",
+   "name": "Game Corner",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_Y_Y_Y_Y_Y_Y_|",
+    "|_____________|",
+    "|_____________|",
+    "|_Y_Y_Y_Y_Y_Y_|",
+    "|_____________|",
+    "|_____________|",
+    "|cccc_____cccc|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#e0d8c8",
+   "warps": {
+    "7,11": {
+     "map": "cindercity",
+     "x": 10,
+     "y": 21,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 2,
+     "y": 7,
+     "dir": "down",
+     "palette": "clerk",
+     "text": [
+      "Welcome to the Game Corner! Coins are 50 for $1,000."
+     ],
+     "service": "coins"
+    },
+    {
+     "x": 12,
+     "y": 7,
+     "dir": "down",
+     "palette": "clerk",
+     "text": [
+      "Exchange your coins for prizes!"
+     ],
+     "service": "prizes"
+    },
+    {
+     "x": 7,
+     "y": 9,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "You need a Coin Case to play. Here, have mine!"
+     ],
+     "service": "gift",
+     "gift": "coinCase",
+     "flag": "gift_coinCase",
+     "after": [
+      "Face a slot machine and press A to play. Three 7s pay 300 coins!"
+     ]
+    },
+    {
+     "x": 4,
+     "y": 4,
+     "dir": "down",
+     "palette": "girl",
+     "text": [
+      "Press A three times to stop the reels. Line up three of a kind on the middle row!"
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "berrymaster": {
+   "id": "berrymaster",
+   "name": "Berry Master's House",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#e8d8b8",
+   "warps": {
+    "7,11": {
+     "map": "route8",
+     "x": 3,
+     "y": 30,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "old",
+     "text": [
+      "I'm the Berry Master! I grow berries for anyone who loves them. Take these!"
+     ],
+     "service": "berryMaster",
+     "flag": "berrymaster_daily"
+    },
+    {
+     "x": 4,
+     "y": 6,
+     "dir": "down",
+     "palette": "beauty",
+     "text": [
+      "My husband's berries are the best. Have one of my favorites, too."
+     ],
+     "service": "berryWife",
+     "flag": "berrywife_daily"
+    }
+   ]
+  },
+  "trickhouse": {
+   "id": "trickhouse",
+   "name": "Trick House",
+   "tiles": [
+    "|||||||||||||||",
+    "|_KK_______KK_|",
+    "|_____________|",
+    "|_t_________t_|",
+    "|_____________|",
+    "|______o______|",
+    "|_____________|",
+    "|_t_________t_|",
+    "|_____________|",
+    "|_KK_______KK_|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d8c8e0",
+   "warps": {
+    "7,11": {
+     "map": "route7",
+     "x": 4,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [],
+   "trickHouse": true,
+   "hideSpots": [
+    "2,1",
+    "3,1",
+    "11,1",
+    "12,1",
+    "2,3",
+    "12,3",
+    "7,5",
+    "2,7",
+    "12,7",
+    "2,9",
+    "3,9",
+    "11,9",
+    "12,9"
+   ]
+  },
+  "trickpuzzle1": {
+   "id": "trickpuzzle1",
+   "name": "Trick House Puzzle 1",
+   "tiles": [
+    "|||||||||||||||",
+    "|X__T_________|",
+    "|_|||||_|||||_|",
+    "|_|___|_|_____|",
+    "|||_|_|_|_|||||",
+    "|___|___|_|_T_|",
+    "|_|||_|||||_|_|",
+    "|___|_|_____|_|",
+    "|_|_|||_|||||T|",
+    "|_|_|___|___|_|",
+    "|_|_|_|||_|_|_|",
+    "|_|___|___|___|",
+    "|||||||e|||||||"
+   ],
+   "indoor": true,
+   "theme": "#c8b8d8",
+   "connections": {},
+   "npcs": [],
+   "music": "trickhouse",
+   "warps": {
+    "7,12": {
+     "map": "trickhouse",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "1,1": {
+     "map": "trickreward",
+     "x": 7,
+     "y": 6,
+     "dir": "up",
+     "script": "trickDone",
+     "level": 1
+    }
+   },
+   "trickLevel": 1
+  },
+  "trickpuzzle2": {
+   "id": "trickpuzzle2",
+   "name": "Trick House Puzzle 2",
+   "tiles": [
+    "|||||||||||||||",
+    "|X____|_______|",
+    "|_|||_|_|||R|_|",
+    "|___|___|___|_|",
+    "|||_|||||_|||_|",
+    "|_|_|_R___|___|",
+    "|_|_|_|||||||||",
+    "|___|_________|",
+    "|_|||||||||||_|",
+    "|___|_|___|___|",
+    "|||_|_|_|_|T|_|",
+    "|_____|_|___|_|",
+    "|||||||e|||||||"
+   ],
+   "indoor": true,
+   "theme": "#c8b8d8",
+   "connections": {},
+   "npcs": [],
+   "music": "trickhouse",
+   "warps": {
+    "7,12": {
+     "map": "trickhouse",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "1,1": {
+     "map": "trickreward",
+     "x": 7,
+     "y": 6,
+     "dir": "up",
+     "script": "trickDone",
+     "level": 2
+    }
+   },
+   "trickLevel": 2
+  },
+  "trickpuzzle3": {
+   "id": "trickpuzzle3",
+   "name": "Trick House Puzzle 3",
+   "tiles": [
+    "|||||||||||||||",
+    "|___|_______|X|",
+    "|_|_|_|||||_|_|",
+    "|_|O__|__O__|_|",
+    "|_|_|||||_|||_|",
+    "|_|_|___|_____|",
+    "|_|||_|_|||||_|",
+    "|_____|_____|_|",
+    "|_|||||||||_|_|",
+    "|_|_______|_|_|",
+    "|_|_|||||_|_|_|",
+    "|_|_____|_R_|_|",
+    "|||||||e|||||||"
+   ],
+   "indoor": true,
+   "theme": "#c8b8d8",
+   "connections": {},
+   "npcs": [],
+   "music": "trickhouse",
+   "warps": {
+    "7,12": {
+     "map": "trickhouse",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "13,1": {
+     "map": "trickreward",
+     "x": 7,
+     "y": 6,
+     "dir": "up",
+     "script": "trickDone",
+     "level": 3
+    }
+   },
+   "trickLevel": 3
+  },
+  "trickreward": {
+   "id": "trickreward",
+   "name": "Trick House",
+   "indoor": true,
+   "theme": "#d8c8e0",
+   "connections": {},
+   "music": "trickhouse",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_t_________t_|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "warps": {
+    "7,7": {
+     "map": "route7",
+     "x": 4,
+     "y": 16,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 3,
+     "dir": "down",
+     "palette": "psychic",
+     "text": [
+      "You solved my puzzle!"
+     ],
+     "service": "trickPrize"
+    }
+   ]
+  },
+  "frontier_factory": {
+   "id": "frontier_factory",
+   "name": "Battle Factory",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d0d8e8",
+   "warps": {
+    "7,11": {
+     "map": "battlefrontier",
+     "x": 6,
+     "y": 10,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Battle Factory!",
+      "Rent creatures, then win seven battles in a row. You may swap a rental after each win."
+     ],
+     "service": "frontier",
+     "facility": "factory"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Every facility uses level-50 creatures. Legendaries can't enter."
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "frontier_arena": {
+   "id": "frontier_arena",
+   "name": "Battle Arena",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d0d8e8",
+   "warps": {
+    "7,11": {
+     "map": "battlefrontier",
+     "x": 13,
+     "y": 10,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Battle Arena!",
+      "Three-turn matches judged on Mind, Skill and Body. No switching!"
+     ],
+     "service": "frontier",
+     "facility": "arena"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Every facility uses level-50 creatures. Legendaries can't enter."
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "frontier_dome": {
+   "id": "frontier_dome",
+   "name": "Battle Dome",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d0d8e8",
+   "warps": {
+    "7,11": {
+     "map": "battlefrontier",
+     "x": 28,
+     "y": 10,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Battle Dome!",
+      "A four-round tournament. See your rival's team, then pick two of your three."
+     ],
+     "service": "frontier",
+     "facility": "dome"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Every facility uses level-50 creatures. Legendaries can't enter."
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "frontier_palace": {
+   "id": "frontier_palace",
+   "name": "Battle Palace",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d0d8e8",
+   "warps": {
+    "7,11": {
+     "map": "battlefrontier",
+     "x": 35,
+     "y": 10,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Battle Palace!",
+      "Your creatures fight on their own, as their nature tells them."
+     ],
+     "service": "frontier",
+     "facility": "palace"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Every facility uses level-50 creatures. Legendaries can't enter."
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "frontier_pike": {
+   "id": "frontier_pike",
+   "name": "Battle Pike",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d0d8e8",
+   "warps": {
+    "7,11": {
+     "map": "battlefrontier",
+     "x": 6,
+     "y": 18,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Battle Pike!",
+      "Choose one of three doors in each of 14 rooms. Anything could be behind them..."
+     ],
+     "service": "frontier",
+     "facility": "pike"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Every facility uses level-50 creatures. Legendaries can't enter."
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "frontier_pyramid": {
+   "id": "frontier_pyramid",
+   "name": "Battle Pyramid",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d0d8e8",
+   "warps": {
+    "7,11": {
+     "map": "battlefrontier",
+     "x": 35,
+     "y": 18,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "nurse",
+     "text": [
+      "Welcome to the Battle Pyramid!",
+      "Climb seven dark floors full of wild creatures and trainers. Bring only what you find!"
+     ],
+     "service": "frontier",
+     "facility": "pyramid"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "dir": "down",
+     "palette": "gentleman",
+     "text": [
+      "Every facility uses level-50 creatures. Legendaries can't enter."
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "frontier_exchange": {
+   "id": "frontier_exchange",
+   "name": "Exchange Service Corner",
+   "tiles": [
+    "|||||||||||||||",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|_____________|",
+    "|||||||e|||||||"
+   ],
+   "connections": {},
+   "indoor": true,
+   "theme": "#d0d8e8",
+   "warps": {
+    "7,11": {
+     "map": "battlefrontier",
+     "x": 20,
+     "y": 4,
+     "dir": "down"
+    }
+   },
+   "npcs": [
+    {
+     "x": 7,
+     "y": 4,
+     "dir": "down",
+     "palette": "clerk",
+     "text": [
+      "Exchange your Battle Points for prizes!"
+     ],
+     "service": "shop",
+     "shop": "bp"
+    },
+    {
+     "x": 3,
+     "y": 6,
+     "dir": "down",
+     "palette": "ace",
+     "text": [
+      "Each facility pays Battle Points for every set of seven wins."
+     ]
+    }
+   ],
+   "music": "town"
+  },
+  "battlefrontier": {
+   "id": "battlefrontier",
+   "name": "Battle Frontier",
+   "tiles": [
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    "~#################iiii#################~",
+    "~#................iiii................#~",
+    "~#................wwdw................#~",
+    "~#....................................#~",
+    "~#.................==.................#~",
+    "~#.................==.................#~",
+    "~#..iiii...iiii....==.....iiii...iiii.#~",
+    "~#..iiii...iiii....==.....iiii...iiii.#~",
+    "~#..wwdw...wwdw....==.....wwdw...wwdw.#~",
+    "~#.................==.................#~",
+    "~#====================================#~",
+    "~#.................==.................#~",
+    "~#.................==.................#~",
+    "~#.................==.................#~",
+    "~#..iiii...........==............iiii.#~",
+    "~#..iiii...........==............iiii.#~",
+    "~#..wwdw...........==............wwdw.#~",
+    "~#.................==.................#~",
+    "~#====================================#~",
+    "~#.................==.................#~",
+    "~#.................==.................#~",
+    "~#.................==.................#~",
+    "~#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#~",
+    "~#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#~",
+    "~~~~~~~~~~~~~~~~aaaaaa~~~~~~~~~~~~~~~~~~",
+    "~~~~~~~~~~~~~~~~~~aaaa~~~~~~~~~~~~~~~~~~",
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+   ],
+   "theme": "#d8d0c0",
+   "connections": {},
+   "warps": {
+    "6,9": {
+     "map": "frontier_factory",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "13,9": {
+     "map": "frontier_arena",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "28,9": {
+     "map": "frontier_dome",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "35,9": {
+     "map": "frontier_palace",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "6,17": {
+     "map": "frontier_pike",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "35,17": {
+     "map": "frontier_pyramid",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    },
+    "20,3": {
+     "map": "frontier_exchange",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
+   },
+   "town": false,
+   "music": "town",
+   "npcs": [
+    {
+     "x": 17,
+     "y": 25,
+     "dir": "down",
+     "palette": "swimmer",
+     "text": [
+      "The ferry leaves for Saltmarsh whenever you're ready."
+     ],
+     "service": "ferry",
+     "to": "saltmarsh"
+    },
+    {
+     "x": 22,
+     "y": 12,
+     "dir": "down",
+     "palette": "ace",
+     "text": [
+      "Welcome to the Battle Frontier! Seven facilities, one goal: become the strongest."
+     ]
+    },
+    {
+     "x": 8,
+     "y": 20,
+     "dir": "down",
+     "palette": "girl",
+     "text": [
+      "Win seven battles in a row anywhere here and you earn Battle Points."
+     ]
     }
    ]
   }
@@ -27318,7 +28261,7 @@
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 26,
       "max": 36,
       "weight": 15
@@ -27339,7 +28282,7 @@
      "weight": 60
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 23,
      "max": 31,
      "weight": 30
@@ -27551,6 +28494,27 @@
      "service": "tutor",
      "move": "bodySlam",
      "flag": "tutor_bodySlam"
+    },
+    {
+     "x": 11,
+     "y": 1,
+     "dir": "right",
+     "palette": "old",
+     "text": [
+      "I look out to sea every morning, hoping to see Mirage Island..."
+     ],
+     "service": "mirageWatch"
+    },
+    {
+     "x": 17,
+     "y": 8,
+     "dir": "right",
+     "palette": "swimmer",
+     "text": [
+      "This ferry runs to the Battle Frontier. Only Champions may board."
+     ],
+     "service": "ferry",
+     "to": "battlefrontier"
     }
    ],
    "fishing": {
@@ -27602,7 +28566,7 @@
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 26,
       "max": 36,
       "weight": 15
@@ -27623,7 +28587,7 @@
      "weight": 60
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 23,
      "max": 31,
      "weight": 30
@@ -27792,13 +28756,13 @@
       "weight": 60
      },
      {
-      "species": "raylet",
+      "species": "nipshell",
       "min": 10,
       "max": 15,
       "weight": 20
      },
      {
-      "species": "nipshell",
+      "species": "raylet",
       "min": 10,
       "max": 15,
       "weight": 20
@@ -27806,13 +28770,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -27839,13 +28803,13 @@
      "weight": 60
     },
     {
-     "species": "raylet",
+     "species": "nipshell",
      "min": 5,
      "max": 13,
      "weight": 30
     },
     {
-     "species": "nipshell",
+     "species": "raylet",
      "min": 5,
      "max": 13,
      "weight": 10
@@ -27980,13 +28944,13 @@
       "weight": 60
      },
      {
-      "species": "raylet",
+      "species": "nipshell",
       "min": 10,
       "max": 15,
       "weight": 20
      },
      {
-      "species": "nipshell",
+      "species": "raylet",
       "min": 10,
       "max": 15,
       "weight": 20
@@ -27994,13 +28958,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 26,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 20,
       "max": 26,
       "weight": 40
@@ -28021,13 +28985,13 @@
    },
    "waterEncounters": [
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 13,
      "max": 21,
      "weight": 60
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 13,
      "max": 21,
      "weight": 30
@@ -28310,13 +29274,13 @@
     ],
     "good": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 38,
       "weight": 60
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 38,
       "weight": 20
@@ -28330,7 +29294,7 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 41,
       "max": 51,
       "weight": 40
@@ -28348,7 +29312,7 @@
       "weight": 15
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 41,
       "max": 51,
       "weight": 5
@@ -28587,13 +29551,13 @@
       "weight": 60
      },
      {
-      "species": "raylet",
+      "species": "nipshell",
       "min": 10,
       "max": 15,
       "weight": 20
      },
      {
-      "species": "nipshell",
+      "species": "raylet",
       "min": 10,
       "max": 15,
       "weight": 20
@@ -28601,13 +29565,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -28628,13 +29592,13 @@
    },
    "waterEncounters": [
     {
-     "species": "nipshell",
+     "species": "raylet",
      "min": 5,
      "max": 9,
      "weight": 60
     },
     {
-     "species": "raylet",
+     "species": "nipshell",
      "min": 5,
      "max": 9,
      "weight": 30
@@ -29017,9 +29981,9 @@
     "===========,,,,,,,,,,,,,=====.....======",
     "#S....,,,,,,,,,,,,,,,,,,=====,,,,.==...#",
     "#.....,,,,,,,,,,,,,,,,,,...=========F..#",
-    "#..............,,,,,,,,,...=========...#",
-    "#...........................,,,,,,,,...#",
-    "#..F........................,,,,,,,,...#",
+    "#.iiii.........,,,,,,,,,...=========...#",
+    "#.iiii......................,,,,,,,,...#",
+    "#.wwdw......................,,,,,,,,...#",
     "#.........................F.,,,,,,,,...#",
     "#........F........F....................#",
     "#......................F...............#",
@@ -29027,7 +29991,15 @@
    ],
    "secretSpots": [
     "11,4"
-   ]
+   ],
+   "warps": {
+    "4,15": {
+     "map": "trickhouse",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
+   }
   },
   "route8": {
    "items": [
@@ -29132,9 +30104,9 @@
     "#....=========,,,,,..#",
     "#F...=========,,,,,..#",
     "#vvvv==,,,,,,,,,,,,vv#",
-    "#....,,,,,,,,,,,,,,..#",
-    "#....,,,,,,,,........#",
-    "#....,,,,,,,,........#",
+    "#iiii,,,,,,,,,,,,,,..#",
+    "#iiii,,,,,,,,........#",
+    "#wwdw,,,,,,,,........#",
     "#....,,,,,,,,........#",
     "#....,,,,,,,,....###.#",
     "#....,,,,,,,,....###.#",
@@ -29153,6 +30125,14 @@
    "berries": {
     "10,6": "figyBerry",
     "11,6": "wikiBerry"
+   },
+   "warps": {
+    "3,29": {
+     "map": "berrymaster",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
    }
   },
   "route9": {
@@ -29307,7 +30287,7 @@
       "weight": 15
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 29,
       "max": 39,
       "weight": 5
@@ -29322,7 +30302,7 @@
      "weight": 60
     },
     {
-     "species": "mirrakoi",
+     "species": "twirlfin",
      "min": 26,
      "max": 34,
      "weight": 30
@@ -29472,7 +30452,7 @@
     ],
     "good": [
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 23,
       "max": 30,
       "weight": 60
@@ -29510,7 +30490,7 @@
       "weight": 15
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 33,
       "max": 43,
       "weight": 5
@@ -29646,7 +30626,7 @@
       "weight": 60
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 27,
       "max": 34,
       "weight": 20
@@ -29666,7 +30646,7 @@
       "weight": 40
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 37,
       "max": 47,
       "weight": 40
@@ -29693,13 +30673,13 @@
      "weight": 60
     },
     {
-     "species": "twirlfin",
+     "species": "mirrakoi",
      "min": 34,
      "max": 42,
      "weight": 30
     },
     {
-     "species": "fenspawn",
+     "species": "tuskling",
      "min": 34,
      "max": 42,
      "weight": 10
@@ -29908,6 +30888,21 @@
      "give": "jellip",
      "nickname": "DOTS",
      "flag": "trade_stonecrest"
+    },
+    {
+     "x": 18,
+     "y": 18,
+     "dir": "up",
+     "palette": "boy",
+     "text": [
+      "Some items are buried where you can't see them. This Itemfinder beeps when one is near!"
+     ],
+     "service": "gift",
+     "gift": "itemfinder",
+     "flag": "gift_itemfinder",
+     "after": [
+      "Use the Itemfinder from your BAG. It points toward hidden items nearby."
+     ]
     }
    ]
   },
@@ -29989,13 +30984,13 @@
       "weight": 60
      },
      {
-      "species": "raylet",
+      "species": "nipshell",
       "min": 10,
       "max": 15,
       "weight": 20
      },
      {
-      "species": "nipshell",
+      "species": "raylet",
       "min": 10,
       "max": 15,
       "weight": 20
@@ -30003,13 +30998,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -30030,7 +31025,7 @@
    },
    "waterEncounters": [
     {
-     "species": "nipshell",
+     "species": "raylet",
      "min": 9,
      "max": 17,
      "weight": 60
@@ -30042,7 +31037,7 @@
      "weight": 30
     },
     {
-     "species": "raylet",
+     "species": "nipshell",
      "min": 9,
      "max": 17,
      "weight": 10
@@ -30188,7 +31183,7 @@
       "weight": 40
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 26,
       "max": 36,
       "weight": 15
@@ -30209,7 +31204,7 @@
      "weight": 60
     },
     {
-     "species": "tuskling",
+     "species": "fenspawn",
      "min": 23,
      "max": 31,
      "weight": 30
@@ -30220,7 +31215,47 @@
      "max": 31,
      "weight": 10
     }
-   ]
+   ],
+   "tiles": [
+    "####################################",
+    "#...........==............==.......#",
+    "#.rrrrr.....==.bbbbbbbbbb.==.......#",
+    "#.rrrrr.##..==.bbbbbbbbbb.==.ppppp.#",
+    "#.wwhww.....==.bbbbbbbbbb.==.ppppp.#",
+    "#...=.......==.bbbbbbbbbb.==.wwlww.#",
+    "#...=...#...==.wwwwmwwwww.==...=...#",
+    "#.F.=.FF....==....S==.....==...=...#",
+    "##..=.......==.....==.....==...=..##",
+    "#..L=....L..==S.L..==..L..==..L=...#",
+    "===================================#",
+    "===================================#",
+    "#........L..==..L.........==..L....#",
+    "#.kkkkkkk...==.rrrr.===F=.==.rrrrr.#",
+    "#.kkkkkkk#..==.rrrr.=====.==.rrrrr.#",
+    "#.kkkkkkk#..==.wwhw.=~~==.==.wwhww.#",
+    "#.wwwjwww...==...=..=~~==.==...=...#",
+    "#S...=......==...=..=====.==...=..##",
+    "#....=..iiii==...=..=====.==...=...#",
+    "#....=..iiii==...=..F...F.==...=...#",
+    "#....=..wwdw==...=........==...=...#",
+    "#==================================#",
+    "#==================================#",
+    "#..L.....L..==....L.........L......#",
+    "###.........==......rrrr...........#",
+    "#...........==......rrrr....F.##...#",
+    "#....##.....==..##..wwhw.##..F.....#",
+    "#..F........==...F.................#",
+    "#...........==.....................#",
+    "############==######################"
+   ],
+   "warps": {
+    "10,20": {
+     "map": "gamecorner",
+     "x": 7,
+     "y": 10,
+     "dir": "up"
+    }
+   }
   },
   "bramblegate": {
    "npcs": [
@@ -30380,13 +31415,13 @@
     ],
     "good": [
      {
-      "species": "twirlfin",
+      "species": "mirrakoi",
       "min": 31,
       "max": 38,
       "weight": 60
      },
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 31,
       "max": 38,
       "weight": 20
@@ -30400,7 +31435,7 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 41,
       "max": 51,
       "weight": 40
@@ -30418,7 +31453,7 @@
       "weight": 15
      },
      {
-      "species": "fenspawn",
+      "species": "tuskling",
       "min": 41,
       "max": 51,
       "weight": 5
@@ -30500,13 +31535,13 @@
       "weight": 60
      },
      {
-      "species": "raylet",
+      "species": "nipshell",
       "min": 10,
       "max": 15,
       "weight": 20
      },
      {
-      "species": "nipshell",
+      "species": "raylet",
       "min": 10,
       "max": 15,
       "weight": 20
@@ -30514,13 +31549,13 @@
     ],
     "super": [
      {
-      "species": "mirrakoi",
+      "species": "twirlfin",
       "min": 20,
       "max": 25,
       "weight": 40
      },
      {
-      "species": "tuskling",
+      "species": "fenspawn",
       "min": 20,
       "max": 25,
       "weight": 40
@@ -30541,13 +31576,13 @@
    },
    "waterEncounters": [
     {
-     "species": "nipshell",
+     "species": "raylet",
      "min": 5,
      "max": 8,
      "weight": 60
     },
     {
-     "species": "raylet",
+     "species": "nipshell",
      "min": 5,
      "max": 8,
      "weight": 30
@@ -30707,6 +31742,11 @@
    "x": 21,
    "y": 6,
    "name": "Summit Crown"
+  },
+  "battlefrontier": {
+   "x": 19,
+   "y": 21,
+   "name": "Battle Frontier"
   }
  },
  "decorations": {
@@ -30892,7 +31932,9 @@
     "greatOrb",
     "superPotion",
     "escapeRope",
-    "iceHeal"
+    "iceHeal",
+    "orangeMail",
+    "harborMail"
    ],
    "2": [
     "revive",
@@ -30904,13 +31946,17 @@
     "ultraOrb",
     "fullHeal",
     "repeatOrb",
-    "timerOrb"
+    "timerOrb",
+    "glitterMail",
+    "mechMail"
    ],
    "4": [
     "hyperPotion",
     "maxRepel",
     "luxuryOrb",
-    "diveOrb"
+    "diveOrb",
+    "woodMail",
+    "waveMail"
    ],
    "6": [
     "maxPotion",
@@ -31716,5 +32762,384 @@
   "6": "tm40",
   "7": "tm04",
   "8": "tm03"
+ },
+ "prizes": {
+  "items": [
+   [
+    "tm24",
+    4000
+   ],
+   [
+    "tm13",
+    4000
+   ],
+   [
+    "tm35",
+    4000
+   ],
+   [
+    "tm29",
+    3500
+   ],
+   [
+    "tm30",
+    3500
+   ],
+   [
+    "brightPowder",
+    1500
+   ],
+   [
+    "scopeLens",
+    1500
+   ],
+   [
+    "quickClaw",
+    1000
+   ],
+   [
+    "kingsRock",
+    1000
+   ],
+   [
+    "rareCandy",
+    800
+   ],
+   [
+    "ppUp",
+    1200
+   ]
+  ],
+  "creatures": [
+   [
+    "stormquill",
+    25,
+    2000
+   ],
+   [
+    "grimveil",
+    30,
+    4500
+   ],
+   [
+    "slushtusk",
+    35,
+    7000
+   ]
+  ]
+ },
+ "trick": {
+  "badges": [
+   1,
+   3,
+   4
+  ],
+  "prizes": [
+   [
+    "rareCandy",
+    "nugget"
+   ],
+   [
+    "ppUp",
+    "starPiece"
+   ],
+   [
+    "leftovers",
+    "masterOrb"
+   ]
+  ]
+ },
+ "frontier": {
+  "pyramidWild": [
+   "aerolith",
+   "amperix",
+   "antlegion",
+   "anvilfist",
+   "arcferret",
+   "arclure",
+   "barkhide",
+   "bogmonarch",
+   "bouldron",
+   "bounder",
+   "brightwing",
+   "bruisant",
+   "cairnox",
+   "cascadon",
+   "cragmaw",
+   "dartwing",
+   "dreadspore",
+   "driftail",
+   "duskhound",
+   "dynamoth",
+   "elderoak",
+   "encasa",
+   "excavore",
+   "falcrest",
+   "fernhart",
+   "floodfang",
+   "forgecrest",
+   "fulgorax",
+   "fungloom",
+   "galvanfly",
+   "glacifin",
+   "gnawlord",
+   "gorsebrier",
+   "grimveil",
+   "hearthawk",
+   "hexapede",
+   "hoarwhal",
+   "hogburr",
+   "hogrumble",
+   "hopvault"
+  ],
+  "arrive": {
+   "battlefrontier": [
+    19,
+    24
+   ],
+   "saltmarsh": null
+  }
+ },
+ "regionMap": {
+  "fernhollow": {
+   "x": 2,
+   "y": 264,
+   "w": 24,
+   "h": 18,
+   "town": true,
+   "name": "Fernhollow"
+  },
+  "route1": {
+   "x": 2,
+   "y": 230,
+   "w": 24,
+   "h": 34,
+   "town": false,
+   "name": "Route 1"
+  },
+  "route2": {
+   "x": 2,
+   "y": 200,
+   "w": 24,
+   "h": 30,
+   "town": false,
+   "name": "Mistwood Path"
+  },
+  "stonecrest": {
+   "x": 0,
+   "y": 178,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Stonecrest"
+  },
+  "route3": {
+   "x": 26,
+   "y": 179,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 3"
+  },
+  "duskmere": {
+   "x": 66,
+   "y": 178,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Duskmere"
+  },
+  "route4": {
+   "x": 68,
+   "y": 138,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 4"
+  },
+  "voltara": {
+   "x": 66,
+   "y": 116,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Voltara"
+  },
+  "route5": {
+   "x": 92,
+   "y": 117,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 5"
+  },
+  "cindercity": {
+   "x": 132,
+   "y": 116,
+   "w": 36,
+   "h": 30,
+   "town": true,
+   "name": "Cinder City"
+  },
+  "route6": {
+   "x": 134,
+   "y": 146,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 6"
+  },
+  "harrowfield": {
+   "x": 132,
+   "y": 186,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Harrowfield"
+  },
+  "route7": {
+   "x": 158,
+   "y": 187,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 7"
+  },
+  "bramblegate": {
+   "x": 198,
+   "y": 186,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Bramblegate"
+  },
+  "route8": {
+   "x": 200,
+   "y": 146,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 8"
+  },
+  "skyreach": {
+   "x": 198,
+   "y": 124,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Skyreach"
+  },
+  "route9": {
+   "x": 224,
+   "y": 125,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 9"
+  },
+  "saltmarsh": {
+   "x": 264,
+   "y": 124,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Saltmarsh"
+  },
+  "route10": {
+   "x": 266,
+   "y": 84,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Route 10"
+  },
+  "route13": {
+   "x": 290,
+   "y": 124,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 13"
+  },
+  "lumenvale": {
+   "x": 264,
+   "y": 62,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Lumenvale"
+  },
+  "route11": {
+   "x": 290,
+   "y": 63,
+   "w": 40,
+   "h": 20,
+   "town": false,
+   "name": "Route 11"
+  },
+  "coralhaven": {
+   "x": 330,
+   "y": 62,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Coralhaven"
+  },
+  "route12": {
+   "x": 332,
+   "y": 22,
+   "w": 22,
+   "h": 40,
+   "town": false,
+   "name": "Victory Road"
+  },
+  "summitcrown": {
+   "x": 330,
+   "y": 0,
+   "w": 26,
+   "h": 22,
+   "town": true,
+   "name": "Summit Crown"
+  },
+  "battlefrontier": {
+   "x": 336,
+   "y": 126,
+   "w": 40,
+   "h": 28,
+   "town": true,
+   "name": "Battle Frontier",
+   "island": true
+  }
+ },
+ "mapParent": {
+  "gym1": "stonecrest",
+  "gym2": "duskmere",
+  "gym3": "voltara",
+  "gym4": "cindercity",
+  "gamecorner": "cindercity",
+  "daycare": "harrowfield",
+  "gym5": "bramblegate",
+  "gym6": "skyreach",
+  "safarizone": "saltmarsh",
+  "gym7": "lumenvale",
+  "contesthall": "lumenvale",
+  "deptstore": "lumenvale",
+  "gym8": "coralhaven",
+  "league": "summitcrown",
+  "battletower": "summitcrown",
+  "granitecave": "route3",
+  "desertruins": "route5",
+  "trickhouse": "route7",
+  "berrymaster": "route8",
+  "skyspire": "route13",
+  "skyspire2": "route13",
+  "granitecave_b1": "route3",
+  "frontier_factory": "battlefrontier",
+  "frontier_arena": "battlefrontier",
+  "frontier_dome": "battlefrontier",
+  "frontier_palace": "battlefrontier",
+  "frontier_pike": "battlefrontier",
+  "frontier_pyramid": "battlefrontier",
+  "frontier_exchange": "battlefrontier"
  }
 }

@@ -371,10 +371,11 @@ func _lodge_menu(heal := true) -> void:
 	var items: Array = ["HEAL"] if heal else []
 	var first := 1 if heal else 0
 	items.append_array(["STORAGE P1", "STORAGE P2"] if players > 1 else ["STORAGE"])
+	items.append_array(Pc.MENU)
 	items.append("LEAVE")
 	var ref: Array = []
 	var menu := ListMenu.new({
-		"x": 140, "y": 40, "w": 96, "items": items,
+		"x": 128, "y": 24, "w": 108, "items": items,
 		"on_cancel": func() -> void: Game.pop(ref[0]),
 		"on_select": func(i: int) -> void:
 			Game.pop(ref[0])
@@ -383,7 +384,9 @@ func _lodge_menu(heal := true) -> void:
 					Creatures.heal_fully(m)
 				gs.respawn = {"map": map.id, "x": player.x, "y": player.y}
 				Audio.sfx("heal")
-				Game.say(["Let me take your creatures for a moment...", "... ... ...", "They're fully healed! We hope to see you again!"], _lodge_menu)
+				Game.say(["Let me take your creatures for a moment...", "... ... ..."] + Pokerus.nurse_lines(gs) + ["They're fully healed! We hope to see you again!"], _lodge_menu)
+			elif Pc.MENU.has(items[i]):
+				Pc.open(items[i], func() -> void: _lodge_menu(heal))
 			elif i - first < players:
 				var pl := i - first
 				var sref: Array = []
@@ -443,39 +446,39 @@ func _interact() -> void:
 
 func _open_start_menu(pl: int) -> void:
 	var ref: Array = []
+	var labels: Array = ["DEX", "PARTY", "BAG", gs.players[pl].name.to_upper(), "SAVE", "CO-OP", "OPTIONS", "CONTROLS", "EXIT"]
 	var opts := {
-		"x": 158, "y": 4, "w": 78, "player": pl,
-		"items": ["DEX", "PARTY", "BAG", "SAVE", "CO-OP", "OPTIONS", "CONTROLS", "EXIT"],
+		"x": 158, "y": 4, "w": 78, "player": pl, "items": labels,
 		"on_cancel": func() -> void: Game.pop(ref[0]),
 		"on_select": func(i: int) -> void:
-			# OPTIONS sits between CO-OP and CONTROLS.
-			if i == 5:
-				Options.open_menu(pl, func() -> void: pass)
-				return
-			if i > 5:
-				i -= 1
 			if i == 0:
 				var dref: Array = []
 				var d := DexScreen.new(pl, func() -> void: Game.pop(dref[0]))
 				dref.append(d)
 				Game.push(d)
-			if (i == 1 or i == 2) and gs.players[pl].party.is_empty():
+			elif (i == 1 or i == 2) and gs.players[pl].party.is_empty():
 				Game.say(["You don't have any creatures yet."], Callable(), pl)
-				return
-			if i == 1:
+			elif i == 1:
 				Menus.open_party_menu(pl, func() -> void: pass)
-			if i == 2:
+			elif i == 2:
 				Menus.open_bag_overworld(pl, func() -> void: pass)
-			if i == 3:
+			elif i == 3:
+				var cref: Array = []
+				var card := TrainerCardScene.new(pl, func() -> void: Game.pop(cref[0]))
+				cref.append(card)
+				Game.push(card)
+			elif i == 4:
 				Game.ask("Save your progress?", ["YES", "NO"], func(c: int) -> void:
 					if c == 0:
 						Audio.sfx("save")
 						Game.say(["Your progress was saved!" if GameState.save(gs) else "Saving failed (the save file could not be written)."], Callable(), pl), pl)
-			if i == 4:
+			elif i == 5:
 				Game.say(OverworldScene.coop_text(), func() -> void: Trade.offer_coop(self), pl)
-			if i == 5:
+			elif i == 6:
+				Options.open_menu(pl, func() -> void: pass)
+			elif i == 7:
 				Game.say(OverworldScene.controls_text(false), Callable(), pl)
-			if i == 6:
+			else:
 				Game.pop(ref[0]),
 	}
 	if gs.mode == "coop":
@@ -621,6 +624,8 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 					msgs.append("%s was sent to storage (party full: %d max)." % [Creatures.display_name(c.mon), GameState.party_cap(g)])
 			Field.after_battle(self, setup, result, battle, trainer, msgs)
 			if result == "lose":
+				if Field.on_whiteout(self):
+					return
 				for m in GameState.all_party_mons(g):
 					Creatures.heal_fully(m)
 				var r: Dictionary = g.respawn

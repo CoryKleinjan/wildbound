@@ -4,7 +4,8 @@ extends Scene
 ## setup keys (TS BattleSetup): kind ("wild" | "trainer" | "safari"), double (bool), wild (Array of Creatures, wild battles),
 ## trainer (TrainerDef dict from DB.MAPS), trainerParty (Array of Creatures), onEnd (Callable(result: String, battle: Battle)).
 ## Optional: weather (the map's), location ("water"/"underwater"/"cave"), noExp (Battle Tower), noPrize, party (Array:
-## the creatures to use instead of the player's party, for the Battle Tower).
+## the creatures to use instead of the player's party, for the Battle Tower). Battle Frontier rules: palace (creatures
+## act on their own), arena (three-turn judged match-ups), noBag, noSwitch, noCatch.
 ## The snake_case spellings trainer_party / on_end are accepted too.
 
 class Slot:
@@ -62,7 +63,8 @@ func _init(setup: Dictionary) -> void:
 			var p: Dictionary = gs.players[i]
 			side0.append({"name": p.name, "party": p.party, "controller": "human", "slots": [i], "player": i, "otId": p.otId})
 	else:
-		side0.append({"name": gs.players[0].name, "party": setup.get("party", gs.players[0].party), "controller": "human",
+		side0.append({"name": gs.players[0].name, "party": setup.get("party", gs.players[0].party),
+			"controller": "palace" if setup.get("palace", false) else "human",
 			"slots": [0, 1] if double else [0], "player": 0, "otId": gs.players[0].otId})
 	var side1: Array = []
 	if setup.kind != "trainer":
@@ -71,7 +73,8 @@ func _init(setup: Dictionary) -> void:
 		side1.append({"name": setup.trainer.name, "party": _trainer_party(), "controller": "ai", "slots": [0, 1] if double else [0]})
 	battle = Battle.new({"kind": setup.kind, "double": double, "sides": [side0, side1], "weather": setup.get("weather", null),
 		"location": setup.get("location", "land"), "noExp": setup.get("noExp", false), "caughtSpecies": gs.caught,
-		"shift": Options.shift_style()})
+		"shift": Options.shift_style() and not setup.get("noSwitch", false), "palace": setup.get("palace", false),
+		"arena": setup.get("arena", false)})
 	var n := 2 if double else 1
 	for side in [0, 1]:
 		for i in n:
@@ -553,9 +556,17 @@ func update(dt: float) -> void:
 					return
 				_menu = "move"
 			elif _action_sel == 1:
-				_open_bag_for(r)
+				if _setup.get("noBag", false):
+					_mode = "busy"
+					Game.say(["Items can't be used here."], func() -> void: _mode = "choose", r.player)
+				else:
+					_open_bag_for(r)
 			elif _action_sel == 2:
-				_open_party_for(r)
+				if _setup.get("noSwitch", false):
+					_mode = "busy"
+					Game.say(["Switching isn't allowed here!"], func() -> void: _mode = "choose", r.player)
+				else:
+					_open_party_for(r)
 			elif _action_sel == 3:
 				var why: String = battle.trapped(b)
 				if battle.kind != "trainer" and why != "" and b.ability != "runAway" and b.item != "smokeBall":

@@ -97,6 +97,8 @@ static func _swap(va: int, a: Dictionary, vb: int, b: Dictionary) -> void:
 	pb[pb.find(b)] = a
 	a.owner = 0
 	b.owner = 0
+	gsa.trades = int(gsa.get("trades", 0)) + 1
+	gsb.trades = int(gsb.get("trades", 0)) + 1
 	for pair in [[gsa, b], [gsb, a]]:
 		for list in [pair[0].seen, pair[0].caught]:
 			if not list.has(pair[1].species):

@@ -47,6 +47,11 @@ func draw() -> void:
 		Gfx.text("♂" if g == "M" else "♀", 50, 109, {"color": "#3870e0" if g == "M" else "#e04870", "shadow": null})
 	if Creatures.is_shiny(m):
 		Gfx.text("★", 66, 109, {"color": "#e0b020", "shadow": null})
+	if Pokerus.infected(m):
+		Gfx.rect(54, 98, 24, 9, "#a050c0")
+		Gfx.text("PKRS", 66, 100, {"size": 5, "color": "#ffffff", "align": "center", "shadow": null})
+	elif Pokerus.ever_had(m):
+		Gfx.text("☺", 72, 100, {"size": 6, "color": "#a050c0", "shadow": null})
 	var types: Array = sp.types
 	for i in types.size():
 		Gfx.type_badge(types[i], 4 + i * 36, 122)

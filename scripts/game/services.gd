@@ -37,6 +37,25 @@ static func run(o: OverworldScene, npc: Dictionary, text: Array) -> void:
 			Trade.npc_trade(npc)
 		"berryGift":
 			Game.say(text, func() -> void: _berry_gift(npc))
+		"coins":
+			GameCorner.coins_counter(text)
+		"prizes":
+			GameCorner.prizes(text)
+		"lottery":
+			Game.say(text, func() -> void: _lottery())
+		"berryMaster":
+			Game.say(text, func() -> void: _berry_master(npc, 2, 0))
+		"berryWife":
+			Game.say(text, func() -> void: _berry_master(npc, 1, 24))
+		"mirageWatch":
+			Game.say(text + (["Oh! I can see it! Mirage Island is out there east of here today!"] if Field.mirage_visible(gs)
+				else ["No sign of it today... They say it only shows itself to certain creatures."]))
+		"ferry":
+			_ferry(o, npc, text)
+		"frontier":
+			Game.say(text, func() -> void: Frontier.start(o, npc.facility))
+		"trickPrize":
+			Trick.prize(text)
 		_:
 			Game.say(text)
 
@@ -53,6 +72,79 @@ static func _gift(npc: Dictionary, text: Array) -> void:
 		var lines: Array = ["%s received the %s!" % [gs.players[0].name, DB.item(id).name]]
 		lines.append_array(npc.get("after", []))
 		Game.say(lines))
+
+## The Lottery Corner: one draw a day, matched against the ID No. of every creature you have.
+static func _lottery() -> void:
+	var gs: Dictionary = Game.gs
+	var today := Options.today()
+	if int(gs.flags.get("lottery_day", -1)) == today:
+		Game.say(["You've already drawn today. Please come back tomorrow!"])
+		return
+	gs.flags.lottery_day = today
+	var draw := absi(hash("lottery%d" % today)) % 65536
+	var number := "%05d" % draw
+	var best := 0
+	var best_mon: Variant = null
+	for m in gs.players[0].party + gs.box:
+		if m.get("egg", false):
+			continue
+		var id := "%05d" % (int(m.otId) % 65536)
+		var n := 0
+		while n < 5 and id[4 - n] == number[4 - n]:
+			n += 1
+		if n > best:
+			best = n
+			best_mon = m
+	var lines: Array = ["Today's number is %s!" % number]
+	if best < 2:
+		Game.say(lines + ["I'm sorry, none of your creatures' ID numbers matched. Try again tomorrow!"])
+		return
+	var prize: String = {2: "ppUp", 3: "expShare", 4: "maxRevive", 5: "masterOrb"}[best]
+	gs.bag[prize] = gs.bag.get(prize, 0) + 1
+	Audio.sfx("badge" if best >= 4 else "item")
+	Game.say(lines + ["%s's ID No. matched the last %d digits!" % [Creatures.display_name(best_mon), best],
+		"You won the %s!" % DB.item(prize).name])
+
+## The Berry Master gives n berries a day; his wife gives one rare berry (growing min_hours or longer).
+static func _berry_master(npc: Dictionary, n: int, min_hours: int) -> void:
+	var gs: Dictionary = Game.gs
+	var today := Options.today()
+	if int(gs.flags.get(npc.flag, -1)) == today:
+		Game.say(["Come back tomorrow and I'll have more!"])
+		return
+	var pool: Array = DB.ITEMS.keys().filter(func(k: String) -> bool:
+		return DB.ITEMS[k].effect.kind == "berry" and int(DB.ITEMS[k].get("growHours", 4)) >= min_hours)
+	gs.flags[npc.flag] = today
+	var lines: Array = []
+	for i in n:
+		var id: String = pool[Rng.global_rng.int_below(pool.size())]
+		gs.bag[id] = gs.bag.get(id, 0) + 1
+		lines.append("%s received one %s!" % [gs.players[0].name, DB.item(id).name])
+	Audio.sfx("item")
+	Game.say(lines)
+
+## The ferry between Saltmarsh and the Battle Frontier (Champions only).
+static func _ferry(o: OverworldScene, npc: Dictionary, text: Array) -> void:
+	var gs: Dictionary = Game.gs
+	if npc.to == "battlefrontier" and not gs.flags.get("champion", false):
+		Game.say(text + ["Sorry, the Battle Frontier is only open to League Champions."])
+		return
+	var dest: String = npc.to
+	Game.ask("%s Shall we set sail for %s?" % [" ".join(text), DB.MAPS[dest].name], ["YES", "NO"], func(c: int) -> void:
+		if c != 0:
+			return
+		var spot := ferry_landing(dest)
+		Audio.sfx("door")
+		Game.say(["The ferry sets sail...", "... ... ..."], func() -> void:
+			Field._warp(o, dest, spot.x, spot.y, "down", false)))
+
+## Where the ferry lets you off: next to the ferry attendant on that map.
+static func ferry_landing(map_id: String) -> Vector2i:
+	var m: Dictionary = DB.MAPS[map_id]
+	for n in m.get("npcs", []):
+		if n.get("service", "") == "ferry":
+			return Field.nearest_walkable(m, int(n.x) + 1, int(n.y))
+	return Field.nearest_walkable(m, 5, 5)
 
 ## Pick a creature from the party (eggs can't be picked). filter(m) -> String: "" if OK, otherwise why not.
 static func pick_creature(prompt: String, filter: Callable, on_pick: Callable, on_cancel: Callable = Callable()) -> void:

@@ -7,8 +7,6 @@ class_name Field
 ## current visit (cut trees, pushed boulders, Flash, Strength) lives in ow.field, and anything saved lives in gs.
 
 const WATER := "~DW"
-## Tiles that are floor once their obstacle is gone.
-const CLEARED := {"T": ".", "R": "."}
 const PICKUP_TABLE := [
 	[1, ["potion", "antidote", "superPotion", "greatOrb", "repel", "escapeRope", "xAttack", "fullHeal", "ultraOrb"]],
 	[31, ["superPotion", "greatOrb", "repel", "hyperPotion", "ultraOrb", "rareCandy", "fullHeal", "nugget", "ppUp"]],
@@ -36,10 +34,37 @@ static func tile(o: OverworldScene, x: int, y: int) -> String:
 		return f.boulders[k]
 	if f.cleared.has(k):
 		return f.cleared[k]
+	var mg: Variant = o.map.get("mirage")
+	if mg != null and _in_mirage(mg, x, y):
+		return (mg.tiles[y - int(mg.y)] as String)[x - int(mg.x)] if f.get("mirage", false) else "~"
 	return Maps.tile_at(o.map, x, y)
 
+## Floor left behind by a cut tree, a smashed rock or a pushed boulder.
 static func _floor(o: OverworldScene) -> String:
-	return "g" if o.map.get("cave", false) else "."
+	if o.map.get("cave", false):
+		return "g"
+	return "_" if o.map.get("indoor", false) else "."
+
+# ---------- Mirage Island ----------
+static func _in_mirage(mg: Dictionary, x: int, y: int) -> bool:
+	return x >= int(mg.x) and y >= int(mg.y) and y < int(mg.y) + mg.tiles.size() and x < int(mg.x) + (mg.tiles[0] as String).length()
+
+## Mirage Island rises out of the sea on some days: when today's number matches one of your creatures.
+static func mirage_visible(gs: Dictionary) -> bool:
+	var day := Options.today()
+	var target := absi(hash("mirage%d" % day)) % 16
+	for m in gs.players[0].party:
+		if not m.get("egg", false) and (int(m.personality) & 0xffff) % 16 == target:
+			return true
+	return false
+
+## A berry tree or soil on Mirage Island can't be reached while the island is hidden.
+static func _mirage_hidden(o: OverworldScene, k: String) -> bool:
+	var mg: Variant = o.map.get("mirage")
+	if mg == null or o.field.get("mirage", false):
+		return false
+	var p := k.split(",")
+	return _in_mirage(mg, int(p[0]), int(p[1]))
 
 static func surfing(o: OverworldScene) -> bool:
 	return Game.gs.get("surfing", false)
@@ -126,6 +151,10 @@ static func on_map_loaded(o: OverworldScene) -> void:
 	# Fly remembers every town you've been to.
 	if DB.FLY_POINTS.has(o.map.id) and not gs.fly.has(o.map.id):
 		gs.fly.append(o.map.id)
+	if o.map.has("mirage"):
+		o.field.mirage = mirage_visible(gs)
+	if o.map.get("trickHouse", false):
+		Trick.on_enter(o)
 	_move_roamers(gs)
 
 # ---------- bumping into things ----------
@@ -184,14 +213,19 @@ static func interact(o: OverworldScene, tx: int, ty: int) -> bool:
 		if s.x == tx and s.y == ty:
 			_static_battle(o, s)
 			return true
-	if o.map.get("soil", []).has(k) or o.map.get("berries", {}).has(k):
+	if (o.map.get("soil", []).has(k) or o.map.get("berries", {}).has(k)) and not _mirage_hidden(o, k):
 		_soil(o, k)
+		return true
+	if o.map.get("trickHouse", false) and Trick.interact(o, k):
+		return true
+	if tile(o, tx, ty) == "Y":
+		GameCorner.slots(o)
 		return true
 	var t := tile(o, tx, ty)
 	match t:
 		"T":
 			_obstacle(o, "cut", "This tree looks like it can be cut down!", func() -> void:
-				o.field.cleared[k] = CLEARED.T)
+				o.field.cleared[k] = _floor(o))
 			return true
 		"R":
 			_obstacle(o, "rockSmash", "It's a rugged rock, but a creature may be able to smash it.", func() -> void:
@@ -342,7 +376,10 @@ static func on_step(o: OverworldScene) -> bool:
 			Game.say(["Repel's effect wore off..."])
 			took = true
 	DayCare.on_step(gs)
+	Pokerus.on_step(gs)
 	if Eggs.on_step(gs):
+		took = true
+	if not took and MatchCall.on_step(gs):
 		took = true
 	if gs.safari != null and o.map.get("safari", false):
 		gs.safari.steps -= 1
@@ -411,6 +448,9 @@ static func repelled(level: int) -> bool:
 # ---------- battles ----------
 ## Fills in battle options from the map: weather, where it is, the Safari Zone.
 static func prepare_battle(o: OverworldScene, setup: Dictionary) -> void:
+	if Game.gs.get("pyramid") != null:
+		setup.noPrize = true
+		setup.noExp = true
 	var w: String = o.map.get("weather", "")
 	if not setup.has("weather"):
 		setup.weather = {"rain": "rain", "sand": "sand", "sun": "sun"}.get(w, null)
@@ -446,6 +486,10 @@ static func after_battle(o: OverworldScene, setup: Dictionary, result: String, b
 	if result == "lose":
 		gs.safari = null
 		gs.surfing = false
+	if result != "ran" or setup.get("kind", "") == "trainer":
+		Pokerus.after_battle(gs, GameState.all_party_mons(gs), msgs)
+	if trainer != null and result == "win" and not setup.has("rematch"):
+		MatchCall.after_win(gs, trainer, msgs)
 	# A gym leader also hands over their TM.
 	if trainer != null and result == "win" and trainer.get("badge") and not setup.has("rematch"):
 		var tm: String = DB.GYM_TMS.get(str(trainer.badge), "")
@@ -462,6 +506,14 @@ static func after_battle(o: OverworldScene, setup: Dictionary, result: String, b
 					hm_move = mv
 			if hm_move != "":
 				late.append("With this badge, creatures can use %s outside of battle." % DB.move(hm_move).name)
+
+## Losing a battle normally sends you back to the last Rest Lodge. True if something else happens instead
+## (losing in the Battle Pyramid ends the run at its entrance).
+static func on_whiteout(o: OverworldScene) -> bool:
+	if Game.gs.get("pyramid") != null:
+		Frontier.pyramid_lost(o)
+		return true
+	return false
 
 ## Pickup: creatures with the Pickup ability sometimes find an item after a battle.
 static func pickup(gs: Dictionary, mons: Array) -> Array:
@@ -490,7 +542,7 @@ static func _ready_rematch(gs: Dictionary) -> void:
 		for t in DB.MAPS[mid].get("trainers", []):
 			if not gs.flags.get(t.id, false) or gs.flags.get("ready_" + t.id, false):
 				continue
-			if t.get("champion", false) or t.get("leaveAfter", false) or str(t.id).begins_with("elite") or str(t.id).begins_with("order_") or str(t.id).contains("rival"):
+			if t.get("champion", false) or t.get("leaveAfter", false) or str(t.id).begins_with("elite") or str(t.id).begins_with("order_") or str(t.id).contains("rival") or str(t.id).begins_with("pyr_"):
 				continue
 			if t.get("badge") and not champion:
 				continue
@@ -503,7 +555,9 @@ static func _ready_rematch(gs: Dictionary) -> void:
 			ready += 1
 	if ready >= 6:
 		return
-	gs.flags["ready_" + beaten[Rng.global_rng.int_below(beaten.size())]] = true
+	var pick: String = beaten[Rng.global_rng.int_below(beaten.size())]
+	gs.flags["ready_" + pick] = true
+	MatchCall.queue_ready(gs, pick)
 
 static func rematch_ready(gs: Dictionary, t: Dictionary) -> bool:
 	return gs.flags.get("ready_" + t.id, false)
@@ -547,6 +601,9 @@ static func use_field_move(player: int, m: Dictionary, move_id: String, close: C
 		return
 	var nm := Creatures.display_name(m)
 	var cant := func() -> void: Game.say(["You can't use that here."], Callable(), player)
+	if gs.get("pyramid") != null and move_id in ["fly", "teleport", "dig"]:
+		cant.call()
+		return
 	if DB.HM_BADGES.has(move_id) and not has_badge_for(move_id):
 		Game.say(["You need the right badge to use %s outside of battle." % DB.move(move_id).name], Callable(), player)
 		return
@@ -623,26 +680,20 @@ static func use_field_move(player: int, m: Dictionary, move_id: String, close: C
 
 # ---------- Fly / Navi Gear ----------
 static func open_fly_menu(player: int, on_pick: Callable) -> void:
-	var gs: Dictionary = Game.gs
-	var towns: Array = []
-	for id in DB.FLY_POINTS:
-		if gs.fly.has(id):
-			towns.append(id)
-	var items: Array = []
-	for id in towns:
-		items.append(DB.FLY_POINTS[id].name)
-	items.append("CANCEL")
 	var ref := {}
-	var menu := ListMenu.new({
-		"x": 100, "y": 8, "w": 136, "player": player, "title": "Fly to?", "items": items, "max_visible": 8,
-		"on_cancel": func() -> void: Game.pop(ref.menu),
-		"on_select": func(i: int) -> void:
-			Game.pop(ref.menu)
-			if i < towns.size():
-				on_pick.call(towns[i]),
-	})
-	ref.menu = menu
-	Game.push(menu)
+	var scene := TownMapScene.new(player, true, func(town: String) -> void:
+		Game.pop(ref.s)
+		on_pick.call(town), func() -> void: Game.pop(ref.s))
+	ref.s = scene
+	Game.push(scene)
+
+static func open_town_map(player: int, on_close: Callable) -> void:
+	var ref := {}
+	var scene := TownMapScene.new(player, false, Callable(), func() -> void:
+		Game.pop(ref.s)
+		on_close.call())
+	ref.s = scene
+	Game.push(scene)
 
 static func fly_to(o: OverworldScene, town: String) -> void:
 	var p: Dictionary = DB.FLY_POINTS[town]
@@ -658,16 +709,15 @@ static func nearest_walkable(m: Dictionary, x: int, y: int) -> Vector2i:
 					return Vector2i(x + dx, y + dy)
 	return Vector2i(x, y)
 
+## The Navi Gear: the region map and Match Call.
 static func open_navi(player: int, on_close: Callable) -> void:
-	var gs: Dictionary = Game.gs
-	var o := ow()
-	var lines: Array = ["Navi Gear: you are in %s. It's %s." % [o.map.name if o != null else "?", Options.clock_text()]]
-	var ready := ready_trainers(gs)
-	if ready.is_empty():
-		lines.append("No trainers are asking for a rematch right now.")
-	else:
-		lines.append("Trainers who want a rematch: " + ", ".join(ready.slice(0, 4)) + ("..." if ready.size() > 4 else "."))
-	Game.say(lines, on_close, player)
+	Game.ask("Navi Gear. It's %s." % Options.clock_text(), ["MAP", "MATCH CALL", "CANCEL"], func(c: int) -> void:
+		if c == 0:
+			open_town_map(player, func() -> void: open_navi(player, on_close))
+		elif c == 1:
+			MatchCall.open(player, func() -> void: open_navi(player, on_close))
+		elif on_close.is_valid():
+			on_close.call(), player)
 
 # ---------- key items ----------
 static func use_key_item(player: int, id: String, close: Callable) -> void:
@@ -695,10 +745,47 @@ static func use_key_item(player: int, id: String, close: Callable) -> void:
 				Game.say(["There's nothing to water here."], Callable(), player)
 		"navi":
 			open_navi(player, Callable())
+		"finder":
+			close.call()
+			itemfinder(o)
+		"coins":
+			Game.say(["Your Coin Case holds %d coins." % int(gs.get("coins", 0))], Callable(), player)
 		"blocks":
 			Contest.open_block_case(player)
 		_:
 			Game.say([DB.item(id).desc], Callable(), player)
+
+# ---------- Itemfinder ----------
+## Points toward the nearest hidden item on screen, or digs it up if you're standing on it.
+static func itemfinder(o: OverworldScene) -> void:
+	if o == null:
+		return
+	var gs: Dictionary = Game.gs
+	var best: Variant = null
+	var best_d := 999
+	for it in o.map.get("items", []):
+		if not it.hidden or gs.flags.get(it.id, false):
+			continue
+		var d := absi(int(it.x) - o.player.x) + absi(int(it.y) - o.player.y)
+		if absi(int(it.x) - o.player.x) <= 7 and absi(int(it.y) - o.player.y) <= 5 and d < best_d:
+			best = it
+			best_d = d
+	Audio.sfx("spotted" if best != null else "bump")
+	if best == null:
+		Game.say(["... ... ...", "Nope! There's no response."])
+		return
+	if best_d == 0:
+		Game.say(["... ... ... Beep! Beep!", "There's an item buried right here!"], func() -> void: interact(o, best.x, best.y))
+		return
+	var dx := int(best.x) - o.player.x
+	var dy := int(best.y) - o.player.y
+	var dir := ""
+	if absi(dx) >= absi(dy):
+		dir = "right" if dx > 0 else "left"
+	else:
+		dir = "down" if dy > 0 else "up"
+	o.player.dir = dir
+	Game.say(["... ... ... Beep! Beep!", "There's a response! It's coming from %s!" % {"up": "the north", "down": "the south", "left": "the west", "right": "the east"}[dir]])
 
 # ---------- fishing ----------
 static func fish(o: OverworldScene, rod: String) -> void:
@@ -723,7 +810,7 @@ static func fish(o: OverworldScene, rod: String) -> void:
 # ---------- Escape Rope / Dig ----------
 static func can_escape(gs: Dictionary) -> bool:
 	var o := ow()
-	return o != null and o.map.get("cave", false) and gs.has("lastOutside")
+	return gs.get("pyramid") == null and o != null and o.map.get("cave", false) and gs.has("lastOutside")
 
 static func escape(_player: int) -> void:
 	var o := ow()
@@ -744,6 +831,11 @@ static func before_warp(o: OverworldScene, warp: Dictionary) -> bool:
 			return true
 		"safariExit":
 			gs.safari = null
+		"trickDone":
+			Trick.solved(int(warp.level))
+		"pyramidUp":
+			Frontier.pyramid_next_floor(o)
+			return true
 		"baseExit":
 			var b: Variant = gs.secretBase
 			if b != null:
@@ -873,6 +965,8 @@ static func draw_ground(o: OverworldScene, cam_x: int, cam_y: int) -> void:
 		if not spots.has(k):
 			spots.append(k)
 	for k in spots:
+		if _mirage_hidden(o, k):
+			continue
 		var e := _berry_entry(o, k)
 		var stage := berry_stage(e)
 		if stage >= 0:
