@@ -35,6 +35,9 @@ var _anim: Variant = null
 ## "intro" | "events" | "choose" | "busy" | "end"
 var _mode := "intro"
 var _intro_t := 0.0
+## The player's back sprite (assets/trainers/<p1|p2>_back.png): slides in with the intro, throws at the first send-out
+## (-1 until then), then slides away.
+var _throw_t := -1.0
 var _reqs: Array = []
 var _req_idx := 0
 ## Array of {req, action, refund}
@@ -169,6 +172,8 @@ func _next_event() -> void:
 			sl.appear = 0
 			if e.side == 0 or _setup.kind == "trainer":
 				Audio.sfx("send_out")
+			if e.side == 0 and _throw_t < 0:
+				_throw_t = 0.0
 			if e.side == 1 and not _gs.seen.has(e.mon.species):
 				_gs.seen.append(e.mon.species)
 			_anim = {"kind": "appear", "t": 0.0, "dur": 0.35, "data": sl}
@@ -801,6 +806,10 @@ static func backdrop_for(m: Dictionary) -> String:
 	return ["field", "forest", "field", "mountain", "forest", "beach", "field", "forest", "beach", "night", "field", "mountain"][(int(m.route) - 1) % 12]
 
 func _plat(cx: float, cy: float, rx: float, ry: float) -> void:
+	var tex := ArtAssets.texture("ui/platform_" + str(_setup.get("bg", "field")))
+	if tex != null:
+		_tex(tex, cx - rx, cy - ry, rx * 2, ry * 2 + 4)
+		return
 	var c: Array = PLATFORMS.get(_setup.get("bg", "field"), PLATFORMS.field)
 	_ellipse(cx, cy, rx, ry, c[0])
 	_ellipse(cx, cy + 2, rx - 6, ry - 3, c[1])
@@ -838,6 +847,7 @@ func draw() -> void:
 		var slots: Array = _slots[side]
 		for slot in slots.size():
 			_draw_sprite(slots[slot], side, slot, intro)
+	_draw_player_back(intro)
 	if _ball != null:
 		_draw_ball()
 	for side in [1, 0]:
@@ -903,6 +913,20 @@ func _draw_sprite(s: Slot, side: int, slot: int, intro: float) -> void:
 	if s.tint != null:
 		var alpha := 0.5 * sin(s.tint.t * PI)
 		_tex(CreatureArt.silhouette(spr, s.tint.color), x, y, size, size, Color(1, 1, 1, alpha))
+
+func _draw_player_back(intro: float) -> void:
+	if _throw_t > 1.2:
+		return
+	var tex := ArtAssets.texture("trainers/%s_back" % ("p2" if Game.cur == 1 else "p1"))
+	if tex == null:
+		return
+	var frame := 0
+	var x := 30.0 - intro * 140
+	if _throw_t >= 0:
+		_throw_t += 1.0 / 60
+		frame = clampi(int(_throw_t / 0.12) + 1, 1, 3)
+		x -= maxf(0, _throw_t - 0.4) * 160
+	Gfx.ci.draw_texture_rect_region(tex, Rect2(x, 48, 64, 64), Rect2(frame * 64, 0, 64, 64))
 
 ## Shows a generated effect sprite (assets/fx/<name>.png) over a creature for dur seconds; Normal's for unknown types.
 func _set_fx(sl: Slot, name: String, dur: float) -> void:

@@ -179,6 +179,10 @@ class SlotsScene extends Scene:
 		_msg = ("You won %d coins!   " % win if win > 0 else "No luck...   ") + "A: spin  B: quit"
 
 	func _draw_symbol(sym: int, cx: float, cy: float) -> void:
+		var tex := ArtAssets.texture("fx/slot_" + ["7", "bar", "orb", "leaf", "grape"][sym])
+		if tex != null:
+			Gfx.image(tex, cx - tex.get_width() / 2.0, cy - tex.get_height() / 2.0)
+			return
 		match sym:
 			0:
 				Gfx.text("7", cx, cy - 7, {"size": 14, "color": "#e03030", "align": "center"})

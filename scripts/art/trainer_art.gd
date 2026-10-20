@@ -18,7 +18,11 @@ static func draw_char(x: float, y: float, dir: String, step: int, pal: Dictionar
 	var leg_a := 1 if step == 1 else 0
 	var leg_b := 1 if step == 2 else 0
 	# shadow
-	Gfx.ellipse(x + 8, y + 15, 6, 2, Color(0, 0, 0, 0.2))
+	var sh := ArtAssets.texture("fx/shadow")
+	if sh != null:
+		Gfx.ci.draw_texture_rect(sh, Rect2(x + 2, y + 13, 13, 4), false, Color(1, 1, 1, 0.55))
+	else:
+		Gfx.ellipse(x + 8, y + 15, 6, 2, Color(0, 0, 0, 0.2))
 	# legs
 	p.call(4, 11 - leg_a, 3, 4, OL)
 	p.call(9, 11 - leg_b, 3, 4, OL)
@@ -83,7 +87,11 @@ static func draw_trainer_big(x: float, y: float, pal: Dictionary, back_view: boo
 ## Generated overworld strip: 48x20, frames down | up | left (right is left mirrored).
 ## Walking frames bob the body up a pixel and keep one foot planted.
 static func _draw_walk(tex: Texture2D, x: float, y: float, dir: String, step: int) -> void:
-	Gfx.ellipse(x + 8, y + 15, 6, 2, Color(0, 0, 0, 0.2))
+	var sh := ArtAssets.texture("fx/shadow")
+	if sh != null:
+		Gfx.ci.draw_texture_rect(sh, Rect2(x + 2, y + 13, 13, 4), false, Color(1, 1, 1, 0.55))
+	else:
+		Gfx.ellipse(x + 8, y + 15, 6, 2, Color(0, 0, 0, 0.2))
 	if tex.get_height() > 20:
 		# 3x3 sheet (16x24 walking, 24x24 riding): rows face down, up, left (right mirrors left); columns stand, step 1, step 2
 		var fw := tex.get_width() / 3

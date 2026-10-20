@@ -27,7 +27,11 @@ static func hatch(gs: Dictionary, m: Dictionary) -> void:
 		if not list.has(m.species):
 			list.append(m.species)
 	Audio.sfx("evolve_start")
-	Game.say(["Oh?", "... ... ...", "%s hatched from the Egg!" % Creatures.display_name(m)], func() -> void: Audio.sfx("level_up"))
+	var scene := HatchScene.new(m)
+	Game.push(scene)
+	Game.say(["Oh?", "... ... ...", "%s hatched from the Egg!" % Creatures.display_name(m)], func() -> void:
+		Game.pop(scene)
+		Audio.sfx("level_up"))
 
 ## How close an egg is to hatching, as the summary screen says it.
 static func hatch_text(m: Dictionary) -> String:

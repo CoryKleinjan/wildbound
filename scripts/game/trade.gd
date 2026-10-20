@@ -27,7 +27,10 @@ static func npc_trade(npc: Dictionary) -> void:
 				if not list.has(give):
 					list.append(give)
 			Audio.sfx("item")
+			var scene := TradeScene.new(m.species, give)
+			Game.push(scene)
 			Game.say(["%s traded %s for %s!" % [gs.players[0].name, Creatures.display_name(m), npc.nickname], "Take good care of it!"], func() -> void:
+				Game.pop(scene)
 				_trade_evolve(got, 0))))
 
 static func _trade_evolve(m: Dictionary, player: int) -> void:

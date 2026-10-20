@@ -2,6 +2,7 @@
 import base64
 import json
 import os
+import threading
 import time
 from pathlib import Path
 
@@ -31,11 +32,86 @@ def misc() -> dict:
 	return json.loads((ROOT / "data" / "misc.json").read_text())
 
 
+# ---------- spending guard ----------
+# The key is prepaid and its balance can't be read through the API, so every call is costed here (estimated from the
+# response's usage numbers, rounded up) and calls stop before the limit in raw/budget.json: {"limit": dollars}.
+# The running total is in raw/spend.json. Set the limit to the account balance minus a safety margin.
+SPEND = RAW / "spend.json"
+BUDGET = RAW / "budget.json"
+# Dollars per million tokens (input, output) and per output image; deliberately on the high side.
+PRICES = {
+	"gemini-3-pro-image": (2.0, 12.0, 0.14), "nano-banana-pro-preview": (2.0, 12.0, 0.14),
+	"gemini-2.5-flash-image": (0.3, 2.5, 0.04), "gemini-3.1-pro-preview": (2.5, 15.0, 0.0),
+	"gemini-3.5-flash": (0.5, 3.0, 0.0), "lyria": (0.0, 0.0, 0.08),
+}
+# The most one call may cost, reserved before it is sent so parallel calls can't overshoot together.
+RESERVE = 0.2
+_lock = threading.Lock()
+_pending = 0.0
+
+
+class BudgetExceeded(RuntimeError):
+	pass
+
+
+def spent() -> float:
+	return json.loads(SPEND.read_text()).get("total", 0.0) if SPEND.exists() else 0.0
+
+
+def limit() -> float:
+	return float(json.loads(BUDGET.read_text())["limit"]) if BUDGET.exists() else 0.0
+
+
+def _cost(model: str, resp: dict) -> float:
+	pin, pout, pimg = PRICES.get(model, PRICES["lyria"] if "lyria" in model else (2.5, 15.0, 0.14))
+	u = resp.get("usageMetadata", {})
+	images = sum(1 for c in resp.get("candidates", []) for p in c.get("content", {}).get("parts", []) if "inlineData" in p or "inline_data" in p)
+	return u.get("promptTokenCount", 0) * pin / 1e6 + u.get("candidatesTokenCount", 0) * pout / 1e6 + images * pimg
+
+
+def _reserve() -> None:
+	global _pending
+	with _lock:
+		if spent() + _pending + RESERVE > limit():
+			raise BudgetExceeded(f"stopping: ${spent():.2f} spent of the ${limit():.2f} limit in {BUDGET}")
+		_pending += RESERVE
+
+
+def _record(model: str, resp: dict | None) -> None:
+	global _pending
+	with _lock:
+		_pending -= RESERVE
+		if resp is None:
+			return
+		data = json.loads(SPEND.read_text()) if SPEND.exists() else {"total": 0.0, "by_model": {}}
+		c = _cost(model, resp)
+		data["total"] = data.get("total", 0.0) + c
+		data["by_model"][model] = data["by_model"].get(model, 0.0) + c
+		SPEND.parent.mkdir(parents=True, exist_ok=True)
+		SPEND.write_text(json.dumps(data, indent=1))
+
+
 def _post(url: str, body: dict, tries: int = 6) -> dict:
+	model = url.split("/models/")[-1].split(":")[0] if "/models/" in url else ""
+	if model:
+		_reserve()
+		try:
+			resp = _post_raw(url, body, tries)
+		except Exception:
+			_record(model, None)
+			raise
+		_record(model, resp)
+		return resp
+	return _post_raw(url, body, tries)
+
+
+def _post_raw(url: str, body: dict, tries: int) -> dict:
 	for i in range(tries):
 		r = requests.post(url, params={"key": key()}, json=body, timeout=300)
 		if r.status_code == 200:
 			return r.json()
+		if r.status_code == 402:
+			raise BudgetExceeded("the API key is out of prepaid credits (402)")
 		if r.status_code in (429, 500, 502, 503, 504) and i < tries - 1:
 			time.sleep(2 ** (i + 1))
 			continue

@@ -15,6 +15,13 @@ static func draw_mini(m: Dictionary, x: float, y: float, size: float = 24, bob: 
 	if m.get("egg", false):
 		draw_egg(x + size / 2, y + size / 2 + bob, size / 24.0)
 		return
+	# The two-frame party icon (assets/creatures/icons/<id>.png, from tools/artgen/partyicons.py); a bob shows frame 2.
+	var icon := ArtAssets.texture("creatures/icons/" + str(m.species))
+	if icon != null and not Creatures.is_shiny(m):
+		var k := size / 22.0
+		var c := 32.0 * k
+		Gfx.ci.draw_texture_rect_region(icon, Rect2(x + size / 2 - c / 2, y + size - c + 2 * k, c, c), Rect2(32 if bob > 0 else 0, 0, 32, 32))
+		return
 	var spr: Texture2D = CreatureArt.creature_sprite(m.species, Creatures.is_shiny(m))
 	Gfx.image(spr, x, y + bob, {"scale": size / spr.get_width()})
 
