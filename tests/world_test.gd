@@ -4,6 +4,8 @@ extends SceneTree
 
 const DX := {"up": Vector2i(0, -1), "down": Vector2i(0, 1), "left": Vector2i(-1, 0), "right": Vector2i(1, 0)}
 const OPP := {"up": "down", "down": "up", "left": "right", "right": "left"}
+## Tiles crossed with field moves (see Field): water, deep water, waterfalls, cut trees, rocks, boulders.
+const FIELD := "~DWTRO"
 
 func _initialize() -> void:
 	await process_frame
@@ -21,8 +23,10 @@ func _initialize() -> void:
 			# Story bosses that leave once beaten only block until then.
 			if not a.get("leaveAfter", false):
 				blocked["%d,%d" % [a.x, a.y]] = true
+		# Field moves (Surf, Cut, Rock Smash, Strength, Waterfall) open up their tiles.
 		var ok := func(x: int, y: int) -> bool:
-			return Maps.WALKABLE.has(Maps.tile_at(m, x, y)) and not blocked.has("%d,%d" % [x, y])
+			var t: String = Maps.tile_at(m, x, y)
+			return (Maps.WALKABLE.has(t) or FIELD.contains(t)) and not blocked.has("%d,%d" % [x, y])
 		# Entry points: each connection edge gap and each warp landing.
 		var starts: Array = []
 		for side: String in m.connections.keys():
@@ -45,10 +49,10 @@ func _initialize() -> void:
 				errs.append("%s: %s connection not mirrored" % [m.id, side])
 		for other: Dictionary in maps.values():
 			for wp in other.get("warps", {}).values():
-				if wp.map == m.id:
+				if wp.map == m.id and wp.get("script", "") != "baseExit":
 					starts.append([wp.x, wp.y, "warp"])
 		if starts.is_empty():
-			if m.id != "fernhollow":
+			if m.id != "fernhollow" and not m.get("secretBase", false) and not m.get("underwater", false):
 				errs.append("%s: unreachable (no entries)" % m.id)
 			continue
 		# BFS from the first entry; ledges can be jumped downwards.
@@ -93,7 +97,7 @@ func _initialize() -> void:
 					talk = true
 			if not talk:
 				errs.append("%s: npc at %d,%d can't be talked to" % [m.id, n.x, n.y])
-		if m.get("route") and m.get("encounters", []).is_empty():
+		if m.get("route") and m.get("encounters", []).is_empty() and m.get("waterEncounters", []).is_empty():
 			errs.append("%s: no wild encounters" % m.id)
 		for e in m.get("encounters", []):
 			if not db.SPECIES.has(e.species):
@@ -132,6 +136,8 @@ func _initialize() -> void:
 			var wp: Dictionary = m.warps[k]
 			if not maps.has(wp.map):
 				errs.append("%s: warp %s to missing %s" % [m.id, k, wp.map])
+			elif wp.get("script", "") == "baseExit":
+				continue
 			elif not Maps.WALKABLE.has(Maps.tile_at(maps[wp.map], wp.x, wp.y)):
 				errs.append("%s: warp %s lands on a wall in %s" % [m.id, k, wp.map])
 	# Whole-world reachability from Fernhollow through connections and warps (doors lead back outside).
@@ -144,6 +150,11 @@ func _initialize() -> void:
 			nexts.append(c.map)
 		for wp in maps[id].get("warps", {}).values():
 			nexts.append(wp.map)
+		# Dive, and the Secret Base behind a secret-spot tree.
+		if maps[id].has("diveTo"):
+			nexts.append(maps[id].diveTo)
+		if not maps[id].get("secretSpots", []).is_empty():
+			nexts.append("secretbase")
 		for n in nexts:
 			if maps.has(n) and not reach.has(n):
 				reach[n] = true

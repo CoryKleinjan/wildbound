@@ -49,6 +49,8 @@ var _flash_t := 0.0
 ## Story hooks run on the first update after a map loads (dialogs pushed earlier would be lost by Game.replace).
 var _map_fresh := false
 var _bump_t := 0.0
+## This visit's field state (cut trees, pushed boulders, Flash, Strength): see Field.
+var field: Dictionary = Field.fresh_state()
 
 func _init() -> void:
 	var gs: Dictionary = Game.gs
@@ -92,6 +94,7 @@ func load_map(id: String, x: int, y: int, dir: String) -> void:
 		npcs.append(a)
 	_banner = {"text": map.name, "t": 0.0 if map.get("interior", false) else 2.2}
 	_map_fresh = true
+	Field.on_map_loaded(self)
 	Audio.play_music(map_track(map))
 
 ## Music for a map: gym, league, town or route (rooms inside buildings name theirs).
@@ -136,13 +139,13 @@ func _npc_at(x: int, y: int, except: Actor = null) -> Actor:
 	return null
 
 func _walkable(x: int, y: int, ignore_actors := false) -> bool:
-	var t := Maps.tile_at(map, x, y)
+	var t := Field.tile(self, x, y)
 	var outside := y < 0 or x < 0 or y >= _map_h() or x >= _map_w()
 	if outside:
 		return false
-	if not Maps.WALKABLE.has(t):
+	if not Maps.WALKABLE.has(t) and not Field.passable(self, t):
 		return false
-	if not ignore_actors and _npc_at(x, y) != null:
+	if not ignore_actors and (_npc_at(x, y) != null or Field.blocked(self, x, y)):
 		return false
 	return true
 
@@ -212,7 +215,7 @@ func update(dt: float) -> void:
 	player.dir = held
 	if _hold_time < 0.07:
 		return
-	_try_move(held, RUN if p1.is_held("b") else WALK)
+	_try_move(held, Field.step_time(self, RUN if p1.is_held("b") else WALK))
 
 func _bump() -> void:
 	if _bump_t <= 0:
@@ -244,7 +247,8 @@ func _try_move(dir: String, dur: float) -> void:
 		jump = true
 		Audio.sfx("ledge")
 	elif not _walkable(tx, ty) and not _can_leave(tx, ty, dir):
-		_bump()
+		if not Field.on_bump(self, dir, tx, ty):
+			_bump()
 		return
 	if Story.intercept_move(self, dir, tx, ty):
 		_hold_time = 0
@@ -313,6 +317,8 @@ func _on_step() -> void:
 		return
 	var t := Maps.tile_at(map, p.x, p.y)
 	var warp: Variant = map.get("warps", {}).get("%d,%d" % [p.x, p.y])
+	if warp != null and Field.before_warp(self, warp):
+		return
 	if warp != null:
 		Audio.sfx("door")
 		Game.transition(func() -> void:
@@ -321,12 +327,11 @@ func _on_step() -> void:
 			gs.y = warp.y
 			gs.dir = warp.dir)
 		return
+	if Field.on_step(self):
+		return
 	if _check_trainers():
 		return
-	if t == "," and map.has("encounters"):
-		var rate: int = map.get("encounterRate", 20)
-		if Rng.global_rng.int_below(2880) < rate * 16:
-			_start_wild()
+	Field.encounter(self, t)
 
 # ---------- buildings ----------
 ## What looking at a piece of furniture says (A while facing it).
@@ -342,6 +347,9 @@ const DRINKS := ["freshWater", "sodaPop", "lemonade"]
 ## Runs a building NPC's job after (or instead of) their lines: the Rest Lodge nurse, the Mart clerk,
 ## or a resident who lets your creatures rest.
 func _npc_action(npc: Dictionary, text: Array) -> void:
+	if npc.has("service"):
+		Services.run(self, npc, text)
+		return
 	match npc.get("action", ""):
 		"lodge":
 			Game.say(["Welcome to the Rest Lodge!"], _lodge_menu)
@@ -390,6 +398,8 @@ func _lodge_menu(heal := true) -> void:
 
 # ---------- interaction ----------
 func _interact() -> void:
+	if Field.interact_here(self):
+		return
 	var p := player
 	var d: Vector2i = DX[p.dir]
 	var tx := p.x + d.x
@@ -410,6 +420,8 @@ func _interact() -> void:
 			return
 		if n.trainer != null:
 			if gs.flags.get(n.trainer.id, false):
+				if Field.offer_rematch(self, n):
+					return
 				Game.say([n.trainer.after])
 				return
 			_trainer_battle(n)
@@ -417,6 +429,8 @@ func _interact() -> void:
 	var sign: Variant = map.get("signs", {}).get("%d,%d" % [tx, ty])
 	if sign != null:
 		Game.say(sign)
+		return
+	if Field.interact(self, tx, ty):
 		return
 	var tile := Maps.tile_at(map, tx, ty)
 	if tile == "V":
@@ -431,9 +445,15 @@ func _open_start_menu(pl: int) -> void:
 	var ref: Array = []
 	var opts := {
 		"x": 158, "y": 4, "w": 78, "player": pl,
-		"items": ["DEX", "PARTY", "BAG", "SAVE", "CO-OP", "CONTROLS", "EXIT"],
+		"items": ["DEX", "PARTY", "BAG", "SAVE", "CO-OP", "OPTIONS", "CONTROLS", "EXIT"],
 		"on_cancel": func() -> void: Game.pop(ref[0]),
 		"on_select": func(i: int) -> void:
+			# OPTIONS sits between CO-OP and CONTROLS.
+			if i == 5:
+				Options.open_menu(pl, func() -> void: pass)
+				return
+			if i > 5:
+				i -= 1
 			if i == 0:
 				var dref: Array = []
 				var d := DexScreen.new(pl, func() -> void: Game.pop(dref[0]))
@@ -452,7 +472,7 @@ func _open_start_menu(pl: int) -> void:
 						Audio.sfx("save")
 						Game.say(["Your progress was saved!" if GameState.save(gs) else "Saving failed (the save file could not be written)."], Callable(), pl), pl)
 			if i == 4:
-				Game.say(OverworldScene.coop_text(), Callable(), pl)
+				Game.say(OverworldScene.coop_text(), func() -> void: Trade.offer_coop(self), pl)
 			if i == 5:
 				Game.say(OverworldScene.controls_text(false), Callable(), pl)
 			if i == 6:
@@ -512,6 +532,7 @@ func _trainer_battle(n: Actor) -> void:
 			party.append(Creatures.create_creature(e[0], e[1], {"owner": 9}))
 		_flash_then(func() -> void:
 			var setup := {"kind": "trainer", "double": t.get("double", false) or gs.mode == "coop", "trainer": t, "trainerParty": party}
+			Field.prepare_battle(self, setup)
 			# The champion battle leads into the ending, so it stays one player's.
 			if not t.get("champion", false) and JointBattle.partner_ready(self):
 				JointBattle.start(setup, t)
@@ -530,8 +551,11 @@ func is_busy() -> bool:
 	return _script.is_valid()
 
 # ---------- wild ----------
-func _start_wild() -> void:
-	var table: Array = map.encounters
+## table: the encounter list to roll on (the map's grass list by default). extra: more battle setup
+## (kind "safari", location...). Returns false when Repel kept the creature away.
+func _start_wild(table: Array = [], extra: Dictionary = {}) -> bool:
+	if table.is_empty():
+		table = map.encounters
 	var pick := func() -> Dictionary:
 		var total := 0
 		for e in table:
@@ -545,17 +569,23 @@ func _start_wild() -> void:
 				break
 		return Creatures.create_creature(found.species, found.min + Rng.global_rng.int_below(found.max - found.min + 1), {"owner": 9})
 	# With the other player on screen, two wild creatures appear and both players fight.
-	var count := 2 if gs.mode == "coop" or JointBattle.partner_ready(self) else 1
+	var solo: bool = extra.get("kind", "wild") == "safari"
+	var count := 2 if not solo and (gs.mode == "coop" or JointBattle.partner_ready(self)) else 1
 	var wild: Array = []
 	for i in count:
 		wild.append(pick.call())
+	if not extra.get("fishing", false) and Field.repelled(wild[0].level):
+		return false
 	Audio.sfx("encounter")
+	var setup := {"kind": "wild", "double": count > 1, "wild": wild}
+	setup.merge(extra, true)
+	Field.prepare_battle(self, setup)
 	_flash_then(func() -> void:
-		var setup := {"kind": "wild", "double": count > 1, "wild": wild}
 		if count > 1 and JointBattle.partner_ready(self):
 			JointBattle.start(setup, null)
 		else:
 			_run_battle(setup))
+	return true
 
 func _flash_then(cb: Callable) -> void:
 	var st := {"t": 0.0}
@@ -570,6 +600,7 @@ func _flash_then(cb: Callable) -> void:
 func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 	var g := gs
 	var ref: Array = []
+	Field.prepare_battle(self, setup)
 	setup.onEnd = func(result: String, battle) -> void:
 		Game.transition(func() -> void:
 			var scene = ref[0]
@@ -588,6 +619,7 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 				var where := GameState.receive_creature(g, c.mon, c.player)
 				if where == "box":
 					msgs.append("%s was sent to storage (party full: %d max)." % [Creatures.display_name(c.mon), GameState.party_cap(g)])
+			Field.after_battle(self, setup, result, battle, trainer, msgs)
 			if result == "lose":
 				for m in GameState.all_party_mons(g):
 					Creatures.heal_fully(m)
@@ -610,6 +642,7 @@ func _run_battle(setup: Dictionary, trainer: Variant = null) -> void:
 					Audio.sfx("badge")
 					msgs.append("You received the %s! (%d/8 badges)" % [gym.badgeName, OverworldScene.badge_count(g)])
 				champion = trainer.get("champion", false)
+			msgs.append_array(setup.get("lateMsgs", []))
 			var evolve_queue: Array = []
 			for uid in scene.leveled:
 				for m in GameState.all_party_mons(g):
@@ -659,6 +692,7 @@ func draw() -> void:
 	var indoor: bool = map.get("indoor", false)
 	var style: Dictionary = map.get("style", {})
 	var gen_trees := Tiles.tree_sprite(0, 0) != null and not style.has("treeShape")
+	var cave: bool = map.get("cave", false)
 	var h := _map_h()
 	var w := _map_w()
 	Gfx.rect(0, 0, Gfx.W, Gfx.H, "#000000")
@@ -666,16 +700,25 @@ func draw() -> void:
 		for tx in range(x0, x0 + Gfx.W / 16 + 3):
 			if indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w):
 				continue
-			var ch := Maps.tile_at(map, tx, ty)
-			# Generated trees are drawn as sprites below, so their tile is just (town-styled) grass.
-			var tch := "." if ch == "#" and gen_trees else ch
-			var tex: Texture2D = TownStyle.apply(Tiles.map_tile(map, tx, ty, anim, theme), tch, style)
+			var raw := Maps.tile_at(map, tx, ty)
+			var ch := Field.tile(self, tx, ty)
+			if ch == "#" and cave:
+				ch = "x"
+			var tex: Texture2D
+			if FieldTiles.handles(ch):
+				tex = FieldTiles.texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), theme)
+			elif ch == raw:
+				# Generated trees are drawn as sprites below, so their tile is just (town-styled) grass.
+				var tch := "." if ch == "#" and gen_trees else ch
+				tex = TownStyle.apply(Tiles.map_tile(map, tx, ty, anim, theme), tch, style)
+			else:
+				tex = TownStyle.apply(Tiles.tile_texture(ch, tx, ty, anim, Maps.tile_at(map, tx, ty - 1), Maps.tile_at(map, tx, ty + 1), theme), ch, style)
 			Gfx.image(tex, tx * 16 - cam_x, ty * 16 - cam_y)
 	# Generated trees: one 32x32 sprite per '#' tile, row by row so lower trees overlap the ones behind.
-	if gen_trees:
+	if gen_trees and not cave:
 		for ty in range(y0, y0 + Gfx.H / 16 + 4):
 			for tx in range(x0 - 1, x0 + Gfx.W / 16 + 4):
-				if Maps.tile_at(map, tx, ty) == "#" and not (indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w)):
+				if Field.tile(self, tx, ty) == "#" and not (indoor and (tx < 0 or ty < 0 or ty >= h or tx >= w)):
 					Gfx.image(TownStyle.apply(Tiles.tree_sprite(tx, ty), "#", style), tx * 16 - cam_x - 8, ty * 16 - cam_y - 16)
 	# Generated whole-building sprites (when present) over their footprint, doors on top.
 	for b in Tiles.buildings(map):
@@ -687,6 +730,7 @@ func draw() -> void:
 		Gfx.ci.draw_texture_rect(btex, Rect2(r.position.x * 16 - cam_x, r.position.y * 16 - cam_y, r.size.x * 16, r.size.y * 16), false)
 		for d in b.doors:
 			Gfx.image(TownStyle.apply(Tiles.tile_texture(d[2], d[0], d[1], anim), d[2], style), d[0] * 16 - cam_x, d[1] * 16 - cam_y)
+	Field.draw_ground(self, cam_x, cam_y)
 	var actors: Array[Actor] = []
 	actors.append_array(npcs)
 	actors.append(player)
@@ -715,6 +759,7 @@ func draw() -> void:
 			Gfx.rect(sx + 5, sy - 13, 7, 9, "#f8f8f8")
 			Gfx.rect(sx + 8, sy - 12, 2, 5, "#e03030")
 			Gfx.rect(sx + 8, sy - 6, 2, 1, "#e03030")
+	Field.draw_overlay(self, cam_x, cam_y)
 	if _banner.t > 0:
 		var slide := minf(1.0, minf(_banner.t * 3, (2.2 - _banner.t) * 4))
 		Gfx.panel(4, -28 + 32 * slide, 110, 24)

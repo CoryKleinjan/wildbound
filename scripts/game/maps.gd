@@ -7,10 +7,13 @@ class_name Maps
 # k/n roof (gym/league)   j/u door (gym/league)   indoor: _ floor  | wall  o statue  e exit mat
 # c counter (talk across it)  t table  K bookshelf  B bed  P potted plant  q mart shelf  M storage machine
 # X stairs  V drink machine   L street lamp
+# Field features (see FieldTiles): T cut tree  R cracked rock  O boulder  W waterfall  D deep water  s soft soil
+# g cave floor  x cave wall  y cave mouth/ladder  a sand  i roof  d door  z secret-base tree  Q base PC
 
 const WALKABLE := {
 	".": true, ",": true, "=": true, "F": true, "h": true, "l": true, "m": true,
 	":": true, "j": true, "u": true, "_": true, "e": true, "X": true,
+	"s": true, "g": true, "y": true, "a": true, "d": true,
 }
 
 static func tile_at(m: Dictionary, x: int, y: int) -> String:
