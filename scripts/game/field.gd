@@ -37,7 +37,14 @@ static func tile(o: OverworldScene, x: int, y: int) -> String:
 	var mg: Variant = o.map.get("mirage")
 	if mg != null and _in_mirage(mg, x, y):
 		return (mg.tiles[y - int(mg.y)] as String)[x - int(mg.x)] if f.get("mirage", false) else "~"
-	return Maps.tile_at(o.map, x, y)
+	var t := Maps.tile_at(o.map, x, y)
+	# Islands are surrounded by sea rather than trees.
+	if o.map.has("outside") and (y < 0 or x < 0 or y >= o.map.tiles.size() or x >= (o.map.tiles[0] as String).length()):
+		return o.map.outside
+	# Shoal Cave's tide pools: water at high tide, cave floor at low tide.
+	if t == "J":
+		return "g" if f.get("low", false) else "~"
+	return t
 
 ## Floor left behind by a cut tree, a smashed rock or a pushed boulder.
 static func _floor(o: OverworldScene) -> String:
@@ -90,7 +97,7 @@ static func blocked(o: OverworldScene, x: int, y: int) -> bool:
 		for d in gs.secretBase.decor:
 			if d.x == x and d.y == y and DB.DECORATIONS[d.id].get("solid", false):
 				return true
-	return false
+	return o.map.has("shoal") and Shoal.blocked(o, x, y) or Legends.blocked(o, x, y)
 
 ## Legendaries standing on this map that haven't been caught or beaten.
 static func _statics(o: OverworldScene) -> Array:
@@ -100,6 +107,8 @@ static func _statics(o: OverworldScene) -> Array:
 		if gs.flags.get(s.id, false):
 			continue
 		if s.has("requires") and not gs.flags.get(s.requires, false):
+			continue
+		if not Legends.eon_here(gs, s):
 			continue
 		out.append(s)
 	return out
@@ -155,6 +164,7 @@ static func on_map_loaded(o: OverworldScene) -> void:
 		o.field.mirage = mirage_visible(gs)
 	if o.map.get("trickHouse", false):
 		Trick.on_enter(o)
+	Shoal.on_map_loaded(o)
 	_move_roamers(gs)
 
 # ---------- bumping into things ----------
@@ -220,6 +230,16 @@ static func interact(o: OverworldScene, tx: int, ty: int) -> bool:
 		return true
 	if tile(o, tx, ty) == "Y":
 		GameCorner.slots(o)
+		return true
+	if o.map.has("shoal") and Shoal.interact(o, tx, ty):
+		return true
+	if Legends.interact(o, tx, ty) or Legends.triangle_interact(o, tx, ty):
+		return true
+	if tile(o, tx, ty) == "N":
+		Tv.watch()
+		return true
+	if tile(o, tx, ty) == "G":
+		Museum.view(o, tx)
 		return true
 	var t := tile(o, tx, ty)
 	match t:
@@ -377,6 +397,8 @@ static func on_step(o: OverworldScene) -> bool:
 			took = true
 	DayCare.on_step(gs)
 	Pokerus.on_step(gs)
+	TownLife.on_step(o, here)
+	Legends.on_step(o)
 	if Eggs.on_step(gs):
 		took = true
 	if not took and MatchCall.on_step(gs):
@@ -400,7 +422,7 @@ static func encounter(o: OverworldScene, t: String) -> bool:
 		rate = 4
 		extra.location = "water"
 	elif t == "," and m.has("encounters"):
-		table = m.encounters
+		table = TownLife.outbreak_table(o, m.encounters)
 	elif m.get("cave", false) and m.has("encounters") and (t == "g" or t == "D"):
 		table = m.encounters
 		extra.location = "underwater" if m.get("underwater", false) else "cave"
@@ -416,6 +438,7 @@ static func encounter(o: OverworldScene, t: String) -> bool:
 			rate *= 2
 		if lead_mon.get("item", null) == "cleanseTag":
 			rate = rate * 2 / 3
+	rate = TownLife.flute_rate(rate)
 	if Rng.global_rng.int_below(2880) >= rate * 16:
 		return false
 	# A roamer on this route shows up in a quarter of the encounters.
@@ -469,6 +492,9 @@ static func after_battle(o: OverworldScene, setup: Dictionary, result: String, b
 	if setup.has("static"):
 		if caught_it or result == "win":
 			gs.flags[setup.static.id] = true
+			# The Eon creature on Southern Island stops roaming once it's caught or beaten there.
+			if setup.static.get("eon", false):
+				gs.roamers.erase(setup.static.species)
 	if setup.has("roamer"):
 		var sp: String = setup.roamer
 		if caught_it or result == "win":
@@ -752,6 +778,11 @@ static func use_key_item(player: int, id: String, close: Callable) -> void:
 			Game.say(["Your Coin Case holds %d coins." % int(gs.get("coins", 0))], Callable(), player)
 		"blocks":
 			Contest.open_block_case(player)
+		"ash":
+			Game.say(["The Soot Sack holds %d ash." % int(gs.ash)], Callable(), player)
+		"flute":
+			close.call()
+			TownLife.play_flute(id)
 		_:
 			Game.say([DB.item(id).desc], Callable(), player)
 
@@ -796,7 +827,7 @@ static func fish(o: OverworldScene, rod: String) -> void:
 	if not (t == "~" or t == "D") and not surfing(o):
 		Game.say(["You can't fish here. Face the water first."])
 		return
-	var table: Array = o.map.get("fishing", {}).get(rod, [])
+	var table: Array = TownLife.fishing_table(o, o.player.x + d.x, o.player.y + d.y, o.map.get("fishing", {}).get(rod, []))
 	Game.say(["... ... ..."], func() -> void:
 		# Better rods get bites more often.
 		var bite: int = {"old": 70, "good": 80, "super": 90}.get(rod, 70)
@@ -976,6 +1007,9 @@ static func draw_ground(o: OverworldScene, cam_x: int, cam_y: int) -> void:
 		var spr: Texture2D = CreatureArt.creature_sprite(s.species)
 		var bob := sin(Game.time * 2) * 1.5
 		Gfx.image(spr, s.x * 16 - cam_x - 8, s.y * 16 - cam_y - 16 + bob, {"scale": 32.0 / spr.get_width()})
+	if o.map.has("shoal"):
+		Shoal.draw(o, cam_x, cam_y)
+	Legends.draw(o, cam_x, cam_y)
 	if o.map.get("secretBase", false) and gs.secretBase != null:
 		for d in gs.secretBase.decor:
 			var dd: Dictionary = DB.DECORATIONS[d.id]
