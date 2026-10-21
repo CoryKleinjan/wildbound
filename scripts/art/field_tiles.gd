@@ -74,11 +74,26 @@ static func texture(ch: String, x: int, y: int, frame: int, above: String, theme
 				p.call(2 + (x + y) % 2 * 6, 6, 5, 3, "#4a3826")
 				p.call(9 - (x + y) % 2 * 6, 11, 4, 2, "#4a3826"))
 		"y":
+			if above == "x" or above == "#":
+				# A hole in the floor by the back wall with a ladder down, as in Emerald's caves.
+				return Tiles._make("fx_ladder", func(p: Callable):
+					p.call(0, 0, 16, 16, "#a88c68")
+					p.call(1, 2, 14, 13, "#3a2c20")
+					p.call(2, 3, 12, 11, "#100808")
+					for r in [4, 7, 10, 13]:
+						p.call(4, r, 8, 1, "#c08a50")
+					p.call(4, 3, 1, 12, "#8a5a30")
+					p.call(11, 3, 1, 12, "#8a5a30"))
+			# A way out through the wall: the floor runs on into the dark between two rock edges.
 			return Tiles._make("fx_mouth", func(p: Callable):
 				p.call(0, 0, 16, 16, "#5a4632")
-				p.call(2, 3, 12, 13, "#181010")
-				p.call(4, 1, 8, 4, "#181010")
-				p.call(3, 13, 10, 3, "#302018"))
+				p.call(0, 0, 16, 2, "#6e5840")
+				var shades := ["#a88c68", "#a88c68", "#8c7254", "#6e5840", "#4e3c2a", "#342618", "#1e140c", "#100808"]
+				for i in shades.size():
+					p.call(2, i * 2, 12, 2, shades[i])
+				p.call(1, 0, 1, 16, "#3a2c20")
+				p.call(14, 0, 1, 16, "#3a2c20")
+				p.call(2, 0, 1, 4, "#c0a682"))
 		"a":
 			return Tiles._make("fx_sand%d" % v, func(p: Callable):
 				p.call(0, 0, 16, 16, "#e8d498")
@@ -212,6 +227,60 @@ static func cave_entrance() -> Texture2D:
 	rows.call(13, arch.call(-1, 13), "#3a2c20")
 	rows.call(14, arch.call(0, 14), "#181010")
 	img.fill_rect(Rect2i(11, 30, 10, 2), Color("#302018"))
+	var tex := ImageTexture.create_from_image(img)
+	Tiles._cache[key] = tex
+	return tex
+
+## A carved stone tablet with raised Braille dots, 32x32, drawn over a painted cave's Braille wall (Z) so it isn't
+## mistaken for a doorway. Its bottom edge sits on the wall tile and it overhangs half a tile each side and one above.
+static func braille_tablet() -> Texture2D:
+	var key := "fx_braille_tablet"
+	if Tiles._cache.has(key):
+		return Tiles._cache[key]
+	var img := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	img.fill_rect(Rect2i(3, 2, 26, 29), Color("#3a2c20"))
+	img.fill_rect(Rect2i(2, 4, 28, 26), Color("#3a2c20"))
+	img.fill_rect(Rect2i(4, 3, 24, 27), Color("#8a7a64"))
+	img.fill_rect(Rect2i(3, 5, 26, 23), Color("#8a7a64"))
+	img.fill_rect(Rect2i(5, 4, 22, 2), Color("#a8987e"))
+	img.fill_rect(Rect2i(3, 27, 26, 3), Color("#6a5a48"))
+	# Three lines of Braille cells: two columns by three rows of raised dots each.
+	for line in 3:
+		for c in 4:
+			for d in 6:
+				if (line * 7 + c * 5 + d * 3) % 4 == 0:
+					continue
+				var dx := 6 + c * 6 + (d % 2) * 2
+				var dy := 8 + line * 6 + (d / 2) * 2
+				if dy < 26:
+					img.fill_rect(Rect2i(dx, dy, 1, 1), Color("#e8dcc0"))
+					img.fill_rect(Rect2i(dx, dy + 1, 1, 1), Color("#4a3a2a"))
+	var tex := ImageTexture.create_from_image(img)
+	Tiles._cache[key] = tex
+	return tex
+
+## The rock either side of a cave's bottom exit gap, in the painting's wall colors [dark, mid, light]: a strip of rock
+## face along the gap that hides the painted arch frame, transparent beyond it so the painted wall shows through.
+## side is the side of the gap the rock is on ("left" rock has the gap on its right).
+static func gap_edge(side: String, colors: Array, y: int) -> Texture2D:
+	var key := "fx_gap_%s_%s_%d" % [side, "".join(colors), y % 2]
+	if Tiles._cache.has(key):
+		return Tiles._cache[key]
+	var dark := Color(colors[0])
+	var mid := Color(colors[1])
+	var light := Color(colors[2])
+	var img := Image.create(16, 16, false, Image.FORMAT_RGBA8)
+	var at := func(i: int) -> int: return 15 - i if side == "left" else i
+	# From the gap outward: outline, lit lip, rock face, then a ragged fade into the painting.
+	for r in 16:
+		var reach: int = 8 + (r * 7 + y * 3) % 3
+		for i in reach:
+			var c: Color = dark if i < 1 else (light if i < 3 else mid)
+			if i >= 3 and (r + y * 2) % 5 == 0:
+				c = mid.darkened(0.22)
+			if i == reach - 1:
+				c = dark
+			img.set_pixel(at.call(i), r, c)
 	var tex := ImageTexture.create_from_image(img)
 	Tiles._cache[key] = tex
 	return tex

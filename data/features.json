@@ -27728,7 +27728,24 @@
      "max": 36,
      "weight": 10
     }
-   ]
+   ],
+   "exitGap": {
+    "floor": {
+     "7,10": [
+      7,
+      9
+     ]
+    },
+    "edges": {
+     "6,10": "left",
+     "8,10": "right"
+    },
+    "colors": [
+     "#543939",
+     "#6c5f56",
+     "#bd9c76"
+    ]
+   }
   },
   "skyspire": {
    "id": "skyspire",
@@ -27905,7 +27922,32 @@
      "weight": 10
     }
    ],
-   "items": []
+   "items": [],
+   "exitGap": {
+    "floor": {
+     "13,15": [
+      13,
+      14
+     ],
+     "13,16": [
+      13,
+      14
+     ],
+     "13,17": [
+      13,
+      14
+     ]
+    },
+    "edges": {
+     "12,17": "left",
+     "14,17": "right"
+    },
+    "colors": [
+     "#322231",
+     "#7c6055",
+     "#a38062"
+    ]
+   }
   },
   "granitecave_b1": {
    "id": "granitecave_b1",
@@ -28014,7 +28056,30 @@
      "requires": "champion",
      "text": "The ground glows red-hot..."
     }
-   ]
+   ],
+   "exitGap": {
+    "floor": {
+     "7,9": [
+      7,
+      7
+     ],
+     "7,10": [
+      7,
+      7
+     ]
+    },
+    "edges": {
+     "6,9": "left",
+     "6,10": "left",
+     "8,9": "right",
+     "8,10": "right"
+    },
+    "colors": [
+     "#372525",
+     "#5a432f",
+     "#9d7b57"
+    ]
+   }
   },
   "safarizone": {
    "id": "safarizone",
@@ -29539,7 +29604,30 @@
      6,
      "shoalSalt"
     ]
-   ]
+   ],
+   "exitGap": {
+    "floor": {
+     "10,9": [
+      10,
+      8
+     ],
+     "10,10": [
+      10,
+      8
+     ]
+    },
+    "edges": {
+     "9,9": "left",
+     "9,10": "left",
+     "11,9": "right",
+     "11,10": "right"
+    },
+    "colors": [
+     "#49352f",
+     "#684a35",
+     "#a57f5c"
+    ]
+   }
   },
   "sealedchamber": {
    "id": "sealedchamber",
@@ -29572,7 +29660,30 @@
     "12,1": "BUT WE SEALED THE CREATURES AWAY. WE FEARED THEM.",
     "7,1": "FIRST COMES A CREATURE OF THE SEA. LAST COMES A CREATURE OF STONE. THEN DIG."
    },
-   "chamber": "7,1"
+   "chamber": "7,1",
+   "exitGap": {
+    "floor": {
+     "7,9": [
+      7,
+      8
+     ],
+     "7,10": [
+      7,
+      8
+     ]
+    },
+    "edges": {
+     "6,9": "left",
+     "6,10": "left",
+     "8,9": "right",
+     "8,10": "right"
+    },
+    "colors": [
+     "#4e322e",
+     "#7e5a3b",
+     "#cea978"
+    ]
+   }
   },
   "tomb_rock": {
    "id": "tomb_rock",
@@ -29618,7 +29729,30 @@
      "requires": "tomb_rock_open",
      "text": "The golem's eyes light up..."
     }
-   ]
+   ],
+   "exitGap": {
+    "floor": {
+     "7,9": [
+      7,
+      8
+     ],
+     "7,10": [
+      7,
+      8
+     ]
+    },
+    "edges": {
+     "6,9": "left",
+     "6,10": "left",
+     "8,9": "right",
+     "8,10": "right"
+    },
+    "colors": [
+     "#3a2b1f",
+     "#594431",
+     "#806548"
+    ]
+   }
   },
   "tomb_ice": {
    "id": "tomb_ice",
@@ -29664,7 +29798,30 @@
      "requires": "tomb_ice_open",
      "text": "The golem's eyes light up..."
     }
-   ]
+   ],
+   "exitGap": {
+    "floor": {
+     "7,9": [
+      7,
+      8
+     ],
+     "7,10": [
+      7,
+      8
+     ]
+    },
+    "edges": {
+     "6,9": "left",
+     "6,10": "left",
+     "8,9": "right",
+     "8,10": "right"
+    },
+    "colors": [
+     "#4d424a",
+     "#6483a7",
+     "#c9e8f7"
+    ]
+   }
   },
   "tomb_steel": {
    "id": "tomb_steel",
@@ -29710,7 +29867,30 @@
      "requires": "tomb_steel_open",
      "text": "The golem's eyes light up..."
     }
-   ]
+   ],
+   "exitGap": {
+    "floor": {
+     "7,9": [
+      7,
+      8
+     ],
+     "7,10": [
+      7,
+      8
+     ]
+    },
+    "edges": {
+     "6,9": "left",
+     "6,10": "left",
+     "8,9": "right",
+     "8,10": "right"
+    },
+    "colors": [
+     "#362a28",
+     "#71553e",
+     "#9c7955"
+    ]
+   }
   },
   "southernisland": {
    "id": "southernisland",
@@ -31439,7 +31619,7 @@
     {
      "id": "route4_i30",
      "x": 17,
-     "y": 16,
+     "y": 12,
      "item": "expShare",
      "count": 1,
      "hidden": true
@@ -31674,8 +31854,8 @@
     },
     {
      "id": "route7_i56",
-     "x": 19,
-     "y": 5,
+     "x": 22,
+     "y": 2,
      "item": "tm36",
      "count": 1,
      "hidden": false
@@ -31690,8 +31870,8 @@
     },
     {
      "id": "route7_i57",
-     "x": 24,
-     "y": 9,
+     "x": 20,
+     "y": 7,
      "item": "focusBand",
      "count": 1,
      "hidden": true
@@ -31903,8 +32083,8 @@
     },
     {
      "id": "route9_i75",
-     "x": 6,
-     "y": 2,
+     "x": 9,
+     "y": 5,
      "item": "shellBell",
      "count": 1,
      "hidden": true
@@ -32486,8 +32666,8 @@
     },
     {
      "id": "seafloor_i106",
-     "x": 18,
-     "y": 11,
+     "x": 19,
+     "y": 10,
      "item": "pearl",
      "count": 1,
      "hidden": false
