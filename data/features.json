@@ -31619,7 +31619,7 @@
     {
      "id": "route4_i30",
      "x": 17,
-     "y": 16,
+     "y": 12,
      "item": "expShare",
      "count": 1,
      "hidden": true
@@ -31854,8 +31854,8 @@
     },
     {
      "id": "route7_i56",
-     "x": 19,
-     "y": 5,
+     "x": 22,
+     "y": 2,
      "item": "tm36",
      "count": 1,
      "hidden": false
@@ -31870,8 +31870,8 @@
     },
     {
      "id": "route7_i57",
-     "x": 24,
-     "y": 9,
+     "x": 20,
+     "y": 7,
      "item": "focusBand",
      "count": 1,
      "hidden": true
@@ -32083,8 +32083,8 @@
     },
     {
      "id": "route9_i75",
-     "x": 6,
-     "y": 2,
+     "x": 9,
+     "y": 5,
      "item": "shellBell",
      "count": 1,
      "hidden": true
@@ -32666,8 +32666,8 @@
     },
     {
      "id": "seafloor_i106",
-     "x": 18,
-     "y": 11,
+     "x": 19,
+     "y": 10,
      "item": "pearl",
      "count": 1,
      "hidden": false
