@@ -99,7 +99,11 @@ static func _draw_walk(tex: Texture2D, x: float, y: float, dir: String, step: in
 		var row: int = {"down": 0, "up": 1, "left": 2, "right": 2}.get(dir, 0)
 		var fl := dir == "right"
 		var left := x - (fw - 16) / 2.0
-		var dst := Rect2(left + (fw if fl else 0), y + 16 - fh - (1 if step != 0 else 0), -fw if fl else fw, fh)
+		# Walking sheets lift a leg in their step frames and keep the other foot planted, so the sprite stays on the
+		# ground; only the rides (bike, surf) bob a pixel.
+		var lift := 1 if step != 0 and fw != 16 else 0
+		# A negative width mirrors the frame in place (Godot keeps the rect's position), so no offset is added.
+		var dst := Rect2(left, y + 16 - fh - lift, -fw if fl else fw, fh)
 		Gfx.ci.draw_texture_rect_region(tex, dst, Rect2(clampi(step, 0, 2) * fw, row * fh, fw, fh))
 		return
 	var col: int = {"down": 0, "up": 1, "left": 2, "right": 2}.get(dir, 0)
@@ -116,12 +120,12 @@ static func _draw_walk(tex: Texture2D, x: float, y: float, dir: String, step: in
 		_region_part(tex, col, 17, 3, x, top, flip, planted_left)
 
 static func _region(tex: Texture2D, col: int, sy: int, h: int, x: float, top: float, flip: bool) -> void:
-	var dst := Rect2(x + (16 if flip else 0), top + sy, -16 if flip else 16, h)
+	var dst := Rect2(x, top + sy, -16 if flip else 16, h)
 	Gfx.ci.draw_texture_rect_region(tex, dst, Rect2(col * 16, sy, 16, h))
 
 static func _region_part(tex: Texture2D, col: int, sy: int, h: int, x: float, top: float, flip: bool, left_half: bool) -> void:
 	# left_half is in screen space
 	var sx := 0 if (left_half != flip) else 8
 	var dx := x + (0 if left_half else 8)
-	var dst := Rect2(dx + (8 if flip else 0), top + sy, -8 if flip else 8, h)
+	var dst := Rect2(dx, top + sy, -8 if flip else 8, h)
 	Gfx.ci.draw_texture_rect_region(tex, dst, Rect2(col * 16 + sx, sy, 8, h))

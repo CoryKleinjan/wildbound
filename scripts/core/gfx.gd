@@ -34,8 +34,7 @@ static func image(tex: Texture2D, x: float, y: float, opts: Dictionary = {}) -> 
 	var s: float = opts.get("scale", 1.0)
 	var size := Vector2(tex.get_width(), tex.get_height()) * s
 	if opts.get("flip_h", false):
-		size.x = -size.x
-		x -= size.x
+		size.x = -size.x  # mirrored in place: Godot keeps the rect's position
 	ci.draw_texture_rect(tex, Rect2(Vector2(x, y), size), false, col(opts.get("modulate", Color.WHITE)))
 
 ## Text with its top-left (or top-center / top-right by align) at (x, y).
@@ -101,10 +100,23 @@ static func _frame(style: String) -> StyleBoxTexture:
 		_frames[style] = sb
 	return _frames[style]
 
+## Draws tex stretched over r with its m-pixel border unstretched, through ci's draw calls (a StyleBox can't draw
+## onto the DrawRecorder that stands in for the canvas while recording a joined friend's view).
+static func _nine_slice(tex: Texture2D, r: Rect2, m: float) -> void:
+	var ts := tex.get_size()
+	var sx := [0.0, m, ts.x - m, ts.x]
+	var sy := [0.0, m, ts.y - m, ts.y]
+	var dx := [r.position.x, r.position.x + m, r.end.x - m, r.end.x]
+	var dy := [r.position.y, r.position.y + m, r.end.y - m, r.end.y]
+	for j in 3:
+		for i in 3:
+			ci.draw_texture_rect_region(tex, Rect2(dx[i], dy[j], dx[i + 1] - dx[i], dy[j + 1] - dy[j]),
+				Rect2(sx[i], sy[j], sx[i + 1] - sx[i], sy[j + 1] - sy[j]))
+
 static func panel(x: float, y: float, w: float, h: float, style: String = "light") -> void:
 	var sb := _frame(style)
 	if sb != null and w >= 16 and h >= 16:
-		sb.draw(ci.get_canvas_item(), Rect2(x, y, w, h))
+		_nine_slice(sb.texture, Rect2(x, y, w, h), 8)
 		return
 	var border := "#283048" if style == "dark" else "#48506a"
 	var fill := "#384060" if style == "dark" else ("#f8f8f0" if style == "battle" else "#f8f8f8")

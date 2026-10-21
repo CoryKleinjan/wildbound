@@ -4,8 +4,9 @@ extends Scene
 
 const DX := {"up": Vector2i(0, -1), "down": Vector2i(0, 1), "left": Vector2i(-1, 0), "right": Vector2i(1, 0)}
 const OPP := {"up": "down", "down": "up", "left": "right", "right": "left"}
-const WALK := 0.24
-const RUN := 0.12
+## Emerald's step times: 16 frames (1px a frame at 60fps) walking, 8 running.
+const WALK := 16.0 / 60.0
+const RUN := 8.0 / 60.0
 
 class Actor:
 	var x: int
@@ -24,14 +25,16 @@ class Actor:
 		dir = dir_
 		palette = palette_
 
+## Where an actor is drawn, in whole pixels: the window is scaled up, so a fractional position would draw the
+## sprite between the map's pixels and it would wobble against the tiles as it walks.
 static func actor_pixel(a: Actor) -> Dictionary:
 	if a.move == null:
 		return {"x": a.x * 16.0, "y": a.y * 16.0, "hop": 0.0}
 	var k := minf(1.0, a.move.t / a.move.dur)
 	return {
-		"x": (a.move.fx + (a.x - a.move.fx) * k) * 16.0,
-		"y": (a.move.fy + (a.y - a.move.fy) * k) * 16.0,
-		"hop": sin(k * PI) * 8.0 if a.move.jump else 0.0,
+		"x": roundf((a.move.fx + (a.x - a.move.fx) * k) * 16.0),
+		"y": roundf((a.move.fy + (a.y - a.move.fy) * k) * 16.0),
+		"hop": roundf(sin(k * PI) * 8.0) if a.move.jump else 0.0,
 	}
 
 var map: Dictionary
@@ -232,13 +235,22 @@ func update(dt: float) -> void:
 		return
 	var inp := Game.input
 	var p1 := inp.p(0)
+	var carry := 0.0
 	if player.move != null or (follower != null and follower.move != null):
+		if player.move != null:
+			carry = player.move.t + dt - player.move.dur
 		var done := _advance(player, dt)
 		if follower != null:
 			_advance(follower, dt)
-		if done:
-			_on_step()
-		return
+		if not done:
+			return
+		var on_map: String = map.id
+		_on_step()
+		# Holding a direction walks on without a pause between steps (a standing frame each step reads as a
+		# stutter), so unless the step started something, the next one begins now with the time left over.
+		if Game.top != self or _script.is_valid() or player.move != null or map.id != on_map \
+				or Game.views[Game.cur].fade_target == 1 or (follower != null and follower.move != null):
+			return
 	for pl in ([0, 1] if gs.mode == "coop" else [0]):
 		if inp.p(pl).pressed("start"):
 			_open_start_menu(pl)
@@ -263,6 +275,10 @@ func update(dt: float) -> void:
 	if _hold_time < 0.07:
 		return
 	_try_move(held, Field.step_time(self, RUN if p1.is_held("b") else WALK))
+	if carry > 0 and player.move != null:
+		player.move.t = minf(carry, player.move.dur)
+		if follower != null and follower.move != null:
+			follower.move.t = minf(carry, follower.move.dur)
 
 func _bump() -> void:
 	if _bump_t <= 0:
@@ -852,7 +868,8 @@ func draw() -> void:
 		if walking and a.move.t / a.move.dur < 0.5:
 			step = (a.step_count % 2) + 1
 		var sx: float = ap.x - cam_x
-		var sy: float = ap.y - cam_y - 4 - ap.hop
+		# Feet on the bottom row of the tile, as in Emerald.
+		var sy: float = ap.y - cam_y - ap.hop
 		var look: String = a.palette if DB.PALETTES.has(a.palette) else "boy"
 		if a == player:
 			look = _ride_look(look)
