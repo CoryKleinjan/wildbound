@@ -17,7 +17,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from PIL import Image, ImageDraw, ImageFont
 
-from common import RAW, ROOT, ask_vision
+from common import BudgetExceeded, RAW, ROOT, ask_vision
 
 MODEL = "gemini-3.1-pro-preview"  # whole-map comparison
 CELL_MODEL = "gemini-3.5-flash"  # one-cell close-ups: easy, and there are many
@@ -100,6 +100,8 @@ def proposals(mid: str, m: dict) -> set[tuple[int, int]]:
 	def run(_):
 		try:
 			return json.loads(ask_vision(p, q, MODEL))
+		except BudgetExceeded:
+			raise
 		except Exception as e:  # one bad run is fine, the others still count
 			print("WARN", mid, e)
 			return []

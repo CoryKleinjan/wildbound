@@ -97,10 +97,17 @@ func load_map(id: String, x: int, y: int, dir: String) -> void:
 	Field.on_map_loaded(self)
 	Audio.play_music(map_track(map))
 
-## Music for a map: gym, league, town or route (rooms inside buildings name theirs).
+## Music for a map. A map's own "music" wins unless it is the generic "town" a room or Frontier hall inherited; then the
+## map's kind picks a theme (cave, surf, forest, ...), falling back to gym, league, town or route when that track is missing.
 static func map_track(m: Dictionary) -> String:
-	if m.has("music"):
-		return m.music
+	var own: String = m.get("music", "")
+	if own != "" and own != "town":
+		return own
+	var t := _theme_track(m)
+	if t != "" and Audio.has_music(t):
+		return t
+	if own != "":
+		return own
 	var id: String = m.id
 	if id.begins_with("gym"):
 		return "gym"
@@ -109,6 +116,46 @@ static func map_track(m: Dictionary) -> String:
 	if m.get("town", false):
 		return "town"
 	return "route"
+
+static func _theme_track(m: Dictionary) -> String:
+	var id: String = m.id
+	var name: String = m.get("name", "")
+	if id.begins_with("trick"):
+		return "trickhouse"
+	if id == "gamecorner":
+		return "gamecorner"
+	if id.contains("frontier") or id == "battletower" or id.begins_with("tent_"):
+		return "frontier"
+	if id.ends_with("_lodge"):
+		return "lodge"
+	if id.ends_with("_mart") or id.contains("_store") or id == "deptstore":
+		return "mart"
+	if id in ["southernisland", "farawayisland", "birthisland", "navelrock", "skyspire", "skyspire2"] or m.has("tomb") or m.has("chamber"):
+		return "mystic"
+	if m.get("underwater", false):
+		return "underwater"
+	if m.get("cave", false):
+		return "cave"
+	if m.get("safari", false):
+		return "safari"
+	if m.get("town", false) or m.get("indoor", false) or m.get("interior", false) or id.begins_with("gym") or id == "league":
+		return ""
+	if m.get("backdrop", "") == "forest" or name.contains("Woods") or name.contains("Forest") or id == "route2":
+		return "forest"
+	var tiles: Array = m.get("tiles", [])
+	var water := 0
+	var total := 0
+	for row in tiles:
+		total += (row as String).length()
+		water += (row as String).count("~")
+	if total > 0 and water * 100 >= total * 35:
+		return "surf"
+	var lv := 99
+	for e in m.get("encounters", []):
+		lv = mini(lv, int(e.get("min", 99)))
+	if lv >= 20 and lv < 99 or m.get("backdrop", "") in ["mountain", "night"]:
+		return "route_late"
+	return ""
 
 ## Adds a temporary actor for a story scene (not saved).
 func add_actor(x: int, y: int, dir: String, palette: String) -> Actor:

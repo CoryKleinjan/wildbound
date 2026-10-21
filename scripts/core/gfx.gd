@@ -11,7 +11,7 @@ static var _font: FontFile
 
 static func font() -> FontFile:
 	if _font == null:
-		_font = load("res://assets/fonts/PressStart2P.ttf")
+		_font = load("res://assets/fonts/Wildbound.ttf")
 		_font.antialiasing = TextServer.FONT_ANTIALIASING_NONE
 		_font.hinting = TextServer.HINTING_NONE
 	return _font
